@@ -1,0 +1,1354 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Vectors and Matrices &#8212; Mathematical Tools for Neuroscience</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Vectors and Matrices';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to NBIO 228!" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/scary_brain.png" class="logo__image only-light" alt="Mathematical Tools for Neuroscience - Home"/>
+    <script>document.write(`<img src="_static/scary_brain.png" class="logo__image only-dark" alt="Mathematical Tools for Neuroscience - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to NBIO 228!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Linear Algebra</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Vectors and Matrices</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FVectors and Matrices.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Vectors and Matrices.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Vectors and Matrices</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vectors">Vectors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-dot-product">The Dot Product</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrices">Matrices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-matrices">Special Matrices</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-geometric-interpretation">The Geometric Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bases">Bases</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="vectors-and-matrices">
+<h1>Vectors and Matrices<a class="headerlink" href="#vectors-and-matrices" title="Link to this heading">#</a></h1>
+<p>If you are sitting in this class, you may have seen linear algebra—the mathematics of vectors, matrices, and their operations—before. But linear algebra is fundamental to a huge chunk of computational neuroscience, so we’ll be taking the time to review some basic concepts.</p>
+<p>You could take a whole quarter of linear algebra in the math department here; we won’t be going into that much detail, or be getting as theoretical as a math course might. Instead, we will be approaching linear algebra from the perspective of neuroscience. Why are the tools of linear algebra so useful for us? What do all the topics you’ve previously learned about mean in neuroscientific terms? And how might you use linear algebra in your research?</p>
+<div class="important admonition">
+<p class="admonition-title">Learning Goals</p>
+<p>By the end of this week, you should be able to:</p>
+<ul class="simple">
+<li><p>Describe and identify scalars, vectors, and matrices</p></li>
+<li><p>Apply basic operations like the transpose, the dot product, and matrix multiplication</p></li>
+<li><p>Explain what it means to change from one vector basis to another, and carry out that computation</p></li>
+<li><p>Articulate why linear algebra is so foundational to computational neuroscience</p></li>
+<li><p>Describe a simple neural circuit in terms of vectors and matrices</p></li>
+</ul>
+</div>
+<section id="vectors">
+<h2>Vectors<a class="headerlink" href="#vectors" title="Link to this heading">#</a></h2>
+<p>Before we talk about vectors, we need to talk about scalars. Don’t worry if you’ve never heard of a scalar before—you definitely know what they are. “Scalar” is just a fancy word for a single number or variable. 2 is a scalar, <span class="math notranslate nohighlight">\(\pi\)</span> is a scalar, <span class="math notranslate nohighlight">\(x\)</span> is a scalar. When you see a single algebraic symbol—<span class="math notranslate nohighlight">\(x,\)</span> <span class="math notranslate nohighlight">\(y,\)</span> <span class="math notranslate nohighlight">\(a\)</span>—it will typically represent a scalar.</p>
+<p>And, of course, individual quantites we might talk about when we talk about neurons—the activity level of a single neuron, the strength of the connection between two specfic neurons—those are scalars, too.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>A <em><strong>scalar</strong></em> is a single number or a single algebraic quantity.</p>
+</div>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="_images/figure1.png"><img alt="_images/figure1.png" src="_images/figure1.png" style="height: 200px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text"><i>One way scalars are used in neuroscience—to describe the activity level of a single neuron, as x is doing here.</i></span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Scalars are the basic building blocks of everything we will be talking about today. A vector, for example, is an ordered collection of scalars. What does that mean? Well, let’s say we have some quantities <span class="math notranslate nohighlight">\(x_1,\)</span> <span class="math notranslate nohighlight">\(x_2,\)</span> <span class="math notranslate nohighlight">\(x_3.\)</span> We can build a vector <span class="math notranslate nohighlight">\(\textbf{x} = [x_1, x_2, x_3].\)</span> Actually, we’ll typically write vectors vertically, so it will look something more like:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0062261c-5061-4ccb-b3de-94f8c3cb92f8">
+<span class="eqno">(1)<a class="headerlink" href="#equation-0062261c-5061-4ccb-b3de-94f8c3cb92f8" title="Permalink to this equation">#</a></span>\[\begin{align}
+	\textbf{x} = \left[\begin{matrix} x_1 \\ x_2 \\ x_3 \end{matrix}\right]
+\end{align}\]</div>
+<p>Or, we might create a different vector out of those three scalars:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-28bc76c2-f8df-4bae-b7f9-cdc43a9a7a4f">
+<span class="eqno">(2)<a class="headerlink" href="#equation-28bc76c2-f8df-4bae-b7f9-cdc43a9a7a4f" title="Permalink to this equation">#</a></span>\[\begin{align}
+	\textbf{x}^\prime = \left[\begin{matrix} x_2 \\ x_3 \\ x_1 \end{matrix}\right]
+\end{align}\]</div>
+<p>(You’ll generally see vectors written in bold, like <span class="math notranslate nohighlight">\(\textbf{x},\)</span> or with an arrow over them, like <span class="math notranslate nohighlight">\(\vec{x}\)</span>.)</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>A <em><strong>vector</strong></em> is an ordered collection of scalars.</p>
+</div>
+<p>Why do this at all? Why not just use scalars? Technically, we can do all of the math we want to do with scalars. But sometimes we want to do the same math to a bunch of quantities at the same time, and vectors help us make that math much simpler. For example, let’s say the three neurons with activity levels <span class="math notranslate nohighlight">\(x_1,\)</span> <span class="math notranslate nohighlight">\(x_2,\)</span> <span class="math notranslate nohighlight">\(x_3\)</span> all receive inputs from a single neuron with activity level <span class="math notranslate nohighlight">\(y,\)</span> and that the connections all have the same weight, <span class="math notranslate nohighlight">\(w.\)</span> (We’re ignoring action potentials for the moment and assuming the input each neuron sends to another neuron is just the product of its activity level and the strength of the connection between the two neurons.)</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/figure 2.png"><img alt="_images/figure%202.png" src="_images/figure%202.png" style="height: 400px;" /></a>
+</figure>
+<p>How much does the activity level of each neuron change? We can write the equations:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-6eb3df7d-3618-4c25-a8bc-ab7472da8e15">
+<span class="eqno">(3)<a class="headerlink" href="#equation-6eb3df7d-3618-4c25-a8bc-ab7472da8e15" title="Permalink to this equation">#</a></span>\[\begin{align}
+	x_1(t+1) = x_1(t) + wy(t)\\
+	x_2(t+1) = x_2(t) + wy(t)\\
+	x_3(t+1) = x_3(t) + wy(t)
+\end{align}\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(x_1(t)\)</span> represents the activity level of the corresponding neuron at time <span class="math notranslate nohighlight">\(t,\)</span> and <span class="math notranslate nohighlight">\(x_1(t+1)\)</span> represents its activity level one “time step” into the future, after it has received the input from neuron <span class="math notranslate nohighlight">\(y.\)</span> (Don’t worry too much about the details of the timing for now.</p>
+<p>Vectors allow us to write these three equations as one. We can say:</p>
+<div class="math notranslate nohighlight" id="equation-eq1">
+<span class="eqno">(4)<a class="headerlink" href="#equation-eq1" title="Link to this equation">#</a></span>\[	\textbf{x}(t+1) = \textbf{x}(t) + wy(t)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\textbf{x}(t) = \left[\begin{matrix} x_1(t) \\ x_2(t) \\ x_3(t) \end{matrix}\right].\)</span></p>
+<p>What does this equation mean? This rule will help us figure it out:</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When we add, subtract, multiply, or divide a vector by a scalar, we apply that operation to every element of the vector.</p>
+</div>
+<p>So we can break down <a class="reference internal" href="#equation-eq1">(4)</a> into its component parts by adding <span class="math notranslate nohighlight">\(wy(t)\)</span> to each element of <span class="math notranslate nohighlight">\(\textbf{x}(t)\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5ee20963-420d-44df-9f5d-4e086c3d6c17">
+<span class="eqno">(5)<a class="headerlink" href="#equation-5ee20963-420d-44df-9f5d-4e086c3d6c17" title="Permalink to this equation">#</a></span>\[\begin{align}
+	 \left[\begin{matrix} x_1(t) \\ x_2(t) \\ x_3(t) \end{matrix}\right] + wy(t) &amp;= \left[\begin{matrix} x_1(t) + wy(t)  \\ x_2(t) + wy(t)\\ x_3(t)  + wy(t)\end{matrix}\right]
+\end{align}\]</div>
+<p>And if we wanted to multiply our vector <span class="math notranslate nohighlight">\(\textbf{x}\)</span> by some scalar <span class="math notranslate nohighlight">\(a,\)</span> we would have:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e91dc7fa-0ebb-4937-8674-69a2cfaeacb1">
+<span class="eqno">(6)<a class="headerlink" href="#equation-e91dc7fa-0ebb-4937-8674-69a2cfaeacb1" title="Permalink to this equation">#</a></span>\[\begin{align}
+	a \left[\begin{matrix} x_1 \\ x_2 \\ x_3 \end{matrix}\right] &amp;=  \left[\begin{matrix}a x_1 \\a x_2 \\ ax_3 \end{matrix}\right]
+\end{align}\]</div>
+<p>Importantly, this is exactly how adding vectors and scalars works in <code class="docutils literal notranslate"><span class="pre">numpy</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[6 7 8]
+[10 20 30]
+</pre></div>
+</div>
+</div>
+</div>
+<p>What if we want to add two vectors to each other? We can only do this if the vectors are exactly the same shape, because, to add two vectors together, we sum all of their corresponding entires. This looks like:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0abee2ec-7f9c-41c9-b89c-afad5ea34cd7">
+<span class="eqno">(7)<a class="headerlink" href="#equation-0abee2ec-7f9c-41c9-b89c-afad5ea34cd7" title="Permalink to this equation">#</a></span>\[\begin{align}
+	\left[\begin{matrix} a \\ b \\ c \end{matrix}\right] + \left[\begin{matrix} d \\ e \\ f \end{matrix}\right] = \left[\begin{matrix} a +d \\ b + e \\ c + f  \end{matrix}\right]
+\end{align}\]</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you want to add two vectors to each other, they must have exactly the same length.</p>
+</div>
+<p>And it’s exactly the same in Python (note that we get an error if we try to add two vectors of different lengths):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">])</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[5 7 9]
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">z</span><span class="p">)</span>
+
+<span class="ne">ValueError</span>: operands could not be broadcast together with shapes (3,) (4,) 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Vector addition and scalar multiplication come in handy if we want to allow the three synapses in our little network to have different weights.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/figure 3.png"><img alt="_images/figure%203.png" src="_images/figure%203.png" style="height: 400px;" /></a>
+</figure>
+<p>In scalar notation, we say:</p>
+<div class="math notranslate nohighlight" id="equation-eq2">
+<span class="eqno">(8)<a class="headerlink" href="#equation-eq2" title="Link to this equation">#</a></span>\[\begin{split}x_1(t+1) = x_1(t) + w_1y(t)\\
+x_2(t+1) = x_2(t) + w_2y(t)\\
+x_3(t+1) = x_3(t) + w_3y(t)\end{split}\]</div>
+<p>But we can make this look a lot simpler in vector notation!</p>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>Using the rules for vector addition and multiplication above, rewrite <a class="reference internal" href="#equation-eq2">(8)</a> as a vector equation.</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d2c0daa8-64af-4832-8da2-686c3f3c3100">
+<span class="eqno">(9)<a class="headerlink" href="#equation-d2c0daa8-64af-4832-8da2-686c3f3c3100" title="Permalink to this equation">#</a></span>\[\begin{align}
+	\left[\begin{matrix} x_1(t+1) \\ x_2(t+1) \\ x_3(t+1) \end{matrix}\right] &amp;= \left[\begin{matrix} x_1(t)  \\ x_2(t)\\ x_3(t)\end{matrix}\right] +  \left[\begin{matrix} w_1  \\ w_2\\ w_3\end{matrix}\right]y(t)
+\end{align}\]</div>
+<p>Or, equivalently:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a3eab08f-6d5f-4a5b-8b40-904ca7d25f2d">
+<span class="eqno">(10)<a class="headerlink" href="#equation-a3eab08f-6d5f-4a5b-8b40-904ca7d25f2d" title="Permalink to this equation">#</a></span>\[\begin{align}
+	\textbf{x}(t+1) = \textbf{x}(t) + \textbf{w}y(t)
+\end{align}\]</div>
+<p>where</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a6edba8f-db8c-4d4d-af98-93b9d2c05855">
+<span class="eqno">(11)<a class="headerlink" href="#equation-a6edba8f-db8c-4d4d-af98-93b9d2c05855" title="Permalink to this equation">#</a></span>\[\begin{align}
+\textbf{w} = \left[\begin{matrix}w_1 \\ w_2 \\ w_3 \end{matrix}\right]
+\end{align}\]</div>
+<p>and</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0b68df10-bf47-4199-932a-0f91eff33c17">
+<span class="eqno">(12)<a class="headerlink" href="#equation-0b68df10-bf47-4199-932a-0f91eff33c17" title="Permalink to this equation">#</a></span>\[\begin{align}
+\textbf{x}(t) = \left[\begin{matrix}x_1(t) \\ x_2(t) \\ x_3(t) \end{matrix}\right]
+\end{align}\]</div>
+</div>
+</div>
+<section id="the-dot-product">
+<span id="dotproduct"></span><h3>The Dot Product<a class="headerlink" href="#the-dot-product" title="Link to this heading">#</a></h3>
+<div class="dropdown note admonition">
+<p class="admonition-title">Sigma Notation</p>
+<p>Let’s say you want to sum up the integers from 1 to 10. You could write <span class="math notranslate nohighlight">\(1 + 2 + 3 + 4 + \cdots + 10,\)</span> but there’s a more compact way to do it:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-2de00cc4-3e16-48df-9ece-baf0f9ebc58e">
+<span class="eqno">(13)<a class="headerlink" href="#equation-2de00cc4-3e16-48df-9ece-baf0f9ebc58e" title="Permalink to this equation">#</a></span>\[\begin{align}
+	\sum_{i=1}^{10} i
+\end{align}\]</div>
+<p>To turn something in sigma notation into a traditional sum, we look above and below the sigma (<span class="math notranslate nohighlight">\(\Sigma\)</span>) to find the range of our <em>index variable</em>, which, in this case, is <span class="math notranslate nohighlight">\(i.\)</span> <span class="math notranslate nohighlight">\(i\)</span> is basically acting like a placeholder here. To figure out our sum, we take the expression after the sigma (just <span class="math notranslate nohighlight">\(i\)</span>, in this case), substitute in the full range of values for <span class="math notranslate nohighlight">\(i,\)</span> and then add up everything we get. In plain English, the expression above means something like “the sum of all <span class="math notranslate nohighlight">\(i\)</span> as <span class="math notranslate nohighlight">\(i\)</span> ranges from 1 to 10.”</p>
+<p>Try it yourself! How would we express <span class="math notranslate nohighlight">\(x_1 + x_2 + x_3\)</span> more compactly, using sigma notation?</p>
+<div class="toggle docutils container">
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\sum_{i=1}^3 x_i
+\end{align*}\]</div>
+</div>
+</div>
+<p>We can now handle a single neuron that projects to multiple other neurons, possibly with different connection strengths. But that isn’t going to get us terribly far on its own. We need to figure out how to handle the situation where multiple presynaptic neurons project to a single postsynaptic neuron, like in the network below:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/figure 4.png"><img alt="_images/figure%204.png" src="_images/figure%204.png" style="height: 400px;" /></a>
+</figure>
+<p>We can write a scalar equation describing <span class="math notranslate nohighlight">\(x\)</span>’s activity at <span class="math notranslate nohighlight">\(t+1\)</span> without too much trouble:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-6460596b-84b2-4921-a97d-b02e4df6e439">
+<span class="eqno">(14)<a class="headerlink" href="#equation-6460596b-84b2-4921-a97d-b02e4df6e439" title="Permalink to this equation">#</a></span>\[\begin{align}
+x(t+1) &amp;= w_1y_1(t) + w_2y_2(t) + w_3y_3(t)
+\end{align}\]</div>
+<p>Or, using sigma notation:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-fe8f8de3-7c3f-4157-a500-40422fe388cd">
+<span class="eqno">(15)<a class="headerlink" href="#equation-fe8f8de3-7c3f-4157-a500-40422fe388cd" title="Permalink to this equation">#</a></span>\[\begin{align}
+x(t+1) &amp;= \sum_{i=1}^3 w_iy_i(t)
+\end{align}\]</div>
+<p>Sigma notation is super useful for writing things compactly, but we’re still dealing with scalars here. How can we transform this into a vector equation? Turns out, there is a vector operation called the <b>dot product</b> that solves our problem for us.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>The <em><strong>dot product</strong></em> of two vectors <span class="math notranslate nohighlight">\(\textbf{a}\)</span> and <span class="math notranslate nohighlight">\(\textbf{b}\)</span>, where <span class="math notranslate nohighlight">\(\textbf{a} = (a_1, a_2, \cdots, a_n)\)</span> and <span class="math notranslate nohighlight">\(\textbf{b} = (b_1, b_2, \cdots, b_n)\)</span> is simply:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-6314081b-4ea9-461c-b951-9037c9255d22">
+<span class="eqno">(16)<a class="headerlink" href="#equation-6314081b-4ea9-461c-b951-9037c9255d22" title="Permalink to this equation">#</a></span>\[\begin{align}
+\textbf{a}\cdot\textbf{b} &amp;= a_1b_1 + a_2b_2 + \cdots + a_nb_n\\
+&amp;= \sum_{i=1}^na_ib_i
+\end{align}\]</div>
+</div>
+<p>In other words, to take the dot product of two vectors, you line up all their entries, multiply them together in pairs, and then add up all the results. The fact that you have to pair the entries introduces an important limitation on the dot product:</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you want to take the dot product of two vectors, they must have exactly the same length.</p>
+</div>
+<p>Numpy has a function to calculate the dot product: <code class="docutils literal notranslate"><span class="pre">np.dot</span></code>. Here’s how it works:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">c</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">))</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">c</span><span class="p">))</span>
+
+<span class="nn">File &lt;__array_function__ internals&gt;:200,</span> in <span class="ni">dot</span><span class="nt">(*args, **kwargs)</span>
+
+<span class="ne">ValueError</span>: shapes (3,) and (4,) not aligned: 3 (dim 0) != 4 (dim 0)
+</pre></div>
+</div>
+</div>
+</div>
+<p>As expected, we get an error if we try to take the dot product of two vectors that have different lengths.</p>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>Compute the dot product of <span class="math notranslate nohighlight">\(\textbf{a}\)</span> and <span class="math notranslate nohighlight">\(\textbf{b},\)</span> where <span class="math notranslate nohighlight">\(\textbf{a} = \left[\begin{matrix} 3 \\ 5 \\ -2 \\ 0 \end{matrix}\right]\)</span> and <span class="math notranslate nohighlight">\(\textbf{b} = \left[\begin{matrix} 1 \\ 3 \\ 4 \\ -3 \end{matrix}\right]\)</span>.</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="amsmath math notranslate nohighlight" id="equation-7931b4b9-01d6-4a9e-a2df-e6c9dee70df5">
+<span class="eqno">(17)<a class="headerlink" href="#equation-7931b4b9-01d6-4a9e-a2df-e6c9dee70df5" title="Permalink to this equation">#</a></span>\[\begin{align}
+ \left[\begin{matrix} 3 \\ 5 \\ -2 \\ 0 \end{matrix}\right] \cdot \left[\begin{matrix} 1 \\ 3 \\ 4 \\ -3 \end{matrix}\right] &amp;= (3\times 1) + (5 \times 3) + (-2 \times 4) + (0 \times -3)\\
+ &amp;= 10
+\end{align}\]</div>
+</div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>Our scalar equation for the activity of the postsynaptic neuron, <span class="math notranslate nohighlight">\(x(t+1),\)</span> is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e1e3f2ad-1258-456b-8134-d962211ae929">
+<span class="eqno">(18)<a class="headerlink" href="#equation-e1e3f2ad-1258-456b-8134-d962211ae929" title="Permalink to this equation">#</a></span>\[\begin{align}
+x(t+1) &amp;= w_1y_1(t) + w_2y_2(t) + w_3y_3(t)
+\end{align}\]</div>
+<p>Use the dot product to rewrite this as a vector equation.</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Using sigma notation, we can say</p>
+<div class="amsmath math notranslate nohighlight" id="equation-64b998b5-5d27-4104-9898-3479a4f2850e">
+<span class="eqno">(19)<a class="headerlink" href="#equation-64b998b5-5d27-4104-9898-3479a4f2850e" title="Permalink to this equation">#</a></span>\[\begin{align}
+x(t+1) = \sum_{i=1}^3w_iy_i(t)
+\end{align}\]</div>
+<p>You should recognize this expression as equivalent to a dot product. In particular, if</p>
+<div class="amsmath math notranslate nohighlight" id="equation-56ed8119-35a6-4f00-af28-ad860109617c">
+<span class="eqno">(20)<a class="headerlink" href="#equation-56ed8119-35a6-4f00-af28-ad860109617c" title="Permalink to this equation">#</a></span>\[\begin{align}
+\textbf{y}(t) = \left[\begin{matrix}y_1(t) \\ y_2(t) \\ y_3(t) \end{matrix}\right]
+\end{align}\]</div>
+<p>and</p>
+<div class="amsmath math notranslate nohighlight" id="equation-583bbb32-2911-438b-b4eb-283ec861fb02">
+<span class="eqno">(21)<a class="headerlink" href="#equation-583bbb32-2911-438b-b4eb-283ec861fb02" title="Permalink to this equation">#</a></span>\[\begin{align}\textbf{w} = \left[\begin{matrix}w_1 \\ w_2 \\ w_3 \end{matrix}\right]
+\end{align}\]</div>
+<p>then</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0b8dfc97-6b95-44c9-b64f-cdc3876124e7">
+<span class="eqno">(22)<a class="headerlink" href="#equation-0b8dfc97-6b95-44c9-b64f-cdc3876124e7" title="Permalink to this equation">#</a></span>\[\begin{align}
+x(t+1) &amp;= \textbf{w}\cdot\textbf{y}(t)
+\end{align}\]</div>
+</div>
+</div>
+<p>The dot product can be written in a number of different ways. You should be able to recognize all of them. For two vectors <span class="math notranslate nohighlight">\(\textbf{a} = \left[\begin{matrix}a_1 \\ a_2 \\ a_3 \end{matrix}\right]\)</span> and <span class="math notranslate nohighlight">\(\textbf{b} = \left[\begin{matrix}b_1 \\ b_2 \\ b_3 \end{matrix}\right]\)</span>, all of the following expressions are equivalent:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-723b2e3a-eabb-4f6a-8a06-ae68bb6b3742">
+<span class="eqno">(23)<a class="headerlink" href="#equation-723b2e3a-eabb-4f6a-8a06-ae68bb6b3742" title="Permalink to this equation">#</a></span>\[\begin{align}
+\textbf{a} &amp;\cdot \textbf{b} \end{align}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-ca4b4d0c-8ca0-4a39-910a-394678d49e02">
+<span class="eqno">(24)<a class="headerlink" href="#equation-ca4b4d0c-8ca0-4a39-910a-394678d49e02" title="Permalink to this equation">#</a></span>\[\begin{align}
+\left[\begin{matrix}a_1 \\ a_2 \\ a_3 \end{matrix}\right]\cdot\left[\begin{matrix}b_1 \\ b_2 \\ b_3 \end{matrix}\right]
+\end{align}\]</div>
+<div class="math notranslate nohighlight" id="equation-eq3">
+<span class="eqno">(25)<a class="headerlink" href="#equation-eq3" title="Link to this equation">#</a></span>\[\begin{split}\left[\begin{matrix}a_1 &amp; a_2 &amp; a_3 \end{matrix} \right] 
+\left[\begin{matrix}b_1 \\ b_2 \\ b_3 \end{matrix}\right]\end{split}\]</div>
+<p>Equation <a class="reference internal" href="#equation-eq3">(25)</a> might look a bit strange—we seem to have lost the central dot that tells us to take the dot product. This is just different notation for the same thing. Whenever you see a row vector immediately followed by a column vector, that’s a dot product. This isn’t just a random, annoying choice that mathematicians made: It comes directly from <strong>matrix multiplication</strong>, which we will learn about next.</p>
+</section>
+</section>
+<section id="matrices">
+<h2>Matrices<a class="headerlink" href="#matrices" title="Link to this heading">#</a></h2>
+<p>Finally, we are ready for a somewhat more realistic neural network. Let’s consider a network with three presynaptic neurons and three post synaptic neurons, as in the figure below. (Note that the numbers in the axon terminals represent the weights—e.g. <span class="math notranslate nohighlight">\(w_{11}\)</span>—the <span class="math notranslate nohighlight">\(w\)</span> is just elided for legibility.)</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/figure 9.png"><img alt="_images/figure%209.png" src="_images/figure%209.png" style="height: 400px;" /></a>
+</figure>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>Write the three scalar equations describing how the activity levels of <span class="math notranslate nohighlight">\(x_1,\)</span> <span class="math notranslate nohighlight">\(x_2,\)</span> and <span class="math notranslate nohighlight">\(x_3\)</span> evolve in time. Then, rewrite each of those scalar equations as a vector equation.</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="amsmath math notranslate nohighlight" id="equation-50110223-2985-4b02-b0ed-8bc8c3958e2d">
+<span class="eqno">(26)<a class="headerlink" href="#equation-50110223-2985-4b02-b0ed-8bc8c3958e2d" title="Permalink to this equation">#</a></span>\[\begin{align}
+	x_1(t+1) &amp;= x_1(t) + w_{11}y_1(t) + w_{12}y_2(t) + w_{13}y_3(t)\\
+	x_2(t+1) &amp;= x_2(t) + w_{21}y_1(t) + w_{22}y_2(t) + w_{23}y_3(t)\\
+	x_3(t+1) &amp;= x_3(t) + w_{31}y_1(t) + w_{32}y_2(t) + w_{33}y_3(t)
+\end{align}\]</div>
+<p>Taken separately, each <span class="math notranslate nohighlight">\(x_i\)</span> neuron is just a single postsynaptic neuron with three presynaptic inputs, which is exactly the situation we had above. So to turn these into vector equations, we just have to use the dot product:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-12e9a5fd-69c0-48d8-a4bc-932eb9bf984e">
+<span class="eqno">(27)<a class="headerlink" href="#equation-12e9a5fd-69c0-48d8-a4bc-932eb9bf984e" title="Permalink to this equation">#</a></span>\[\begin{align}
+	x_1(t+1) &amp;= x_1(t) + \left[\begin{matrix}w_{11} \\ w_{12} \\ w_{13} \end{matrix}\right]\cdot\left[\begin{matrix}y_1(t) \\ y_2(t) \\ y_3(t) \end{matrix}\right]\\
+	x_2(t+1) &amp;= x_2(t) + \left[\begin{matrix}w_{21} \\ w_{22} \\ w_{23} \end{matrix}\right]\cdot\left[\begin{matrix}y_1(t) \\ y_2(t) \\ y_3(t) \end{matrix}\right]\\
+	x_3(t+1) &amp;= x_3(t) + \left[\begin{matrix}w_{31} \\ w_{32} \\ w_{33} \end{matrix}\right]\cdot\left[\begin{matrix}y_1(t) \\ y_2(t) \\ y_3(t) \end{matrix}\right]
+\end{align}\]</div>
+</div>
+</div>
+<p>Using the notation we learned above, where a dot product can be written as a row vector followed by a column vector, the equations describing our network are:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-752d127c-606a-4c13-8dfc-e10c59797ed1">
+<span class="eqno">(28)<a class="headerlink" href="#equation-752d127c-606a-4c13-8dfc-e10c59797ed1" title="Permalink to this equation">#</a></span>\[\begin{align}
+		x_1(t+1) &amp;= x_1(t) + \left[\begin{matrix} w_{11} &amp; w_{12} &amp; w_{13} \end{matrix}\right]\left[\begin{matrix} y_1(t) \\ y_2(t) \\ y_3(t) \end{matrix} \right]\\
+		x_2(t+1) &amp;= x_2(t) + \left[\begin{matrix} w_{21} &amp; w_{22} &amp; w_{23} \end{matrix}\right]\left[\begin{matrix} y_1(t) \\ y_2(t) \\ y_3(t) \end{matrix} \right]\\
+			x_3(t+1) &amp;= x_3(t) + \left[\begin{matrix} w_{31} &amp; w_{32} &amp; w_{33} \end{matrix}\right]\left[\begin{matrix} y_1(t) \\ y_2(t) \\ y_3(t) \end{matrix} \right]
+\end{align}\]</div>
+<p>These equations all look very similar. Is there a way for us to combine these vector equations into one big equation, just like we combined scalar equations into a vector equation at the beginning of this lesson? It turns out there is—by using matrices!</p>
+<p>You can take the dot product of several different vectors <span class="math notranslate nohighlight">\(\textbf{a}_1,\)</span> <span class="math notranslate nohighlight">\(\textbf{a}_2,\)</span> <span class="math notranslate nohighlight">\(\textbf{a}_3,\)</span> etc. with a single vector <span class="math notranslate nohighlight">\(\textbf{b}\)</span> by stacking all the <span class="math notranslate nohighlight">\(\textbf{a}_i\)</span> into a two-dimensional structure called a <strong>matrix</strong> and multiplying <em>that</em> by <span class="math notranslate nohighlight">\(\textbf{b}\)</span>.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>A <em><strong>matrix</strong></em> is a two-dimensional collection of scalars.</p>
+</div>
+<p>So in our case, we want to stack all those <span class="math notranslate nohighlight">\(\textbf{w}\)</span> vectors into a matrix, which we will call <span class="math notranslate nohighlight">\(\textbf{W}.\)</span> (Matrices are typically written as bold capitals, like <span class="math notranslate nohighlight">\(\textbf{W},\)</span> versus vectors, which are written as bold lower-case letters, like <span class="math notranslate nohighlight">\(\textbf{w}\)</span>.) Here’s what it looks like when we turn our three vector equations into a single matrix equation:</p>
+<div class="math notranslate nohighlight" id="equation-eq4">
+<span class="eqno">(29)<a class="headerlink" href="#equation-eq4" title="Link to this equation">#</a></span>\[\begin{split}\left[\begin{matrix} x_1(t+1)\\x_2(t+1)\\x_3(t+1) \end{matrix}\right] &amp;=   \left[\begin{matrix} x_1(t)\\x_2(t)\\x_3(t) \end{matrix}\right] +  \left[\begin{matrix} w_{11} &amp; w_{12} &amp; w_{13} \\ w_{21} &amp; w_{22} &amp; w_{23} \\ w_{31} &amp; w_{32} &amp; w_{33}  \end{matrix}\right]\left[\begin{matrix} y_1(t) \\ y_2(t) \\ y_3(t) \end{matrix} \right]\end{split}\]</div>
+<p>Let’s break down <a class="reference internal" href="#equation-eq4">(29)</a> to figure out how it works. We can expand the last portion, where we multiply our matrix <span class="math notranslate nohighlight">\(\textbf{W}\)</span> by the vector:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-69ff27ae-fcd1-41b0-a9bc-7dc4d5c826f4">
+<span class="eqno">(30)<a class="headerlink" href="#equation-69ff27ae-fcd1-41b0-a9bc-7dc4d5c826f4" title="Permalink to this equation">#</a></span>\[\begin{align}
+ \left[\begin{matrix} w_{11} &amp; w_{12} &amp; w_{13} \\ w_{21} &amp; w_{22} &amp; w_{23} \\ w_{31} &amp; w_{32} &amp; w_{33}  \end{matrix}\right]\left[\begin{matrix} y_1(t) \\ y_2(t) \\ y_3(t) \end{matrix} \right] &amp;=  \left[\begin{matrix} w_{11}y_1(t) + w_{12}y_2(t) + w_{13}y_3(t) \\ w_{21}y_1(t) + w_{22}y_2(t) + w_{23}y_3(t) \\ w_{31}y_1(t) + w_{32}y_2(t) + w_{33}y_3(t)  \end{matrix}\right]
+\end{align}\]</div>
+<p>We’ve taken a 3x3 matrix, multiplied it by a 3x1 vector, and obtain another 3x1 vector. And each entry in that 3x1 vector is the <strong>dot product</strong> of one of the rows of <span class="math notranslate nohighlight">\(\textbf{W}\)</span> and <span class="math notranslate nohighlight">\(\textbf{y}(t).\)</span> <strong>Matrix multiplication is just taking lots and lots of dot products.</strong></p>
+<p>We just multiplied a matrix by a vector, but we can also multiply two matrices together. If <span class="math notranslate nohighlight">\(\color{red}{\textbf{a}} \, \color{black}{=} \, \left[\begin{matrix}\color{red}{a_1} \\ \color{red}{a_2} \\ \color{red}{a_3} \end{matrix}\right],\)</span> <span class="math notranslate nohighlight">\(\color{orange}{\textbf{b}} \, \color{black} \, = \left[\begin{matrix}\color{orange}{b_1} \\ \color{orange}{b_2} \\ \color{orange}{b_3} \end{matrix}\right],\)</span> etc:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a979b2be-5c6f-40c4-97f1-aa27bc121862">
+<span class="eqno">(31)<a class="headerlink" href="#equation-a979b2be-5c6f-40c4-97f1-aa27bc121862" title="Permalink to this equation">#</a></span>\[\begin{align}
+\left[\begin{matrix} \color{red}{a_1} &amp; \color{red}{a_2} &amp; \color{red}{a_3}\\
+\color{orange}{b_1} &amp; \color{orange}{b_2} &amp; \color{orange}{b_3}\\
+\color{yellow}{c_1} &amp; \color{yellow}{c_2} &amp; \color{yellow}{c_3}
+\end{matrix}\right]\left[\begin{matrix} \color{green}{d_1} &amp; \color{blue}{e_1} &amp; \color{purple}{f_1}\\
+\color{green}{d_2} &amp; \color{blue}{e_2} &amp; \color{purple}{f_2}\\
+\color{green}{d_3} &amp; \color{blue}{e_3} &amp; \color{purple}{f_3}
+\end{matrix}\right] &amp;= \left[\begin{matrix} \color{red}{\textbf{a}}\, \color{black}{\cdot}\, \color{green}{\textbf{d}} &amp; \color{red}{\textbf{a}}\, \color{black}{\cdot}\, \color{blue}{\textbf{e}} &amp; \color{red}{\textbf{a}} \,\color{black}{\cdot} \,\color{purple}{\textbf{f}} \\
+\color{orange}{\textbf{b}}\, \color{black}{\cdot} \,\color{green}{\textbf{d}} &amp; \color{orange}{\textbf{b}} \,\color{black}{\cdot}\,\color{blue}{\textbf{e}} &amp; \color{orange}{\textbf{b}}\, \color{black}{\cdot} \,\color{purple}{\textbf{f}} \\ 
+\color{yellow}{\textbf{c}} \,\color{black}{\cdot}\, \color{green}{\textbf{d}} &amp; \color{yellow}{\textbf{c}} \,\color{black}{\cdot}\,\color{blue}{\textbf{e}} &amp; \color{yellow}{\textbf{c}}\, \color{black}{\cdot}\, \color{purple}{\textbf{f}} \end{matrix}\right]\\
+&amp;= \left[\begin{matrix} \color{red}{a_1}\color{green}{d_1} \, \color{black}{+} \, \color{red}{a_2}\color{green}{d_2} \, \color{black}{+} \, \color{red}{a_3}\color{green}{d_3} &amp; \color{red}{a_1}\color{blue}{e_1} \, \color{black}{+} \, \color{red}{a_2}\color{blue}{e_2} \, \color{black}{+} \, \color{red}{a_3}\color{blue}{e_3}  
+&amp; \color{red}{a_1}\color{purple}{f_1} \, \color{black}{+} \, \color{red}{a_2}\color{purple}{f_2} \, \color{black}{+} \, \color{red}{a_3}\color{purple}{f_3} \\
+\color{orange}{b_1}\color{green}{d_1} \, \color{black}{+} \, \color{orange}{b_2}\color{green}{d_2} \, \color{black}{+} \, \color{orange}{b_3}\color{green}{d_3} 
+&amp; \color{orange}{b_1}\color{blue}{e_1} \, \color{black}{+} \, \color{orange}{b_2}\color{blue}{e_2} \, \color{black}{+} \, \color{orange}{b_3}\color{blue}{e_3}
+&amp; \color{orange}{b_1}\color{purple}{f_1} \, \color{black}{+} \, \color{orange}{b_2}\color{purple}{f_2} \, \color{black}{+} \, \color{orange}{b_3}\color{purple}{f_3}\\
+\color{yellow}{c_1}\color{green}{d_1} \, \color{black}{+} \, \color{yellow}{c_2}\color{green}{d_2} \, \color{black}{+} \, \color{yellow}{c_3}\color{green}{d_3} 
+&amp; \color{yellow}{c_1}\color{blue}{e_1} \, \color{black}{+} \, \color{yellow}{c_2}\color{blue}{e_2} \, \color{black}{+} \, \color{yellow}{c_3}\color{blue}{e_3}
+&amp; \color{yellow}{c_1}\color{purple}{f_1} \, \color{black}{+} \, \color{yellow}{c_2}\color{purple}{f_2} \, \color{black}{+} \, \color{yellow}{c_3}\color{purple}{f_3}
+\end{matrix}\right]
+\end{align}\]</div>
+<p>In general, if we want to find the entry in the <span class="math notranslate nohighlight">\(i^{\text{th}}\)</span> row and <span class="math notranslate nohighlight">\(j^{\text{th}}\)</span> column of some matrix <span class="math notranslate nohighlight">\(C = AB\)</span> (which we denote <span class="math notranslate nohighlight">\(C_{ij}\)</span>), we do the following:</p>
+<ul class="simple">
+<li><p>Take the <span class="math notranslate nohighlight">\(i^{\text{th}}\)</span> row of <span class="math notranslate nohighlight">\(A\)</span></p></li>
+<li><p>Take the <span class="math notranslate nohighlight">\(j^{\text{th}}\)</span> column of <span class="math notranslate nohighlight">\(B\)</span></p></li>
+<li><p>Find their dot product.</p></li>
+</ul>
+<p>It is important to remember that we <em>always</em> take the rows of the first matrix, and the columns of the second. This has a really important consequence:</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In matrix multiplication, <em><strong>order matters</strong></em>. <span class="math notranslate nohighlight">\(AB\)</span> is <strong>not</strong> necessarily equal to <span class="math notranslate nohighlight">\(BA\)</span>.</p>
+</div>
+<p>There are a few different ways to execute matrix multiplication in Python. One, surprisingly, is just to use <code class="docutils literal notranslate"><span class="pre">np.dot()</span></code>—it can do matrix multiplication as well as the dot product. But using <code class="docutils literal notranslate"><span class="pre">np.dot()</span></code> for matrix multiplication might confuse people when they try to read your code. Instead, you can use <code class="docutils literal notranslate"><span class="pre">np.matmul</span></code> or <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>. All three of these options work exactly the same on matrices.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">4</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="o">-</span><span class="mi">5</span><span class="p">],[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="nd">@B</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ -5   2   2]
+ [ 25   9  -2]
+ [  6  14 -10]]
+[[ -5   2   2]
+ [ 25   9  -2]
+ [  6  14 -10]]
+[[ -5   2   2]
+ [ 25   9  -2]
+ [  6  14 -10]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>There’s one more important feature of matrix multiplication to discuss. Remember how we can only take the dot product of vectors that have the same length? Since matrix multiplication comes down to lots of dot products, that restriction also affects the matrices we can multiply. In order to be able to take the dot product of the rows of the first matrix with the columns of the second, those rows and columns have to have the same length.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Matrices can only be multiplied if the number of columns of the first matrix is equal to the number of rows in the second.</p>
+</div>
+<p>If you want to take <span class="math notranslate nohighlight">\(AB,\)</span> and <span class="math notranslate nohighlight">\(A\)</span> is a <span class="math notranslate nohighlight">\(c \times d\)</span> matrix, and <span class="math notranslate nohighlight">\(B\)</span> is an <span class="math notranslate nohighlight">\(e \times f\)</span> matrix, you can only do the multiplication if <span class="math notranslate nohighlight">\(d = e.\)</span> And your result will have dimensions <span class="math notranslate nohighlight">\(c \times f.\)</span></p>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>Can you carry out the below matrix multiplications? If so, what dimensions will the result have? (You don’t have to actually do the multiplication.)</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\left[\begin{matrix} 1 &amp; 2 \\ 0 &amp; -1 \\ -4 &amp; 0 \end{matrix}\right] \left[\begin{matrix} 3 &amp; 4 \\ 2 &amp; -3 \\ 5 &amp; 1 \end{matrix}\right]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\left[\begin{matrix} 1 &amp; 2 \\ 0 &amp; -1 \\ -4 &amp; 0 \end{matrix}\right] \left[\begin{matrix} 3 &amp; 2 &amp; 5 \\ 4 &amp; -3 &amp; -1\end{matrix}\right]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\( \left[\begin{matrix} 3 &amp; 2 &amp; 5 \\ 4 &amp; -3 &amp; -1\end{matrix}\right]\left[\begin{matrix} 1 &amp; 2 \\ 0 &amp; -1 \\ -4 &amp; 0 \end{matrix}\right]\)</span></p></li>
+</ul>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<ul class="simple">
+<li><p>No</p></li>
+<li><p>Yes; <span class="math notranslate nohighlight">\(3\times 3\)</span></p></li>
+<li><p>Yes; <span class="math notranslate nohighlight">\(2\times 2\)</span></p></li>
+</ul>
+</div>
+</div>
+<p>And so now we can understand why</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a6c362da-3800-4f1a-86ec-c89ee3a64538">
+<span class="eqno">(32)<a class="headerlink" href="#equation-a6c362da-3800-4f1a-86ec-c89ee3a64538" title="Permalink to this equation">#</a></span>\[\begin{align}
+\left[\begin{matrix} a_1 &amp; a_2 &amp; a_3 \end{matrix}\right] \left[\begin{matrix}b_1\\ b_2\\ b_3\end{matrix}\right]
+\end{align}\]</div>
+<p>is a dot product. It’s matrix multiplication of a matrix with a single row and a matrix with a single column.</p>
+<section id="special-matrices">
+<h3>Special Matrices<a class="headerlink" href="#special-matrices" title="Link to this heading">#</a></h3>
+<p>There are a couple more facts about matrices that we need to cover. First off is one really important matrix, the <em><strong>identity matrix</strong></em>. There are identity matrices of every square dimension (i.e. <span class="math notranslate nohighlight">\(1\times 1\)</span>, <span class="math notranslate nohighlight">\(2\times 2\)</span>, <span class="math notranslate nohighlight">\(3 \times 3\)</span>, etc.), but here’s what the <span class="math notranslate nohighlight">\(3 \times 3\)</span> identity matrix looks like:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e965294d-7841-450b-bf99-55d3a8668936">
+<span class="eqno">(33)<a class="headerlink" href="#equation-e965294d-7841-450b-bf99-55d3a8668936" title="Permalink to this equation">#</a></span>\[\begin{align}
+	\textbf{I} &amp;=\left[ \begin{matrix}1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{matrix}\right]
+\end{align}\]</div>
+<p>It follows a similar pattern for all dimensions—the diagonal is all 1s, and the other entries are all 0s. But what’s the point of it? Well, let’s try multiplying it by a generic 3-dimensional vector, <span class="math notranslate nohighlight">\(\left[\begin{matrix} a\\ b \\ c \end{matrix} \right]\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-73239ac0-2d3f-4c32-88ba-2e6c68620451">
+<span class="eqno">(34)<a class="headerlink" href="#equation-73239ac0-2d3f-4c32-88ba-2e6c68620451" title="Permalink to this equation">#</a></span>\[\begin{align}
+	\textbf{I} \cdot \left[\begin{matrix} a\\ b \\ c \end{matrix} \right] &amp;= \left[ \begin{matrix}1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{matrix}\right] \left[\begin{matrix} a\\ b \\ c \end{matrix} \right]\\
+	&amp;= \left[\begin{matrix} a\\ b \\ c \end{matrix} \right]
+\end{align}\]</div>
+<p>So we see why it’s called the identity matrix: when multiplied by another matrix, it returns that matrix’s identity (i.e., itself).</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>The <span class="math notranslate nohighlight">\(n\times n\)</span> <em><strong>identity matrix</strong></em> is the <span class="math notranslate nohighlight">\(n\times n\)</span> matrix <span class="math notranslate nohighlight">\(I\)</span> such that, for any matrix of appropriate dimension <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(AI\)</span> = <span class="math notranslate nohighlight">\(IA\)</span> = <span class="math notranslate nohighlight">\(A.\)</span></p>
+</div>
+<p>To obtain the identity matrix in numpy, just use <code class="docutils literal notranslate"><span class="pre">np.identity()</span></code> and put the dimension you want as the argument.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1. 0. 0. 0. 0.]
+ [0. 1. 0. 0. 0.]
+ [0. 0. 1. 0. 0.]
+ [0. 0. 0. 1. 0.]
+ [0. 0. 0. 0. 1.]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, let’s discuss the <em><strong>transpose</strong></em>. This is a really easy one, so here’s an example of how it works:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a98c1bef-67b5-4941-9047-30ba393a2959">
+<span class="eqno">(35)<a class="headerlink" href="#equation-a98c1bef-67b5-4941-9047-30ba393a2959" title="Permalink to this equation">#</a></span>\[\begin{align}
+	\left[\begin{matrix}  1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6 \\ 7 &amp; 8 &amp; 9 \end{matrix} \right]^{\intercal} &amp;= \left[\begin{matrix}  1 &amp; 4 &amp; 7 \\ 2 &amp; 5 &amp; 8 \\ 3 &amp; 6 &amp; 9 \end{matrix} \right]
+\end{align}\]</div>
+<p>The transpose just reflects a matrix over its diagonal.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>The <em><strong>transpose</strong></em> of an <span class="math notranslate nohighlight">\(n\times m\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(A^{\intercal},\)</span> is the <span class="math notranslate nohighlight">\(m \times n\)</span> matrix such that <span class="math notranslate nohighlight">\(A_{ij} = A^{\intercal}_{ji}\)</span> for all <span class="math notranslate nohighlight">\(1 \le i \le n,\)</span> <span class="math notranslate nohighlight">\(1 \le j \le m.\)</span></p>
+</div>
+<p>You’ll find the transpose really useful in two primary circumstances. One has to do with handling data. Let’s say someone gives you a weight matrix for a two-layer neural network like the ones we’ve been working with. But each row holds the weights corresponding to a given <em>input</em> neuron, not an <em>output</em> neuron, as has been the case in the examples we’ve worked with so far. This isn’t too hard to handle—just take the transpose of the matrix, and the rows and columns will be switched:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	 \left[\begin{matrix} w_{11} &amp; w_{21} &amp; w_{31} \\ w_{12} &amp; w_{22} &amp; w_{32} \\ w_{13} &amp; w_{23} &amp; w_{33}  \end{matrix}\right]^{\intercal} &amp;=  \left[\begin{matrix} w_{11} &amp; w_{12} &amp; w_{13} \\ w_{21} &amp; w_{22} &amp; w_{23} \\ w_{31} &amp; w_{32} &amp; w_{33}  \end{matrix}\right]
+\end{align*}\]</div>
+<p>Another application has to do with vectors. Remember  how we discussed the relationship between the dot product and matrix multiplication? The dot product is just the result of matrix multiplying two vectors:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	\left[\begin{matrix} a &amp; b &amp; c \end{matrix}\right]\left[\begin{matrix} d \\ e \\ f \end{matrix}\right] &amp;= ad + be + cf
+\end{align*}\]</div>
+<p>What if we want to take the dot product of a matrix with itself? We have a problem, because to multiply two vectors, one has to be a row vector and the other has to be a column vector (why?). So if our vector is (as is conventional) a column vector, e.g.:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	\mathbf{x} &amp;= \left[ \begin{matrix}x_1 \\ x_2 \\ x_3 \end{matrix}\right]
+\end{align*}\]</div>
+<p>we need to use the transpose to be able to take its dot product with itself.</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	\mathbf{x}^{\intercal}\mathbf{x} &amp;= \left[ \begin{matrix}x_1 &amp; x_2 &amp; x_3 \end{matrix}\right]\left[ \begin{matrix}x_1 \\ x_2 \\ x_3 \end{matrix}\right]\\
+	&amp;= x_1^2 + x_2^2 + x_3^2
+\end{align*}\]</div>
+<p>Transposes in numpy are super easy—just append <code class="docutils literal notranslate"><span class="pre">.T</span></code> to the matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1 1 1]
+ [0 1 1]
+ [0 0 1]]
+[[1 0 0]
+ [1 1 0]
+ [1 1 1]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Last, we will discuss the <em><strong>determinant</strong></em>. The determinant is going to seem like a bit of an obscure quantity for now, although you will see one important interpretation of it in your homework. But we’ll have to wait till we cover matrix inverses to learn its true power. But here’s what it is, for a <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+	\begin{vmatrix} a &amp; b \\ c &amp; d \end{vmatrix} &amp;= ad - cb
+\end{align*}\]</div>
+<p>(Those vertical lines just indicate that you are taking the determinant of the matrix between them.) Determinants exist for all square matrices, and there are similar formulas for all sizes of square matrix, but you don’t have to worry about any of them except this one. For every matrix, the determinant is just a single number. And depending on what that number is, we can figure out some interesting things about the matrix.</p>
+<p>To calculate the determinant in numpy, use <code class="docutils literal notranslate"><span class="pre">np.linalg.det</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1  2]
+ [-3  1]]
+7.000000000000001
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="the-geometric-interpretation">
+<h2>The Geometric Interpretation<a class="headerlink" href="#the-geometric-interpretation" title="Link to this heading">#</a></h2>
+<p>Let’s say we have two neurons, <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2,\)</span> and we’re tracking their activities in a vector</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c2a99be6-1297-44f5-994d-3ca892b813f5">
+<span class="eqno">(36)<a class="headerlink" href="#equation-c2a99be6-1297-44f5-994d-3ca892b813f5" title="Permalink to this equation">#</a></span>\[\begin{align}
+\textbf{x}(t) &amp;= \left[\begin{matrix} x_1(t) \\ x_2(t) \end{matrix}\right]
+\end{align}\]</div>
+<p>At some time <span class="math notranslate nohighlight">\(t_1\)</span>, we might measure their activites and find</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4f033126-4020-42cf-9923-b0962784eb4c">
+<span class="eqno">(37)<a class="headerlink" href="#equation-4f033126-4020-42cf-9923-b0962784eb4c" title="Permalink to this equation">#</a></span>\[\begin{align}
+x(t_1) &amp;= \left[\begin{matrix} 1 \\ 2 \end{matrix}\right]
+\end{align}\]</div>
+<p>A reasonable thing to do would be to plot this data point, with the <span class="math notranslate nohighlight">\(x\)</span>-axis representing the <span class="math notranslate nohighlight">\(x_1\)</span> neuron and the <span class="math notranslate nohighlight">\(y\)</span>-axis representing the <span class="math notranslate nohighlight">\(x_2\)</span> neuron.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/geofig0.png"><img alt="_images/geofig0.png" src="_images/geofig0.png" style="height: 400px;" /></a>
+</figure>
+<p>This is an acceptable representation of that datum. But when we plot vectors, we typically plot them not as points, but as arrows from the origin, <span class="math notranslate nohighlight">\((0,0)\)</span>, to the endpoint. Here’s what that looks like. (Arrows aren’t available in the software I used to make this plot, but you’ll generally see them on the ends of vectors.)</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/geofig1.png"><img alt="_images/geofig1.png" src="_images/geofig1.png" style="height: 400px;" /></a>
+</figure>
+<p>This representation of vectors ends up being handy when we want to apply operations, like addition. First, let’s add another vector, <span class="math notranslate nohighlight">\(\left[\begin{matrix} 4 \\ 1 \end{matrix}\right]\)</span>, to our plot.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/geofig2.png"><img alt="_images/geofig2.png" src="_images/geofig2.png" style="height: 400px;" /></a>
+</figure>
+<p>We can easily calcualte that</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8ee22314-1ece-424a-9d76-6b7bbd798f2a">
+<span class="eqno">(38)<a class="headerlink" href="#equation-8ee22314-1ece-424a-9d76-6b7bbd798f2a" title="Permalink to this equation">#</a></span>\[\begin{align}
+\left[\begin{matrix} 1 \\ 2 \end{matrix}\right] + \left[\begin{matrix} 4 \\ 1 \end{matrix}\right] = \left[\begin{matrix} 5 \\ 3 \end{matrix}\right]
+\end{align}\]</div>
+<p>Let’s add that sum to our plot.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/geofig3.png"><img alt="_images/geofig3.png" src="_images/geofig3.png" style="height: 400px;" /></a>
+</figure>
+<p>This might not seem terribly illuminating. But if instead of anchoring both vectors to the origin we place them end to end, we’ll see something interesting.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/geofig4.png"><img alt="_images/geofig4.png" src="_images/geofig4.png" style="height: 400px;" /></a>
+</figure>
+<p>The sum, in red, is just the diagonal of a parallelogram with sides defined by our two vectors, in green and blue. In other words, you can take the sum of two vectors, geometrically, by stacking them end-to-end and drawing a line between the start of one vector and the end of the other.</p>
+<p>There’s also a straightforward geometric interpretation of scalar multiplication. We know</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c01c36ac-5624-4eb4-bbbb-d48877aa699a">
+<span class="eqno">(39)<a class="headerlink" href="#equation-c01c36ac-5624-4eb4-bbbb-d48877aa699a" title="Permalink to this equation">#</a></span>\[\begin{align}
+0.5 \times \left[\begin{matrix} 1 \\ 2 \end{matrix}\right] = \left[\begin{matrix} 0.5 \\ 1\end{matrix}\right]
+\end{align}\]</div>
+<p>and</p>
+<div class="amsmath math notranslate nohighlight" id="equation-865b067c-43ea-4946-a19e-9baeb6449a30">
+<span class="eqno">(40)<a class="headerlink" href="#equation-865b067c-43ea-4946-a19e-9baeb6449a30" title="Permalink to this equation">#</a></span>\[\begin{align}
+2 \times \left[\begin{matrix} 1 \\ 2\end{matrix}\right] = \left[\begin{matrix} 2 \\ 4\end{matrix}\right]
+\end{align}\]</div>
+<p>What does this look like when we plot it? Multiplying our original vector by 0.5 yields:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/geofig5.png"><img alt="_images/geofig5.png" src="_images/geofig5.png" style="height: 400px;" /></a>
+</figure>
+<p>And multiplying it by 2 yields:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/geofig6.png"><img alt="_images/geofig6.png" src="_images/geofig6.png" style="height: 400px;" /></a>
+</figure>
+<p>In both cases, we have simply scaled the length of the vector by the scalar.</p>
+<p>The geometric interpretation also introduces a new feature of vectors—their magnitude or <em><strong>norm</strong></em>. That’s just a fancy work for the length of the vector.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>A vector’s <em><strong>norm</strong></em> is simply its length.</p>
+</div>
+<p>So the norm of <span class="math notranslate nohighlight">\(\left[\begin{matrix} 1 \\ 2 \end{matrix}\right]\)</span> is just, by the Pythagorean theorem, <span class="math notranslate nohighlight">\(\sqrt{1^2 + 2^2} = \sqrt{5}.\)</span> In general, the norm of a vector <span class="math notranslate nohighlight">\(\textbf{x} = \left[\begin{matrix} x_1 \\ x_2 \\ x_3 \end{matrix}\right]\)</span> is <span class="math notranslate nohighlight">\(\sqrt{x_1^2 + x_2^2 + x_3^2}.\)</span> Or,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ac423ecc-56a7-46fe-9b30-dbebf8e1d047">
+<span class="eqno">(41)<a class="headerlink" href="#equation-ac423ecc-56a7-46fe-9b30-dbebf8e1d047" title="Permalink to this equation">#</a></span>\[\begin{align}
+	\lVert x \rVert &amp;= \sqrt{x_1^2 + x_2^2 + x_3^2}
+\end{align}\]</div>
+<p>Finally, there’s also a straightfoward geometric interpretation of the <a class="reference internal" href="#dotproduct"><span class="std std-ref">dot product</span></a>. Let’s return to our two vectors.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/geofig2.png"><img alt="_images/geofig2.png" src="_images/geofig2.png" style="height: 400px;" /></a>
+</figure>
+<p>We know that</p>
+<div class="amsmath math notranslate nohighlight" id="equation-68d335ea-45cf-4b03-959a-b52a0e3b7b4c">
+<span class="eqno">(42)<a class="headerlink" href="#equation-68d335ea-45cf-4b03-959a-b52a0e3b7b4c" title="Permalink to this equation">#</a></span>\[\begin{align}
+\left[\begin{matrix}1 &amp; 2 \end{matrix}\right] \left[\begin{matrix} 4 \\ 1 \end{matrix}\right] &amp;= 6
+\end{align}\]</div>
+<p>But there’s another way to calculate the dot product. If we call our vectors <span class="math notranslate nohighlight">\(\textbf{a}\)</span> and <span class="math notranslate nohighlight">\(\textbf{b}\)</span>, and the angle between them <span class="math notranslate nohighlight">\(\theta\)</span>, it turns out that our dot product is equal to</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a1f44f41-e562-48b0-8695-f7c38ea448a5">
+<span class="eqno">(43)<a class="headerlink" href="#equation-a1f44f41-e562-48b0-8695-f7c38ea448a5" title="Permalink to this equation">#</a></span>\[\begin{align}
+	\lVert \textbf{a} \rVert \lVert \textbf{b} \rVert \cos\theta
+\end{align}\]</div>
+<p>Let’s demonstrate that for our vectors. Using trigonometry, we can find that the angle between our vectors is approximately <span class="math notranslate nohighlight">\(49.4^{\circ}.\)</span> So our dot product is equal to</p>
+<div class="amsmath math notranslate nohighlight" id="equation-3977df11-530b-4666-815f-5c1090d610bc">
+<span class="eqno">(44)<a class="headerlink" href="#equation-3977df11-530b-4666-815f-5c1090d610bc" title="Permalink to this equation">#</a></span>\[\begin{align}
+\lVert \textbf{a} \rVert \lVert \textbf{b} \rVert \cos\theta &amp;= \sqrt{1^2 + 2^2}\times \sqrt{4^2 + 1^2}\times\cos 49.4\\
+&amp;= 6
+\end{align}\]</div>
+<p>The geometric interpretation of the dot product gives us some important intuition about how the dot product works. If two vectors point in entirely the same direction (so have an angle of <span class="math notranslate nohighlight">\(0^{\circ}\)</span> between them), their dot product is just the product of their norms, because <span class="math notranslate nohighlight">\(\cos(0) = 1.\)</span> So the dot product is <em>maximized</em> when two vectors point in the same direction.</p>
+<p>And if two vectors are at a right angle, <span class="math notranslate nohighlight">\(90^{\circ}\)</span>, to each other, we see something else—<span class="math notranslate nohighlight">\(\cos(90) = 0,\)</span> so the dot product is 0, regardless of the norms of the two vectors. If the dot product of two vectors is 0—if they point in completely different directions—we refer to them as <em><strong>orthogonal</strong></em>.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>Two vectors are <em><strong>orthogonal</strong></em> if they sit at a right angle to each other.</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>Prove that two non-zero vectors with dot product 0 must be orthogonal.</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Based on the geometric definition of the dot product, we can say (calling our vectors <span class="math notranslate nohighlight">\(\textbf{a}\)</span> and <span class="math notranslate nohighlight">\(\textbf{b}\)</span>):</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0592728f-159e-4155-84d5-4ed01a773916">
+<span class="eqno">(45)<a class="headerlink" href="#equation-0592728f-159e-4155-84d5-4ed01a773916" title="Permalink to this equation">#</a></span>\[\begin{align}
+\lVert \textbf{a} \rVert \lVert \textbf{b} \rVert \cos\theta = 0
+\end{align}\]</div>
+<p>We know that <span class="math notranslate nohighlight">\(\lVert \textbf{a} \rVert\)</span> and <span class="math notranslate nohighlight">\(\lVert \textbf{b} \rVert\)</span> must be nonzero—that’s just the length of the vectors, and we were told our vectors are nonzero. So we must have</p>
+<div class="amsmath math notranslate nohighlight" id="equation-3ff6cf9a-7631-46fc-a2c1-7a6f5dbbae2d">
+<span class="eqno">(46)<a class="headerlink" href="#equation-3ff6cf9a-7631-46fc-a2c1-7a6f5dbbae2d" title="Permalink to this equation">#</a></span>\[\begin{align}
+\cos\theta = 0
+\end{align}\]</div>
+<p>So <span class="math notranslate nohighlight">\(\theta = 90^{\circ}, 270^{\circ}, 450^{\circ},\)</span> etc.—all angles that have the vectors at right angles to each other.</p>
+</div>
+</div>
+<p>It’s important—and often extremely helpful—to remember that all the objects we talk about in linear algebra, like vectors and matrices, are also geometric objects. We will learn about the geometric interpretation of matrices on this week’s problem set.</p>
+<p>If you want some more practice thinking about vectors as geometric objects, try playing around with the interactive tool below.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
+<span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://www.desmos.com/calculator/wcnkh335sd?embed&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;border: 1px solid #ccc&quot;</span><span class="p">,</span><span class="n">frameborder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="900"
+            height="500"
+            src="https://www.desmos.com/calculator/wcnkh335sd?embed?style=border%3A+1px+solid+%23ccc&frameborder=0"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+</section>
+<section id="bases">
+<h2>Bases<a class="headerlink" href="#bases" title="Link to this heading">#</a></h2>
+<p>Let’s go back to that first plot we made, of the vector <span class="math notranslate nohighlight">\(\textbf{x} = \left[\begin{matrix} 1 \\ 2 \end{matrix}\right].\)</span></p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/geofig1.png"><img alt="_images/geofig1.png" src="_images/geofig1.png" style="height: 400px;" /></a>
+</figure>
+<p>Our plotting strategy probably seems so obvious that it doesn’t need to be said. The vector is <span class="math notranslate nohighlight">\(\left[\begin{matrix} 1 \\ 2 \end{matrix}\right],\)</span> so we placed its end at <span class="math notranslate nohighlight">\((1,2).\)</span> But I want you to start thinking about things a bit differently.</p>
+<p>Let’s define two vectors <span class="math notranslate nohighlight">\(\textbf{e}_1 = \left[\begin{matrix} 1 \\ 0 \end{matrix}\right]\)</span> and <span class="math notranslate nohighlight">\(\textbf{e}_2 = \left[\begin{matrix} 0 \\ 1 \end{matrix}\right].\)</span> We can add them to our plot:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/basisfig1.png"><img alt="_images/basisfig1.png" src="_images/basisfig1.png" style="height: 400px;" /></a>
+</figure>
+<p>Using <span class="math notranslate nohighlight">\(\textbf{e}_1\)</span> and <span class="math notranslate nohighlight">\(\textbf{e}_2,\)</span> we can rewrite <span class="math notranslate nohighlight">\(\textbf{x}\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-9d4e2946-8629-4566-8ce6-f429fc886f1a">
+<span class="eqno">(47)<a class="headerlink" href="#equation-9d4e2946-8629-4566-8ce6-f429fc886f1a" title="Permalink to this equation">#</a></span>\[\begin{align}
+\textbf{x} &amp;= 1\textbf{e}_1 + 2\textbf{e}_2
+\end{align}\]</div>
+<p>Note that our coefficients are just the first and second entries of <span class="math notranslate nohighlight">\(\textbf{x}\)</span>, respectively. So we just obtain <span class="math notranslate nohighlight">\(\textbf{x}\)</span> by scaling <span class="math notranslate nohighlight">\(\textbf{e}_1\)</span> by 1, scaling <span class="math notranslate nohighlight">\(\textbf{e}_2\)</span> by 2, and adding the result. Let’s visualize that:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/basisfig2.png"><img alt="_images/basisfig2.png" src="_images/basisfig2.png" style="height: 400px;" /></a>
+</figure>
+<p>This gives us a totally new way to interpret what a vector means. A vector is just a collection of numbers by which we scale vectors in this special set—<span class="math notranslate nohighlight">\(\textbf{e}_1\)</span> and <span class="math notranslate nohighlight">\(\textbf{e}_2\)</span>—before adding them.</p>
+<div class="math notranslate nohighlight" id="equation-eq5">
+<span class="eqno">(48)<a class="headerlink" href="#equation-eq5" title="Link to this equation">#</a></span>\[\begin{split}\left[\begin{matrix} a \\ b \end{matrix}\right] \sim a\textbf{e}_1 + b\textbf{e}_2\end{split}\]</div>
+<p>The expression on the right, where we multiply <span class="math notranslate nohighlight">\(\textbf{e}_1\)</span> and <span class="math notranslate nohighlight">\(\textbf{e}_2\)</span> by scalars and then add them, is called a <em><strong>linear combination</strong></em>. Since any two-dimensional vector can be written as a linear combination of <span class="math notranslate nohighlight">\(\textbf{e}_1\)</span> and <span class="math notranslate nohighlight">\(\textbf{e}_2\)</span>, according to <a class="reference internal" href="#equation-eq5">(48)</a>, we refer to the whole set of two-dimensional vectors as the
+<em><strong>span</strong></em> of <span class="math notranslate nohighlight">\(\textbf{e}_1\)</span> and <span class="math notranslate nohighlight">\(\textbf{e}_2\)</span>.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>A <em><strong>linear combination</strong></em> is an expression in which a set of vectors is multiplied by scalars and then summed. The <em><strong>span</strong></em> of a set of vectors is all of the vectors that can be written as a linear combination of that set.</p>
+</div>
+<p>The fact that we can write any two-dimensional vector as a linear combination of <span class="math notranslate nohighlight">\(\textbf{e}_1\)</span> and <span class="math notranslate nohighlight">\(\textbf{e}_2\)</span> is really important. Anything we want to do with two-dimensional vectors, we can do in terms of <span class="math notranslate nohighlight">\(\textbf{e}_1\)</span> and <span class="math notranslate nohighlight">\(\textbf{e}_2\)</span>. They are basic ingredients we can use to make any (two-dimensional) linear algebra recipe we want. Because of this important feature, we call them a <em><strong>basis</strong></em>.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>A <em><strong>basis</strong></em> for the set of <span class="math notranslate nohighlight">\(n\)</span>-dimensional vectors is any collection of <span class="math notranslate nohighlight">\(n\)</span> vectors that spans that entire set.</p>
+</div>
+<p>But <span class="math notranslate nohighlight">\(\textbf{e}_1\)</span> and <span class="math notranslate nohighlight">\(\textbf{e}_2\)</span> are <em>not</em> the only basis possible for two-dimensional vectors. For example, we could write any vector <span class="math notranslate nohighlight">\(\left[\begin{matrix} a \\ b\end{matrix}\right]\)</span> as a linear combination of <span class="math notranslate nohighlight">\(\left[\begin{matrix} 2 \\ 0 \end{matrix}\right]\)</span> and <span class="math notranslate nohighlight">\(\left[\begin{matrix} 0 \\ 2 \end{matrix}\right]\)</span>, using the coefficients <span class="math notranslate nohighlight">\(a/2\)</span> and <span class="math notranslate nohighlight">\(b/2.\)</span> So <span class="math notranslate nohighlight">\(\left[\begin{matrix} 2 \\ 0 \end{matrix}\right],\)</span> <span class="math notranslate nohighlight">\(\left[\begin{matrix} 0 \\ 2 \end{matrix}\right]\)</span> is <em>also</em> a basis.</p>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>Are the vectors <span class="math notranslate nohighlight">\(\left[\begin{matrix} 2 \\ 0\end{matrix}\right], \left[\begin{matrix} 4 \\ 0\end{matrix}\right]\)</span> a basis for the set of two-dimensional vectors? Why or why not?</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>No, they are not a basis. Any vector <span class="math notranslate nohighlight">\(\left[\begin{matrix} a \\ b\end{matrix}\right]\)</span> with <span class="math notranslate nohighlight">\(b \neq 0\)</span> cannot be written as a linear combination of those vectors.</p>
+</div>
+</div>
+<p>The existence of different bases means that there are tons of different ways to write the same vector. The vector <span class="math notranslate nohighlight">\(\left[\begin{matrix} 2 \\ 4 \end{matrix}\right]\)</span> using the basis <span class="math notranslate nohighlight">\((\textbf{e}_1, \textbf{e}_2)\)</span> is equivalent to the vector <span class="math notranslate nohighlight">\(\left[\begin{matrix} 1 \\ 2 \end{matrix}\right]\)</span> using the basis <span class="math notranslate nohighlight">\(\left(\left[\begin{matrix} 2 \\ 0 \end{matrix}\right], \left[\begin{matrix} 0 \\ 2 \end{matrix}\right]\right).\)</span> (If that’s not clear, expand each vector as a linear combination of its respective basis.)</p>
+<p>Let’s visualize this. We know how to write our original vector, <span class="math notranslate nohighlight">\(\left[\begin{matrix} 1 \\ 2 \end{matrix}\right]\)</span>, in terms of the basis <span class="math notranslate nohighlight">\((\textbf{e}_1, \textbf{e}_2)\)</span>:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-5a4bb060-3ad8-4a67-b342-21a0e7cfc58d">
+<span class="eqno">(49)<a class="headerlink" href="#equation-5a4bb060-3ad8-4a67-b342-21a0e7cfc58d" title="Permalink to this equation">#</a></span>\[\begin{align}
+\left[\begin{matrix} 1 \\ 2 \end{matrix}\right] &amp;= 1\textbf{e}_1 + 2\textbf{e}_2
+\end{align}\]</div>
+<p>Let’s use another basis: <span class="math notranslate nohighlight">\(\left(\left[\begin{matrix} 1 \\ 1 \end{matrix}\right], \left[\begin{matrix} -1 \\ 0 \end{matrix}\right]\right)\)</span>. We can see:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4811029b-2f3e-492b-a213-4fa1151f6fd7">
+<span class="eqno">(50)<a class="headerlink" href="#equation-4811029b-2f3e-492b-a213-4fa1151f6fd7" title="Permalink to this equation">#</a></span>\[\begin{align}
+\left[\begin{matrix} 1 \\ 2 \end{matrix}\right] &amp;= 2\left[\begin{matrix} 1 \\ 1 \end{matrix}\right] + 1\left[\begin{matrix} -1 \\ 0 \end{matrix}\right]
+\end{align}\]</div>
+<p>So in terms of our new basis, our vector is just <span class="math notranslate nohighlight">\(\left[\begin{matrix} 2 \\ 1 \end{matrix}\right].\)</span> We could write something like</p>
+<div class="amsmath math notranslate nohighlight" id="equation-b30d4d18-dabf-45f6-89ac-7f6ecb3e83fe">
+<span class="eqno">(51)<a class="headerlink" href="#equation-b30d4d18-dabf-45f6-89ac-7f6ecb3e83fe" title="Permalink to this equation">#</a></span>\[\begin{align}
+\left[\begin{matrix} 1 \\ 2 \end{matrix}\right]_{old} &amp;= \left[\begin{matrix} 2 \\ 1 \end{matrix}\right]_{new}
+\end{align}\]</div>
+<p>where the subscripts indicate the basis that we are using.</p>
+<p>Let’s see what’s going on geometrically. We can plot these new basis vectors:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/geofig7.png"><img alt="_images/geofig7.png" src="_images/geofig7.png" style="height: 400px;" /></a>
+</figure>
+<p>And then, just like for the first basis set, we scale them by the appropriate coefficients—2 and 1 respectively—and add them together to get our original vector.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/geofig8.png"><img alt="_images/geofig8.png" src="_images/geofig8.png" style="height: 400px;" /></a>
+</figure>
+<p>You can think of different bases like sets of paints. If you start with a good set of colors, you can mix them together in different proportions to get practically any color you want. But there are lots of different starting sets that you could theoretically use. Depending on the colors you start with, you’ll need to use different recipes. But any set works equally well.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/colorpic.webp"><img alt="_images/colorpic.webp" src="_images/colorpic.webp" style="height: 400px;" /></a>
+</figure>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>Express the vector <span class="math notranslate nohighlight">\(\left[\begin{matrix} 3 \\ 4 \end{matrix}\right]\)</span> in terms of each of the below basis sets.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\left[\begin{matrix} 1 \\ 0 \end{matrix}\right], \left[\begin{matrix} 0 \\ 1 \end{matrix}\right]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\left[\begin{matrix} 2 \\ 1 \end{matrix}\right], \left[\begin{matrix} 1 \\ 3 \end{matrix}\right]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\left[\begin{matrix} 0 \\ 1 \end{matrix}\right], \left[\begin{matrix} 1 \\ 1 \end{matrix}\right]\)</span></p></li>
+</ul>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\left[\begin{matrix} 3 \\ 4 \end{matrix}\right]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\left[\begin{matrix} 1 \\ 1 \end{matrix}\right]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\left[\begin{matrix} 1 \\ 3 \end{matrix}\right]\)</span></p></li>
+</ul>
+</div>
+</div>
+<p>The desmos calculator below allows you to play around a bit with different bases. Using the sliders, you can define a basis <span class="math notranslate nohighlight">\((i,j)\)</span> and see how it redefines the coordinate system. You can also plot a vector of your choice, in <span class="math notranslate nohighlight">\((\textbf{e}_1, \textbf{e}_2)\)</span> coordinates, and see how you would express it in the new basis. Choosing a new basis really is like drawing a new coordinate system.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://www.desmos.com/calculator/jhb1znrllb?embed&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;border: 1px solid #ccc&quot;</span><span class="p">,</span><span class="n">frameborder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="900"
+            height="500"
+            src="https://www.desmos.com/calculator/jhb1znrllb?embed?style=border%3A+1px+solid+%23ccc&frameborder=0"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+<p>Why should we care about this at all in neuroscience? If we can express a vector in terms of any basis, isn’t every basis equally good? As it turns out, different bases can be better or worse for different purposes. Sometimes, choosing a basis wisely can make our data much simpler. This insight is the cornerstone of principal component analysis (PCA), which we will cover in a couple of weeks.</p>
+<p>For now, here’s a quick example. Let’s say we collect data from two neurons and plot them, and we obtain something that looks like this:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">*</span><span class="mi">10</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7fad9ae9ed10&gt;
+</pre></div>
+</div>
+<img alt="_images/ac958ce4ca00b2d5af5ec4a503f443cb66ce1be5aff0f8ecd837cdd1318ada5d.png" src="_images/ac958ce4ca00b2d5af5ec4a503f443cb66ce1be5aff0f8ecd837cdd1318ada5d.png" />
+</div>
+</div>
+<p>It looks like the two neuros are firing exactly in sync! If we write out or data in the standard basis, it’s going to look something like</p>
+<div class="amsmath math notranslate nohighlight" id="equation-39f478b5-d91f-4689-90ca-729c6a705f1c">
+<span class="eqno">(52)<a class="headerlink" href="#equation-39f478b5-d91f-4689-90ca-729c6a705f1c" title="Permalink to this equation">#</a></span>\[\begin{align}
+\left[\begin{matrix} 1.2 \\ 1.2 \end{matrix}\right],\left[\begin{matrix} 4.3 \\ 4.3 \end{matrix}\right], \left[\begin{matrix} 8.9 \\ 8.9 \end{matrix}\right], \cdots
+\end{align}\]</div>
+<p>It seems kind of silly to keep writing out both of these numbers. In an important sense, our data aren’t really two-dimensional—they are essentially one-dimensional. If we know the activity of one of the two neurons, we already know the activity of the other.</p>
+<p>Is there a way we can encode this insight? Yes! We can switch to a cleverly chosen basis—in this case, <span class="math notranslate nohighlight">\(\left(\left[\begin{matrix} 1 \\ 1 \end{matrix}\right],\left[\begin{matrix} 1 \\ -1 \end{matrix}\right]\right)\)</span>. In this new basis, our data look a lot simpler:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-aad3810a-d3b4-4e5f-80c1-0c24cd8f4f58">
+<span class="eqno">(53)<a class="headerlink" href="#equation-aad3810a-d3b4-4e5f-80c1-0c24cd8f4f58" title="Permalink to this equation">#</a></span>\[\begin{align}
+\left[\begin{matrix} 1.2 \\ 0 \end{matrix}\right],\left[\begin{matrix} 4.3 \\ 0 \end{matrix}\right], \left[\begin{matrix} 8.9 \\ 0 \end{matrix}\right], \cdots
+\end{align}\]</div>
+<p>Now we can essentially ignore the second entry in each vector. By changing our basis, we’ve made a two-dimenional dataset one-dimensional.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to NBIO 228!</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vectors">Vectors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-dot-product">The Dot Product</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#matrices">Matrices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#special-matrices">Special Matrices</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-geometric-interpretation">The Geometric Interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bases">Bases</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Grace Huckins, Linnie Warton, and Gabriel Mel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
