@@ -7,3 +7,4 @@ parts:
   - caption: Introduction to Linear Algebra
     chapters:
     - file: Vectors and Matrices
+    - file: Eigenvectors and Eigenvalues

@@ -1,0 +1,1064 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Eigenvectors and eigenvalues &#8212; Mathematical Tools for Neuroscience</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Eigenvectors and Eigenvalues';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Vectors and Matrices" href="Vectors%20and%20Matrices.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/scary_brain.png" class="logo__image only-light" alt="Mathematical Tools for Neuroscience - Home"/>
+    <script>document.write(`<img src="_static/scary_brain.png" class="logo__image only-dark" alt="Mathematical Tools for Neuroscience - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to NBIO 228!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Linear Algebra</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Vectors%20and%20Matrices.html">Vectors and Matrices</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Eigenvectors and eigenvalues</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ghuckins/NBIO-228" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ghuckins/NBIO-228/issues/new?title=Issue%20on%20page%20%2FEigenvectors and Eigenvalues.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Eigenvectors and Eigenvalues.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Eigenvectors and eigenvalues</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-and-motivation">Introduction and motivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-linear-algebra">Basic linear algebra</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-eigenvalues-and-eigenvectors">Determining eigenvalues and eigenvectors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theory">Theory</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-example">A simple example</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-general-recipe">The general recipe</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagonalization">Diagonalization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation">Derivation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-powers">Matrix powers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration-discrete-linear-dynamics">Demonstration: discrete linear dynamics</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="eigenvectors-and-eigenvalues">
+<h1>Eigenvectors and eigenvalues<a class="headerlink" href="#eigenvectors-and-eigenvalues" title="Link to this heading">#</a></h1>
+<section id="introduction-and-motivation">
+<h2>Introduction and motivation<a class="headerlink" href="#introduction-and-motivation" title="Link to this heading">#</a></h2>
+<p>Eigenanalysis - that is, analysis of eigenvectors and eigenvalues - is a fundamental topic in both pure and applied math. We will learn about it in this class because no self-respecting linear algebra class can do without it, and because eigenanalysis provides helpful intuition and is an extremely useful tool in many concrete settings. For example, eigenanalysis</p>
+<ul class="simple">
+<li><p>is the basis of principle components analysis (PCA), which we will talk about next week.</p></li>
+<li><p>can be used to predict the evolution of arbitrary linear dynamical systems, and to extract crucial information from nonlinear dynamical systems via a technique known as <em>linearization</em>. We will cover this topic later in the course.</p></li>
+<li><p>provides a beautiful and powerful interpretation for Fourier analysis.</p></li>
+</ul>
+</section>
+<section id="basic-linear-algebra">
+<h2>Basic linear algebra<a class="headerlink" href="#basic-linear-algebra" title="Link to this heading">#</a></h2>
+<p>We’ll begin with the bare essentials. These are the facts you should know from this section:</p>
+<div class="important admonition">
+<p class="admonition-title">Key Takeaways</p>
+<ol class="arabic simple">
+<li><p>For a matrix <span class="math notranslate nohighlight">\(A\)</span>, an eigenvector is a vector <span class="math notranslate nohighlight">\(v\)</span> and an eigenvalue is a scalar (ie. number) <span class="math notranslate nohighlight">\(\lambda\)</span> that together satisfy the equation <span class="math notranslate nohighlight">\(Av=\lambda v\)</span>. That is, when applying <span class="math notranslate nohighlight">\(A\)</span>, the vector <span class="math notranslate nohighlight">\(v\)</span> only changes in length, unlike a general vector which may be whipped around in a random direction.</p></li>
+<li><p>A general <span class="math notranslate nohighlight">\(n\times n\)</span> matrix has <span class="math notranslate nohighlight">\(n\)</span> eigenvalues, when counted with multiplicity. These may be complex numbers.</p></li>
+<li><p>Not all <span class="math notranslate nohighlight">\(n\times n\)</span> matrices have <span class="math notranslate nohighlight">\(n\)</span> <em>eigenvectors</em>. However, a special class of matrices, called <em>normal matrices</em>, which includes <em>symmetric</em>, <em>antisymmetric</em>, and <em>rotation</em> matrices, is guaranteed to have a full set of <span class="math notranslate nohighlight">\(n\)</span> eigenvectors.</p></li>
+</ol>
+</div>
+<p>Consider an arbitrary matrix <span class="math notranslate nohighlight">\(A\)</span>. If we select a vector <span class="math notranslate nohighlight">\(w\)</span> at random and apply the matrix <span class="math notranslate nohighlight">\(A\)</span>, our expectation is that <span class="math notranslate nohighlight">\(A w\)</span> will point in a random new direction. We then ask a natural question: are there any special vectors <span class="math notranslate nohighlight">\(v\)</span> that, after applying <span class="math notranslate nohighlight">\(A\)</span>, the output <span class="math notranslate nohighlight">\(A v\)</span> points in the same direction as the input <span class="math notranslate nohighlight">\(v\)</span>? Any such special vector is called an <em>eigenvector</em>.</p>
+<p>Get a feel for this by playing around with the graph below. Can you find special values for <span class="math notranslate nohighlight">\(v\)</span> such that the new vector <span class="math notranslate nohighlight">\(Av\)</span> points in the same direction as <span class="math notranslate nohighlight">\(v\)</span>?</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
+<span class="n">IFrame</span><span class="p">(</span><span class="s1">&#39;https://www.desmos.com/calculator/fhwvsgxyln?embed&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">700</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">350</span><span class="p">,</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;border: 1px solid #ccc&quot;</span><span class="p">,</span><span class="n">frameborder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output text_html">
+        <iframe
+            width="700"
+            height="350"
+            src="https://www.desmos.com/calculator/fhwvsgxyln?embed?style=border%3A+1px+solid+%23ccc&frameborder=0"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>An <strong>eigenvector</strong> of a matrix <span class="math notranslate nohighlight">\(A\)</span> is a vector <span class="math notranslate nohighlight">\(v\)</span> satisfying</p>
+<div class="math notranslate nohighlight" id="equation-my-label">
+<span class="eqno">(58)<a class="headerlink" href="#equation-my-label" title="Link to this equation">#</a></span>\[Av = \lambda v\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda\)</span> is an ordinary scalar. <span class="math notranslate nohighlight">\(\lambda\)</span> is said to be the associated <strong>eigenvalue</strong>.</p>
+</div>
+<p>Let’s illustrate this with a simple example:</p>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>Confirm that the vector <span class="math notranslate nohighlight">\(v\)</span> is an eigenvector of the matrix <span class="math notranslate nohighlight">\(A\)</span> and determine the eigenvalue.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}v=\left(\begin{array}{c}
+1\\
+-1
+\end{array}\right)\quad A=\left(\begin{array}{cc}
+0 &amp; 2\\
+2 &amp; 0
+\end{array}\right)\end{split}\]</div>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>We simply multiply <span class="math notranslate nohighlight">\(A\)</span> by <span class="math notranslate nohighlight">\(v\)</span> using the rules of ordinary matrix multiplication:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}Av=\left(\begin{array}{cc}
+0 &amp; 2\\
+2 &amp; 0
+\end{array}\right)\left(\begin{array}{c}
+1\\
+-1
+\end{array}\right)=\left(\begin{array}{c}
+0\cdot1+2\cdot\left(-1\right)\\
+2\cdot1+0\cdot\left(-1\right)
+\end{array}\right)=\left(\begin{array}{c}
+-2\\
+2
+\end{array}\right)=-2v,\end{split}\]</div>
+<p>which shows that <span class="math notranslate nohighlight">\(v\)</span> is an eigenvector of <span class="math notranslate nohighlight">\(A\)</span> with eigenvalue <span class="math notranslate nohighlight">\(-2\)</span>.</p>
+</div>
+</div>
+<p>The exercise above shows that some matrices have an eigenvalue/eigenvector. A natural question to ask is whether <em>all</em> matrices do. It turns out the answer is yes, with some qualifications:</p>
+<div class="admonition-theorem-n-times-n-matrices-have-n-eigenvalues admonition">
+<p class="admonition-title">Theorem: <span class="math notranslate nohighlight">\(n\times n\)</span> matrices have <span class="math notranslate nohighlight">\(n\)</span> eigenvalues</p>
+<p>Every <span class="math notranslate nohighlight">\(n\times n\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span> has <span class="math notranslate nohighlight">\(n\)</span> eigenvalues when counted with multiplicity. Even when the matrix <span class="math notranslate nohighlight">\(A\)</span> is real, the eigenvalues may be complex numbers.</p>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Proof</p>
+<p>Suppose <span class="math notranslate nohighlight">\(A\)</span> is an arbitrary <span class="math notranslate nohighlight">\(n\times n\)</span> matrix with complex components (which includes purely real components as a special case). Begin with the defining equation <span class="math notranslate nohighlight">\(Av =\lambda v\)</span>. Subtracting the right from both sides, we may write <span class="math notranslate nohighlight">\((A-\lambda I)v = 0\)</span>, where <span class="math notranslate nohighlight">\(I\)</span> is the <span class="math notranslate nohighlight">\(n\times n\)</span> identity matrix. This states that the matrix <span class="math notranslate nohighlight">\((A-\lambda I)\)</span> sends <span class="math notranslate nohighlight">\(v\)</span> to <span class="math notranslate nohighlight">\(0\)</span>, which implies that it is singular, which in turn implies that its determinant is <span class="math notranslate nohighlight">\(0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\det(A-\lambda I)=0\]</div>
+<p>We may take this as the definition of an eigenvalue <span class="math notranslate nohighlight">\(\lambda\)</span> - ie. special values of <span class="math notranslate nohighlight">\(\lambda\)</span> such that the determinant <span class="math notranslate nohighlight">\(\det(A-\lambda I)\)</span> vanishes. This determinant is a degree <span class="math notranslate nohighlight">\(n\)</span> polynomial in <span class="math notranslate nohighlight">\(\lambda\)</span>, and so by the fundamental theorem of algebra, there are <span class="math notranslate nohighlight">\(n\)</span> complex eigenvalues when counted with multiplicity.</p>
+</div>
+<p>This theorem suggests that the matrix in the exercise above should have a second eigenvalue besides <span class="math notranslate nohighlight">\(-2\)</span>. A bit of experimentation shows that this is exactly right.</p>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>Consider the second vector <span class="math notranslate nohighlight">\(w = \begin{pmatrix} 1 \\ 1 \end{pmatrix}.\)</span> Show that <span class="math notranslate nohighlight">\(w\)</span> is also an eigenvector of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}Aw=\left(\begin{array}{cc}
+0 &amp; 2\\
+2 &amp; 0
+\end{array}\right)\left(\begin{array}{c}
+1\\
+1
+\end{array}\right)=\left(\begin{array}{c}
+0\cdot1+2\cdot 1\\
+2\cdot1+0\cdot 1
+\end{array}\right)=\left(\begin{array}{c}
+2\\
+2
+\end{array}\right)=2w,\end{split}\]</div>
+<p>Thus we’ve found a second eigenvector, <span class="math notranslate nohighlight">\(w\)</span>, whose associated eigenvalue is <span class="math notranslate nohighlight">\(2\)</span>.</p>
+</div>
+</div>
+<p>The situation with <em>eigenvectors</em> is a bit more complex: an <span class="math notranslate nohighlight">\(n\times n\)</span> matrix may fail to have <span class="math notranslate nohighlight">\(n\)</span> eigenvectors, in which case the matrix is said to be <em>defective</em>.</p>
+<p>There are, however, special classes of matrices which are guaranteed to have a complete set of eigenvectors. One such class is the <em>normal matrices</em>, which includes <em>symmetric</em>, <em>antisymmetric</em>, and <em>orthogonal (rotation)</em> matrices. These are very important and often come up in applications.</p>
+<div class="admonition-theorem-symmetric-matrices-have-a-complete-set-of-eigenvectors admonition">
+<p class="admonition-title">Theorem: Symmetric matrices have a complete set of eigenvectors</p>
+<p>A symmetric matrix, ie. one satisfying <span class="math notranslate nohighlight">\(A^\top = A\)</span>, always has a complete set of <span class="math notranslate nohighlight">\(n\)</span> eigenvectors <span class="math notranslate nohighlight">\(v_1,v_2,\ldots v_n\)</span>. Furthermore, these eigenvectors are orthogonal, so that <span class="math notranslate nohighlight">\(v_i\cdot v_j=0\)</span> for distinct eigenvectors <span class="math notranslate nohighlight">\(i\neq j\)</span>.</p>
+</div>
+<div class="dropdown admonition">
+<p class="admonition-title">Proof</p>
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> be a symmetric <span class="math notranslate nohighlight">\(n\times n\)</span> matrix. We’ll proceed by induction on the dimension <span class="math notranslate nohighlight">\(n\)</span>. The statement is obviously true for <span class="math notranslate nohighlight">\(n=1\)</span>, since a <span class="math notranslate nohighlight">\(1\)</span>-dimensional symmetric matrix is a scalar. Now assume the statement is proven for all <span class="math notranslate nohighlight">\(n\leq k\)</span>. Suppose <span class="math notranslate nohighlight">\(n=k+1\)</span>. Take any one of <span class="math notranslate nohighlight">\(A\)</span>’s eigenvalues <span class="math notranslate nohighlight">\(\lambda\)</span>. Since <span class="math notranslate nohighlight">\(\det\left(\lambda I-A\right)=0\)</span>, there must be at least one nonzero vector satisfying <span class="math notranslate nohighlight">\(Av=\lambda v\)</span>. Take any orthogonal basis including <span class="math notranslate nohighlight">\(v\)</span> as one basis vector. This divides <span class="math notranslate nohighlight">\(A\)</span> into two subspaces: the <span class="math notranslate nohighlight">\(1\)</span>-dimensional subspace spanned by <span class="math notranslate nohighlight">\(v\)</span>, and the <span class="math notranslate nohighlight">\(k\)</span>-dimensional subspace spanned by the remaining basis vectors. For any vector <span class="math notranslate nohighlight">\(w\)</span> in the second subspace, we have <span class="math notranslate nohighlight">\(v^{\top}Aw=\left(Av\right)^{\top}w=\lambda v^{\top}w=0\)</span> by orthogonality of the basis. Thus <span class="math notranslate nohighlight">\(A\)</span> sends the entire <span class="math notranslate nohighlight">\(k\)</span>-dimensional subspace to itself, and <span class="math notranslate nohighlight">\(A\)</span>’s action in that space can be represented by a <span class="math notranslate nohighlight">\(k\times k\)</span> matrix. By induction, this matrix has <span class="math notranslate nohighlight">\(k\)</span> orthogonal eigenvectors, which yield k eigenvectors for <span class="math notranslate nohighlight">\(A\)</span> in the <span class="math notranslate nohighlight">\(k\)</span>-dimensional space, which together with <span class="math notranslate nohighlight">\(v\)</span> yield a <span class="math notranslate nohighlight">\(k+1\)</span>-dimensional set of orthogonal vectors, proving the statement.</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>The matrix <span class="math notranslate nohighlight">\(A\)</span> that we have been working with so far is symmetric. We found <span class="math notranslate nohighlight">\(2\)</span> distinct eigenvectors <span class="math notranslate nohighlight">\(v\)</span> and <span class="math notranslate nohighlight">\(w\)</span>, which amount to a complete set, since <span class="math notranslate nohighlight">\(A\)</span> is <span class="math notranslate nohighlight">\(2\times 2\)</span>. Based on the theorem we just covered, <span class="math notranslate nohighlight">\(v\)</span> and <span class="math notranslate nohighlight">\(w\)</span> should be orthogonal. Demonstrate that this is the case.</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Orthogonal vectors have a dot product of 0. Let’s confirm this for <span class="math notranslate nohighlight">\(v\)</span> and <span class="math notranslate nohighlight">\(w\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[v\cdot w = -2\cdot 2+2\cdot 2=0\]</div>
+</div>
+</div>
+</section>
+<section id="determining-eigenvalues-and-eigenvectors">
+<h2>Determining eigenvalues and eigenvectors<a class="headerlink" href="#determining-eigenvalues-and-eigenvectors" title="Link to this heading">#</a></h2>
+<p>Next we discuss how eigenvalues and eigenvectors are computed for a given matrix. We’ll begin by discussing the problem from the linear algebraic point of view, which is essential for proving mathematical statements about eigenvalues/eigenvectors, as well as for designing algorithms. After, we’ll illustrate how to easily compute eigenvalues/eigenvectors using python.</p>
+<section id="theory">
+<h3>Theory<a class="headerlink" href="#theory" title="Link to this heading">#</a></h3>
+<section id="a-simple-example">
+<h4>A simple example<a class="headerlink" href="#a-simple-example" title="Link to this heading">#</a></h4>
+<p>We begin with a simple, concrete example that will help us guess the general recipe. Let’s suppose we’re given the matrix <span class="math notranslate nohighlight">\(A = \begin{pmatrix} 0 &amp; 2 \\ 2 &amp; 0 \end{pmatrix}\)</span> from the examples above, and that we don’t aready know the eigenvectors <span class="math notranslate nohighlight">\(v\)</span> and <span class="math notranslate nohighlight">\(w\)</span>. All we know is that an eigenvector <span class="math notranslate nohighlight">\(w\)</span> should satisfy <span class="math notranslate nohighlight">\(Aw=\lambda w\)</span>. Moving the left side to the right, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}Aw - \lambda w=\left(\begin{array}{cc}
+0 &amp; 2\\
+2 &amp; 0
+\end{array}\right) w-\lambda w=0.\end{split}\]</div>
+<p>Since the identity matrix <span class="math notranslate nohighlight">\(I\)</span> leaves every vector unchanged, there’s no harm in putting an <span class="math notranslate nohighlight">\(I\)</span> between <span class="math notranslate nohighlight">\(\lambda\)</span> and <span class="math notranslate nohighlight">\(w\)</span>, leaving <span class="math notranslate nohighlight">\(Aw - \lambda I w = 0\)</span>. But now we can factor out the vector <span class="math notranslate nohighlight">\(w\)</span> to the right, leaving</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}(A - \lambda I) w=\left(\begin{array}{cc}
+0 &amp; 2\\
+2 &amp; 0
+\end{array}\right) w-\left(\begin{array}{cc}
+\lambda &amp; 0\\
+0 &amp; \lambda
+\end{array}\right) w=\left(\begin{array}{cc}
+-\lambda &amp; 2\\
+2 &amp; -\lambda
+\end{array}\right) w=0,\end{split}\]</div>
+<p>which shows that the matrix <span class="math notranslate nohighlight">\(A-\lambda I=\left(\begin{array}{cc}
+-\lambda &amp; 2\\
+2 &amp; -\lambda
+\end{array}\right)\)</span> sends the vector <span class="math notranslate nohighlight">\(w\)</span> to <span class="math notranslate nohighlight">\(0\)</span>. The only way this is possible is if the matrix <span class="math notranslate nohighlight">\(A-\lambda I\)</span> is singular, ie. its determinant is <span class="math notranslate nohighlight">\(0\)</span>. So we compute the derivative and set it to <span class="math notranslate nohighlight">\(0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\det(A-\lambda I)=\det\left(\begin{array}{cc}
+-\lambda &amp; 2\\
+2 &amp; -\lambda
+\end{array}\right)=(-\lambda)(-\lambda)-2\cdot2=\lambda^2-4=0\end{split}\]</div>
+<aside class="sidebar">
+<p class="sidebar-title">Insight 1</p>
+<p>From <span class="math notranslate nohighlight">\((A - \lambda I) w\)</span> we concluded that <span class="math notranslate nohighlight">\((A - \lambda I)\)</span> must have a determinant of <span class="math notranslate nohighlight">\(0\)</span>, which allowed us to write an equation and then solve for the eigenvalues <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+</aside>
+<p>Moving the <span class="math notranslate nohighlight">\(4\)</span> over and taking square roots, we find <span class="math notranslate nohighlight">\(\lambda =\pm 2\)</span>, which is promising, since these are the two eigenvalues we found before.</p>
+<p>Now we want to determine the eigenvector associated to, say, the eigenvalue <span class="math notranslate nohighlight">\(+2\)</span>. Returning to <span class="math notranslate nohighlight">\((A - \lambda I) w=0\)</span>, we’ll set <span class="math notranslate nohighlight">\(\lambda=2\)</span>, and suppose the <span class="math notranslate nohighlight">\(x\)</span>- and <span class="math notranslate nohighlight">\(y\)</span>-components of the eigenvector <span class="math notranslate nohighlight">\(w\)</span> are <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, respectively:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left(A-\lambda I\right)w=\left(\begin{array}{cc}
+-2 &amp; 2\\
+2 &amp; -2
+\end{array}\right)\left(\begin{array}{c}
+x\\
+y
+\end{array}\right)=\left(\begin{array}{c}
+-2x+2y\\
+2x-2y
+\end{array}\right)=0\end{split}\]</div>
+<aside class="sidebar">
+<p class="sidebar-title">Insight 2</p>
+<p>Plugging in a value for <span class="math notranslate nohighlight">\(\lambda\)</span> in <span class="math notranslate nohighlight">\((A-\lambda I)w=0\)</span> gives a linear system of equations for the components of the eigenvector <span class="math notranslate nohighlight">\(v\)</span>.</p>
+</aside>
+<p>which gives us the system of equations</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}-2x+2y&amp;=0\\
+2x-2y&amp;=0\end{split}\]</div>
+<p>Multiplying the first equation by <span class="math notranslate nohighlight">\(-1\)</span>, we find that it is identical to the second equation, so the best we can do is solve one of them, yielding <span class="math notranslate nohighlight">\(x=y\)</span>, and say that the eigenvector is any vector where the <span class="math notranslate nohighlight">\(x\)</span>- and <span class="math notranslate nohighlight">\(y\)</span>-components are equal. We can check this by setting <span class="math notranslate nohighlight">\(w = \begin{pmatrix} x \\ x \end{pmatrix}\)</span> — a generic vector with equal components.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}Aw=\left(\begin{array}{cc}
+0 &amp; 2\\
+2 &amp; 0
+\end{array}\right)\left(\begin{array}{c}
+x\\
+x
+\end{array}\right)=\left(\begin{array}{c}
+0\cdot x+2\cdot x\\
+2\cdot x+0\cdot x
+\end{array}\right)=\left(\begin{array}{c}
+2x\\
+2x
+\end{array}\right)=2w,\end{split}\]</div>
+<p>which confirms that any such vector is an eigenvector. What’s going on here? Why are there infinitely many solutions? This is due to the simple fact that we can scale an eigenvector arbitrarily and obtain another eigenvector with the same eigenvalue. Concretely, if <span class="math notranslate nohighlight">\(Aw=\lambda w\)</span>, then the scaled vector <span class="math notranslate nohighlight">\(aw\)</span> is still an eigenvector, since <span class="math notranslate nohighlight">\(A(aw)=aAw=a\lambda w=\lambda (aw)\)</span>, and so <span class="math notranslate nohighlight">\(av\)</span> satisfies the same eigenvector equation. This freedom to scale <span class="math notranslate nohighlight">\(w\)</span> is often used to scale <span class="math notranslate nohighlight">\(w\)</span> to have length equal to <span class="math notranslate nohighlight">\(1\)</span>. Still, though, we can set <span class="math notranslate nohighlight">\(x=1\)</span>, and even though <span class="math notranslate nohighlight">\(w\)</span>’s length is then <span class="math notranslate nohighlight">\(\sqrt{2}\)</span>, we’ve still managed to find a perfectly good eigenvector associated to the eigenvalue <span class="math notranslate nohighlight">\(2\)</span>. Repeating this process after plugging in <span class="math notranslate nohighlight">\(\lambda=-2\)</span>, we easily find <span class="math notranslate nohighlight">\(A\)</span>’s second eigenvector <span class="math notranslate nohighlight">\(v\)</span>.</p>
+</section>
+<section id="the-general-recipe">
+<h4>The general recipe<a class="headerlink" href="#the-general-recipe" title="Link to this heading">#</a></h4>
+<p>Looking back at our strategy for the <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span>, we can now outline a general procedure for finding the eigenvalues of an arbitrary <span class="math notranslate nohighlight">\(n\times n\)</span> matrix <span class="math notranslate nohighlight">\(M\)</span>.</p>
+<div class="important admonition">
+<p class="admonition-title">The Eigenvalue Recipe</p>
+<ol class="arabic simple">
+<li><p>Since an eigenvalue/eigenvector pair must satisfy <span class="math notranslate nohighlight">\(Mv=\lambda v\)</span>, we conclude that <span class="math notranslate nohighlight">\((M-\lambda I)v=0\)</span> for a nonzero vector <span class="math notranslate nohighlight">\(v\)</span>, and so <span class="math notranslate nohighlight">\(\det(M-\lambda I)=0\)</span>. Writing out the determinant explicitly yields a degree <span class="math notranslate nohighlight">\(n\)</span> polynomial, called the <em>characteristic polynomial</em> of <span class="math notranslate nohighlight">\(M\)</span>. Solving for the roots of the characteristic polynomial yields the eigenvalues <span class="math notranslate nohighlight">\(\lambda\)</span>.</p></li>
+<li><p>We then substitute one of the eigenvalues for <span class="math notranslate nohighlight">\(\lambda\)</span> in <span class="math notranslate nohighlight">\((M-\lambda I)v=0\)</span>, yielding a linear system of equations for the eigenvector <span class="math notranslate nohighlight">\(v\)</span>. Solving, we obtain the components of <span class="math notranslate nohighlight">\(v\)</span>, up to an overall scaling factor, which can optionally be chosen so that <span class="math notranslate nohighlight">\(v\)</span> has length <span class="math notranslate nohighlight">\(1\)</span>.</p></li>
+</ol>
+</div>
+</section>
+</section>
+<section id="python">
+<h3>Python<a class="headerlink" href="#python" title="Link to this heading">#</a></h3>
+<p>Eigenvalues and eigenvectors can easily be computed in python using <code class="docutils literal notranslate"><span class="pre">np.linalg.eig</span></code>. We’ll illustrate with our familiar matrix <span class="math notranslate nohighlight">\(A = \begin{pmatrix} 0 &amp; 2 \\ 2 &amp; 0 \end{pmatrix}\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+<span class="n">E</span><span class="p">,</span><span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;eigenvalues:&#39;</span><span class="p">,</span><span class="n">E</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;eigenvectors:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eigenvalues: [ 2. -2.]
+eigenvectors:
+[[ 0.70710678 -0.70710678]
+ [ 0.70710678  0.70710678]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">np.linalg.eig</span></code> returns two things, the eigenvectors, which we’ve stored in <code class="docutils literal notranslate"><span class="pre">E</span></code>, and the eigenvectors, which go into the columns of the matrix <code class="docutils literal notranslate"><span class="pre">V</span></code>. If the eigenvectors <code class="docutils literal notranslate"><span class="pre">V</span></code> look different than you expected, recall that we’re allowed to scale them by an arbitrary factor. Numpy scales them to have unit lenght. If we multiply them by <span class="math notranslate nohighlight">\(\sqrt{2},\)</span> we find</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">V</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 1. -1.]
+ [ 1.  1.]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>which are exactly the eigenvectors <span class="math notranslate nohighlight">\(v\)</span> and <span class="math notranslate nohighlight">\(w\)</span> from above.</p>
+<p>Of course, we’re not limited to <span class="math notranslate nohighlight">\(2\times 2\)</span> matrices. We can easily compute eigenvalues and eigenvectors for larger matrices that would be next to impossible to treat by hand. Here’s an example of a <span class="math notranslate nohighlight">\(1000\times 1000\)</span> matrix. Let’s time this while we’re at it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span> 
+<span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">M</span> <span class="o">=</span> <span class="p">(</span><span class="n">M</span><span class="o">+</span><span class="n">M</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">E</span><span class="p">,</span><span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eig</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 2.9 s, sys: 69.2 ms, total: 2.97 s
+Wall time: 409 ms
+</pre></div>
+</div>
+</div>
+</div>
+<p>and now let’s make a histogram of the eigenvalues</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">E</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;eigenvalue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;count&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e4a727b5deb7de62993a2a84c3e8ef63cb71156e910e814e2c0669360808d8c6.png" src="_images/e4a727b5deb7de62993a2a84c3e8ef63cb71156e910e814e2c0669360808d8c6.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="diagonalization">
+<h2>Diagonalization<a class="headerlink" href="#diagonalization" title="Link to this heading">#</a></h2>
+<p>In this section we will explore the problem of finding a simple way to express what a given matrix does to a general vector. For this we’ll encounter a powerful technique for decomposing a matrix known as <em>diagonalization</em>, or <em>eigendecomposition</em>. Here are the key takeaways:</p>
+<div class="important admonition">
+<p class="admonition-title">Key Takeaways</p>
+<ol class="arabic simple">
+<li><p>A matrix acts most simply on its eigenvectors. For each eigenvalue/eigenvector pair <span class="math notranslate nohighlight">\(\lambda_i,v_i\)</span>, we can write <span class="math notranslate nohighlight">\(Av_i=\lambda_i v_i\)</span>. Collecting all eigenvectors into the columns of the matrix <span class="math notranslate nohighlight">\(V\)</span>, we can write <span class="math notranslate nohighlight">\(AV=VD\)</span>, where <span class="math notranslate nohighlight">\(D\)</span> is a diagonal matrix whose <span class="math notranslate nohighlight">\(i^{th}\)</span> entry is the <span class="math notranslate nohighlight">\(i^{th}\)</span> eigenvalue <span class="math notranslate nohighlight">\(\lambda_i\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(A\)</span> has a full set of <span class="math notranslate nohighlight">\(n\)</span> linearly independent eigenvectors, then <span class="math notranslate nohighlight">\(V\)</span> is invertible, and we can write <span class="math notranslate nohighlight">\(A=VDV^{-1}\)</span>. This is called the <strong>eigendecomposition</strong> of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>The eigendecomposition gives insight into the structure of <span class="math notranslate nohighlight">\(A\)</span>. It shows how if we change to an eigenvector basis, <span class="math notranslate nohighlight">\(A\)</span> is diagonal. It makes computing powers of <span class="math notranslate nohighlight">\(A\)</span> trivial, since <span class="math notranslate nohighlight">\(A^k=VD^kV^{-1}\)</span>.</p></li>
+<li><p>A simple but powerful application (that we will study in more detail later on), is to predict the stability of a linear dynamical system.</p></li>
+</ol>
+</div>
+<section id="derivation">
+<h3>Derivation<a class="headerlink" href="#derivation" title="Link to this heading">#</a></h3>
+<p>Eigendecomposition is based on the idea that matrices behave most simply when viewed in terms of their eigenvectors. Let’s begin by drawing the eigenvector equation for an eigenvector/eigenvalue pair <span class="math notranslate nohighlight">\(\lambda_i,v_i\)</span> as follows:</p>
+<a class="reference internal image-reference" href="_images/diag1.png"><img alt="eigenvector equation" class="align-center" src="_images/diag1.png" style="width: 250px;" /></a>
+<p>This is true for each eigenvector, one at a time. You should check that both sides of this equation are <span class="math notranslate nohighlight">\(n\times 1\)</span>-dimensional.</p>
+<p>We can actually collect all of these vector equations into one big <span class="math notranslate nohighlight">\(n\times n\)</span> matrix equation as follows:</p>
+<a class="reference internal image-reference" href="_images/diag2.png"><img alt="eigenvector equation" class="align-center" src="_images/diag2.png" style="width: 502px;" /></a>
+<p>That is, we collect the eigenvectors into the columns of a matrix <span class="math notranslate nohighlight">\(V\)</span>, and we place the eigenvalues along the diagonal of a (diagonal!) matrix <span class="math notranslate nohighlight">\(D\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(A\)</span> has a full set of linearly independent eigenvectors - which is the case, for example, if <span class="math notranslate nohighlight">\(A\)</span> is symmetric - then the eigenvector matrix <span class="math notranslate nohighlight">\(V\)</span> has linearly independent columns and is therefore invertible. We can right-multiply our equation by <span class="math notranslate nohighlight">\(V^{-1}\)</span>, leaving</p>
+<div class="math notranslate nohighlight">
+\[A=VDV^{-1}\]</div>
+<p>which is the <em>diagonalization</em>, or <em>eigendecomposition</em> of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>Consider the matrix <span class="math notranslate nohighlight">\(A = \begin{pmatrix} 0 &amp; 2 \\ 2 &amp; 0 \end{pmatrix}\)</span> — the same matrix we were working with before. We’ve already determined eigenvalues and eigenvectors. Use those quantities to find <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(D\)</span> and diagonalize <span class="math notranslate nohighlight">\(A\)</span>. (You can use a tool like NumPy to find the inverse of <span class="math notranslate nohighlight">\(V\)</span>). Then, prove that the diagonalization is equal to <span class="math notranslate nohighlight">\(A.\)</span></p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>The eigenvectors and corresponding eigenvalues of <span class="math notranslate nohighlight">\(A\)</span> are <span class="math notranslate nohighlight">\(2,-2\)</span> and <span class="math notranslate nohighlight">\(\begin{pmatrix} 1\\ 1 \end{pmatrix}, \begin{pmatrix} 1\\ -1 \end{pmatrix}\)</span>, respectively. Arranging the eigenvalues along the diagonal entries of <span class="math notranslate nohighlight">\(D\)</span>, and collecting the two eigenvectors together to make <span class="math notranslate nohighlight">\(V\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}D=\left(\begin{array}{cc}
+2 &amp; 0\\
+0 &amp; -2
+\end{array}\right)\quad V=\left(\begin{array}{cc}
+1 &amp; 1\\
+1 &amp; -1
+\end{array}\right)\end{split}\]</div>
+<p>Now we can compute <span class="math notranslate nohighlight">\(VDV^{-1}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}VDV^{-1}=\left(\begin{array}{cc}
+1 &amp; 1\\
+1 &amp; -1
+\end{array}\right)\left(\begin{array}{cc}
+2 &amp; 0\\
+0 &amp; -2
+\end{array}\right)\left(\begin{array}{cc}
+\frac{1}{2} &amp; \frac{1}{2}\\
+\frac{1}{2} &amp; -\frac{1}{2}
+\end{array}\right)=\left(\begin{array}{cc}
+0 &amp; 2\\
+2 &amp; 0
+\end{array}\right)=A\end{split}\]</div>
+<p>as claimed.</p>
+</div>
+</div>
+<p>Let’s take a moment to consider what the equation <span class="math notranslate nohighlight">\(A=VDV^{-1}\)</span> means. Suppose we have an arbitrary vector. Since the eigenvectors <span class="math notranslate nohighlight">\(\textbf{v}_1, \dots, \textbf{v}_n\)</span> of <span class="math notranslate nohighlight">\(A\)</span> are orthogonal, we can express any <span class="math notranslate nohighlight">\(n\)</span>-dimensional vector as a combination of the eigenvectors, i.e., <span class="math notranslate nohighlight">\(c_1\textbf{v}_1 + \dots + c_n\textbf{v}_n\)</span> for some scalars <span class="math notranslate nohighlight">\(c_1, \dots, c_n.\)</span> Equivalently, we could express our vector as <span class="math notranslate nohighlight">\(V\textbf{c}\)</span> where <span class="math notranslate nohighlight">\(\textbf{c}\)</span> is a column vector of those coefficients. Then</p>
+<div class="math notranslate nohighlight">
+\[AV\textbf{c}=VDV^{-1}V\textbf{c}=V(D\textbf{c}),\]</div>
+<p>so <span class="math notranslate nohighlight">\(V\textbf{c}\)</span> has turned into <span class="math notranslate nohighlight">\(V(D\textbf{c})\)</span>, which says that the coefficients of the eigenvectors, <span class="math notranslate nohighlight">\(\textbf{c}\)</span>, simply transform to <span class="math notranslate nohighlight">\(D\textbf{c}\)</span>. This is exactly what <em>should</em> happen, since the diagonal matrix <span class="math notranslate nohighlight">\(D\)</span> scales each eigenvector by the corresponding eigenvalue.</p>
+<p>Stated another way, if we use the standard basis, the matrix components are found in <span class="math notranslate nohighlight">\(A\)</span>. Vectors transform as <span class="math notranslate nohighlight">\(\textbf{x}\to A\textbf{x}\)</span>. If, on the other hand, we use a basis of eigenvectors, the matrix components are found in <span class="math notranslate nohighlight">\(D\)</span>, and vectors transform as <span class="math notranslate nohighlight">\(\textbf{c}\to D\textbf{c}\)</span>. The diagonalization <span class="math notranslate nohighlight">\(A=VDV^{-1}\)</span> simply expresses the <em>change of basis formula</em> that takes us to a very special basis: the eigenbasis. The advantage of being in this new basis is that we get the diagonal matrix <span class="math notranslate nohighlight">\(D\)</span>, which is extremely easy to understand and compute with.</p>
+</section>
+<section id="matrix-powers">
+<h3>Matrix powers<a class="headerlink" href="#matrix-powers" title="Link to this heading">#</a></h3>
+<p>A very important use of the eigendecomposition, and one that we’ll talk about more later in the class, is for taking powers of matrices. Suppose we want to compute the <span class="math notranslate nohighlight">\({10}^{th}\)</span> power of a matrix <span class="math notranslate nohighlight">\(A\)</span>. Our first instinct might be to write out the matrix <span class="math notranslate nohighlight">\(10\)</span> times and successively multiply:</p>
+<div class="math notranslate nohighlight">
+\[A^{10} = A\cdot A\cdot A\cdot A\cdot A\cdot A\cdot A\cdot A\cdot A\cdot A\]</div>
+<p>This is a very tedious approach! Even a single <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix multiplication takes effort. In real world problems, we often deal with much larger matrices and much larger powers. So we need a new strategy.</p>
+<p>Remember the adage that “matrices behave most simply when viewed in terms of their eigenvectors”. Enter the eigendecomposition.</p>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>Substitute <span class="math notranslate nohighlight">\(A\)</span>’s eigendecomposition into the matrix power <span class="math notranslate nohighlight">\(A^2\)</span> and simplify. What happens?</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+A^2 &amp;= AA \\
+&amp;= VDV^{-1}VDV^{-1}\\
+&amp;= VDIDV^{-1}\\
+&amp;= VD^2V^{-1}
+\end{align*}\]</div>
+</div>
+</div>
+<p>In general, we find that when we raise <span class="math notranslate nohighlight">\(A=VDV^{-1}\)</span> to a power, the inner <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(V^{-1}\)</span> matrices cancel, leaving only</p>
+<div class="math notranslate nohighlight">
+\[A^k=VD^kV^{-1}.\]</div>
+<p>This is a huge simplification: raising <span class="math notranslate nohighlight">\(A\)</span> to a power directly can be very costly, but using the eigendecomposition we’ve reduced this to the problem of raising a <em>diagonal</em> matrix to a power, which is conceptually and practically very easy - just raise each entry to that power:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}D^{k}=\left(\begin{array}{ccc}
+\lambda_{1}^{k}\\
+ &amp; \lambda_{2}^{k}\\
+ &amp;  &amp; \ddots
+\end{array}\right)\end{split}\]</div>
+<p>It’s easier for you, and it’s easier for the computer. Here we’ll raise our favorite matrix, <span class="math notranslate nohighlight">\(A = \begin{pmatrix} 0 &amp; 2 \\ 2 &amp; 0 \end{pmatrix}\)</span> to the <span class="math notranslate nohighlight">\({1000}^{th}\)</span> power, first using the direct approach, successively multiply by <span class="math notranslate nohighlight">\(A\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">1000</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
+<span class="n">Apow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="n">Apow</span> <span class="o">=</span> <span class="n">A</span><span class="nd">@Apow</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 ms ± 87 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<p>and now again using the eigendecomposition:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>it
+<span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">Apow</span> <span class="o">=</span> <span class="n">V</span><span class="nd">@np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">E</span><span class="o">**</span><span class="n">p</span><span class="p">)</span><span class="nd">@np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14.5 µs ± 592 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<p>For large powers like this, the eigendecomposition can be orders of magnitude faster!</p>
+<p>Now only does the eigendecomposition ease compution, it also can give us important insight into the structure of a matrix. This is very useful, for example, in the study of dynamical systems - which we’ll start to see in the next section, and discuss further on in the course.</p>
+</section>
+<section id="demonstration-discrete-linear-dynamics">
+<h3>Demonstration: discrete linear dynamics<a class="headerlink" href="#demonstration-discrete-linear-dynamics" title="Link to this heading">#</a></h3>
+<p>Consider a <em>discrete linear dynamical system</em>. That is, we have a system represented by a vector <span class="math notranslate nohighlight">\(x\)</span> that evolves in discrete steps over time, where at each step, the update rule is</p>
+<div class="math notranslate nohighlight" id="equation-lds">
+<span class="eqno">(59)<a class="headerlink" href="#equation-lds" title="Link to this equation">#</a></span>\[x_{n+1} = Ax_n\]</div>
+<p>If we assume that at time <span class="math notranslate nohighlight">\(0\)</span> the system starts in state <span class="math notranslate nohighlight">\(x_0\)</span>, and we apply the update rule in <a class="reference internal" href="#equation-lds">(59)</a>, we can see that the state at any given time is just <span class="math notranslate nohighlight">\(x_n=A^n x_0\)</span>.</p>
+<p>Using the eigendecomposition to express the matrix power, we have <span class="math notranslate nohighlight">\(x_n=VD^nV^{-1}x_0\)</span>. At the very least, we have a convenient way to predict the state of the system at any time in the future.</p>
+<div class="note admonition">
+<p class="admonition-title">Example: Fibonacci Numbers</p>
+<p>Here we use eigendecomposition to derive a simple formula for the Fibonacci sequence. This sequence’s first two terms are <span class="math notranslate nohighlight">\(1,1\)</span>, and from then on the next term is always the sum of the previous two terms. The first few terms are</p>
+<div class="math notranslate nohighlight">
+\[1,1,2,3,5,8,13,21,\cdots\]</div>
+<p>Concretely, <span class="math notranslate nohighlight">\(f_{n}=1\)</span> for <span class="math notranslate nohighlight">\(n=1\)</span> or <span class="math notranslate nohighlight">\(n=2\)</span>, and thereafter <span class="math notranslate nohighlight">\(f_{n}=f_{n-1}+f_{n-2}\)</span>. We can combine this recurrence with the trivial equation <span class="math notranslate nohighlight">\(f_{n-1}=f_{n-1}\)</span> into the following system of equations:</p>
+<div class="math notranslate nohighlight" id="equation-fibb">
+<span class="eqno">(60)<a class="headerlink" href="#equation-fibb" title="Link to this equation">#</a></span>\[\begin{split}\left(\begin{array}{c}
+f_{n}\\
+f_{n-1}
+\end{array}\right)	=\left(\begin{array}{cc}
+1 &amp; 1\\
+1 &amp; 0
+\end{array}\right)\left(\begin{array}{c}
+f_{n-1}\\
+f_{n-2}
+\end{array}\right),\end{split}\]</div>
+<p>for <span class="math notranslate nohighlight">\(n&gt;2\)</span>, along with the initial value <span class="math notranslate nohighlight">\(\left(\begin{array}{c}
+f_{2}\\
+f_{1}
+\end{array}\right)=\left(\begin{array}{c}
+1\\
+1
+\end{array}\right)\)</span>. So defining a vector state <span class="math notranslate nohighlight">\(x_{n}=\left(\begin{array}{c}
+f_{n}\\
+f_{n-1}
+\end{array}\right)\)</span> that holds two fibonacci numbers at a time, and writing <a class="reference internal" href="#equation-fibb">(60)</a> in terms of <span class="math notranslate nohighlight">\(x_{n}\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}x_{n}=\left(\begin{array}{cc}
+1 &amp; 1\\
+1 &amp; 0
+\end{array}\right)x_{n-1},\end{split}\]</div>
+<p>ie. to move <span class="math notranslate nohighlight">\(x\)</span> forward one step in time, we simply multiply by a <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix! We’ve thus expressed the fibinacci numbers as a <span class="math notranslate nohighlight">\(2\)</span>-dimensional discrete linear dynamical system. To get to <span class="math notranslate nohighlight">\(x_{n}\)</span> from <span class="math notranslate nohighlight">\(x_{2}\)</span>, we simply step forward by <span class="math notranslate nohighlight">\(n-2\)</span> applications of the system’s matrix:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}x_{n}=\left(\begin{array}{cc}
+1 &amp; 1\\
+1 &amp; 0
+\end{array}\right)^{n-2}x_{2}.\end{split}\]</div>
+<p>We’ll compute the power using eigendecomposition. For this we’ll need the matrix’s eigenvalues and eigenvectors. Write <span class="math notranslate nohighlight">\(F\)</span> for this matrix. We solve for the eigenvalues by setting the characteristic polynomial to <span class="math notranslate nohighlight">\(0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[0=\det\left(\lambda I-F\right)=\left(\lambda-1\right)\lambda-1,\]</div>
+<p>which has solutions</p>
+<div class="math notranslate nohighlight">
+\[\lambda_{\pm}=\frac{1\pm\sqrt{5}}{2}.\]</div>
+<p>Next to find <span class="math notranslate nohighlight">\(v_{+}\)</span>, the eigenvector associated to the eigenvalue <span class="math notranslate nohighlight">\(\lambda_{+}\)</span>, we need to solve the system of equations <span class="math notranslate nohighlight">\(\left(F-\lambda_{+}I\right)v_{+}=0\)</span>, which reads</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left(\begin{array}{cc}
+\frac{1-\sqrt{5}}{2} &amp; 1\\
+1 &amp; \frac{-1-\sqrt{5}}{2}
+\end{array}\right)\left(\begin{array}{c}
+x\\
+y
+\end{array}\right)=0,\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(x,y\)</span> are the components of <span class="math notranslate nohighlight">\(v_{+}\)</span>. As before, the system is singular (because of the freedom to scale any eigenvector), so we lose nothing by considering only the first equation, which yields <span class="math notranslate nohighlight">\(y=-\lambda_{-}x\)</span>. We are free to choose, say, <span class="math notranslate nohighlight">\(x=1\)</span>. Repeating the procedure for the other eigenvector, we find <span class="math notranslate nohighlight">\(v_{-}\)</span>, finally giving</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\lambda_{+},\lambda_{-}\quad\quad\left(\begin{array}{c}
+1\\
+-\lambda_{-}
+\end{array}\right),\left(\begin{array}{c}
+1\\
+-\lambda_{+}
+\end{array}\right),\end{split}\]</div>
+<p>for the eigenvalues and eigenvectors. Collecting the eigenvalues into the diagonal matrix <span class="math notranslate nohighlight">\(D\)</span> and the eigenvectors into the matrix <span class="math notranslate nohighlight">\(V\)</span>, we can now compute powers of <span class="math notranslate nohighlight">\(F\)</span> via the diagonalization <span class="math notranslate nohighlight">\(F^{k}=VD^{k}V^{-1}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}F^{n-2}=\left(\begin{array}{cc}
+1 &amp; 1\\
+-\lambda_{-} &amp; -\lambda_{+}
+\end{array}\right)\left(\begin{array}{cc}
+\lambda_{+}^{n-2} &amp; 0\\
+0 &amp; \lambda_{-}^{n-2}
+\end{array}\right)\left(\begin{array}{cc}
+1 &amp; 1\\
+-\lambda_{-} &amp; -\lambda_{+}
+\end{array}\right)^{-1}.\end{split}\]</div>
+<p>We then multiply this by <span class="math notranslate nohighlight">\(x_{2}\)</span> to move the state forward to <span class="math notranslate nohighlight">\(x_{n}\)</span>, extract the first component of <span class="math notranslate nohighlight">\(x_{n}\)</span>, which is <span class="math notranslate nohighlight">\(f_{n}\)</span> (the second component being <span class="math notranslate nohighlight">\(f_{n-1}\)</span>), and simplify, giving</p>
+<div class="math notranslate nohighlight">
+\[f_{n}=\frac{\lambda_{+}^{n}-\lambda_{-}^{n}}{\sqrt{5}}=\frac{\left(\frac{1+\sqrt{5}}{2}\right)^{n}-\left(\frac{1-\sqrt{5}}{2}\right)^{n}}{\sqrt{5}}.\]</div>
+<p>This is known as <a class="reference external" href="https://en.wikipedia.org/wiki/Fibonacci_sequence#Binet's_formula">Binet’s formula</a>. The first few terms are <span class="math notranslate nohighlight">\(1,1,2,3,\ldots\)</span> as expected. If you ever wondered what the <span class="math notranslate nohighlight">\({100}^{th}\)</span> fibonacci number is, it’s <span class="math notranslate nohighlight">\(354224848179261915075\)</span>.</p>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Vectors%20and%20Matrices.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Vectors and Matrices</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-and-motivation">Introduction and motivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-linear-algebra">Basic linear algebra</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#determining-eigenvalues-and-eigenvectors">Determining eigenvalues and eigenvectors</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theory">Theory</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-simple-example">A simple example</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-general-recipe">The general recipe</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagonalization">Diagonalization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#derivation">Derivation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matrix-powers">Matrix powers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration-discrete-linear-dynamics">Demonstration: discrete linear dynamics</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Grace Huckins, Linnie Warton, and Gabriel Mel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
