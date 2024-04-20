@@ -1,0 +1,1089 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Principal Component Analysis &#8212; Mathematical Tools for Neuroscience</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Principal Component Analysis';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Eigenvectors and Eigenvalues" href="Eigenvectors%20and%20Eigenvalues.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/scary_brain.png" class="logo__image only-light" alt="Mathematical Tools for Neuroscience - Home"/>
+    <script>document.write(`<img src="_static/scary_brain.png" class="logo__image only-dark" alt="Mathematical Tools for Neuroscience - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to NBIO 228!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Linear Algebra</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Vectors%20and%20Matrices.html">Vectors and Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Eigenvectors%20and%20Eigenvalues.html">Eigenvectors and Eigenvalues</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Principal Component Analysis</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ghuckins/NBIO-228" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ghuckins/NBIO-228/issues/new?title=Issue%20on%20page%20%2FPrincipal Component Analysis.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Principal Component Analysis.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Principal Component Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivatation">Motivatation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-example-2-dimensional-data">Extended example: 2-dimensional data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shape-of-data">Shape of data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-compression-heuristic">A compression heuristic</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-and-solving">Setting up and solving</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantifying-shape">Quantifying shape</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-longest-directions">Finding the longest directions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#projecting-onto-fewer-dimensions">Projecting onto fewer dimensions</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#putting-it-all-together">Putting it all together</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-formulation">General formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formulation">Formulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimal-1-dimensional-subspace">Optimal 1-dimensional subspace</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-subspace">General subspace</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scree-plots">Scree plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-with-python">PCA with python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-eigenanalysis">Covariance eigenanalysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compression">Compression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#approximation">Approximation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code">Code</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additonal-resources">Additonal resources</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="principal-component-analysis">
+<h1>Principal Component Analysis<a class="headerlink" href="#principal-component-analysis" title="Link to this heading">#</a></h1>
+<section id="motivatation">
+<span id="sec-motivation"></span><h2>Motivatation<a class="headerlink" href="#motivatation" title="Link to this heading">#</a></h2>
+<p>Suppose we present a stimulus to the retina and simultaneously record the activity of 100 retinal ganglion cells. We’ll take the stimulus to be very simple - just a solid background of varying brightness. Here’s an example of the stimuli and the corresponding neural responses:</p>
+<figure class="align-default" id="fig-experiment">
+<a class="reference internal image-reference" href="_images/experiment.png"><img alt="_images/experiment.png" src="_images/experiment.png" style="height: 200px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Stimuli (left) and retinal ganglion cell raster plot (right).</span><a class="headerlink" href="#fig-experiment" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Your first impression when viewing the data is that the <span class="math notranslate nohighlight">\(100\)</span> neurons appear to increase/decrease their firing rates together in response to increasing/decreasing stimulus light levels. However, at this point, this is just an impression - there may be a few neurons which break the pattern, or some neurons may be modulated more than others, etc.</p>
+<p>A reasonable goal (which is admittedly a bit open-ended), is to give a <em>compact, quantitative description of the data</em>. To begin to illustrate the challenge: Saying, “the 100 neural firing rates all seem to go up or down together as the stimulus varies,” is very compact, but not quantitative at all. On the other hand, simply writing out the exact firing rates of the 100 neurons is quantitive, but not very compact. Ideally, we’d like to find a strategy which combines the strengths of these two.</p>
+</section>
+<section id="extended-example-2-dimensional-data">
+<span id="sec-2d-ex"></span><h2>Extended example: 2-dimensional data<a class="headerlink" href="#extended-example-2-dimensional-data" title="Link to this heading">#</a></h2>
+<p>In this section we will deal with the simpler problem of studying a <span class="math notranslate nohighlight">\(2\)</span>-dimensional dataset. These two dimensions could be, for example, the firing rates of <span class="math notranslate nohighlight">\(2\)</span> randomly selected neurons from our retina dataset. We’ll explore, we’ll ask some questions, and in an effort to better understand the structure of the data, we’ll end up deriving principal components analysis (PCA). With this concrete example in mind, the generalities will follow very easily. Feel free to skip ahead to <a class="reference internal" href="#sec-gen-pca"><span class="std std-ref">General formulation</span></a> if you’re comfortable with the material in this section.</p>
+<p>The key takeaways are:</p>
+<div class="admonition-summary admonition">
+<p class="admonition-title">Summary</p>
+<ol class="arabic simple">
+<li><p><strong>Redundancy</strong>, <strong>correlations</strong> between variables, <strong>low dimensionality</strong>, and data cloud <strong>elongation</strong> are all (roughly) the same thing. We can interpret each of these as referring to some aspect of the <strong>shape</strong> of the data distribution.</p></li>
+<li><p>PCA amounts to the following recipe for compressing data:</p>
+<ol class="arabic simple">
+<li><p>Quantify the shape of the data distribution using the <strong>covariance matrix</strong>.</p></li>
+<li><p>Compress by discarding directions along which the data cloud is shortest.</p></li>
+</ol>
+</li>
+<li><p>The <strong>eigenvectors</strong> of the covariance matrix correspond to the longest/shortest directions. The <strong>eigenvalues</strong> give the lengths in the corresponding directions.</p></li>
+</ol>
+</div>
+<section id="shape-of-data">
+<span id="subsec-shape-2d"></span><h3>Shape of data<a class="headerlink" href="#shape-of-data" title="Link to this heading">#</a></h3>
+<p>At this point, it should be natural to think of each stimulis response - ie. the firing rates of the 2 neurons - as a single point in a 2-dimensional space.</p>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>Describe this <span class="math notranslate nohighlight">\(2\)</span>-dimesional space. What are its axes? How do we plot a population response in this space?</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>There’s one axis for each of the <span class="math notranslate nohighlight">\(2\)</span> neuron firing rates, and one can imagine plotting a population response by moving out to the corresponding value on each of the axes, as illustrated below:</p>
+<figure class="align-default" id="fig-2d-space">
+<a class="reference internal image-reference" href="_images/2d_space.png"><img alt="_images/2d_space.png" src="_images/2d_space.png" style="height: 200px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text"><span class="math notranslate nohighlight">\(2\)</span>-d plot of the response of a population of <span class="math notranslate nohighlight">\(2\)</span> neurons.</span><a class="headerlink" href="#fig-2d-space" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>However, locating each population response in a <span class="math notranslate nohighlight">\(2\)</span>-dimensional space is really just a geometrical way of listing both neural firing rates. We argued above that while this description is perfectly quantitative, it’s very inefficient. We can interpret this inefficiency in several related ways.</p>
+<p>Play around with the graph below. By dragging the black points you can change the shape of the data. You can also drag the oval around for ease of viewing. When the oval is narrow…</p>
+<ul class="simple">
+<li><p><strong>Redundancy</strong>: the <span class="math notranslate nohighlight">\(2\)</span>-dimensional description is redundant in the sense that the <span class="math notranslate nohighlight">\(x\)</span>- and <span class="math notranslate nohighlight">\(y\)</span>-coordinates of the data points are almost equal.</p></li>
+<li><p><strong>Correlations</strong>: the correlation is high. Knowing the <span class="math notranslate nohighlight">\(x\)</span>-coordinate roughly tells you the <span class="math notranslate nohighlight">\(y\)</span>-coordinate.</p></li>
+<li><p><strong>Elongatation</strong>: the data is very elongated. It does not spread out in the NW-SE direction, and so the <span class="math notranslate nohighlight">\(2\)</span>-dimensional description is wasteful.</p></li>
+<li><p><strong>Low-dimensionality</strong>: the data nearly sits on the 1-dimensional black line. We could make a more compact representation by simply projecting all the data onto this line.</p></li>
+</ul>
+<center><iframe src=https://www.desmos.com/calculator/66qzwoaeld?nokeypad&nobranding&noexpressions&lockViewport&nosettingsMenu width="700" height="350" frameborder=0></iframe></center>
+<p>This leads us to the following important insight:</p>
+<div class="admonition-key-insight admonition">
+<p class="admonition-title">Key insight</p>
+<p>Redundancy, correlations, data elongation, and low-dimensionality can be thought of as different ways of describing the underlying <strong>shape</strong> of the data distribution.</p>
+</div>
+</section>
+<section id="a-compression-heuristic">
+<span id="subsec-pca-principle-2d"></span><h3>A compression heuristic<a class="headerlink" href="#a-compression-heuristic" title="Link to this heading">#</a></h3>
+<p>With this in mind, here’s an idea about how to make our description of the neural data more compact: If we <em>must</em> compactify our data by throwing away some information, we should <strong>start by throwing away the shortest directions</strong>. Stated another way, if we need to locate each point with incomplete information, we’ll get closer if we’re given the coordinates along directions that spread out a lot, than if we’re given the coordinates along directions which don’t spread out much at all.</p>
+<p>Play with the slider in the graph below. You should be able to convince yourself that if we have to compress our data to a single dimension by discarding one of the two coordinates, it’s better to keep the long coordinate, since this distorts the data cloud much less.</p>
+<center><iframe src=https://www.desmos.com/calculator/vn5vxfm3dn?nokeypad&nobranding&noexpressions&lockViewport&nosettingsMenu width="700" height="350" frameborder=0></iframe></center>
+<p>This heuristic is precisely the principle behind principal components analysis!</p>
+<div class="admonition-the-pca-principle admonition">
+<p class="admonition-title">The PCA principle</p>
+<p>To form a lower-dimensional description of data, ignore variation along the shortest directions of the data cloud.</p>
+</div>
+</section>
+<section id="setting-up-and-solving">
+<span id="subsec-setup-solve-2d"></span><h3>Setting up and solving<a class="headerlink" href="#setting-up-and-solving" title="Link to this heading">#</a></h3>
+<p>We now have a clear criterion for choosing the best way to compress our data. We need to express this idea as a concrete mathematical optimization problem, and solve.</p>
+<section id="quantifying-shape">
+<span id="subsubsec-quantify-shape-2d"></span><h4>Quantifying shape<a class="headerlink" href="#quantifying-shape" title="Link to this heading">#</a></h4>
+<p>To determine which directions to keep or discard, we will need a function that measures the length of the data distribution in an arbitrary direction. Let’s represent this direction as a unit vector, <span class="math notranslate nohighlight">\(\vec{p}\)</span>, and call our function <span class="math notranslate nohighlight">\(\text{Length}\left(\vec{p}\right)\)</span>. Looking back at <a class="reference internal" href="#subsec-pca-principle-2d"><span class="std std-ref">A compression heuristic</span></a>, first we’ll project the data onto this direction (left), and then we measure its spread (right). A reasonable choice for defining spread is the variance of the projections, <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p>
+<center><iframe src=https://www.desmos.com/calculator/mzthtrqrn3?nokeypad&nobranding&noexpressions&lockViewport&nosettingsMenu width="700" height="350" frameborder=0></iframe></center>
+<p>So the length is simply the variance of the projected data points:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{Length}\left(\vec{p}\right)&amp;=\text{Variance of projected data in direction }\vec{p}\\
+&amp;=\frac{1}{\#\text{ points}}\left(\left(\text{proj }\vec{x}_{1}\right)^{2}
++\left(\text{proj }\vec{x}_{2}\right)^{2}+\cdots\right).\end{split}\]</div>
+<p>Now recall that to project the <span class="math notranslate nohighlight">\(i^{th}\)</span> point <span class="math notranslate nohighlight">\(\vec{x}_i\)</span> onto the direction <span class="math notranslate nohighlight">\(\vec{p}\)</span>, we simply compute the dot product <span class="math notranslate nohighlight">\(\vec{p} \cdot\vec{x}_i\)</span>, so</p>
+<div class="math notranslate nohighlight">
+\[\text{Length}\left(\vec{p}\right)=
+\frac{1}{\#\text{ points}}\left(\left(\vec{p}\cdot\vec{x}_{1}\right)^{2}
++\left(\vec{p}\cdot\vec{x}_{2}\right)^{2}+\cdots\right).\]</div>
+<p>Next, we use the fact that we can write <span class="math notranslate nohighlight">\(\left(\vec{p}\cdot\vec{x}_{i}\right)^{2}\)</span> in the equivalent form <span class="math notranslate nohighlight">\(\vec{p}^\top \left(\vec{x}_i\vec{x}_i^\top\right)\vec{p}\)</span>. Substituting into our expression for <span class="math notranslate nohighlight">\(\text{Length}\left(\vec{p}\right)\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{Length}\left(\vec{p}\right)&amp;=\frac{1}{\#\text{ points}}
+\left(\vec{p}^{\top}\left(x_{1}x_{1}^{\top}\right)\vec{p}
++\vec{p}^{\top}\left(x_{2}x_{2}^{\top}\right)\vec{p}+\cdots\right)\\
+&amp;=\vec{p}^{\top}\left[\frac{1}{\#\text{ points}}\left(x_{1}x_{1}^{\top}
++x_{2}x_{2}^{\top}+\cdots\right)\right]\vec{p}\\
+&amp;=\vec{p}^{\top}C\vec{p},\end{split}\]</div>
+<p>where we’ve defined the <em>covariance matrix</em> <span class="math notranslate nohighlight">\(C\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}C&amp;:=\frac{1}{\#\text{ points}}\left(x_{1}x_{1}^{\top}+x_{2}x_{2}^{\top}+\cdots\right)\\
+&amp;=\text{Average}\left[xx^{\top}\right]=\mathbb{E}\left[xx^{\top}\right]\end{split}\]</div>
+<p>We now have a very simple expression for the length:</p>
+<div class="math notranslate nohighlight">
+\[\text{Length}\left(\vec{p}\right)=\vec{p}^{\top}C\vec{p}.\]</div>
+<p>Note that we’ve condensed all of the information needed to compute the length of the data in an arbitrary direction into a single matrix <span class="math notranslate nohighlight">\(C\)</span> with dimensions <span class="math notranslate nohighlight">\(\text{neurons} \times \text{neurons}\)</span>. Even if the retinal dataset has 10 billion stimuli, our covariance matrix is still <span class="math notranslate nohighlight">\(2\times 2\)</span>. This is quite efficient!</p>
+</section>
+<section id="finding-the-longest-directions">
+<span id="subsubsec-long-dirs-2d"></span><h4>Finding the longest directions<a class="headerlink" href="#finding-the-longest-directions" title="Link to this heading">#</a></h4>
+<p>Now that we have a way of computing the length of the data cloud in any direction, finding the longest direction is a matter of solving the constrained optimization problem</p>
+<div class="math notranslate nohighlight" id="equation-eq-pca-opt">
+<span class="eqno">(61)<a class="headerlink" href="#equation-eq-pca-opt" title="Link to this equation">#</a></span>\[\begin{split}\max\quad\vec{p}^{\top}C\vec{p}\\
+\text{st.}\quad\left\Vert \vec{p}\right\Vert =1\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\text{st.}\)</span> stands for “such that,” which encodes the constraint that <span class="math notranslate nohighlight">\(\vec{p}\)</span> is a direction, ie. a vector of unit norm. As usual, we find the maximum of a function by finding points where the derivative is zero:</p>
+<center><iframe src="https://www.desmos.com/calculator/x1trhquwth?embed" width="300" height="250" frameborder=0></iframe></center><p>To incorporate the constraint on the length of <span class="math notranslate nohighlight">\(\vec{p}\)</span>, we introduce a Lagrange multiplier, which is just a tool for imposing constraints on optimization problems. Differentiating and setting the resulting derivative to <span class="math notranslate nohighlight">\(0\)</span>, we find the following condition for a direction <span class="math notranslate nohighlight">\(\vec{p}\)</span> to be of maximal length (you don’t need to worry about the details here):</p>
+<div class="math notranslate nohighlight" id="equation-eq-pca-eig">
+<span class="eqno">(62)<a class="headerlink" href="#equation-eq-pca-eig" title="Link to this equation">#</a></span>\[C\vec{p}=\lambda \vec{p}\]</div>
+<p>This equation should be familiar! It says that for <span class="math notranslate nohighlight">\(\vec{p}\)</span> to be a maximal length direction, it must be an eigenvector of the covariance matrix <span class="math notranslate nohighlight">\(C\)</span>. We call this eigenvector, which points in the direction of maximum variance, the (direction of the) <em>first</em> or <em>top principle component</em>. (What do you think the second principle component is?) Eigenvectors have appeared completely organically, as the solution to a simple optimization problem <a class="reference internal" href="#equation-eq-pca-opt">(61)</a>!</p>
+<p>What about the eigenvalue? To interpret the eigenvalue, let’s plug the optimal direction <span class="math notranslate nohighlight">\(\vec{p}\)</span> into the length function:</p>
+<div class="math notranslate nohighlight">
+\[\text{Length}(\vec{p}) = \vec{p}^\top C \vec{p} = \vec{p}^\top (C \vec{p}) = \lambda \vec{p}^\top \vec{p} = \lambda,\]</div>
+<p>which shows that the eigenvalue is just the length! To be a bit more precise, recall that we defined the length function <span class="math notranslate nohighlight">\(\text{Length}\)</span> as the variance of the data cloud when projected onto the direction <span class="math notranslate nohighlight">\(\vec{p}\)</span>, so the eigenvalue represents the <em>variance</em> in the long direction.</p>
+<p>Since the eigenvalue corresponds to the length, this tells us immediately that we should select the eigenvector of <span class="math notranslate nohighlight">\(C\)</span> corresponding to the largest eigenvalue, since this will give the longest dirction.</p>
+<p>Putting everything togther, we’ve extracted the following neat interpretation for our optimization problem <a class="reference internal" href="#equation-eq-pca-opt">(61)</a> and its solution <a class="reference internal" href="#equation-eq-pca-eig">(62)</a>:</p>
+<div class="admonition-key-insight admonition" id="insight-eigvec-solution-2d">
+<p class="admonition-title">Key insight</p>
+<p>Solving the optimization problem <a class="reference internal" href="#equation-eq-pca-opt">(61)</a> for the longest dirction of the data cloud leads to the eigenvector equation <a class="reference internal" href="#equation-eq-pca-eig">(62)</a>.</p>
+<ul class="simple">
+<li><p>The <strong>eigenvector</strong> <span class="math notranslate nohighlight">\(\vec{p}\)</span> corresponds to the <strong>long direction</strong> of the data cloud.</p></li>
+<li><p>The <strong>eigenvalue</strong> <span class="math notranslate nohighlight">\(\lambda\)</span> corresponds to the <strong>length (variance)</strong> of the data cloud in the direction <span class="math notranslate nohighlight">\(\vec{p}\)</span>.</p></li>
+</ul>
+<figure class="align-default" id="fig-pca-eig-annotate">
+<a class="reference internal image-reference" href="_images/eigenvector_equation.png"><img alt="_images/eigenvector_equation.png" src="_images/eigenvector_equation.png" style="height: 200px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Interpretation of the optimality criterion <a class="reference internal" href="#equation-eq-pca-eig">(62)</a>.</span><a class="headerlink" href="#fig-pca-eig-annotate" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="projecting-onto-fewer-dimensions">
+<span id="subsubsec-projection-2d"></span><h4>Projecting onto fewer dimensions<a class="headerlink" href="#projecting-onto-fewer-dimensions" title="Link to this heading">#</a></h4>
+<p>Now we have everything we need to compress our data. We’ve found the longest direction <span class="math notranslate nohighlight">\(\vec{p}\)</span> in <a class="reference internal" href="#subsubsec-long-dirs-2d"><span class="std std-ref">Finding the longest directions</span></a>, which corresponds to the eigenvector of <span class="math notranslate nohighlight">\(C\)</span> with the largest eigenvalue. Now all we need to do is to discard the other direction, or equivalently project the two dimensional data (left) onto the long direction, leaving a compressed 1-dimensional representation of our data (right).</p>
+<center><iframe src=https://www.desmos.com/calculator/gzjpopbicj?nokeypad&nobranding&noexpressions&lockViewport&nosettingsMenu width="700" height="350" frameborder=0></iframe></center>
+<p>The values obtained by projecting the data onto the long-direction <span class="math notranslate nohighlight">\(\vec{p}\)</span> are called <em>scores</em>, and the resulting 1-dimensional representation is called the <em>first principal component of the data</em>.</p>
+</section>
+</section>
+<section id="putting-it-all-together">
+<h3>Putting it all together<a class="headerlink" href="#putting-it-all-together" title="Link to this heading">#</a></h3>
+<p>Summarizing our analysis of 2-dimensional data:</p>
+<ol class="arabic simple">
+<li><p><strong><a class="reference internal" href="#subsec-shape-2d"><span class="std std-ref">Lurking simplicity</span></a></strong> Whether it’s redundancy, correlations, data elongation, or approximate low dimensionality, we’re given reason to believe that we can find a simpler, but still quantitative, description of the data.</p></li>
+<li><p><strong><a class="reference internal" href="#subsubsec-quantify-shape-2d"><span class="std std-ref">Quantifying shape</span></a></strong> We quantify the shape of the data distribution using the length function <span class="math notranslate nohighlight">\(\text{Length}(\vec{p})=\vec{p}^\top C\vec{p}\)</span>, where <span class="math notranslate nohighlight">\(C\)</span> is the <em>covariance matrix</em> of the data.</p></li>
+<li><p><strong><a class="reference internal" href="#subsec-pca-principle-2d"><span class="std std-ref">A criterion for compression</span></a></strong> We decide that if we must discard coordinates, we should start by discarding the directions along which the data varies least.</p></li>
+<li><p><strong><a class="reference internal" href="#subsubsec-long-dirs-2d"><span class="std std-ref">An optimization</span></a></strong> We pose the problem of finding the longest directions of the data distribution as a simple constrained optimization problem.</p></li>
+<li><p><strong><a class="reference internal" href="#insight-eigvec-solution-2d"><span class="std std-ref">Eigenvector solution</span></a></strong> We find that the longest direction is just the eigenvector of <span class="math notranslate nohighlight">\(C\)</span> corresponding to the largest eigenvalue.</p></li>
+<li><p><strong><a class="reference internal" href="#subsubsec-projection-2d"><span class="std std-ref">Compression</span></a></strong> We compress the data from 2 dimensions to 1 by projecting the data onto the long direction, giving the <em>scores</em>. The resulting 1-dimensional representation is the first <em>principal component</em> of the data.</p></li>
+</ol>
+</section>
+</section>
+<section id="general-formulation">
+<span id="sec-gen-pca"></span><h2>General formulation<a class="headerlink" href="#general-formulation" title="Link to this heading">#</a></h2>
+<p>Now with the help of the intuition developed in <a class="reference internal" href="#sec-2d-ex"><span class="std std-ref">Extended example: 2-dimensional data</span></a>, we’ll formulate PCA in full generality.</p>
+<section id="dataset">
+<h3>Dataset<a class="headerlink" href="#dataset" title="Link to this heading">#</a></h3>
+<p>We assume the dataset constists of a set of <span class="math notranslate nohighlight">\(n\)</span> samples of <span class="math notranslate nohighlight">\(d\)</span> observables. We’ll often write the <span class="math notranslate nohighlight">\(i^{th}\)</span> sample as a <span class="math notranslate nohighlight">\(d\)</span>-dimensional vector <span class="math notranslate nohighlight">\(\vec{x}_i\in\mathbb{R}^d\)</span>. It will also be convenient to collect all of the data into a single <span class="math notranslate nohighlight">\(n\times d\)</span> matrix <span class="math notranslate nohighlight">\(X\in\mathbb{R}^{n\times d}\)</span>, where each row represents one sample of the <span class="math notranslate nohighlight">\(d\)</span> observables. For convenience, we’ll suppose that the data has been preprocessed so that each observable has had its mean subtracted, and thus has mean <span class="math notranslate nohighlight">\(0\)</span>.</p>
+<p>In the example of our <a class="reference internal" href="#sec-motivation"><span class="std std-ref">retinal ganglion cell dataset</span></a>, the <em>observables</em> are the firing rates or spikes of each neuron, and a <em>sample</em> corresponds to a single stimulus presentation. So <span class="math notranslate nohighlight">\(d\)</span> is the number of neurons, and <span class="math notranslate nohighlight">\(n\)</span> is the number of stimuli we’ve presented.</p>
+</section>
+<section id="formulation">
+<h3>Formulation<a class="headerlink" href="#formulation" title="Link to this heading">#</a></h3>
+<p>The goal of PCA is to reduce the dimensionality of the data while preserving as much of the precious variation of the data as possible. To reduce the <span class="math notranslate nohighlight">\(d\)</span>-dimensional data to a single dimension, the PCA heuristic has us project the data onto the 1-dimensional subspace (ie. a direction in space) along which the data has the greatest variance (a measure of spread, or length). More generally, we can formulate PCA as the following heuristic:</p>
+<div class="admonition-pca-heuristic admonition" id="crit-pca">
+<p class="admonition-title">PCA heuristic</p>
+<p>Variability (spread, length) is what counts in a dataset. Therefore, to optimally compress <span class="math notranslate nohighlight">\(d\)</span>-dimensional data to <span class="math notranslate nohighlight">\(k\)</span> dimensions, project the data onto the <span class="math notranslate nohighlight">\(k\)</span>-dimensional subspace that captures the greatest amount of variance in the data.</p>
+</div>
+</section>
+<section id="optimal-1-dimensional-subspace">
+<h3>Optimal 1-dimensional subspace<a class="headerlink" href="#optimal-1-dimensional-subspace" title="Link to this heading">#</a></h3>
+<p>We begin by determining the optimal 1-dimensional subspace for a given dataset <span class="math notranslate nohighlight">\(X\)</span>, and in the next section treat <a class="reference internal" href="#crit-pca"><span class="std std-ref">the PCA criterion</span></a> in full generality.</p>
+<p>We begin by writing the variance in a given direction <span class="math notranslate nohighlight">\(\vec{p}\)</span> as <span class="math notranslate nohighlight">\(\mathcal{V}(\vec{p})\)</span> (note this is just the <span class="math notranslate nohighlight">\(\text{Length}\)</span> function defined in <a class="reference internal" href="#subsubsec-quantify-shape-2d"><span class="std std-ref">Quantifying shape</span></a>). The variance of the data in a 1-dimensional subspace is the ordinary scalar variance of the data when projected onto this subspace, so</p>
+<div class="math notranslate nohighlight" id="equation-eq-var-formula-1d">
+<span class="eqno">(63)<a class="headerlink" href="#equation-eq-var-formula-1d" title="Link to this equation">#</a></span>\[\mathcal{V}\left(\vec{p}\right)=\frac{1}{n}\sum_{i=1}^{n}\left(\vec{p}\cdot\vec{x}_{i}\right)^{2}=\vec{p}^{\top}\left(\frac{1}{n}\sum_{i=1}^{n}x_{i}x_{i}^{\top}\right)\vec{p}=\vec{p}^{\top}C\vec{p},\]</div>
+<p>where <span class="math notranslate nohighlight">\(C\in\mathbb{R}^{d\times d}\)</span> is the <span class="math notranslate nohighlight">\(d\times d\)</span> covariance matrix of the data (there is no need to subtract the means since we’ve assumed these are all <span class="math notranslate nohighlight">\(0\)</span>).</p>
+<p>Now we maximize the variance over all possible directions:</p>
+<div class="math notranslate nohighlight" id="equation-eq-pca-opt-gen">
+<span class="eqno">(64)<a class="headerlink" href="#equation-eq-pca-opt-gen" title="Link to this equation">#</a></span>\[\begin{split}\max\quad\vec{p}^{\top}C\vec{p}\\
+\text{st.}\quad\left\Vert \vec{p}\right\Vert =1.\end{split}\]</div>
+<p>To solve this constrained optimization problem, we form the Lagrangian <span class="math notranslate nohighlight">\(\mathcal{L}:=\vec{p}^{\top}C\vec{p}-\lambda \vec{p}^{\top}\vec{p}\)</span> and set its gradient with respect to <span class="math notranslate nohighlight">\(\vec{p}\)</span> to <span class="math notranslate nohighlight">\(0\)</span>, giving simply</p>
+<div class="math notranslate nohighlight" id="equation-eq-pca-eig-gen">
+<span class="eqno">(65)<a class="headerlink" href="#equation-eq-pca-eig-gen" title="Link to this equation">#</a></span>\[C\vec{p}=\lambda \vec{p},\]</div>
+<p>which states that for a vector <span class="math notranslate nohighlight">\(\vec{p}\)</span> to have extremal variance, it must be an eigenvector of the covariance matrix <span class="math notranslate nohighlight">\(C\)</span>. The covariance matrix is a <span class="math notranslate nohighlight">\(d\times d\)</span> symmetric matrix, so we know it has a complete, orthogonal set of <span class="math notranslate nohighlight">\(d\)</span> eigenvectors. To determine which of the <span class="math notranslate nohighlight">\(d\)</span> eigenvectors has the largest variance, plug an arbitrary eigenvector into <span class="math notranslate nohighlight">\(\mathcal{V}\)</span>, giving <span class="math notranslate nohighlight">\(\mathcal{V}(\vec{p}) = \vec{p}^\top C \vec{p}=\lambda \vec{p}^\top\vec{p} = \lambda\)</span>, which shows that the eigenvalue <span class="math notranslate nohighlight">\(\lambda\)</span> is exactly the variance. Thus choosing <span class="math notranslate nohighlight">\(\vec{p}\)</span> to be the eigenvector with the largest associated eigenvalue yields the direction with the greatest variance.</p>
+<p>Using <span class="math notranslate nohighlight">\(\vec{p}\)</span> we can operate on the data in one of two ways:</p>
+<ul class="simple">
+<li><p><strong>Compression</strong> We compress the <span class="math notranslate nohighlight">\(d\)</span>-dimensional data to a single dimension by storing just the single coordinate of each data point <span class="math notranslate nohighlight">\(\vec{x}_i\)</span> in the <span class="math notranslate nohighlight">\(1\)</span>-dimensional subspace, <span class="math notranslate nohighlight">\(\vec{p}\cdot\vec{x}_i\)</span>, or equivalently in marix notation, we store <span class="math notranslate nohighlight">\(X\vec{p}\)</span>. This coordinate is sometimes called the <em>score</em>, and the resulting <span class="math notranslate nohighlight">\(1\)</span>-dimensional data is the first <em>principle component</em> of the data.</p></li>
+<li><p><strong>Approximation</strong> We use the coordinates (ie. scores) in the <span class="math notranslate nohighlight">\(1\)</span>-dimensional subspace to approximately reconstruct the original <span class="math notranslate nohighlight">\(d\)</span>-dimensional data. In particular, <span class="math notranslate nohighlight">\(\vec{x}_i\)</span>’s coordinate is <span class="math notranslate nohighlight">\(\vec{x}_i\cdot \vec{p}\)</span>, so we go exactly this far out along the direction <span class="math notranslate nohighlight">\(\vec{p}\)</span>, giving <span class="math notranslate nohighlight">\((\vec{x}_i\cdot \vec{p})\vec{p}\)</span>. This is exactly the closest point in the <span class="math notranslate nohighlight">\(1\)</span>-dimensional subspace to the original point <span class="math notranslate nohighlight">\(\vec{x}_i\)</span>. We can express this in matrix notation as <span class="math notranslate nohighlight">\(X\vec{p}\vec{p}^\top\)</span>.</p></li>
+</ul>
+<p>The interactive below can help you get a handle on the difference between compression and approximation. Compression stores just the coordinates in the lower-dimensional subspace of each data point, yielding a <span class="math notranslate nohighlight">\(1\)</span>-dimensional representation (upper right), while approximation or reconstruction replaces each data point with the closest point in the lower-dimensional subspace, yielding an imperfect 2-dimensional representation (lower right).</p>
+<center><iframe src=https://www.desmos.com/calculator/jwxarngdvt?embed width="750" height="350" frameborder=0></iframe></center></section>
+<section id="general-subspace">
+<h3>General subspace<a class="headerlink" href="#general-subspace" title="Link to this heading">#</a></h3>
+<p>Now we treat the general <span class="math notranslate nohighlight">\(k\)</span>-dimensional subspace. Instead of taking just the first eigenvector, as we did in the <span class="math notranslate nohighlight">\(1\)</span>-dimensional solution, we will take the leading <span class="math notranslate nohighlight">\(k\)</span> eigenvectors of <span class="math notranslate nohighlight">\(C\)</span>. Since the eigenvalue of each eigenvector is equal to the length function, it should be intuitive that the eigenvectors with the greatest eigenvalues will together capture the most variance. If you are interested in the mathematical details, however, a proof is included below.</p>
+<div class="admonition-proof admonition">
+<p class="admonition-title">Proof</p>
+<p>Our goal is to find the collection of <span class="math notranslate nohighlight">\(k\)</span> orthogonal unit vectors that best capture the variance in our dataset—since. If the vectors were not orthogonal to one another, they would be capturing some of the same variance in the data as each other (i.e. facing somewhat in the same direction), which isn’t optimal. So let’s try to find the set of <span class="math notranslate nohighlight">\(k\)</span> orthogonal, unit vectors (also known as orthonormal vectors), <span class="math notranslate nohighlight">\(v_{1},v_{2},\ldots,v_{k}\)</span>, that best captures the variance in our dataset. Given that the fact that the vectors are orthonormal, we know that <span class="math notranslate nohighlight">\(v_{i}\cdot v_{j}=0\)</span> for <span class="math notranslate nohighlight">\(i \neq j\)</span> and <span class="math notranslate nohighlight">\(1\)</span> for <span class="math notranslate nohighlight">\(i = j\)</span>. The total variance when we project our dataset along these vectors is defined as the sum of the variance in each of these <span class="math notranslate nohighlight">\(k\)</span> directions:</p>
+<div class="math notranslate nohighlight" id="equation-eq-total-var-def">
+<span class="eqno">(66)<a class="headerlink" href="#equation-eq-total-var-def" title="Link to this equation">#</a></span>\[\mathcal{V}\left(\left\{ v_{1},v_{2},\ldots,v_{k}\right\} \right)=\sum_{i=1}^{k}v_{k}^{\top}Cv_{k}.\]</div>
+<p>It’s convenient to collect all of the vectors <span class="math notranslate nohighlight">\(v_k\)</span> into the columns of the matrix <span class="math notranslate nohighlight">\(V\)</span>, allowing us to write the orthonormality condition <span class="math notranslate nohighlight">\(v_{i}\cdot v_{j}= 0\)</span> for <span class="math notranslate nohighlight">\(i \neq j\)</span> and <span class="math notranslate nohighlight">\(1\)</span> for <span class="math notranslate nohighlight">\(i = j\)</span> as <span class="math notranslate nohighlight">\(V^{\top}V=I\)</span> (why?), and to rewrite the total variance in <a class="reference internal" href="#equation-eq-total-var-def">(66)</a> as <span class="math notranslate nohighlight">\(\mathcal{V}\left(V\right)=\text{tr}\left[V^{\top}CV\right]\)</span>, which generalizes the 1-d formula <a class="reference internal" href="#equation-eq-var-formula-1d">(63)</a> nicely. (<span class="math notranslate nohighlight">\(\text{tr}\)</span> is just the trace of a matrix, which is defined as the sum of the elements along the matrix’s diagonal.) Now we must solve the constrained optimization problem</p>
+<div class="math notranslate nohighlight" id="equation-eq-pca-opt-gen-kd">
+<span class="eqno">(67)<a class="headerlink" href="#equation-eq-pca-opt-gen-kd" title="Link to this equation">#</a></span>\[\begin{split}\max\quad\text{tr}\left[V^{\top}CV\right]\\
+\text{st}.\quad V^{\top}V=I.\end{split}\]</div>
+<p>As before, we encode the constraints by forming the Lagrangian <span class="math notranslate nohighlight">\(\mathcal{L}:=\text{tr}\left[V^{\top}CV\right]-\text{tr}\left[L\left(V^{\top}V-I\right)\right]\)</span>, compute the gradient with respect to <span class="math notranslate nohighlight">\(V\)</span>, and set this to <span class="math notranslate nohighlight">\(0\)</span>. Doing so yields</p>
+<div class="math notranslate nohighlight" id="equation-eq-pca-eig-gen-kd">
+<span class="eqno">(68)<a class="headerlink" href="#equation-eq-pca-eig-gen-kd" title="Link to this equation">#</a></span>\[CV=V\Lambda,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Lambda:=\frac{L+L^{\top}}{2}\)</span>. Since <span class="math notranslate nohighlight">\(\Lambda\)</span> is symmetric we can write its eigendecomposition as <span class="math notranslate nohighlight">\(\Lambda=ODO^{T}\)</span> where <span class="math notranslate nohighlight">\(O\)</span> is an orthogonal matrix. Substiting, we can write <a class="reference internal" href="#equation-eq-pca-eig-gen-kd">(68)</a> as <span class="math notranslate nohighlight">\(C\left(VO\right)=\left(VO\right)D\)</span>. Since <span class="math notranslate nohighlight">\(D\)</span> is diagonal, we have that each column of <span class="math notranslate nohighlight">\(VO\)</span> is an eigenvector of <span class="math notranslate nohighlight">\(C\)</span>, and <span class="math notranslate nohighlight">\(D\)</span> holds the corresponding eigenvalues. Further, since the columns of <span class="math notranslate nohighlight">\(VO\)</span> are orthogonal (since those of <span class="math notranslate nohighlight">\(V\)</span> are), they must be distinct eigenvectors of <span class="math notranslate nohighlight">\(C\)</span>. Finally, for such a <span class="math notranslate nohighlight">\(V\)</span>, the total variance is just</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathcal{V}\left(V\right) &amp; 
+=\text{tr}\left[V^{\top}CV\right]
+=\text{tr}\left[V^{\top}V\Lambda\right]
+=\text{tr}\left[\Lambda\right]\\
+ &amp; =\text{tr}\left[ODO^{T}\right]
+ =\text{tr}\left[DO^{T}O\right]
+ =\text{tr}\left[D\right],\end{split}\]</div>
+<p>that is, the total variance is just the sum of the eigenvalues corresponding to the eigenvectors in <span class="math notranslate nohighlight">\(VO\)</span>, which generalizes the <span class="math notranslate nohighlight">\(1\)</span>-d formula <span class="math notranslate nohighlight">\(\mathcal{V}(\vec{v})=\lambda\)</span>. Since we must pick distinct eigenvalues/eigenvectors, the optimal <span class="math notranslate nohighlight">\(VO\)</span> consists of the <span class="math notranslate nohighlight">\(k\)</span> leading eigenvectors of <span class="math notranslate nohighlight">\(C\)</span>. The subspace spanned by the columns of <span class="math notranslate nohighlight">\(VO\)</span> and <span class="math notranslate nohighlight">\(V\)</span> are identical, so we’ve shown that the optimal <span class="math notranslate nohighlight">\(k\)</span>-dimensional subspace is the space spanned by the top <span class="math notranslate nohighlight">\(k\)</span> eigenvectors of the covariance <span class="math notranslate nohighlight">\(C\)</span>.</p>
+</div>
+<div class="admonition-theorem admonition">
+<p class="admonition-title">Theorem</p>
+<p>The <span class="math notranslate nohighlight">\(k\)</span>-dimensional subspace preserving the largest total variance of the data is spanned by the <span class="math notranslate nohighlight">\(k\)</span> eigenvectors of the data covariance <span class="math notranslate nohighlight">\(C\)</span> with largest eigenvalue</p>
+</div>
+<p>As before we can perform either</p>
+<ul class="simple">
+<li><p><strong>Compression</strong> We store the coordinates - or <em>scores</em> - of the data in the <span class="math notranslate nohighlight">\(k\)</span>-dimensional subspace by computing <span class="math notranslate nohighlight">\(XV\)</span>, leaving only the top <span class="math notranslate nohighlight">\(k\)</span> <em>principle components</em>.</p></li>
+<li><p><strong>Approximation</strong> We approximate the data points using the closest points in the <span class="math notranslate nohighlight">\(k\)</span> dimensional subspace by computing <span class="math notranslate nohighlight">\(XVV^\top\)</span>.</p></li>
+</ul>
+<p>A useful, and perhaps intuitive, fact is that of all <span class="math notranslate nohighlight">\(k\)</span>-dimensional subspaces we could use for approximation/reconstruction, the maximal variance subspace is the most accurate.</p>
+</section>
+</section>
+<section id="scree-plots">
+<h2>Scree plots<a class="headerlink" href="#scree-plots" title="Link to this heading">#</a></h2>
+<p>Suppose we’re given a high-dimensional dataset and we decide to peform PCA, either to compress or approximate the data. How do we know if the data is elongated/low-dimensional? If it is, what is the approximate dimensionality of the data? More generally, how many dimensions can we throw out before the error becomes unacceptable?</p>
+<p>The key to answering these questions is to have a compact summary of the shape information delivered by PCA. A reasonable candidate is the <strong>lengths of the data cloud in all of the PC directions</strong>. Recall that these are just the eigenvalues of the covariance matrix <span class="math notranslate nohighlight">\(C\)</span>. So we plot these eigenvalues in descending order, from longest to shortest. This is called a <em>scree plot</em>, and is an extremely useful tool for quickly interpreting the overall shape of a dataset.</p>
+<div class="admonition-definition admonition">
+<p class="admonition-title">Definition</p>
+<p>A <em>scree</em> or <em>spectrum plot</em> of <span class="math notranslate nohighlight">\(n\)</span>-dimensional data shows the <span class="math notranslate nohighlight">\(n\)</span> eigenvalues of the covariance matrix <span class="math notranslate nohighlight">\(C\)</span> in descending order.</p>
+</div>
+<p>Here’s an example of how we can use a scree plot. For a data distribution with the shape on the left, the scree plot on the right shows the variance of each eigenvector dircetion in descending order. (Note the variance (or eigenvalue) is actually the length <em>squared</em>, so relative to the raw lengths on the left, the scree plot accentuates long directions.) Without having to look at the data, the scree plot tells us a) the data is <span class="math notranslate nohighlight">\(2\)</span>-dimensional, b) one direction is longer than the other, making the data approximately <span class="math notranslate nohighlight">\(1\)</span>-dimensional, c) exactly what fraction of the total variance is captured by the top PC.</p>
+<center><iframe src=https://www.desmos.com/calculator/ziev2vxz3g?nokeypad&nobranding&noexpressions&lockViewport&nosettingsMenu width="700" height="350" frameborder=0></iframe></center>
+<p>We’ll encounter a more realistic example in <a class="reference internal" href="#sec-pca-python"><span class="std std-ref">PCA with python</span></a>, but for now, build some intuition for scree plots by playing with the interactive above, and then trying the exercise below.</p>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>Suppose our data is 10-dimensional. What would a spectrum plot for a perfectly spherical data distribution look like? What about a cigar-shaped distribution? What about a plane (ie. a sheet of paper) sitting in 10-dimensional space?</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Since a spherical distribution has equal length in all directions, its scree plot should show 10 eigenvalues of equal length — it should be flat. A cigar-shaped distribution, with one dimension much longer than all the others, will have a scree plot with one eigenvalue much higher than all the others — one sharp peak, and then short and flat for the rest of the plot. A sheet of paper in 10-dimensional space has two nonzero dimensions, and all other dimensions are 0. So it will show two fairly high eigenvalues (one much higher than the other), and then the rest of the scree plot should be blank.</p>
+</div>
+</div>
+</section>
+<section id="pca-with-python">
+<span id="sec-pca-python"></span><h2>PCA with python<a class="headerlink" href="#pca-with-python" title="Link to this heading">#</a></h2>
+<p>Now we’ll work through a (semi-) realistic example to show how PCA is performed in practice. The key takeaways are:</p>
+<div class="admonition-summary admonition">
+<p class="admonition-title">Summary</p>
+<ol class="arabic simple">
+<li><p>First we subract the mean of each observable.</p></li>
+<li><p>Then we compute the covariance <span class="math notranslate nohighlight">\(C\)</span> either using <code class="docutils literal notranslate"><span class="pre">np.cov</span></code>, or explicitly via <span class="math notranslate nohighlight">\(\frac{1}{n}X^\top X\)</span>.</p></li>
+<li><p>We compute the eigenvectors and eigenvalues using <code class="docutils literal notranslate"><span class="pre">np.linalg.eig</span></code>, or <code class="docutils literal notranslate"><span class="pre">np.linalg.eigh</span></code>, which is specialized for symmetric matrices like <span class="math notranslate nohighlight">\(C\)</span>.</p></li>
+<li><p>Finally, we compute the projection onto the top <span class="math notranslate nohighlight">\(k\)</span> components.</p></li>
+</ol>
+</div>
+<section id="data">
+<h3>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h3>
+<p>First we generate synthetic data for the retinal ganglion cell experiment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># set random seed</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># number of stimuli</span>
+<span class="n">d</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># number of neurons</span>
+<span class="n">σ</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># noise level</span>
+<span class="n">stimuli</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">responses</span> <span class="o">=</span> <span class="n">stimuli</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="n">d</span><span class="p">))</span> <span class="o">+</span> <span class="n">σ</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this case, we know exactly how the data was generated, which will help us build intuition for what PCA does. Each stimulus is a randomly generated standard normal value, and each neuron’s response is the stimulus value plus random noise with standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
+<p>Before performing PCA, let’s spend a moment looking at the data. Since we expect all the neurons to go up and down together, a reasonable thing to do is to scatter a few pairs of neural firing rates:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">i1</span><span class="p">,</span> <span class="n">i2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">responses</span><span class="p">[:,</span><span class="n">i1</span><span class="p">],</span> <span class="n">responses</span><span class="p">[:,</span><span class="n">i2</span><span class="p">]</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">ravel</span><span class="p">()[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">)</span>
+<span class="c1">#     ax.ravel()[i].text(-4,0,&#39;$r^2=$&#39;+str(r**2)[:4],c=&#39;y&#39;)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">ravel</span><span class="p">()[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;$r^2=$&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">)[:</span><span class="mi">4</span><span class="p">])</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8793a86c196cfe5f06914a29dcb6eb2cabcfd2d56cc71facc4ee72a9234d5510.png" src="_images/8793a86c196cfe5f06914a29dcb6eb2cabcfd2d56cc71facc4ee72a9234d5510.png" />
+</div>
+</div>
+<p>Each pair of neurons is positively correlaed, but this correlation is extremely weak. Even in this case where we know the data is low-dimensional, the noise has made this hard to detect at the level of single neurons. Hopefully PCA, which aggregates information from the entire population, can give us a more robust view of the low-d structure.</p>
+</section>
+<section id="covariance-eigenanalysis">
+<h3>Covariance eigenanalysis<a class="headerlink" href="#covariance-eigenanalysis" title="Link to this heading">#</a></h3>
+<p>To proceed, we form the matrix <span class="math notranslate nohighlight">\(X\)</span> by subtracting off the mean firing rate of each neuron. As a sanity check we’ll confirm that a randomly selected firing neuron has mean <span class="math notranslate nohighlight">\(0\)</span> response.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">responses</span> <span class="o">-</span> <span class="n">responses</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;13th firing rate mean after preprocessing is </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">13</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>13th firing rate mean after preprocessing is -4.263256414560601e-17
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we compute the covariance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="c1"># Alternatively, we can compute C via</span>
+<span class="c1"># C = X.T@X/n</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next we compute the eigenvectors and eigenvalues of <span class="math notranslate nohighlight">\(C\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">E</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">np.linalg.eig</span></code> puts the eigenvalues in descending order (biggest first).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.linalg.eigh</span></code>, for <strong>symmetric matrices only</strong>*, puts the eigenvalues in ascending order (biggest last).</p></li>
+</ul>
+<p>Since the covariance matrix is symmetric, you’re free to use either. Since <code class="docutils literal notranslate"><span class="pre">eigh</span></code> is faster, more stable, and guarantees real outputs, you might as well use it, as we have here.</p>
+<p>* Actually, you can plug in any <em><a class="reference external" href="https://en.wikipedia.org/wiki/Hermitian_matrix">hermitian matrix</a></em> (hence the <code class="docutils literal notranslate"><span class="pre">h</span></code> in <code class="docutils literal notranslate"><span class="pre">eigh</span></code>).</p>
+</div>
+<p>Now we’ll make a <em>scree plot</em>. In practice you’d probably start by plotting all <span class="math notranslate nohighlight">\(d=100\)</span> eigenvalues. In this case, we know the data is low-dimensional, so we’ll plot just <span class="math notranslate nohighlight">\(10\)</span> dimensions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">E</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">10</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;.-&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Eigenvalue number&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Eigenvalue (variance)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2ab4d97fa1b9e8e4d73659a8e92861aaf30e973b59891d5eed8d12e5808bc7b2.png" src="_images/2ab4d97fa1b9e8e4d73659a8e92861aaf30e973b59891d5eed8d12e5808bc7b2.png" />
+</div>
+</div>
+<p>Aha! Even though we weren’t able to see the redundancy at the few-neuron level in the plots above, the scree plot confirms that there is one overwhelmingly strong direction and a large number of much shorter directions. Our data is in some sense a very elongated (high-dimensional) cigar.</p>
+</section>
+<section id="compression">
+<h3>Compression<a class="headerlink" href="#compression" title="Link to this heading">#</a></h3>
+<p>Let’s project our data onto this strong direction, giving us a compressed 1-d description of our population. What is this compressed description encoding? Based on the intuition that the neurons go up and down <em>in response to the stimulus</em>, let’s plot our <span class="math notranslate nohighlight">\(1\)</span>-d representation simultaneously with the stimulus.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Project</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">V</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># Picking out top eigenvector</span>
+<span class="n">c1</span> <span class="o">=</span> <span class="n">X</span><span class="nd">@p</span> <span class="c1">#compressing all our data in that direction</span>
+
+<span class="c1"># Plot</span>
+<span class="k">def</span> <span class="nf">standardize</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">/</span><span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+
+<span class="n">n_show</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="c1">#standardize both for easy visualization</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">standardize</span><span class="p">(</span><span class="n">responses</span><span class="p">[:</span><span class="n">n_show</span><span class="p">,</span><span class="mi">10</span><span class="p">]),</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">standardize</span><span class="p">(</span><span class="n">c1</span><span class="p">[:</span><span class="n">n_show</span><span class="p">]))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">standardize</span><span class="p">(</span><span class="n">stimuli</span><span class="p">[:</span><span class="n">n_show</span><span class="p">]))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Single neuron&#39;</span><span class="p">,</span><span class="s1">&#39;Top PC coordinate&#39;</span><span class="p">,</span><span class="s1">&#39;Stimulus&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/034e7b7311c2426d208e47539b4364208a25faa03f2a30aa625bc0a806d5e33a.png" src="_images/034e7b7311c2426d208e47539b4364208a25faa03f2a30aa625bc0a806d5e33a.png" />
+</div>
+</div>
+<p>This shows that the high-variance direction of the data is essentialy encoding the stimulus. This is a fairly accurate readout, especially when compared to the response of a single randomly selected neuron (black trace).</p>
+</section>
+<section id="approximation">
+<h3>Approximation<a class="headerlink" href="#approximation" title="Link to this heading">#</a></h3>
+<p>Another thing we can do is to approximate the data using our lower-dimensional description. To do this, we simply use the projection formula</p>
+<div class="math notranslate nohighlight">
+\[X_{approx} = X\vec{p}\vec{p}^\top.\]</div>
+<p>We then pick a single neuron and plot 4 things:</p>
+<ol class="arabic simple">
+<li><p>We scatter the neuron’s response as a function of the stimulus. This is what we’re trying to approximate.</p></li>
+<li><p>We plot the neuron’s <em>average</em> response for that stimulus value, which is actually the best we can possibly do, since any deviation from this is just noise.</p></li>
+<li><p>We scatter the neuron’s reconstructed response using the highest-variance direction (ie. the top principal component).</p></li>
+<li><p>We scatter the neuron’s reconstructed response using a randomly chosen direction for comparison.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># PCA reconstruction</span>
+<span class="n">X_app_PCA</span> <span class="o">=</span> <span class="n">X</span><span class="nd">@p</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span><span class="nd">@p</span><span class="p">[</span><span class="kc">None</span><span class="p">,:]</span>
+
+<span class="c1"># Reconstruction using randomly selected 1d subspace</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">v</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">v</span><span class="nd">@v</span><span class="p">)</span>
+<span class="n">X_app_rand</span> <span class="o">=</span> <span class="n">X</span><span class="nd">@v</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span><span class="nd">@v</span><span class="p">[</span><span class="kc">None</span><span class="p">,:]</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">stimuli</span><span class="p">,</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Raw responses&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">stimuli</span><span class="p">,</span><span class="n">X_app_PCA</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;PCA reconstruction&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">stimuli</span><span class="p">,</span><span class="n">X_app_rand</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Naive (non-PCA) reconstruction&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">stimuli</span><span class="p">,</span><span class="n">stimuli</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Optimal reconstruction&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Stimulus&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Response&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/88b5d23a4e7d0f60802a90ec8c207fdfcb93aa0018459daa095c5cfc8c8a3078.png" src="_images/88b5d23a4e7d0f60802a90ec8c207fdfcb93aa0018459daa095c5cfc8c8a3078.png" />
+</div>
+</div>
+<p>The PCA reconstruction that uses the highest-variance subspace (ie. the top principal component) is quite close to the optimal reconstruction, and is much better than naive 1-dimensional reconstruction using a randomly selected 1-dimensional subspace.</p>
+</section>
+<section id="code">
+<span id="subsec-pca-code"></span><h3>Code<a class="headerlink" href="#code" title="Link to this heading">#</a></h3>
+<p>Here’s all of the code we used to do the PCA:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate data</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># set random seed</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># number of stimuli</span>
+<span class="n">d</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># number of neurons</span>
+<span class="n">σ</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># noise level</span>
+<span class="n">stimuli</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">responses</span> <span class="o">=</span> <span class="n">stimuli</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="n">d</span><span class="p">))</span> <span class="o">+</span> <span class="n">σ</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
+
+<span class="c1"># Eigendecompose covariance</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">responses</span> <span class="o">-</span> <span class="n">responses</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">E</span><span class="p">,</span><span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+
+<span class="c1"># ------Plotting------</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="c1"># ---Scree plot---</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">E</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">10</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;.-&#39;</span><span class="p">);</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Eigenvalue number&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Eigenvalue (variance)&#39;</span><span class="p">)</span>
+
+<span class="c1"># ---Compression---</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">V</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># Picking out top eigenvector</span>
+<span class="n">c1</span> <span class="o">=</span> <span class="n">X</span><span class="nd">@p</span>
+
+<span class="n">n_show</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">standardize</span><span class="p">(</span><span class="n">responses</span><span class="p">[:</span><span class="n">n_show</span><span class="p">,</span><span class="mi">10</span><span class="p">]),</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">standardize</span><span class="p">(</span><span class="n">c1</span><span class="p">[:</span><span class="n">n_show</span><span class="p">]))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">standardize</span><span class="p">(</span><span class="n">stimuli</span><span class="p">[:</span><span class="n">n_show</span><span class="p">]))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Single neuron&#39;</span><span class="p">,</span><span class="s1">&#39;Top PC coordinate&#39;</span><span class="p">,</span><span class="s1">&#39;Stimulus&#39;</span><span class="p">])</span>
+
+<span class="c1"># ---Approximation---</span>
+<span class="c1"># PCA reconstruction</span>
+<span class="n">X_app_PCA</span> <span class="o">=</span> <span class="n">X</span><span class="nd">@p</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span><span class="nd">@p</span><span class="p">[</span><span class="kc">None</span><span class="p">,:]</span>
+
+<span class="c1"># Reconstruction using randomly selected 1d subspace</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">v</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">v</span><span class="nd">@v</span><span class="p">)</span>
+<span class="n">X_app_rand</span> <span class="o">=</span> <span class="n">X</span><span class="nd">@v</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span><span class="nd">@v</span><span class="p">[</span><span class="kc">None</span><span class="p">,:]</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">stimuli</span><span class="p">,</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Raw responses&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">stimuli</span><span class="p">,</span><span class="n">X_app_PCA</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;PCA reconstruction&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">stimuli</span><span class="p">,</span><span class="n">X_app_rand</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Naive (non-PCA) reconstruction&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">stimuli</span><span class="p">,</span><span class="n">stimuli</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Optimal reconstruction&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Stimulus&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Response&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1049d408dddaf0c047bf22b8ee9e8c9aee5fbebd199de47c146602beceb4ed64.png" src="_images/1049d408dddaf0c047bf22b8ee9e8c9aee5fbebd199de47c146602beceb4ed64.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="additonal-resources">
+<h2>Additonal resources<a class="headerlink" href="#additonal-resources" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Play with <a class="reference external" href="https://www.desmos.com/calculator/4pa8twlgc2">this desmos graph</a> with all the bells and whistles for 2d data.</p></li>
+<li><p>Check out this <a class="reference external" href="https://www.youtube.com/watch?v=fkf4IBRSeEc&amp;amp;list=PLMrJAkhIeNNSVjnsviglFoY2nXildDCcv">short lecture on PCA</a></p></li>
+<li><p>Check out these <a class="reference internal" href="#./slides_source_real.html"><span class="xref myst">slides</span></a></p></li>
+</ul>
+<ul class="simple">
+<li><p>Fix annoying scatter in second correlation desmos</p></li>
+<li><p>links to paper, pages, analysis, blogs, etc.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Eigenvectors%20and%20Eigenvalues.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Eigenvectors and Eigenvalues</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivatation">Motivatation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extended-example-2-dimensional-data">Extended example: 2-dimensional data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shape-of-data">Shape of data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-compression-heuristic">A compression heuristic</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-and-solving">Setting up and solving</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#quantifying-shape">Quantifying shape</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-longest-directions">Finding the longest directions</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#projecting-onto-fewer-dimensions">Projecting onto fewer dimensions</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#putting-it-all-together">Putting it all together</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-formulation">General formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formulation">Formulation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimal-1-dimensional-subspace">Optimal 1-dimensional subspace</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-subspace">General subspace</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scree-plots">Scree plots</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pca-with-python">PCA with python</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-eigenanalysis">Covariance eigenanalysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compression">Compression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#approximation">Approximation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code">Code</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additonal-resources">Additonal resources</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Grace Huckins, Linnie Warton, and Gabriel Mel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
