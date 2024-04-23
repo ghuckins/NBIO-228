@@ -9,3 +9,8 @@ parts:
     - file: Vectors and Matrices
     - file: Eigenvectors and Eigenvalues
     - file: Principal Component Analysis
+
+  - caption: Computational tools
+    chapters:
+    - file: Machine Learning
+

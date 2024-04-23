@@ -1,0 +1,1554 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Machine Learning &#8212; Mathematical Tools for Neuroscience</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Machine Learning';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Principal Component Analysis" href="Principal%20Component%20Analysis.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/scary_brain.png" class="logo__image only-light" alt="Mathematical Tools for Neuroscience - Home"/>
+    <script>document.write(`<img src="_static/scary_brain.png" class="logo__image only-dark" alt="Mathematical Tools for Neuroscience - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to NBIO 228!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Linear Algebra</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Vectors%20and%20Matrices.html">Vectors and Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Eigenvectors%20and%20Eigenvalues.html">Eigenvectors and Eigenvalues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Principal%20Component%20Analysis.html">Principal Component Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Computational tools</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Machine Learning</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ghuckins/NBIO-228" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ghuckins/NBIO-228/issues/new?title=Issue%20on%20page%20%2FMachine Learning.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Machine Learning.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Machine Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-basics-of-machine-learning">The Basics of Machine Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-learning">Supervised Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning">Unsupervised Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-model-and-the-loss-function">The Model and the Loss Function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#worked-example">Worked Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">Multiple Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-x-intercal-x-term">The <span class="math notranslate nohighlight">\(X^{\intercal}X\)</span> Term</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regression">Ridge Regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting">Overfitting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation">Cross-validation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">Logistic Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-likelihood">Log Likelihood</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent">Gradient Descent</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="machine-learning">
+<h1>Machine Learning<a class="headerlink" href="#machine-learning" title="Link to this heading">#</a></h1>
+<p>If you took Algebra 1 in school, you’ve already done some machine learning. Though the term “machine learning” might make you think of tools like GPT-4 and DALL-E that were built by huge teams of skilled programmers, there are lots of simple and highly effective approaches that fall under the machine learning umbrella. Some, like linear regression, are probably already familiar to you. Others are definitely more obscure. But the simplest machine learning approaches (some of which we will learn about this week) are, perhaps surprisingly, often the most useful.</p>
+<p>Along with covering a handful of specific machine learning techniques, we will also learn some general principles of machine learning—from common pitfalls to an algorithm that you can use to solve a wide range of machine learning problems.</p>
+<div class="important admonition">
+<p class="admonition-title">Learning Goals</p>
+<p>By the end of this week, you should be able to:</p>
+<ul class="simple">
+<li><p>Identify the essential components of any machine learning approach, like the model and the loss function</p></li>
+<li><p>Describe the criteria for choosing an appropriate machine learning approach for a given problem</p></li>
+<li><p>Use linear algebra to solve a linear regression problem</p></li>
+<li><p>Articulate the bias/variance tradeoff and use it to explain how regularization helps to prevent overfitting</p></li>
+<li><p>Explain how gradient descent works and implement it in Python</p></li>
+</ul>
+</div>
+<section id="the-basics-of-machine-learning">
+<span id="basics-ml"></span><h2>The Basics of Machine Learning<a class="headerlink" href="#the-basics-of-machine-learning" title="Link to this heading">#</a></h2>
+<p>Here are a few problems you might solve with machine learning:</p>
+<ul class="simple">
+<li><p>Figure out how to predict someone’s height based off of their age</p></li>
+<li><p>Using a bunch of data about the Stanford student body, find the groups of students who are most similar to one another</p></li>
+<li><p>Automatically label images with text describing their contents
+These problems run the gamut from extremely easy to extremely difficult. But they all count as machine learning problems. Put as simply as possible, machine learning means using a computer to find patterns in data. Straightforward enough, right?</p></li>
+</ul>
+<p>In a sense, it really is that straightforward! Did you ever use a graphic calculator to find the line (or perhaps quadratic) of best fit for some set of ordered pairs? Then you’ve done machine learning.</p>
+<p>The key is that you don’t give the computer the solution ahead of time. In the case of linear regression, you don’t figure out the slope and y-intercept yourself and then tell the computer to plot the line or to use it to make a prediction—the computer has to <em>learn</em> those values itself.</p>
+<p>Even so, machine learning remains a surprisingly general term. To get a handle on it, we can break it down into its two major categories: supervised learning and unsupervised learning.</p>
+<section id="supervised-learning">
+<h3>Supervised Learning<a class="headerlink" href="#supervised-learning" title="Link to this heading">#</a></h3>
+<p>In supervised learning, your data are divided into two portions, both of which go by many names: the <strong>features/regressors/predictors/independent variables</strong>, and the <strong>label/dependent variable/outcome variable</strong>. You may notice that the features are plural, whereas the outcome is singular. That’s because we might use many different features—say, zip code, square footage, year of construction—to predict a single outcome variable—here, the price at which a house sells. In neuroscience, your predictors might be, say, fMRI measurements of brain activities in a handful of different regions, and your outcome variable could be the stimulus that your subject is viewing at that point in time. We will often express the <span class="math notranslate nohighlight">\(i\)</span> different predictors as vectors <span class="math notranslate nohighlight">\(\textbf{x}_i,\)</span> and your outcome variable as a single vector <span class="math notranslate nohighlight">\(\textbf{y}.\)</span></p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>The <em><strong>features</strong></em> or <em><strong>predictors</strong></em> in a machine learning problem are the variables that will be known in the final application of your trained model. The <em><strong>label</strong></em> or <em><strong>dependent variable</strong></em> is the variable that will not be known, and that you are training the model to be able to predict using the features.</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>Tools like GPT work by using the <span class="math notranslate nohighlight">\(n\)</span> previous words to predict the best possible next word. What are the features for GPT? What’s the outcome variable?</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>GPT uses <span class="math notranslate nohighlight">\(n\)</span> features—each of the <span class="math notranslate nohighlight">\(n\)</span> previous words is a feature. The outcome variable is the next word.</p>
+</div>
+</div>
+<p>If you have both features and a label/outcome variable, you are doing supervised learning. The outcome variable is where the term <strong>supervised</strong> comes from. The idea is that you are trying to train your system to do something specific: for each set of values for the feature values in your dataset, you want it to learn to predict a particular value of the outcome variable. You’re using pairs of input and outputs to train an input-output machine, and you are <em>supervising</em> that training to ensure the machine learns to output the right thing.</p>
+<p>But features and outcome variables aren’t the only way that the data get sliced up in a supervised learning problem. Equally important are the <strong>training set</strong> and the <strong>test set</strong>. To ensure that your model, once trained, works, you’ll have to present it with some instances of your features that it has never seen before—but where you know what the associated outcome variable should be. Then, you can assess the model’s performance by comparing its prediction to the true value of the outcome variable. This means that, before you start training your model at all, you have to hold a portion of your data aside to be ultimately used in testing. (This can pose problems when you only have a small amount of data, and we’ll address how to deal with that later in this lesson.)</p>
+<figure class="align-default" id="mldata">
+<a class="reference internal image-reference" href="_images/mldata.png"><img alt="_images/mldata.png" src="_images/mldata.png" style="height: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text"><i>: A summary of how a full dataset is divided up for a supervised learning problem.</i></span><a class="headerlink" href="#mldata" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>So let’s apply this all this terminology to a problem that you might be familiar with: using a specific type of deep neural network called a <strong>convolutional neural network</strong> to label images.</p>
+<figure class="align-default" id="fig1">
+<a class="reference internal image-reference" href="_images/cnn.jpeg"><img alt="_images/cnn.jpeg" src="_images/cnn.jpeg" style="height: 300px;" /></a>
+</figure>
+<p>The first several layers of the network on the left might not look much like the neural networks we saw in Week 2 to you—but that’s just because the way they are drawn is meant to illustrate an important feature of convolutional neural networks. In the convolutional layers of a CNN, each neuron only receives inputs from a small fraction of the neurons on the previous layer.</p>
+<p>But let’s think of the problem here in terms of what we’ve learned so far. The <em>features</em>, in this case, are just the individual pixels of the image, each of which gives a small bit of into about the image’s identity (at least when considered in the context of the rest of the pixels). The outcome variable is the label—“car,” “truck”, etc. To get this model to work, you’d have to train it on a bunch of pairs of images and labels—your training set—and then feed in some unseen images to see if the model labeled them correctly—your test set.</p>
+</section>
+<section id="unsupervised-learning">
+<h3>Unsupervised Learning<a class="headerlink" href="#unsupervised-learning" title="Link to this heading">#</a></h3>
+<p>We’re going to spend almost all of our time this week talking about supervised learning. But it’s important to address unsupervised learning as well. Unsupervised learning isn’t typically what comes to mind when you think of machine learning, but it’s an equally important approach. And—surprise!—you learned one approach to it last week!</p>
+<p>In unsupervised learning you <strong>only have feature variables</strong>. There is no outcome variable! So, you can’t train the model to predict anything specific from particular values of the feature variables. Instead, your model will have to uncover intrinsic structure within the features themselves.</p>
+<p>Thos might sound a bit abstract, so let’s make it concrete. Let’s say you collect a bunch of data about different people’s pets: size, diet, how expensive they are to maintain, etc. But you never recorded the species. If you feed all that data to an unsupervised learning model, it will be able to learn that there are certain patterns in those data: a set of small and fairly inexpensive animals (rodents), some large and expensive animals (dogs), some small animals that eat seeds (birds). Sure, the algorithm might misclassify some small dogs as cats. But it will still be able to</p>
+<p>The process above is called <strong>clustering</strong>, and it’s probably the most popular unsupervised learning approach. In a clustering problem, you have a bunch of data, and you want to figure out what the underlying groups in the data are and which observations belong to which groups. In neuroscience, clustering could be used to help you identify different cell types in a big set of electrophysiological recordings, when you don’t actually know which neurons are the same type ahead of time.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="_images/clustering.png"><img alt="_images/clustering.png" src="_images/clustering.png" style="height: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text"><i>: What clustering might look like. Notice that it’s not always necessarily obvious whether a group of data should be identified as a single cluster or two different clusters!</i></span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>We’re not going to explicitly cover how clustering works in this class, but if you ever need to perform it, you’ll probably use the <a class="reference external" href="https://scikit-learn.org/stable/modules/clustering.html"><code class="docutils literal notranslate"><span class="pre">sklearn.cluster</span></code></a> module in scikit-learn. But you’ve actually already learned an unsupervised learning approach: PCA! PCA takes a bunch of data, without any explicit labels, and figures out how to capture as much of the variance in those data as possible using as few dimensions as possible. When PCA finds those optimal dimensions, the principal components, that’s a form of machine learning.</p>
+<div class="admonition-exercise admonition">
+<p class="admonition-title">Exercise</p>
+<p>Go back to the three machine learning problems at the <a class="reference internal" href="#basics-ml"><span class="std std-ref">start of this section</span></a>. Which ones involve supervised learning? Which involve unsupervised learning?</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<ul class="simple">
+<li><p>Figure out how to predict someone’s height based off of their age—<strong>supervised</strong></p></li>
+<li><p>Using a bunch of data about the Stanford student body, find the groups of students who are most similar to one another—<strong>unsupervised</strong></p></li>
+<li><p>Automatically label images with text describing their contents—<strong>supervised</strong></p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="the-model-and-the-loss-function">
+<h3>The Model and the Loss Function<a class="headerlink" href="#the-model-and-the-loss-function" title="Link to this heading">#</a></h3>
+<p>So we now what data to use to train a machine learning model, whether supervised or unsupervised. But how do the models themselves work? There’s obviously a lot of variation here, but every single machine learning approach we will cover has at least two major components: the <strong>model</strong> itself, and the <strong>loss function.</strong></p>
+<p>The model is essentiall the <strong>basic structure</strong> of our approach. It might include some fixed components as well as some <strong>parameters</strong>, which will change over the course of the learning process to improve the model’s performance. In a <a class="reference internal" href="#fig1"><span class="std std-ref">deep neural network</span></a>, for example, the network itself is the model. The parameters are the connection weights among the different neurons, since those are the values that will change over the course of training and allow the model to fit to the data you provide. However, other attributes of the model—the number of layers, for example—are <strong>not</strong> parameters, since they remain fixed throughout training.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>The <em><strong>parameters</strong></em> of a machine learning model are the variables in the model whose values change over the course of training.</p>
+</div>
+<p>But the model itself is not enough. As the programmer, you have to tell the model <em>how</em> to learn. That’s where the loss function (or “objective function”) comes in. The loss function acts kind of like a (rather cruel) trainer who punishes an animal’s mistakes. The animal learns to change its behavior to minimize punishment—its <strong>loss function</strong>.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>The <em><strong>loss function</strong></em> or <em><strong>objective function</strong></em> of a machine learning model is a function that guides how the model learns. In the supervised case, it is defined over the model’s predictions and the true values of the outcome variable. The goal of the machine learning algorithm is to <em>minimize</em> the loss function by changing the parameters appropriately.</p>
+</div>
+<p>Some loss functions are extremely straightforward. For the image classification network, for example, the loss function should just assign a score of 1 every time the network gets the label wrong and 0 every time the network gets the label right. That way, minimizing the loss function will be the same as getting every label right. But sometimes loss functions can be a touch more complicated, and small tweaks the loss function can change really important features of the trained model. That’s going to be the case with linear regression, which we will discuss next.</p>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>What is the loss function for PCA?</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>The loss function is the negative variance explained: we want to explain as much of the variance as possible.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="linear-regression">
+<h2>Linear Regression<a class="headerlink" href="#linear-regression" title="Link to this heading">#</a></h2>
+<p>When you first learned about linear regression, the problem was probably posed like this: We have a bunch of data in the form of <span class="math notranslate nohighlight">\((x,y)\)</span> coordinates, and we want to find the line that comes closest to going through all those points. Or you might have been given a plot like this:</p>
+<figure class="align-default" id="dataplot">
+<a class="reference internal image-reference" href="_images/figure 21.png"><img alt="_images/figure%2021.png" src="_images/figure%2021.png" style="height: 400px;" /></a>
+</figure>
+<p>and asked to find the best-fit line. Your goal would have been to find <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(b\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[y = mx + b\]</div>
+<p>came as close to all of these points as possible. In linear regression, “as close as possible” means “minimize the total distance between the points and the line,” which we define as the <strong>sum of squared residuals</strong> (or errors).</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/residual.png"><img alt="_images/residual.png" src="_images/residual.png" style="height: 200px;" /></a>
+</figure>
+<p>This definition of residual should make sense. <span class="math notranslate nohighlight">\(x\)</span> is our independent variable—the thing we know—and <span class="math notranslate nohighlight">\(y\)</span> is our dependent variable, the thing we are trying to predict. In the above example, we are trying to predict height based on age. So the residual is just the difference between our predicted <span class="math notranslate nohighlight">\(y\)</span>—which we often write as <span class="math notranslate nohighlight">\(\hat{y}\)</span>—and the true <span class="math notranslate nohighlight">\(y\)</span>. It’s the error in our prediction.</p>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>What is the model in linear regression? What is the loss function?</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>The model for linear regression is just the linear equation <span class="math notranslate nohighlight">\(y = mx + b\)</span>. The loss function is the sum of the squared errors.</p>
+</div>
+</div>
+<p>Hopefully, none of this is terribly new to you. What might be new, though, is using linear algebra to solve this problem. That’s what we’re going to learn to do here.</p>
+<p>So let’s say we’re given the <a class="reference internal" href="#dataplot"><span class="std std-ref">data above</span></a>. How do we start thinking about the problem? Let’s say these are measurements from some experiment, in which <span class="math notranslate nohighlight">\(x\)</span> is the independent variable—say, hours of sleep someone had the previous night—and <span class="math notranslate nohighlight">\(y\)</span> is the dependent variable—say, number of math questions answered correctly. We want to find values <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span> so that the equation</p>
+<div class="math notranslate nohighlight">
+\[	y = \beta_0 + \beta_1 x\]</div>
+<p>fits the data as well as possible. (You’ll see in a bit why we use <span class="math notranslate nohighlight">\(\beta\)</span> here instead of <span class="math notranslate nohighlight">\(m\)</span> and <span class="math notranslate nohighlight">\(b\)</span>—it comes in handy when we start adding more coefficients.)</p>
+<p>If we write our <span class="math notranslate nohighlight">\(x\)</span> observations as <span class="math notranslate nohighlight">\((x_1, \dots, x_{10})\)</span> and our <span class="math notranslate nohighlight">\(y\)</span> observations as <span class="math notranslate nohighlight">\((y_1, \dots, y_{10})\)</span>, then we can write</p>
+<div class="math notranslate nohighlight" id="equation-eq51">
+<span class="eqno">(69)<a class="headerlink" href="#equation-eq51" title="Link to this equation">#</a></span>\[	y_i =\hat{\beta}_0 + \hat{\beta}_1x_i + \epsilon_i\]</div>
+<p>Remember, the <span class="math notranslate nohighlight">\(\hat{~}\)</span> indicates that we are dealing with an estimate or prediction based on the data, instead of some “true” value. So the <span class="math notranslate nohighlight">\(\hat{\beta}_0\)</span> and <span class="math notranslate nohighlight">\(\hat{\beta}_1\)</span> are our best guesses for the <span class="math notranslate nohighlight">\(\beta\)</span> values based on the data we have. In other words, <span class="math notranslate nohighlight">\(\hat{\beta}_0\)</span> and <span class="math notranslate nohighlight">\(\hat{\beta}_1\)</span> define our best fit line.</p>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>If <span class="math notranslate nohighlight">\(\hat{\beta}_0\)</span> and <span class="math notranslate nohighlight">\(\hat{\beta}_1\)</span> define our line of best fit, what is <span class="math notranslate nohighlight">\(\epsilon_i\)</span>?</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p><span class="math notranslate nohighlight">\(\epsilon_i\)</span> is the residual associated with our <span class="math notranslate nohighlight">\(i^{\text{th}}\)</span> data point. To see this, realize that <span class="math notranslate nohighlight">\(\hat{\beta}_0 + \hat{\beta}_1x_i\)</span> is just <span class="math notranslate nohighlight">\(\hat{y}_i\)</span>—our best guess for <span class="math notranslate nohighlight">\(y_i\)</span> based on the best fit line. Then we can see</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}	\epsilon_i &amp;= y_i - \hat{\beta}_0 - \hat{\beta}_1x_i \\
+    &amp;= y_i - \hat{y}_i\end{split}\]</div>
+</div>
+</div>
+<p>Since the <span class="math notranslate nohighlight">\(\epsilon_i\)</span> are our residuals, our sum of squared residuals—that is, our loss function—is just</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{SSR} &amp;= \sum_i \epsilon_i^2 \\
+&amp;= \sum_i(y_i - \hat{\beta}_0 - \hat{\beta}_1x_i)^2\end{split}\]</div>
+<p>But now that we know linear algebra, we have the tools that we need to convert annoying sums like that turn into much nicer matrix equations. Let’s figure out how to do that—by first writing out all the relevant equations individually, and then converting them into a single matrix equation.</p>
+<p>Our <a class="reference internal" href="#dataplot"><span class="std std-ref">dataset</span></a> contains 10 ordered pairs <span class="math notranslate nohighlight">\((x_i, y_i)\)</span>, so we can write 10 equations:</p>
+<div class="math notranslate nohighlight" id="equation-eq52">
+<span class="eqno">(70)<a class="headerlink" href="#equation-eq52" title="Link to this equation">#</a></span>\[\begin{split}	y_1 &amp;= \hat{\beta}_0 + \hat{\beta}_1x_1 + \epsilon_1\\
+	y_2 &amp;= \hat{\beta}_0 + \hat{\beta}_1x_2 + \epsilon_2\\
+	&amp;\vdots\\
+	y_{10} &amp;= \hat{\beta}_0 + \hat{\beta}_1x_{10}+ \epsilon_{10}\end{split}\]</div>
+<p>We can put these in matrix form pretty easily!</p>
+<div class="math notranslate nohighlight">
+\[	\mathbf{y} = \mathbf{X}\hat{\boldsymbol\beta} + \boldsymbol\epsilon\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}	\mathbf{y} &amp;= \left[\begin{matrix} y_1 \\ y_2 \\ \vdots \\ y_{10} \end{matrix}\right]\\
+    \mathbf{X} &amp;=  \left[\begin{matrix} 1 &amp; x_1 \\ 1 &amp; x_2 \\ \vdots &amp; \vdots \\1 &amp; x_{10} \end{matrix}\right]\\   \hat{\boldsymbol\beta} &amp;= \left[\begin{matrix} \hat{\beta_0} \\ \hat{\beta_1} \end{matrix}\right] \\ \boldsymbol\epsilon &amp;= \left[\begin{matrix} \epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_{10} \end{matrix}\right] \end{split}\]</div>
+<p>We call the matrix <span class="math notranslate nohighlight">\(\textbf{X}\)</span> the <strong>design matrix</strong>.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>A <em><strong>design matrix</strong></em> is a matrix whose columns are the independent variables or <em><strong>regressors</strong></em> in a linear regression problem.</p>
+</div>
+<div class="note admonition" id="ones">
+<p class="admonition-title">Exercise</p>
+<p>Why does our design matrix <span class="math notranslate nohighlight">\(\textbf{X}\)</span> include a column of ones?</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>The ones are needed to include the <span class="math notranslate nohighlight">\(y\)</span>-intercept, <span class="math notranslate nohighlight">\(\beta_0\)</span>, in the regression. When carrying out the matrix multiplication of <span class="math notranslate nohighlight">\(\textbf{X}\)</span> and <span class="math notranslate nohighlight">\(\hat{\boldsymbol\beta},\)</span> all the ones will be multiplied by <span class="math notranslate nohighlight">\(\hat{\beta}_0,\)</span> yielding the <span class="math notranslate nohighlight">\(\hat{\beta}_0\)</span> term that appears in each of our scalar equations <a class="reference internal" href="#equation-eq52">(70)</a>.</p>
+</div>
+</div>
+<p>Okay, so how do we get the sum of squared residuals here? Well, that’s just every element of the vector <span class="math notranslate nohighlight">\(\boldsymbol\epsilon\)</span> squared and then added together—or, the dot product of the vector with itself! Remember, we can just write that as <span class="math notranslate nohighlight">\(\boldsymbol\epsilon^{\intercal}\boldsymbol\epsilon\)</span>—matrix multiplication of the row version of a vector by the column version is exactly the same as the dot product. Now, using our equation above, we can write</p>
+<div class="math notranslate nohighlight">
+\[	\boldsymbol\epsilon^{\intercal}\boldsymbol\epsilon = (\mathbf{y} - \mathbf{X}\hat{\boldsymbol\beta})^{\intercal}(\mathbf{y} - \mathbf{X}\hat{\boldsymbol\beta})\]</div>
+<p>Remember, we want to \textit{minimize} this quantity. And how do we minimize things? We take their derivatives and set them to zero! In particular, since we are ultimately trying to solve for <span class="math notranslate nohighlight">\(\hat{\boldsymbol\beta}\)</span>, we should take the derivative with respect to <span class="math notranslate nohighlight">\(\hat{\boldsymbol\beta}\)</span>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Don’t worry too much about the details of the matrix calculus here—you won’t be responsible for it in this course.</p>
+</div>
+<p>So let’s mimize our sum of squared residuals, using linear algebra.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}	0 &amp;= \frac{d}{d\hat{\boldsymbol\beta}}\left[(\mathbf{y} - \mathbf{X}\hat{\boldsymbol\beta})^{\intercal}(\mathbf{y} - \mathbf{X}\hat{\boldsymbol\beta})\right]\\
+    &amp;= \frac{d}{d\hat{\boldsymbol\beta}}\left[(\mathbf{y}^{\intercal} - \hat{\boldsymbol\beta}^{\intercal}\mathbf{X}^{\intercal})(\mathbf{y} - \mathbf{X}\hat{\boldsymbol\beta})\right]\\
+	&amp;=  \frac{d}{d\hat{\boldsymbol\beta}}\left[ \mathbf{y}^{\intercal}\mathbf{y} - \mathbf{y}^{\intercal} \mathbf{X}\hat{\boldsymbol\beta} - \hat{\boldsymbol\beta}^{\intercal}\mathbf{X}^{\intercal}\mathbf{y} + \hat{\boldsymbol\beta}^{\intercal}\mathbf{X}^{\intercal}\mathbf{X}\hat{\boldsymbol\beta} \right]\\
+	&amp;= -2\mathbf{X}^{\intercal}\mathbf{y}  + 2\mathbf{X}^{\intercal}\mathbf{X}\hat{\boldsymbol\beta} \\
+	\mathbf{X}^{\intercal}\mathbf{X}\hat{\boldsymbol\beta} &amp;= \mathbf{X}^{\intercal}\mathbf{y}\end{split}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Eagle-eyed readers may notice that I used the fact that <span class="math notranslate nohighlight">\((AB)^{\intercal} = B^{\intercal}A^{\intercal}.\)</span> That’s a useful identity to have in your back pocket!</p>
+</div>
+<p>What do we do here? If this equation were a scalar equation, we could just divide both sides by <span class="math notranslate nohighlight">\(\mathbf{X}^{\intercal}\mathbf{X}.\)</span> But we don’t have anything called matrix division. Instead we have to use the matrix inverse. Remember, for a given matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>, the inverse matrix <span class="math notranslate nohighlight">\(\mathbf{A}^{-1}\)</span> is defined such that</p>
+<div class="math notranslate nohighlight">
+\[	\mathbf{A}^{-1}\mathbf{A} = \mathbf{I}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{I}\)</span> is the identity matrix. So what we need to do here is multiply both sides of the equation by <span class="math notranslate nohighlight">\((\mathbf{X}^{\intercal}\mathbf{X})^{-1}.\)</span> If we do that, we obtain:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}	(\mathbf{X}^{\intercal}\mathbf{X})^{-1}	\mathbf{X}^{\intercal}\mathbf{X}\hat{\boldsymbol\beta} &amp;= 	(\mathbf{X}^{\intercal}\mathbf{X})^{-1}\mathbf{X}^{\intercal}\mathbf{y}\\
+	\mathbf{I}\hat{\boldsymbol\beta} &amp;= 	(\mathbf{X}^{\intercal}\mathbf{X})^{-1}\mathbf{X}^{\intercal}\mathbf{y}\\
+	\hat{\boldsymbol\beta} &amp;=	(\mathbf{X}^{\intercal}\mathbf{X})^{-1}\mathbf{X}^{\intercal}\mathbf{y}\end{split}\]</div>
+<p>This final equation, <span class="math notranslate nohighlight">\(\hat{\boldsymbol\beta} =	(\mathbf{X}^{\intercal}\mathbf{X})^{-1}\mathbf{X}^{\intercal}\mathbf{y}\)</span>, is incredibly important and incredibly general. It is known as the <strong>normal equation</strong>.</p>
+<div class="note admonition" id="normeq">
+<p class="admonition-title">Definition</p>
+<p>The <em><strong>normal equation</strong></em>, <span class="math notranslate nohighlight">\(\hat{\boldsymbol\beta} =	(\mathbf{X}^{\intercal}\mathbf{X})^{-1}\mathbf{X}^{\intercal}\mathbf{y}\)</span>, is the least squares solution to a linear regression problem with design matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> and dependent or outcome variable <span class="math notranslate nohighlight">\(\mathbf{y}.\)</span></p>
+</div>
+<section id="worked-example">
+<h3>Worked Example<a class="headerlink" href="#worked-example" title="Link to this heading">#</a></h3>
+<p>Let’s practice using the normal equation, using the data from the <a class="reference internal" href="#dataplot"><span class="std std-ref">plot</span></a> above.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p>x</p></th>
+<th class="head text-center"><p>y</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>1</p></td>
+<td class="text-center"><p>2</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>3</p></td>
+<td class="text-center"><p>2</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>5</p></td>
+<td class="text-center"><p>3</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>6</p></td>
+<td class="text-center"><p>6</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>7</p></td>
+<td class="text-center"><p>8</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>7</p></td>
+<td class="text-center"><p>9</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>8</p></td>
+<td class="text-center"><p>8</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p>9</p></td>
+<td class="text-center"><p>8</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p>9</p></td>
+<td class="text-center"><p>9</p></td>
+</tr>
+</tbody>
+</table>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>Write the design matrix <span class="math notranslate nohighlight">\(\textbf{X}\)</span> for a linear regression on this dataset.</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>We have two regressors here—the <a class="reference internal" href="#ones"><span class="std std-ref">column of ones</span></a> included in every design matrix for the <span class="math notranslate nohighlight">\(y\)</span>-intercept, and the <span class="math notranslate nohighlight">\(x\)</span> values in the table above. So our matrix should have two columns. It looks like this:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\textbf{X} = \left[\begin{matrix}1 &amp; 1\\1 &amp; 1\\1 &amp; 3\\1 &amp; 5\\1&amp;6\\1&amp;7\\1&amp;7\\1&amp;8\\1&amp;9\\1&amp;9\end{matrix}\right]\end{split}\]</div>
+</div>
+</div>
+<p>Let’s write out our matrix regression equation:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\textbf{y} &amp;= \textbf{X}\hat{\boldsymbol\beta} + \boldsymbol\epsilon\\
+	\left[\begin{matrix}1  \\2\\2\\3\\6\\8\\9\\8\\8\\9 \end{matrix}\right] &amp;= \left[\begin{matrix}1 &amp; 1\\1 &amp; 1\\1 &amp; 3\\1 &amp; 5\\1&amp;6\\1&amp;7\\1&amp;7\\1&amp;8\\1&amp;9\\1&amp;9\end{matrix}\right]\left[\begin{matrix}\hat{\beta}_0\\ \hat{\beta}_1 \end{matrix}\right] + \boldsymbol\epsilon\end{split}\]</div>
+<p>How do we solve for <span class="math notranslate nohighlight">\(\hat{\boldsymbol\beta}\)</span>? Use our <a class="reference internal" href="#normeq"><span class="std std-ref">normal equation</span></a>, of course!</p>
+<div class="math notranslate nohighlight">
+\[	\hat{\boldsymbol\beta} = (\mathbf{X}^{\intercal}\mathbf{X})^{-1}\mathbf{X}^{\intercal}\mathbf{y}\]</div>
+<p>Let’s start by finding <span class="math notranslate nohighlight">\(\mathbf{X}^{\intercal}\mathbf{X}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}	 \mathbf{X}^{\intercal}\mathbf{X} &amp;= \left[\begin{matrix} 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1\\ 1 &amp; 1 &amp; 3 &amp; 5 &amp; 6 &amp; 7 &amp; 7 &amp; 8 &amp; 9 &amp; 9 \end{matrix}\right] \left[\begin{matrix}1 &amp; 1\\1 &amp; 1\\1 &amp; 3\\1 &amp; 5\\1&amp;6\\1&amp;7\\1&amp;7\\1&amp;8\\1&amp;9\\1&amp;9\end{matrix}\right]\\
+	 &amp;=\left[ \begin{matrix}
+	 	10 &amp; 56 \\ 56 &amp; 396 
+	 \end{matrix}\right]\end{split}\]</div>
+<p>This is a <span class="math notranslate nohighlight">\(2\times2\)</span> matrix, so we know how to invert it!</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}	( \mathbf{X}^{\intercal}\mathbf{X})^{-1} &amp;= \frac{1}{824}\left[ \begin{matrix}
+		396 &amp; -56 \\ -56 &amp; 10
+	\end{matrix}\right]\end{split}\]</div>
+<p>Next, let’s calculate <span class="math notranslate nohighlight">\(\mathbf{X}^{\intercal}\mathbf{y}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}	\mathbf{X}^{\intercal}\mathbf{y} &amp;= \left[\begin{matrix} 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1\\ 1 &amp; 1 &amp; 3 &amp; 5 &amp; 6 &amp; 7 &amp; 7 &amp; 8 &amp; 9 &amp; 9 \end{matrix}\right]  	\left[\begin{matrix}1  \\2\\2\\3\\6\\8\\9\\8\\8\\9 \end{matrix}\right] \\
+	&amp;= \left[\begin{matrix} 56 \\ 396 \end{matrix}\right]\end{split}\]</div>
+<p>So, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}	\hat{\boldsymbol\beta} &amp;=  (\mathbf{X}^{\intercal}\mathbf{X})^{-1}\mathbf{X}^{\intercal}\mathbf{y} \\
+	&amp;=  \frac{1}{824}\left[ \begin{matrix}
+		396 &amp; -56 \\ -56 &amp; 10
+	\end{matrix}\right]\left[\begin{matrix} 56 \\ 396 \end{matrix}\right]\\
+&amp;= \frac{1}{824}\left[ \begin{matrix}0 \\ 824 \end{matrix}\right]\\
+&amp;= \left[ \begin{matrix} 0 \\ 1 \end{matrix}\right]\end{split}\]</div>
+<p>Thus we find that <span class="math notranslate nohighlight">\(\hat{\beta}_0 = 0 \)</span> and <span class="math notranslate nohighlight">\(\hat{\beta}_1 = 1.\)</span> Therefore, our line of best fit is <span class="math notranslate nohighlight">\(y = x.\)</span></p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/figure 22.png"><img alt="_images/figure%2022.png" src="_images/figure%2022.png" style="height: 400px;" /></a>
+</figure>
+<p>You won’t really ever have to carry out linear regression like this by hand—as you can see, it gets kind of messy. But hopefully you’ve seen from this example that the normal equation really does work—that, just by using matrix algebra, we can neatly solve linear regression problems.</p>
+<p>For practical purposes, though, you’ll use a Python library called <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>. In particular, to do linear regression, you’ll use the class <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html"><code class="docutils literal notranslate"><span class="pre">sklearn.linear_model.LinearRegression</span></code></a>. Here’s an example of how it works:</p>
+<figure class="align-default" id="square">
+<a class="reference internal image-reference" href="_images/whitesquare.png"><img alt="_images/whitesquare.png" src="_images/whitesquare.png" style="height: 1px;" /></a>
+</figure>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">#setting the first column of the design matrix to 1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">]]))</span> <span class="c1">#generating y by calculating 1 + x, plus some random error</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1">#since I already accounted for the intercept in my design matrix</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="c1">#this is where the regression happens!</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+<span class="n">y_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">,(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span> <span class="c1">#calculating my predictions for y based on X and my fit betas</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">y</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">y_hat</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;best fit line&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1.27729877 1.44104418]]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x12c6e8bd0&gt;
+</pre></div>
+</div>
+<img alt="_images/ef682d45fdebf8febab415a0bb4a386b85a5adef4bd4784a34559c7f23e72a1c.png" src="_images/ef682d45fdebf8febab415a0bb4a386b85a5adef4bd4784a34559c7f23e72a1c.png" />
+</div>
+</div>
+</section>
+<section id="multiple-linear-regression">
+<h3>Multiple Linear Regression<a class="headerlink" href="#multiple-linear-regression" title="Link to this heading">#</a></h3>
+<p>You’re running an fMRI experiment where you have your subjects look at a bunch of different stimuli—faces, buildings, food, animals—and you’re trying to find a brain region that responds specifically to faces. It might not be immediately obvious how, but it turns out that you can pose this as a linear regression problem.</p>
+<p>Your dependent variable, <span class="math notranslate nohighlight">\(\textbf{y},\)</span> is the activity in the brain region you’re looking at. Your <em>predictors</em> or <em>regressors</em>—the columns of your design matrix <span class="math notranslate nohighlight">\(\textbf{X}\)</span>—are the different image categories you presented. You’ll have a column for faces, a column for houses, etc. Since each row of your <span class="math notranslate nohighlight">\(\textbf{y}\)</span> vector—that is, each of your observations of brain activity—is a different timepoint, each row of your design matrix will also represent a different timepoint. So in the column representing faces, you’ll have a 1 if a face was being shown at that timepoint and a 0 if not.</p>
+<p>Here’s what that looks like in practice. If you record one datapoint every second, and you show each stimulus for two seconds with a one second pause in between, your design matrix might look something like this:</p>
+<div class="math notranslate nohighlight" id="equation-eq53">
+<span class="eqno">(71)<a class="headerlink" href="#equation-eq53" title="Link to this equation">#</a></span>\[\begin{split}\mathbf{X} = 
+\begin{matrix}
+\begin{matrix} intercept &amp; faces &amp; houses &amp; animals &amp; etc.\end{matrix} \\
+\begin{bmatrix} \phantom{nter}1\phantom{cept} &amp; \phantom{ac}0\phantom{es} &amp; \phantom{oui}1\phantom{ses} &amp; \phantom{ni}0\phantom{als} &amp; \cdots \\
+	1 &amp; 0 &amp; 1 &amp; 0 &amp; \cdots \\
+	1 &amp; 0 &amp; 0 &amp; 0 &amp; \cdots \\
+	1 &amp; 1 &amp; 0 &amp; 0 &amp; \cdots \\
+	1 &amp; 1 &amp; 0 &amp; 0 &amp; \cdots \\
+	1 &amp; 0 &amp; 0 &amp; 0 &amp; \cdots \\
+	1 &amp; 0 &amp; 0 &amp; 1 &amp; \cdots \\
+	\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots \end{bmatrix} \end{matrix}\end{split}\]</div>
+<p>Then, you’d be looking to find the least squares solution to the equation</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{y} = \mathbf{X}\boldsymbol\beta + \boldsymbol\epsilon\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> is the activity in your brain region of interest. If you end up finding that a given <span class="math notranslate nohighlight">\(\hat{\beta}_i\)</span> is significantly different from 0, that suggests that the corresponding regressor predicts brain activity in the region you’re looking at. In other words, that region seems to be responding to the stimulus.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The columns of your design matrix wouldn’t be exactly 0s and 1s—you actually have to take into account some other details, like what the timecourse of bloodflow—which fMRI measures—looks like in the brain. But this approximation still gives you a pretty good idea of how fMRI data analysis works. If you want more details, you can find them <a class="reference external" href="https://www.fmrib.ox.ac.uk/primers/appendices/glm.pdf">here</a>. In brief, your regression will end up actually looking something like this:</p>
+<figure class="align-default" id="data">
+<a class="reference internal image-reference" href="_images/fmri.png"><img alt="_images/fmri.png" src="_images/fmri.png" style="height: 400px;" /></a>
+</figure>
+<p>The regressors in this figure would have been obtained by replacing all the 1s in a design matrix of the sort we illustrated above with the bumps you see in the figure.</p>
+</div>
+<p>What’s the upshot of all of this? First of all, when you see a plot showing which brain regions “light up” in response to some stimulus, that’s just a plot of the <span class="math notranslate nohighlight">\(\hat{\beta}\)</span> associated with that stimulus in each brain region. But you may have also noticed something interesting about our design matrix above <a class="reference internal" href="#equation-eq53">(71)</a>. Before, we were only dealing with one regressor in addition to the intercept. Now, we have lots of regressors. How does that change things?</p>
+<p>I said before that the <a class="reference internal" href="#normeq"><span class="std std-ref">normal equation</span></a> is incredibly general—and it is. We can still use it in a situation like this with multiple regressors (which, perhaps unsurprisingly, is called “multiple linear regression”). But as we add columns to our design matrix, things can get a bit messier than we might have expected. Let’s see how that shakes out.</p>
+<section id="the-x-intercal-x-term">
+<h4>The <span class="math notranslate nohighlight">\(X^{\intercal}X\)</span> Term<a class="headerlink" href="#the-x-intercal-x-term" title="Link to this heading">#</a></h4>
+<p>Let’s take another look at the normal equation.</p>
+<div class="math notranslate nohighlight">
+\[\hat{\boldsymbol\beta} = (\mathbf{X}^{\intercal}\mathbf{X})^{-1}\mathbf{X}^{\intercal}\mathbf{y}\]</div>
+<p>So far, we haven’t really tackled a major component of it: that tricky inverse. We know that we can’t always invert matrices. So when is this matrix invertible? That is, when can we use the normal equation in its current form?
+Thankfully, there are some really convenient facts about matrices of the form <span class="math notranslate nohighlight">\(\mathbf{A}^{\intercal}\mathbf{A}.\)</span> In general, they are known as \textit{Gram matrices}, and they have some useful properties:</p>
+<ul class="simple">
+<li><p>All Gram matrices are positive semidefinite, which means that their determinants are positive or 0</p></li>
+<li><p>A Gram matrix <span class="math notranslate nohighlight">\(\mathbf{A}^{\intercal}\mathbf{A}\)</span> is invertible (that is, its determinant is positive, not 0) if and only if the columns of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> are linearly independent—that is, when no column can be written as a linear combination of the other columns
+This second fact is enormously useful to us. It tells us that we can solve the normal equation if and only if the colums of our design matrix <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> are linearly independent.</p></li>
+</ul>
+<p>Let’s get some intuition for what this means. When might the columns not be linearly independent? One easy answer is, when the matrix has more columns than rows, e.g.:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left[\begin{matrix} y_1 \\ y_2 \end{matrix}\right] &amp;= \left[\begin{matrix}1 &amp; x^1_1 &amp; x^2_1 \\ 1 &amp; x^1_2 &amp; x^2_2 \end{matrix}\right] \left[\begin{matrix} \beta_0 \\ \beta_1 \\ \beta_2\end{matrix}\right]\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(\mathbf{X}\)</span> clearly can’t have linearly independent columns; no set of 3 2-D vectors can be linearly independent. And that makes sense. Our regression here is effectively a system of 2 equations with 3 unknowns, and such systems have no unique solution. It’s like try to find the least-squares line in a 2-D plane through a single point; there are infinitely many lines that go through that point with 0 residual, so there’s no line of best fit.</p>
+<p>What happens if our <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> matrix fails to have linearly independent columns for some other reason? Perhaps one of our predictors is the sum of two others, like so:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}	\left[\begin{matrix}y_1 \\ y_2 \\ \vdots \\ y_5 \end{matrix}\right] &amp;= \left[\begin{matrix}1 &amp; x_1 &amp; z_1 &amp; x_1 + z_1 \\ 1 &amp; x_2 &amp; z_2 &amp; x_2 + z_2 \\ \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\ 1 &amp; x_5 &amp; z_5  &amp; x_5 + z_5 \end{matrix}\right] \left[\begin{matrix} \beta_0 \\ \beta_1 \\ \beta_2 \\ \beta_3 \end{matrix}\right]\end{split}\]</div>
+<p>What would happen if we tried to solve this equation for the <span class="math notranslate nohighlight">\(\beta\)</span>? Our answer would be ambiguous! We could compensate exactly for, say, increasing <span class="math notranslate nohighlight">\(\beta_1\)</span> by 1 by also increasing <span class="math notranslate nohighlight">\(\beta_2\)</span> by 1 and then decreasing <span class="math notranslate nohighlight">\(\beta_3\)</span> by 1. There would be an infinite number of possible solutions. And this isn’t a super unrealistic situation, though it might seem like one; with large numbers of predictors, it becomes increasingly likely that some of the predictors are (nearly) not linearly independent. That situation is called <em><strong>multicollinearity</strong></em>.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p><em><strong>Multicollinearity</strong></em> describes the situation where multiple predictors in a regression problem are correlated. In such cases, there is typically not a single optimal solution to the regression.</p>
+</div>
+<p>So, what do we do when we can’t invert <span class="math notranslate nohighlight">\(\mathbf{X}^{\intercal}\mathbf{X}\)</span>—when there are multiple, equally good solutions to our regression problem? We have to impose some criteria that allow us to choose among those solutions. The process of imposing those criteria is called <em><strong>regularization</strong></em>, and one common approach for regularization in linear regression is called <em><strong>ridge regression</strong></em>.</p>
+</section>
+</section>
+<section id="ridge-regression">
+<h3>Ridge Regression<a class="headerlink" href="#ridge-regression" title="Link to this heading">#</a></h3>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>In machine learning, <em><strong>regularization</strong></em> describes the process of applying additional constraints to the problem, often by changing the loss function, to obtain a simpler solution that will often work better on unseen data.</p>
+</div>
+<p>When we have an ambiguous regression problem—because we have more features than observations, for example, or because our features are multicollinear—we can’t find a solution without adding some constraints. But what constraints should we add? Since we are only predicting the <span class="math notranslate nohighlight">\(\beta,\)</span> the constraint will have to do with our <span class="math notranslate nohighlight">\(\beta.\)</span></p>
+<p>Here’s a thought: We don’t want our <span class="math notranslate nohighlight">\(\hat{\beta}_i\)</span> to be really huge. Why? One reason is that large <span class="math notranslate nohighlight">\(\hat{\beta}_i\)</span> will tend to produce large errors on unseen data. Another is that we often expect that only a few (if any) of our predictors will actually do a good job of predicting our outcome variable.</p>
+<p>So let’s add a constraint in that vein to our loss function. There are various ways we could do this, but a reasonable one is to try to minimize the norm of <span class="math notranslate nohighlight">\(\hat{\boldsymbol\beta}\)</span> at the same time as we minimize the sum of squared residuals. In other words, our loss function becomes</p>
+<div class="math notranslate nohighlight" id="equation-eq54">
+<span class="eqno">(72)<a class="headerlink" href="#equation-eq54" title="Link to this equation">#</a></span>\[(\mathbf{y} - \mathbf{X}\hat{\boldsymbol\beta})^{\intercal}(\mathbf{y} - \mathbf{X}\hat{\boldsymbol\beta}) + \lambda\hat{\boldsymbol\beta}^{\intercal}\hat{\boldsymbol\beta}\]</div>
+<p>Why did I stick in that <span class="math notranslate nohighlight">\(\lambda\)</span>? The <span class="math notranslate nohighlight">\(\lambda\)</span> is just a parameter that controls how much we care about each constraint. If <span class="math notranslate nohighlight">\(\lambda\)</span> gets really, really big, we will effectively swamp out the sum of squared residuals, and all our <span class="math notranslate nohighlight">\(\hat{\beta}_i\)</span> will go to 0. On the other hand, if we set <span class="math notranslate nohighlight">\(\lambda\)</span> equal to 0, we just get back our original loss function with no regularization.</p>
+<p>So we have a new loss function—that means we have to minimize it. We’ll set the derivative of the function to 0, just like we did for our original linear regression example.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} 	0 &amp;= \frac{d}{d\hat{\boldsymbol\beta}}\left[(\mathbf{y} - \mathbf{X}\hat{\boldsymbol\beta})^{\intercal}(\mathbf{y} - \mathbf{X}\hat{\boldsymbol\beta}) + \lambda\hat{\boldsymbol\beta}^{\intercal}\hat{\boldsymbol\beta} \right]\\
+ 	&amp;=  \frac{d}{d\hat{\boldsymbol\beta}}\left[ \mathbf{y}^{\intercal}\mathbf{y} - \mathbf{y}^{\intercal} \mathbf{X}\hat{\boldsymbol\beta} - \hat{\boldsymbol\beta}^{\intercal}\mathbf{X}^{\intercal}\mathbf{y} + \hat{\boldsymbol\beta}^{\intercal}\mathbf{X}^{\intercal}\mathbf{X}\hat{\boldsymbol\beta} + \lambda\hat{\boldsymbol\beta}^{\intercal}\hat{\boldsymbol\beta}\right]\\
+ 	&amp;= -2\mathbf{X}^{\intercal}\mathbf{y}  + 2\mathbf{X}^{\intercal}\mathbf{X}\hat{\boldsymbol\beta} + 2\lambda\hat{\boldsymbol\beta}\\
+ 	(\mathbf{X}^{\intercal}\mathbf{X} + \lambda \mathbf{I})\hat{\boldsymbol\beta} &amp;= \mathbf{X}^{\intercal}\mathbf{y}\\
+ 	\hat{\boldsymbol\beta} &amp; =	(\mathbf{X}^{\intercal}\mathbf{X} + \lambda \mathbf{I})^{-1}\mathbf{X}^{\intercal}\mathbf{y}\end{split}\]</div>
+<p>Something kind of magical has happened here. By adding the regularization term to our loss function, we have actually solved all of the potential issues with (\mathbf{X}^{\intercal}\mathbf{X})^{-1} that I mentioned above. How? Because the determinant of the matrix we are inverting here, <span class="math notranslate nohighlight">\(\mathbf{X}^{\intercal}\mathbf{X} + \lambda \mathbf{I}\)</span>, can’t possibly be 0.</p>
+<p>Here’s how we know that. <span class="math notranslate nohighlight">\(\mathbf{X}^{\intercal}\mathbf{X}\)</span> is positive semidefinite, so its determinant is 0 or positive, and we also know that its main diagonal is positive. Adding <span class="math notranslate nohighlight">\(\lambda \mathbf{I}\)</span> will just make the entries in the main diagonal even more positive. And since the product of those entries goes right into the determinant, the determinant, too, will become more positive. So the determinant can no longer be 0.</p>
+<p>Regularization is an incredibly important approach in machine learning, and the basic ideas behind it apply to every machine learning method, from linear regression to deep neural networks. We’ll learn about why in the next section. Before we do that, though, let’s see how ridge regression works in practice. Let’s plot the results of the (unregularized) linear regression from above again:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">y</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">y_hat</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;best fit line&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x12c7416d0&gt;
+</pre></div>
+</div>
+<img alt="_images/ef682d45fdebf8febab415a0bb4a386b85a5adef4bd4784a34559c7f23e72a1c.png" src="_images/ef682d45fdebf8febab415a0bb4a386b85a5adef4bd4784a34559c7f23e72a1c.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> also has a class for ridge regression called <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html"><code class="docutils literal notranslate"><span class="pre">sklearn.linear_model.Ridge</span></code></a>. When declaring an instance of this class, you use an additional parameter, <code class="docutils literal notranslate"><span class="pre">alpha</span></code>, which is equivalent to how we used <span class="math notranslate nohighlight">\(\lambda\)</span> above. Here’s what that looks like:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span>
+<span class="n">ridge_model</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ridge_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ridge_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+<span class="n">y_hat_ridge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ridge_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">,(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">y</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;best fit line&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">y_hat_ridge</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;best fit line—ridge&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1.32028809 1.07137993]]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x12c7430d0&gt;
+</pre></div>
+</div>
+<img alt="_images/b94e1dfd6ab522acb392fe108c12a70a152e15f827ffa6e55e630b4da310f888.png" src="_images/b94e1dfd6ab522acb392fe108c12a70a152e15f827ffa6e55e630b4da310f888.png" />
+</div>
+</div>
+<p>What happens if we make <code class="docutils literal notranslate"><span class="pre">alpha</span></code> really huge?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ridge_model</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ridge_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ridge_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+<span class="n">y_hat_ridge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ridge_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">,(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">y</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;best fit line&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">y_hat_ridge</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;best fit line—ridge&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.17390081 0.09854135]]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x12e91ca10&gt;
+</pre></div>
+</div>
+<img alt="_images/30efbb4f33239b4b3f219052a6cc88e96d2355d6b74491b1f339963d95cfc7f2.png" src="_images/30efbb4f33239b4b3f219052a6cc88e96d2355d6b74491b1f339963d95cfc7f2.png" />
+</div>
+</div>
+<p>And if we set it to 0?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ridge_model</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ridge_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ridge_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
+<span class="n">y_hat_ridge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ridge_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">,(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">y</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">y_hat</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;best fit line&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">y_hat_ridge</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;best fit line—ridge&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1.27729877 1.44104418]]
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x12e858dd0&gt;
+</pre></div>
+</div>
+<img alt="_images/185f593045d2e0a679b8e9915b6b02705f38aeed9963985cc2f8896679b508c5.png" src="_images/185f593045d2e0a679b8e9915b6b02705f38aeed9963985cc2f8896679b508c5.png" />
+</div>
+</div>
+<p>The way that our solution changes with <code class="docutils literal notranslate"><span class="pre">alpha</span></code> (or, equivalently, <span class="math notranslate nohighlight">\(\lambda\)</span>) should be clear from the way we wrote our loss function for ridge regression. If it isn’t, take another look at <a class="reference internal" href="#equation-eq54">(72)</a>.</p>
+</section>
+</section>
+<section id="overfitting">
+<h2>Overfitting<a class="headerlink" href="#overfitting" title="Link to this heading">#</a></h2>
+<p>We’ve seen how ridge regression works, and have discussed some potential benefits of using it. But how can we actually observe its benefits, concretely? And how do we know whether or not we should use it in a given situation?</p>
+<p>To figure out when we should be using ridge regression, we need a way to figure out how good a job we actually did of fitting our data (the model’s “goodness of fit”). A natural way to do this is to evaluate the sum of squared residuals for the fit model, since that’s the thing we were trying to minimize in the first place. But in order to fairly compare situations where we have different amounts of data, we don’t just want to take the <em>sum</em> of squared residuals—instead, we take their <em>mean</em>, and we obtain a quantity called the <em><strong>mean squared error</strong></em>.</p>
+<div class="math notranslate nohighlight">
+\[\text{MSE} = \frac{1}{n}\sum_{i=1}^n (y_i - \hat{y}_i)^2\]</div>
+<p>So let’s compare the mean square errors of our vanilla linear regression fit and our ridge regression fit with <span class="math notranslate nohighlight">\(\lambda = 1\)</span> to the data we’ve been working with.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mse</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">yhat</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">yhat</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">yhat</span><span class="p">)</span>
+
+<span class="c1">#ridge fit</span>
+<span class="n">ridge_model</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ridge_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">y_hat_ridge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ridge_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">,(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">MSE_ridge</span> <span class="o">=</span> <span class="n">mse</span><span class="p">(</span><span class="n">y_hat_ridge</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MSE ridge = </span><span class="si">{</span><span class="n">MSE_ridge</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1">#linear fit</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">y_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">,(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">MSE_linear</span> <span class="o">=</span> <span class="n">mse</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MSE linear = </span><span class="si">{</span><span class="n">MSE_linear</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE ridge = 0.10920974711129612
+MSE linear = 0.07528049014408347
+</pre></div>
+</div>
+</div>
+</div>
+<p>So, the linear model seems to do better. But this isn’t a totally fair way of evaluating these models. We’re calculating the MSE on data that the models have already seen, so of <em>course</em> the errors are quite low. But in the real world, we want to see how the models are going to do on data that they haven’t seen—the entire point of training these models is so that they can make good predictions without guidance in the future. So what we really want to do is evaluate their performance on a <a class="reference internal" href="#mldata"><span class="std std-ref">test set</span></a>.</p>
+<p>So let’s generate some more data using the same process we used to generate the training set and see how the two models do.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">X_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">]]))</span>
+
+<span class="n">y_hat_ridge_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ridge_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">,(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">MSE_ridge_test</span> <span class="o">=</span> <span class="n">mse</span><span class="p">(</span><span class="n">y_hat_ridge_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MSE ridge test = </span><span class="si">{</span><span class="n">MSE_ridge_test</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">y_hat_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">,(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">MSE_linear_test</span> <span class="o">=</span> <span class="n">mse</span><span class="p">(</span><span class="n">y_hat_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MSE linear test = </span><span class="si">{</span><span class="n">MSE_linear_test</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE ridge test = 0.06755231283346477
+MSE linear test = 0.054906876677452775
+</pre></div>
+</div>
+</div>
+</div>
+<p>Wow, these errors are <em>substantially</em> higher—and that’s a good sign! Our models haven’t seen the test data, so they should do a bit worse on them. But we can see here that the ridge regression is still doing a bit worse than the linear regression. What’s the point of doing ridge regression, then?</p>
+<p>Remember, ridge regression is particularly helpful in cases where we have <em><strong>multicollinearity</strong></em> among our regressors, or when we have a large ratio of regressors to observations. Here, though, we only have two regressors—<span class="math notranslate nohighlight">\(\textbf{x}\)</span>, and the intercept. And the underlying process that generated those data is quite simple.</p>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>Go back to the <a class="reference internal" href="#square"><span class="std std-ref">code</span></a> where we originally generated our <span class="math notranslate nohighlight">\(\textbf{x}\)</span> and <span class="math notranslate nohighlight">\(\textbf{y}\)</span> data. What’s the underlying model that describes the true relationship between <span class="math notranslate nohighlight">\(\textbf{y}\)</span> and <span class="math notranslate nohighlight">\(\textbf{x}\)</span>?</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Looking at the code, we can see that, to generate <span class="math notranslate nohighlight">\(\textbf{y}\)</span>, we multiplied our design matrix by the vector <span class="math notranslate nohighlight">\(\begin{bmatrix} 1 \\ 1 \end{bmatrix}\)</span> and then added some random noise. So the underlying model is</p>
+<div class="math notranslate nohighlight">
+\[\textbf{y} = 1 + \textbf{x} + \boldsymbol\epsilon\]</div>
+</div>
+</div>
+<p>So a linear model with two regressors, 1 and <span class="math notranslate nohighlight">\(\textbf{x}\)</span>, is exactly the right model for our data. It’s no surprise, then, that a vanilla linear model does so well! In an important sense, it’s the best model possible.</p>
+<p>But what if we don’t choose the best model possible? What if we add an extraneous regressor? To drive the point home, let’s do something pretty silly—let’s make <span class="math notranslate nohighlight">\(2\textbf{x}\)</span> a regressor as well as <span class="math notranslate nohighlight">\(\textbf{x}.\)</span> That’s about as bad as you could do in terms of multicollinearity, so ridge regression should really show its value here.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_silly</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">X</span><span class="p">,</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#stacking another row—2x—onto our design matrix</span>
+<span class="n">X_test_silly</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">X_test</span><span class="p">,</span><span class="n">X_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ridge_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_silly</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">y_hat_ridge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X_silly</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ridge_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">,(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">MSE_ridge</span> <span class="o">=</span> <span class="n">mse</span><span class="p">(</span><span class="n">y_hat_ridge</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MSE ridge = </span><span class="si">{</span><span class="n">MSE_ridge</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">y_hat_ridge_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X_test_silly</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ridge_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">,(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">MSE_ridge_test</span> <span class="o">=</span> <span class="n">mse</span><span class="p">(</span><span class="n">y_hat_ridge_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MSE ridge test = </span><span class="si">{</span><span class="n">MSE_ridge_test</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_silly</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">y_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X_silly</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">,(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">MSE_linear</span> <span class="o">=</span> <span class="n">mse</span><span class="p">(</span><span class="n">y_hat</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MSE linear = </span><span class="si">{</span><span class="n">MSE_linear</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">y_hat_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X_test_silly</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">,(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">MSE_linear_test</span> <span class="o">=</span> <span class="n">mse</span><span class="p">(</span><span class="n">y_hat_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MSE linear test = </span><span class="si">{</span><span class="n">MSE_linear_test</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE ridge = 0.09037199147877786
+MSE ridge test = 0.0705814436510194
+MSE linear = 0.07528049014408347
+MSE linear test = 0.05490687667745274
+</pre></div>
+</div>
+</div>
+</div>
+<p>And look at that! While the linear model still does better on the training data, it does <em>worse</em> on the test data, which is what we really care about! When a model achieves a really good fit to training data but performs poorly on test data, that’s called <em><strong>overfitting</strong></em>. It <em>fits overly well</em> to the training data—specifically, the random noise in the training data—which compromises how well it can fit to the test data.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p><em><strong>Overfitting</strong></em> describes the scenario where a model with too many degrees of freedom—that is, too much flexibility—is allowed to fit to the random noise in a training set, which ultimately results in inferior performance on the test set.</p>
+</div>
+<p>Let’s look at one more example of overfitting to drive the point home. What happens when you try to fit a high-degree polynomial—something like <span class="math notranslate nohighlight">\(y = \beta_0 + \beta_1x + \beta_2x^2 + \beta_3x^3 + \cdots\)</span>—to linear data? Let’s try it! Fortunately, our linear regression framework is powerful enough to accommodate that—we just have to generate a design matrix with not only <span class="math notranslate nohighlight">\(1\)</span> and <span class="math notranslate nohighlight">\(\textbf{x}\)</span> but also <span class="math notranslate nohighlight">\(\textbf{x}^2\)</span>, <span class="math notranslate nohighlight">\(\textbf{x}^3,\)</span> etc. as columns. Let’s try it!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">little_x</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X_poly</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span><span class="n">little_x</span><span class="p">,</span><span class="n">little_x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">little_x</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="n">little_x</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span><span class="n">little_x</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span><span class="n">little_x</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span><span class="n">little_x</span><span class="o">**</span><span class="mi">7</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_poly</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">X_axis</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#this is just here to make the plotting look nice</span>
+<span class="n">X_axis_poly</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span><span class="n">X_axis</span><span class="p">,</span><span class="n">X_axis</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">X_axis</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="n">X_axis</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span><span class="n">X_axis</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span><span class="n">X_axis</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span><span class="n">X_axis</span><span class="o">**</span><span class="mi">7</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X_axis_poly</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">,(</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">little_x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;training data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_axis</span><span class="p">,</span><span class="n">y_hat</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;fit model&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x12e9e8d10&gt;
+</pre></div>
+</div>
+<img alt="_images/0d2cd550d79613981bddf71e3bc9b0ab12893525788f9b829549d2b2f7891e06.png" src="_images/0d2cd550d79613981bddf71e3bc9b0ab12893525788f9b829549d2b2f7891e06.png" />
+</div>
+</div>
+<p>Well, that certainly doesn’t look right. Let’s see what happens when we plot the test data as well.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">little_x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;training data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">y_test</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;test data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_axis</span><span class="p">,</span><span class="n">y_hat</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;fit model&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x12eab2a90&gt;
+</pre></div>
+</div>
+<img alt="_images/3b31b8ad1bbdc933a9e18be18030e99e5546646a2c4e8039524a5aaae2d98eb9.png" src="_images/3b31b8ad1bbdc933a9e18be18030e99e5546646a2c4e8039524a5aaae2d98eb9.png" />
+</div>
+</div>
+<p>That looks like a pretty awful fit. One way to fix this issue is to just have tons more data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bigx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">bigx_poly</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">500</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span><span class="n">bigx</span><span class="p">,</span><span class="n">bigx</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">bigx</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="n">bigx</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span><span class="n">bigx</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span><span class="n">bigx</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span><span class="n">bigx</span><span class="o">**</span><span class="mi">7</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">bigy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">bigx_poly</span><span class="p">[:,:</span><span class="mi">2</span><span class="p">],</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">]]))</span>
+<span class="n">bigmodel</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">bigmodel</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">bigx_poly</span><span class="p">,</span><span class="n">bigy</span><span class="p">)</span>
+<span class="n">bigy_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X_axis_poly</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">bigmodel</span><span class="o">.</span><span class="n">coef_</span><span class="p">,(</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">bigx_poly</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">bigy</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;training data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_axis</span><span class="p">,</span><span class="n">bigy_hat</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;fit model&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x12eb32a90&gt;
+</pre></div>
+</div>
+<img alt="_images/2d897c173522b692c0c15c7e42ce6102b81dfc4e5d25723fd863895c3f7b0b50.png" src="_images/2d897c173522b692c0c15c7e42ce6102b81dfc4e5d25723fd863895c3f7b0b50.png" />
+</div>
+</div>
+<p>As long as you have substantially more data than features, you’re going to be relatively safe from overfitting. But we won’t always have as much data as we would like. So what happens if we follow exactly the same process, with all those extraneous polynomial regressors, but use ridge regression instead?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ridge_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_poly</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">y_hat_ridge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X_axis_poly</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ridge_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">,(</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">little_x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;training data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">y_test</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;test data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_axis</span><span class="p">,</span><span class="n">y_hat</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;fit linear model&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_axis</span><span class="p">,</span><span class="n">y_hat_ridge</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;fit ridge model&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x12ebbfd90&gt;
+</pre></div>
+</div>
+<img alt="_images/86939fcd8d7c373035bbf87204542584f1b1bd23cbc815e2f52cff5ef5e52223.png" src="_images/86939fcd8d7c373035bbf87204542584f1b1bd23cbc815e2f52cff5ef5e52223.png" />
+</div>
+</div>
+<p>And just to make sure our eyes aren’t deceiving us, we can calculate the MSE on the test data for both the linear and the ridge fits.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">little_x_test</span> <span class="o">=</span> <span class="n">X_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">X_test_poly</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span><span class="n">little_x_test</span><span class="p">,</span><span class="n">little_x_test</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">little_x_test</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="n">little_x_test</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span><span class="n">little_x_test</span><span class="o">**</span><span class="mi">5</span><span class="p">,</span><span class="n">little_x_test</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span><span class="n">little_x_test</span><span class="o">**</span><span class="mi">7</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">y_hat_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X_test_poly</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">,(</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">MSE_linear_test</span> <span class="o">=</span> <span class="n">mse</span><span class="p">(</span><span class="n">y_hat_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MSE linear test = </span><span class="si">{</span><span class="n">MSE_linear_test</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">y_hat_test_ridge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X_test_poly</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ridge_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">,(</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">MSE_ridge_test</span> <span class="o">=</span> <span class="n">mse</span><span class="p">(</span><span class="n">y_hat_test_ridge</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MSE ridge test = </span><span class="si">{</span><span class="n">MSE_ridge_test</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE linear test = 0.5680425609995164
+MSE ridge test = 0.08576530568317227
+</pre></div>
+</div>
+</div>
+</div>
+<p>Regularization is a great way to prevent overfitting. So is using a simple model in the first place. In both cases, you are limiting your degrees of freedom—by not using that many degrees of freedom to start out with, or by adding additional constraints to a model with lots of degrees of freedom. The moral of the overfitting story is this:</p>
+<p><em><strong>If your model has more degrees of freedom than the underlying process that produced the data, you are probably going to overfit to your data.</strong></em></p>
+<p>So don’t just go throwing deep neural networks at your datasets. In machine learning, it is essential to always start <em>as simple as possible</em>, and then only use more complex models if there’s a good reason to.</p>
+<p>But how do you know whether or not you need more degrees of freedom? You could just fit a ton of different models to your training data, and then see which does best on the test data. But then you’d be overfitting to the test data! Maybe the specific value of <span class="math notranslate nohighlight">\(\lambda\)</span> you chose for your ridge regression works great for the test data you happen to have access to, but it might not work nearly as well out there in the real world.</p>
+<p>It is <em><strong>absolutely essential</strong></em> that you don’t touch your test set until the very end of the modeling process, once you have your model completely set in stone. Otherwise, your test data might be affecting your choice of model, and then the performance of that model on your test data is pretty much meaningless. (You may also hear this sort of test data referred to as <em><strong>held-out data</strong></em>, because you are holding it out from the rest of the dataset while you do all of your preliminary testing.)</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><em><strong>Never</strong></em> touch your held-out data until you are 100% certain that you are done modifying your model. Lots of bad machine learning research has made it into the literature because people tuned their models to their held-out data. Don’t let that happen to you.</p>
+</div>
+<p>But you need to have some basis for selecting the model that you ultimately end up with. Otherwise, you’re basically just guessing. One option might be to pull a mini test set out of your training set, so that you can test different models on that mini set to find the best possibility to then try on your held-out data. And that’s effectively the approach that we’re going to take.</p>
+<p>There’s a catch, however—once we’ve pulled out the held-out data, and then also selected a mini test set to use for model selection, our training set might be kind of small. And that could affect model performance. Fortunately, there’s a strategy called <em><strong>cross-validation</strong></em> that we can use to mitigate that possibility.</p>
+<section id="cross-validation">
+<h3>Cross-validation<a class="headerlink" href="#cross-validation" title="Link to this heading">#</a></h3>
+<p>Cross-validation is used for two major purposes—choosing a model class (e.g. linear regression vs. deep neural network), and fixing specific features of that model class called <em><strong>hyperparameters</strong></em>.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>The <em><strong>hyperparameters</strong></em> of a model are the variables in the model that we are free to choose—but which we have to fix to a specific value before fitting.</p>
+</div>
+<p>Even if, based on our knowledge of the problem, we have already selected some model class—say, ridge regression—we still probably have hyperparameters that we need to fix. In the case of ridge regression, we have to choose a value for the hyperparameter <span class="math notranslate nohighlight">\(\lambda.\)</span> And rather than choosing <span class="math notranslate nohighlight">\(\lambda\)</span> randomly, we can do it in a strategic, intentional way using cross-validation.</p>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>What are some of the hyperparameters of a deep neural network?</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Any parameters that dictate the architecture of the network count as hyperparameters. A few examples are the number of layers, the number of neurons per layer, and the number of inputs each neuron receives from the previous layer.</p>
+</div>
+</div>
+<p>The goal with cross-validation is to use that same training set/test set structure we’re familiar with to test different choices of hyperparameter <em>within</em> our training set (while leaving the held-out data untouched). But the great thing about dealing with our training set is that we can do whatever we want with it. We don’t have to leave any parts of it pristine—we can train and test on whatever parts of the data we want, as long as they give us a good idea of what is likely to work on our held-out data.</p>
+<p>So instead of splitting up our training set into a single mini training set and mini test set to see what hyperparameters work best, we’ll do that split tons of different times, and then average the results. That’s cross-validation. Typically, we will split our training set into <span class="math notranslate nohighlight">\(n\)</span> different portions, called <em><strong>folds</strong></em>, train on <span class="math notranslate nohighlight">\(n-1\)</span> of the folds, and then test on the last fold. Then we’ll repeat that process <span class="math notranslate nohighlight">\(n\)</span> times, testing on every fold. The figure below shows what that looks like with five folds:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/cv.png"><img alt="_images/cv.png" src="_images/cv.png" style="height: 400px;" /></a>
+</figure>
+<p>This process is known as <em><strong>k-fold cross-validation</strong></em>. If the number of folds is the same as the number of samples—that is, if you have, say, 10 data points in your training set and split it up into 10 folds, so every fold has one data point in it—that’s called <em><strong>leave-one-out (LOO) cross-validation</strong></em>. Different cross-validation strategies have different benefits and costs, which are beyond the scope of this class. But 10 is a pretty typical number of folds to use.</p>
+<p>So, let’s see how it works! You can always code up cross-validation manually, but <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> has some very useful tools. In particular, <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_score.html">sklearn.model_selection.cross_val_score</a> is a very quick and easy way to perform cross-validation. So let’s use cross-validation to find the optimal value of <span class="math notranslate nohighlight">\(\lambda\)</span> for ridge regression!</p>
+<p>First, let’s try to perform cross validation using a specific value—<span class="math notranslate nohighlight">\(\lambda = 1.\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">get_scorer_names</span>
+<span class="n">ridge_model</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">folds</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">ridge_model</span><span class="p">,</span><span class="n">X_poly</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">cv</span><span class="o">=</span><span class="n">folds</span><span class="p">,</span><span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_squared_error&#39;</span><span class="p">))</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.17691088 -0.24086235 -0.05854536 -0.13203808 -0.20134981]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you use <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> for cross-validation like this and want to get the results of your fit as the mean squared error, you have to write <code class="docutils literal notranslate"><span class="pre">scoring='neg_mean_squared_error'</span></code> when you call <code class="docutils literal notranslate"><span class="pre">cross_val_score</span></code>. What you will get back is the <em>negative</em> mean squared error for each fold. But no matter—just multiply the scores by -1 to get the true mean squared error!</p>
+</div>
+<p>I’ve written a loop below that tests a bunch of possible values of <span class="math notranslate nohighlight">\(\lambda\)</span> and tells us which one did best with the cross-validation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lambdas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="o">/</span><span class="mi">20</span>
+<span class="n">folds</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">lowest_mse</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">lamb</span> <span class="ow">in</span> <span class="n">lambdas</span><span class="p">:</span> <span class="c1">#&#39;lambda&#39; is a reserved keyword in python, so you can&#39;t use it as a variable name</span>
+    <span class="n">ridge_model</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">lamb</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">meansqerr</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">ridge_model</span><span class="p">,</span><span class="n">X_poly</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">cv</span><span class="o">=</span><span class="n">folds</span><span class="p">,</span><span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_squared_error&#39;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">meansqerr</span> <span class="o">&lt;</span> <span class="n">lowest_mse</span><span class="p">:</span>
+        <span class="n">lowest_mse</span> <span class="o">=</span> <span class="n">meansqerr</span>
+        <span class="n">best_lamb</span> <span class="o">=</span> <span class="n">lamb</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">best_lamb</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.35
+</pre></div>
+</div>
+</div>
+</div>
+<p>Alright, we’ve found our optimal <span class="math notranslate nohighlight">\(\lambda\)</span> with cross-validation! Let’s see how it works. We’ll compare the fit on our test data to the fit where <span class="math notranslate nohighlight">\(\lambda = 1\)</span>, which you should normally <em><strong>never do</strong></em>—remember, we never want to be testing anything on our held-out data—but this is for didacting purposes here, to show that the cross-validation actually worked.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ridge_model</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">best_lamb</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ridge_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_poly</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">y_hat_ridge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X_axis_poly</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ridge_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">,(</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">ridge_model_1</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ridge_model_1</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_poly</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">y_hat_ridge_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X_axis_poly</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ridge_model_1</span><span class="o">.</span><span class="n">coef_</span><span class="p">,(</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_axis</span><span class="p">,</span> <span class="n">y_hat_ridge</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;lambda = </span><span class="si">{</span><span class="n">best_lamb</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_axis</span><span class="p">,</span> <span class="n">y_hat_ridge_1</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;lambda = 1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">y_test</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;test data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">y_hat_ridge_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X_test_poly</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ridge_model</span><span class="o">.</span><span class="n">coef_</span><span class="p">,(</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">MSE_ridge</span> <span class="o">=</span> <span class="n">mse</span><span class="p">(</span><span class="n">y_hat_ridge_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MSE ridge, lambda=</span><span class="si">{</span><span class="n">best_lamb</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">MSE_ridge</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">y_hat_ridge_1_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X_test_poly</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ridge_model_1</span><span class="o">.</span><span class="n">coef_</span><span class="p">,(</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">MSE_ridge_1</span> <span class="o">=</span> <span class="n">mse</span><span class="p">(</span><span class="n">y_hat_ridge_1_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MSE ridge, lambda=1 = </span><span class="si">{</span><span class="n">MSE_ridge_1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE ridge, lambda=0.35 = 0.052681553363877975
+MSE ridge, lambda=1 = 0.08576530568317227
+</pre></div>
+</div>
+<img alt="_images/a79a82a8e38249fef24b3b9a262f01d7436eb553de48886f28d93fa0af9bb3f4.png" src="_images/a79a82a8e38249fef24b3b9a262f01d7436eb553de48886f28d93fa0af9bb3f4.png" />
+</div>
+</div>
+<p>Cross-validation is truly and bread-and-butter machine learning technique—if you do more machine learning in the future, or if you use machine learning on your final project, you will use it all the time. Remember, whenever you are applying machine learning to a problem, you should <em>always</em> follow this pipeline to prevent overfitting:</p>
+<div class="important admonition">
+<p class="admonition-title">Machine Learning Pipeline</p>
+<ol class="arabic simple">
+<li><p>Take your full dataset, and divide it into a training set and a test set. Then, store the test set elsewhere—like a separate folder—so you aren’t tempted to touch it.</p></li>
+<li><p>Evaluate your training data. Plot them, if that makes sense for the data you have. What sort of model might work here? The simpler the model, the better.</p></li>
+<li><p>If you have a lot of features and/or not much data, consider using a regularized approach like ridge regression.</p></li>
+<li><p>Define the space of models you’ll be considering. Figure out what decisions you need to make, and what hyperparameters you have to fix. The fewer decisions, the better.</p></li>
+<li><p>Use cross-validation to make those decisions and fix your hyperparameters.</p></li>
+<li><p>Once every feature of your model is set in stone, then you can finally test it on you held-out data.</p></li>
+</ol>
+</div>
+</section>
+</section>
+<section id="logistic-regression">
+<h2>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Link to this heading">#</a></h2>
+<p>With just the tools we’ve learned so far, you can tackle a huge number of machine learning problems. Yes, linear regression is a relatively simple approach—but remember, when it comes to machine learning, you want to use the simplest possible tool for the problem at hand.</p>
+<p>But regression problems like the ones we’ve seen so far are really only half of what machine learning’s about. Linear regression allows us to map continuous features to continuous outputs. But let’s say you have a bunch of neuron recordings, and you want to train a model to identify which recordings come from excitatory neurons and which ones come from inhibitory neurons. Your outcome variable in that case—excitatory vs. inhibitory—isn’t continuous anymore. It’s categorical. And so regression isn’t quite the right tool for the problem at hand.</p>
+<p>In theory, we could jury-rig linear regression to do this job for us. It’s not hard to transform a continuous outcome variable—say, a variable that ranges from 0 to 10—into a categorical variable. Just set a threshold at 5, call everything below the threshold “0”, and everything above it “1”.</p>
+<p>We can do better than that, though. In general, we don’t just want to get a 1 or 0 out of our classification model. It’s far more informative if we can train a model to tell us <em>how likely</em> a given observation is to belong to each category.</p>
+<p>So it seems like we have a linear regression problem again. Probability, after all, is a continuous variable. But it’s a special type of continuous variable—it can only take on values between 0 and 1. But there’s no way to restrict our linear regression equation, <span class="math notranslate nohighlight">\(\textbf{y} = \textbf{X}\boldsymbol\beta\)</span>, to exclusively output <span class="math notranslate nohighlight">\(y\)</span> values within that range.</p>
+<p>That’s where the <em><strong>logistic</strong></em> (or <em><strong>sigmoid</strong></em>) function comes in. It’s defined as</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \frac{1}{1 + e^{-x}}\]</div>
+<p>Here’s what that looks like:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mf">.1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x12ece3390&gt;]
+</pre></div>
+</div>
+<img alt="_images/db535bf344e5d1182cb796349619001f7f492396909a4edc26ee095f1003aeea.png" src="_images/db535bf344e5d1182cb796349619001f7f492396909a4edc26ee095f1003aeea.png" />
+</div>
+</div>
+<p>So all of the <span class="math notranslate nohighlight">\(y\)</span> values are between 0 and 1. That means we can use the below modification of linear regression:</p>
+<div class="math notranslate nohighlight">
+\[\textbf{y} = \frac{1}{1 + e^{-\textbf{X}\boldsymbol\beta}}\]</div>
+<p>to give us probabilities. Here, by feeding <span class="math notranslate nohighlight">\(\textbf{X}\boldsymbol\beta\)</span> into the logistic function, I mean that we should apply the logistic function to every element of <span class="math notranslate nohighlight">\(\textbf{X}\boldsymbol\beta\)</span> individually. Then, to classify our data based on those probabilities, we can send everything with a probability <span class="math notranslate nohighlight">\(\ge 0.5\)</span> to 1 and anything with a probability <span class="math notranslate nohighlight">\(&lt;0.5\)</span> to 0.</p>
+<p>So we have a <em><strong>model</strong></em> that we can use for classification! But what about our <em><strong>loss function</strong></em>?</p>
+<section id="log-likelihood">
+<h3>Log Likelihood<a class="headerlink" href="#log-likelihood" title="Link to this heading">#</a></h3>
+<p>Here’s one way we could design our loss function (where <span class="math notranslate nohighlight">\(n\)</span> is our total number of observations):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{loss}(\boldsymbol\beta) &amp;= -\sum_{i=1}^n k_i\\
+k_i &amp;=  \left\{ \begin{array}\\
+      1 &amp; \mbox{if } y_i = 1 \text{ and } \frac{1}{1 + e^{-\textbf{x}_i^{\intercal}\boldsymbol\beta}} \ge 0.5\\ 
+      1 &amp; \mbox{if } y_i = 0 \text{ and } \frac{1}{1 + e^{-\textbf{x}_i^{\intercal}\boldsymbol\beta}} &lt; 0.5\\ 
+      0 &amp; \mbox{otherwise }
+  \end{array}
+    \right.\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\textbf{x}_i\)</span> is the vector of feature values associated with the <span class="math notranslate nohighlight">\(i\)</span><sup>th</sup> observation. What this function tells us to do is to go through every data point, assign it a score of 1 if we predicted the correct label for it, and assign a score of 0 otherwise. Then, we add up the scores for every data point, and we try to maximize that score (or, equivalently, minimize its opposite).</p>
+<p>But we’ve lost something important in designing this loss function—there’s no room for those probabilities we talked about. Shouldn’t we assign a higher score to a probability of 0.9 than a probability of 0.6, if the true value of the outcome variable is 1?</p>
+<p>If we focus on the probabilities, we can implement a very sensible type of loss function, called a “likelihood function.” The likelihood function is designed to answer the question, “What’s the probability of observing our data, given our model?” If we have one data point whose true label is 1, and our model yields a score of 0.7, then the likelihood of that observation is 0.7. If instead the true label is 0, the likelihood if the observation is 0.3—that is, 1 - 0.7.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>The <em><strong>likelihood</strong></em> of a set of data under a particular model is the probability of observing those data, assuming that the model is true.</p>
+</div>
+<p>It’s really easy to extend likelihood to multiple observations. In general, to find the probability that several events all happen—say, that it rains both today and tomorrow—you multiply the individual probabilities for those events. So to find the probability of observing all of our data, we multiply the probabilities of the individual observations under our model. Here’s what that looks like:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}L(\boldsymbol\beta) &amp;= \prod_{i=1}^n k_i\\
+k_i &amp;=  \left\{ \begin{array}\\
+      \frac{1}{1 + e^{-\textbf{x}_i^{\intercal}\boldsymbol\beta}} &amp; \mbox{if } y_i = 1 \\ 
+      1 - \frac{1}{1 + e^{-\textbf{x}_i^{\intercal}\boldsymbol\beta}}  &amp; \mbox{if } y_i = 0 
+  \end{array}
+    \right.\end{split}\]</div>
+<div class="note dropdown admonition">
+<p class="admonition-title">Pi Notation</p>
+<p>Pi notation, which you see in the above example, is for multiplication what sigma notation is for addition.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\sum_{i=1}^5 x_i &amp;= x_1 + x_2 + x_3 + x_4 + x_5\\
+\prod_{i=1}^5 x_i &amp;= x_1 \times x_2 \times x_3 \times x_4 \times x_5\end{split}\]</div>
+</div>
+<p>The only issue we have here is that big products like this get really messy, mathematically speaking. But there’s a trick we can use to make things simpler. Remember, we only really care about the likelihood so that we can eventually find the <span class="math notranslate nohighlight">\(\boldsymbol\beta\)</span> that maximizes it. So we can apply any <em><strong>monotonically increasing</strong></em> function <span class="math notranslate nohighlight">\(y = f(x)\)</span>—that is, any function for which <span class="math notranslate nohighlight">\(x_i &gt; x_j\)</span> if and only if <span class="math notranslate nohighlight">\(f(x_i) &gt; f(x_j)\)</span>—to the likelihood, and the result will still be maximized at that same <span class="math notranslate nohighlight">\(\boldsymbol\beta.\)</span></p>
+<p>For example, we could multiply our likelihood by 2, and it would still be maximized at the same value of <span class="math notranslate nohighlight">\(\boldsymbol\beta.\)</span> Or, somewhat more usefully, we could take the <em><strong>natural logarithm</strong></em> of the likelihood, since the logarithm is a monotonically increasing function. Why would we want to do that? Well, <span class="math notranslate nohighlight">\(\ln(a\times b) = \ln(a) + \ln(b)\)</span>—logs turn products into sums. So:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\ln(L(\boldsymbol\beta)) &amp;= \sum_{i=1}^n k_i\\
+k_i &amp;=  \left\{ \begin{array}\\
+      \ln\left(\frac{1}{1 + e^{-\textbf{x}_i^{\intercal}\boldsymbol\beta}}\right) &amp; \mbox{if } y_i = 1 \\ 
+      \ln\left(1 - \frac{1}{1 + e^{-\textbf{x}_i^{\intercal}\boldsymbol\beta}}\right)  &amp; \mbox{if } y_i = 0 
+  \end{array}
+    \right.\end{split}\]</div>
+<p>This expression is called the <em><strong>log likelihood</strong></em>, which we will write as <span class="math notranslate nohighlight">\(LL(\boldsymbol\beta).\)</span>  And it turns out that using the log likehood allows us to simplify things extensively:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}LL(\boldsymbol\beta) &amp;= \sum_{i=1}^n \ln\left( y_i \frac{1}{1 + e^{-\textbf{x}_i^{\intercal}\boldsymbol\beta}} + (1 - y_i)\left(1 - \frac{1}{1 + e^{-\textbf{x}_i^{\intercal}\boldsymbol\beta}}\right)\right)\\
+&amp;= \sum_{i=1}^n \ln\left(y_i \frac{1}{1 + e^{-\textbf{x}_i^{\intercal}\boldsymbol\beta}} + (1 - y_i)\frac{e^{-\textbf{x}_i^{\intercal}\boldsymbol\beta}}{1 + e^{-\textbf{x}_i^{\intercal}\boldsymbol\beta}}\right)\\
+&amp;= \sum_{i=1}^n \ln\left(\frac{(1 - e^{-\textbf{x}_i^{\intercal}\boldsymbol\beta})y_i + e^{-\textbf{x}_i^{\intercal}\boldsymbol\beta}}{1 + e^{-\textbf{x}_i^{\intercal}\boldsymbol\beta}}\right)\\
+&amp;= \sum_{i=1}^n \ln\left(\frac{1 + (e^{\textbf{x}_i^{\intercal}\boldsymbol\beta} - 1)y_i}{1 + e^{\textbf{x}_i^{\intercal}\boldsymbol\beta}}\right)\\
+&amp;= \sum_{i=1}^n \ln\left(1 + (e^{\textbf{x}_i^{\intercal}\boldsymbol\beta} - 1)y_i\right) - \ln\left(1 + e^{\textbf{x}_i^{\intercal}\boldsymbol\beta}\right)\end{split}\]</div>
+<p>The log likelihood is the function that we try to maximize in logistic regression. And since loss functions are all about minimizing, we set our loss function to be the <em><strong>negative log likelihood</strong></em>. In fact, negative log likelihood is used as a loss function for all sorts of different models, and you are likely to see it many, many times in your computational career.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can also regularize logistic regression, just like we did for linear regression! If we add the ridge regularization to our negative log likelihood, for example, our loss function will look like this:</p>
+<div class="math notranslate nohighlight">
+\[\text{loss}(\boldsymbol\beta) = \lambda \boldsymbol\beta^{\intercal}\boldsymbol\beta - \sum_{i=1}^n \ln\left(1 + (e^{\textbf{x}_i^{\intercal}\boldsymbol\beta} - 1)y_i\right) - \ln\left(1 + e^{\textbf{x}_i^{\intercal}\boldsymbol\beta}\right)\]</div>
+</div>
+<p>But there’s a problem with the negative log likelihood for logistic regression: We can’t differentiate it with respect to <span class="math notranslate nohighlight">\(\boldsymbol\beta\)</span>, like we did with the loss functions for linear and ridge regression. Fortunately, there’s a different approach we can take—an extremely powerful approach that is used to minimize functions for countless mathematical applications. It’s sometimes even used to minimize the loss function for linear regression, when the size of <span class="math notranslate nohighlight">\(\textbf{X}\)</span> makes taking the inverse of <span class="math notranslate nohighlight">\(\textbf{X}^{\intercal}\textbf{X}\)</span> too expensive.</p>
+<p>That approach is called <em><strong>gradient descent</strong></em>.</p>
+</section>
+<section id="gradient-descent">
+<h3>Gradient Descent<a class="headerlink" href="#gradient-descent" title="Link to this heading">#</a></h3>
+<p>Imagine you’re climbing a mountain when a thick fog descends—so dense that you can only see a few feet in front of you. You become disoriented, and you have no idea how to get down to the bottom of the valley below you. How do you get off of the mountain? Well, you could look at the area you can see around you, and follow the steepest downward path that you can see.</p>
+<p>That’s essentially how gradient descent works. When we can’t just find the minimum of a function by taking its derivative, we start somewhere on its landscape and then follow the steepest path downward. It’s an iterative process that involves taking sequential downard steps until we find ourselves at the function’s minimum.</p>
+<p>But how do we figure out what that steepest path is? We just have to use the mathematical tool that gives us the steepness, or slope, of the function–it’s derivative. Since the derivative points up the slope of a function, we want to move in the opposite direction of the derivative at every iteration.</p>
+<p>Here’s what that looks like mathematically when we have one regressor, if our loss function is <span class="math notranslate nohighlight">\(f(\beta)\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-gd">
+<span class="eqno">(73)<a class="headerlink" href="#equation-gd" title="Link to this equation">#</a></span>\[\beta^{n+1} = \beta^{n} - \alpha \frac{\text{d}}{\text{d} \beta} f(\beta^n)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\beta^i\)</span> is our <span class="math notranslate nohighlight">\(\beta\)</span> value at the <span class="math notranslate nohighlight">\(i\)</span><sup>th</sup> iteration of the gradient descent. <span class="math notranslate nohighlight">\(\alpha\)</span> is just a parameter that determines the size of the “steps” we take down our loss function. Generally, you want <span class="math notranslate nohighlight">\(\alpha\)</span> to be fairly small, because you might miss the minimum entirely if your steps are too big. But if <span class="math notranslate nohighlight">\(\alpha\)</span> is too small, then gradient descent will take a very long time.</p>
+<p>The really great thing about gradient descent is that it helps us home in on the minimum very precisely. When we are close to the minimum, our derivative is near 0, so <span class="math notranslate nohighlight">\(\alpha \frac{\text{d}}{\text{d} \beta}f(\beta^n)\)</span> is very small. That means we move quite slowly and carefully—if everything goes well, we won’t miss the minimum. And at the minimum, the derivative <em>is</em> 0, so <span class="math notranslate nohighlight">\(\beta^{n+1} = \beta^n.\)</span> Once we’ve found the minimum, we stay there.</p>
+<p>Let’s visualize what this looks like with the example of a parabolic loss function:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/gdfig1.png"><img alt="_images/gdfig1.png" src="_images/gdfig1.png" style="height: 300px;" /></a>
+</figure>
+<p>If we have an expression for the derivative of the loss function, we can just use the same approach we used for linear regression: set the derivative to 0 to find the minimum.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/gdfig2.png"><img alt="_images/gdfig2.png" src="_images/gdfig2.png" style="height: 300px;" /></a>
+</figure>
+<p>But let’s assume we can’t do that. Often, we may be in situations where we can’t find a global expression for the derivative of some function—but we can evaluate the derivative locally. In such cases, we can start at a random spot along our function and effectively follow along the derivative, evaluated locally, to reach our minimum. This is an <em>iterative</em> process, which means we repeat a process over and over again until we reach our goal (the minimum). You can think of the iterative process of gradient descent as taking steps down a hill, in the steepest direction, to reach a valley as fast as possible.</p>
+<p>Let’s see how that works in practice. We start at some random point along our parabola. We can find our derivative at that point:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/gdfig3.png"><img alt="_images/gdfig3.png" src="_images/gdfig3.png" style="height: 300px;" /></a>
+</figure>
+<p>Since we are on the left arm of the parabola, our derivative is going to be negative, numerically speaking. But we need to move to the right to get closer to our minimum. So we will subtract our derivative, times some constant, from our <span class="math notranslate nohighlight">\(x\)</span> coordinate to move in the proper direction:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/gdfig4.png"><img alt="_images/gdfig4.png" src="_images/gdfig4.png" style="height: 300px;" /></a>
+</figure>
+<p>Now we are at a new point. Again, we find the derivative at that point, multiply it by some constant, and subtract it from our <span class="math notranslate nohighlight">\(x\)</span> coordinate:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/gdfig5.png"><img alt="_images/gdfig5.png" src="_images/gdfig5.png" style="height: 300px;" /></a>
+</figure>
+<p>And we can continue doing this until we reach our minimum. The closer we get to our minimum, the closer the derivative will get to 0. So as we get nearer to our goal, we will move less with each step, which is a good thing—we are getting more careful as we are getting closer. If we continue for enough iterations, we should be about right at our minimum by the time the algorithm terminates.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/gdfig6.png"><img alt="_images/gdfig6.png" src="_images/gdfig6.png" style="height: 300px;" /></a>
+</figure>
+<p>It’s important to note, though, that gradient descent is not foolproof. If we are using it to find the minimum of a more complex function, we could risk getting stuck in a local minimum:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/gdfig7.png"><img alt="_images/gdfig7.png" src="_images/gdfig7.png" style="height: 400px;" /></a>
+</figure>
+<p>There are a couple of ways to avoid this. One is to make clever initial guesses, where you can be pretty confident that you’re near your function’s global minimum to start out with. Another is to adjust <span class="math notranslate nohighlight">\(\alpha\)</span> over the course of learning, so that you make very big steps at first and smaller steps later on.</p>
+<p>The great thing about gradient descent is that it doesn’t just work for univariate functions, like parabolas. It works for multivariate functions, too. And gradient descent is an even more useful technique in those cases—because, unlike with a univariate function, there are tons of different directions you could possibly move in (versus just “left” and “right). Gradient descent helps us make sure we’re moving in the optimal direction down a multivariate function, as you can see in the example of a path that gradient descent might follow down a function of two variables below:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/3dgraddescent.jpeg"><img alt="_images/3dgraddescent.jpeg" src="_images/3dgraddescent.jpeg" style="height: 300px;" /></a>
+</figure>
+<p>As we’ve done before, let’s work out multivariate gradient descent with scalar equations, and then combine them. Let’s say we have three regressors, <span class="math notranslate nohighlight">\(\textbf{x}_1,\)</span> <span class="math notranslate nohighlight">\(\textbf{x}_2,\)</span> and <span class="math notranslate nohighlight">\(\textbf{x}_3,\)</span> and associated coefficients <span class="math notranslate nohighlight">\(\beta_1,\)</span> <span class="math notranslate nohighlight">\(\beta_2,\)</span> and <span class="math notranslate nohighlight">\(\beta_3.\)</span> Our update equations for each <span class="math notranslate nohighlight">\(\beta\)</span> will be exactly the same as <a class="reference internal" href="#equation-gd">(73)</a>, except we will have to use partial derivatives, since we’ll have a multivariate loss function <span class="math notranslate nohighlight">\(F(\boldsymbol\beta)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\beta_1^{n+1} &amp;= \beta_1^n - \alpha \frac{\partial}{\partial \beta_1}F(\boldsymbol\beta^n)\\
+\beta_2^{n+1} &amp;= \beta_2^n - \alpha \frac{\partial}{\partial \beta_2}F(\boldsymbol\beta^n)\\
+\beta_2^{n+1} &amp;= \beta_2^n - \alpha \frac{\partial}{\partial \beta_2}F(\boldsymbol\beta^n)\end{split}\]</div>
+<p>To turn these scalar equations into a single vector equation, we need a new tool that we haven’t used before: the vector version of the derivative. For any vector-valued function (that is, a function that takes a vector as the input), you can evaluated the <em><strong>gradient</strong></em>, <span class="math notranslate nohighlight">\(\nabla\)</span>, which is just a vector of all its partial derivatives. In this case:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\nabla F(\boldsymbol\beta) &amp;= \begin{bmatrix} \frac{\partial}{\partial \beta_1}F(\boldsymbol\beta) \\ \frac{\partial}{\partial \beta_2}F(\boldsymbol\beta) \\ \frac{\partial}{\partial \beta_3}F(\boldsymbol\beta) \end{bmatrix}\end{split}\]</div>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>The <em><strong>gradient</strong></em> of a vector-valued function is a vector of its partial derivatives, in the directions of each vector element.</p>
+</div>
+<p>So, our gradient descent update equation for vector-valued functions is simply</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol\beta^{n+1} = \boldsymbol\beta^n - \alpha \nabla F(\boldsymbol\beta^n)\]</div>
+<p>On this week’s problem set, you will implement gradient descent yourself in Python to solve a regression problem.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Principal%20Component%20Analysis.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Principal Component Analysis</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-basics-of-machine-learning">The Basics of Machine Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-learning">Supervised Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-learning">Unsupervised Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-model-and-the-loss-function">The Model and the Loss Function</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression">Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#worked-example">Worked Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">Multiple Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-x-intercal-x-term">The <span class="math notranslate nohighlight">\(X^{\intercal}X\)</span> Term</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ridge-regression">Ridge Regression</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting">Overfitting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation">Cross-validation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">Logistic Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#log-likelihood">Log Likelihood</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent">Gradient Descent</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Grace Huckins, Linnie Warton, and Gabriel Mel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
