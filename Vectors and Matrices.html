@@ -184,6 +184,10 @@
 <li class="toctree-l1"><a class="reference internal" href="Eigenvectors%20and%20Eigenvalues.html">Eigenvectors and Eigenvalues</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Principal%20Component%20Analysis.html">Principal Component Analysis</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Computational tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Machine%20Learning.html">Machine Learning</a></li>
+</ul>
 
     </div>
 </nav></div>
@@ -429,13 +433,13 @@ document.write(`
 </figcaption>
 </figure>
 <p>Scalars are the basic building blocks of everything we will be talking about today. A vector, for example, is an ordered collection of scalars. What does that mean? Well, let’s say we have some quantities <span class="math notranslate nohighlight">\(x_1,\)</span> <span class="math notranslate nohighlight">\(x_2,\)</span> <span class="math notranslate nohighlight">\(x_3.\)</span> We can build a vector <span class="math notranslate nohighlight">\(\textbf{x} = [x_1, x_2, x_3].\)</span> Actually, we’ll typically write vectors vertically, so it will look something more like:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-58b3b0c9-9f1c-438a-9caf-343794aaedc8">
-<span class="eqno">(1)<a class="headerlink" href="#equation-58b3b0c9-9f1c-438a-9caf-343794aaedc8" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-9f94ec71-27c9-42ce-8497-368ece1d795a">
+<span class="eqno">(1)<a class="headerlink" href="#equation-9f94ec71-27c9-42ce-8497-368ece1d795a" title="Permalink to this equation">#</a></span>\[\begin{align}
 	\textbf{x} = \left[\begin{matrix} x_1 \\ x_2 \\ x_3 \end{matrix}\right]
 \end{align}\]</div>
 <p>Or, we might create a different vector out of those three scalars:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7f900a71-f50a-43ce-97be-ab154a1cb976">
-<span class="eqno">(2)<a class="headerlink" href="#equation-7f900a71-f50a-43ce-97be-ab154a1cb976" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-7c8f3e88-2879-4bb7-a82d-40bef40c3e04">
+<span class="eqno">(2)<a class="headerlink" href="#equation-7c8f3e88-2879-4bb7-a82d-40bef40c3e04" title="Permalink to this equation">#</a></span>\[\begin{align}
 	\textbf{x}^\prime = \left[\begin{matrix} x_2 \\ x_3 \\ x_1 \end{matrix}\right]
 \end{align}\]</div>
 <p>(You’ll generally see vectors written in bold, like <span class="math notranslate nohighlight">\(\textbf{x},\)</span> or with an arrow over them, like <span class="math notranslate nohighlight">\(\vec{x}\)</span>.)</p>
@@ -448,8 +452,8 @@ document.write(`
 <a class="reference internal image-reference" href="_images/figure 2.png"><img alt="_images/figure%202.png" src="_images/figure%202.png" style="height: 400px;" /></a>
 </figure>
 <p>How much does the activity level of each neuron change? We can write the equations:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-35ff5429-0169-4dea-a257-c273ef479b72">
-<span class="eqno">(3)<a class="headerlink" href="#equation-35ff5429-0169-4dea-a257-c273ef479b72" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-741aefbb-2220-4078-9c8e-2437f935c97f">
+<span class="eqno">(3)<a class="headerlink" href="#equation-741aefbb-2220-4078-9c8e-2437f935c97f" title="Permalink to this equation">#</a></span>\[\begin{align}
 	x_1(t+1) = x_1(t) + wy(t)\\
 	x_2(t+1) = x_2(t) + wy(t)\\
 	x_3(t+1) = x_3(t) + wy(t)
@@ -465,13 +469,13 @@ document.write(`
 <p>When we add, subtract, multiply, or divide a vector by a scalar, we apply that operation to every element of the vector.</p>
 </div>
 <p>So we can break down <a class="reference internal" href="#equation-eq1">(4)</a> into its component parts by adding <span class="math notranslate nohighlight">\(wy(t)\)</span> to each element of <span class="math notranslate nohighlight">\(\textbf{x}(t)\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1c2bb695-10bd-4835-9870-64f2141f3048">
-<span class="eqno">(5)<a class="headerlink" href="#equation-1c2bb695-10bd-4835-9870-64f2141f3048" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-966c7565-2bf6-4907-9661-10e70ac1fa95">
+<span class="eqno">(5)<a class="headerlink" href="#equation-966c7565-2bf6-4907-9661-10e70ac1fa95" title="Permalink to this equation">#</a></span>\[\begin{align}
 	 \left[\begin{matrix} x_1(t) \\ x_2(t) \\ x_3(t) \end{matrix}\right] + wy(t) &amp;= \left[\begin{matrix} x_1(t) + wy(t)  \\ x_2(t) + wy(t)\\ x_3(t)  + wy(t)\end{matrix}\right]
 \end{align}\]</div>
 <p>And if we wanted to multiply our vector <span class="math notranslate nohighlight">\(\textbf{x}\)</span> by some scalar <span class="math notranslate nohighlight">\(a,\)</span> we would have:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b39dbff7-eaf8-4e81-bc3a-5fa33f3d1218">
-<span class="eqno">(6)<a class="headerlink" href="#equation-b39dbff7-eaf8-4e81-bc3a-5fa33f3d1218" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-055ff540-f0a9-4eaf-9ae6-ef20c8b2e6f2">
+<span class="eqno">(6)<a class="headerlink" href="#equation-055ff540-f0a9-4eaf-9ae6-ef20c8b2e6f2" title="Permalink to this equation">#</a></span>\[\begin{align}
 	a \left[\begin{matrix} x_1 \\ x_2 \\ x_3 \end{matrix}\right] &amp;=  \left[\begin{matrix}a x_1 \\a x_2 \\ ax_3 \end{matrix}\right]
 \end{align}\]</div>
 <p>Importantly, this is exactly how adding vectors and scalars works in <code class="docutils literal notranslate"><span class="pre">numpy</span></code>.</p>
@@ -492,8 +496,8 @@ document.write(`
 </div>
 </div>
 <p>What if we want to add two vectors to each other? We can only do this if the vectors are exactly the same shape, because, to add two vectors together, we sum all of their corresponding entires. This looks like:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-46896ced-4d1b-43fc-afdf-e231c17b4b1a">
-<span class="eqno">(7)<a class="headerlink" href="#equation-46896ced-4d1b-43fc-afdf-e231c17b4b1a" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-29cacb16-b924-4982-b18c-0fa9f95da540">
+<span class="eqno">(7)<a class="headerlink" href="#equation-29cacb16-b924-4982-b18c-0fa9f95da540" title="Permalink to this equation">#</a></span>\[\begin{align}
 	\left[\begin{matrix} a \\ b \\ c \end{matrix}\right] + \left[\begin{matrix} d \\ e \\ f \end{matrix}\right] = \left[\begin{matrix} a +d \\ b + e \\ c + f  \end{matrix}\right]
 \end{align}\]</div>
 <div class="admonition tip">
@@ -542,23 +546,23 @@ x_3(t+1) = x_3(t) + w_3y(t)\end{split}\]</div>
 <p>Using the rules for vector addition and multiplication above, rewrite <a class="reference internal" href="#equation-eq2">(8)</a> as a vector equation.</p>
 <div class="seealso dropdown admonition">
 <p class="admonition-title">Solution</p>
-<div class="amsmath math notranslate nohighlight" id="equation-543f7c5e-b20b-4d61-9f70-b4df5f7bd472">
-<span class="eqno">(9)<a class="headerlink" href="#equation-543f7c5e-b20b-4d61-9f70-b4df5f7bd472" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-33f78b26-e385-4028-8aad-84cf0d3e2e0a">
+<span class="eqno">(9)<a class="headerlink" href="#equation-33f78b26-e385-4028-8aad-84cf0d3e2e0a" title="Permalink to this equation">#</a></span>\[\begin{align}
 	\left[\begin{matrix} x_1(t+1) \\ x_2(t+1) \\ x_3(t+1) \end{matrix}\right] &amp;= \left[\begin{matrix} x_1(t)  \\ x_2(t)\\ x_3(t)\end{matrix}\right] +  \left[\begin{matrix} w_1  \\ w_2\\ w_3\end{matrix}\right]y(t)
 \end{align}\]</div>
 <p>Or, equivalently:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a6ef9130-f59d-4aeb-8ebf-e9a8c08f4935">
-<span class="eqno">(10)<a class="headerlink" href="#equation-a6ef9130-f59d-4aeb-8ebf-e9a8c08f4935" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-de3ae582-2362-435c-af0c-a8bd0d3e1cdf">
+<span class="eqno">(10)<a class="headerlink" href="#equation-de3ae582-2362-435c-af0c-a8bd0d3e1cdf" title="Permalink to this equation">#</a></span>\[\begin{align}
 	\textbf{x}(t+1) = \textbf{x}(t) + \textbf{w}y(t)
 \end{align}\]</div>
 <p>where</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e068464a-cb23-4693-a384-0dbc8c9196d8">
-<span class="eqno">(11)<a class="headerlink" href="#equation-e068464a-cb23-4693-a384-0dbc8c9196d8" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-64a1d3e5-de20-49f4-9526-2b517fb1d2e2">
+<span class="eqno">(11)<a class="headerlink" href="#equation-64a1d3e5-de20-49f4-9526-2b517fb1d2e2" title="Permalink to this equation">#</a></span>\[\begin{align}
 \textbf{w} = \left[\begin{matrix}w_1 \\ w_2 \\ w_3 \end{matrix}\right]
 \end{align}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d32df225-e97a-4a42-ab5d-b36a47b66166">
-<span class="eqno">(12)<a class="headerlink" href="#equation-d32df225-e97a-4a42-ab5d-b36a47b66166" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-497899a1-930f-4662-851b-f2d58fcc9527">
+<span class="eqno">(12)<a class="headerlink" href="#equation-497899a1-930f-4662-851b-f2d58fcc9527" title="Permalink to this equation">#</a></span>\[\begin{align}
 \textbf{x}(t) = \left[\begin{matrix}x_1(t) \\ x_2(t) \\ x_3(t) \end{matrix}\right]
 \end{align}\]</div>
 </div>
@@ -568,8 +572,8 @@ x_3(t+1) = x_3(t) + w_3y(t)\end{split}\]</div>
 <div class="dropdown note admonition">
 <p class="admonition-title">Sigma Notation</p>
 <p>Let’s say you want to sum up the integers from 1 to 10. You could write <span class="math notranslate nohighlight">\(1 + 2 + 3 + 4 + \cdots + 10,\)</span> but there’s a more compact way to do it:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-27b2157d-60a7-4fad-8a53-6fecfdbb0a41">
-<span class="eqno">(13)<a class="headerlink" href="#equation-27b2157d-60a7-4fad-8a53-6fecfdbb0a41" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-fa0e9015-5b82-4272-9076-ab0e401973a5">
+<span class="eqno">(13)<a class="headerlink" href="#equation-fa0e9015-5b82-4272-9076-ab0e401973a5" title="Permalink to this equation">#</a></span>\[\begin{align}
 	\sum_{i=1}^{10} i
 \end{align}\]</div>
 <p>To turn something in sigma notation into a traditional sum, we look above and below the sigma (<span class="math notranslate nohighlight">\(\Sigma\)</span>) to find the range of our <em>index variable</em>, which, in this case, is <span class="math notranslate nohighlight">\(i.\)</span> <span class="math notranslate nohighlight">\(i\)</span> is basically acting like a placeholder here. To figure out our sum, we take the expression after the sigma (just <span class="math notranslate nohighlight">\(i\)</span>, in this case), substitute in the full range of values for <span class="math notranslate nohighlight">\(i,\)</span> and then add up everything we get. In plain English, the expression above means something like “the sum of all <span class="math notranslate nohighlight">\(i\)</span> as <span class="math notranslate nohighlight">\(i\)</span> ranges from 1 to 10.”</p>
@@ -586,21 +590,21 @@ x_3(t+1) = x_3(t) + w_3y(t)\end{split}\]</div>
 <a class="reference internal image-reference" href="_images/figure 4.png"><img alt="_images/figure%204.png" src="_images/figure%204.png" style="height: 400px;" /></a>
 </figure>
 <p>We can write a scalar equation describing <span class="math notranslate nohighlight">\(x\)</span>’s activity at <span class="math notranslate nohighlight">\(t+1\)</span> without too much trouble:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b9875a1e-a37a-41a5-bf45-53e08f597182">
-<span class="eqno">(14)<a class="headerlink" href="#equation-b9875a1e-a37a-41a5-bf45-53e08f597182" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-cfd8b43e-f294-4afa-a62c-ffaecd068cce">
+<span class="eqno">(14)<a class="headerlink" href="#equation-cfd8b43e-f294-4afa-a62c-ffaecd068cce" title="Permalink to this equation">#</a></span>\[\begin{align}
 x(t+1) &amp;= w_1y_1(t) + w_2y_2(t) + w_3y_3(t)
 \end{align}\]</div>
 <p>Or, using sigma notation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c9ebb5e0-53e1-4d06-ae2f-5f832f3e4384">
-<span class="eqno">(15)<a class="headerlink" href="#equation-c9ebb5e0-53e1-4d06-ae2f-5f832f3e4384" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e03065d6-e23e-4ed7-8942-5b9da360fc26">
+<span class="eqno">(15)<a class="headerlink" href="#equation-e03065d6-e23e-4ed7-8942-5b9da360fc26" title="Permalink to this equation">#</a></span>\[\begin{align}
 x(t+1) &amp;= \sum_{i=1}^3 w_iy_i(t)
 \end{align}\]</div>
 <p>Sigma notation is super useful for writing things compactly, but we’re still dealing with scalars here. How can we transform this into a vector equation? Turns out, there is a vector operation called the <b>dot product</b> that solves our problem for us.</p>
 <div class="note admonition">
 <p class="admonition-title">Definition</p>
 <p>The <em><strong>dot product</strong></em> of two vectors <span class="math notranslate nohighlight">\(\textbf{a}\)</span> and <span class="math notranslate nohighlight">\(\textbf{b}\)</span>, where <span class="math notranslate nohighlight">\(\textbf{a} = (a_1, a_2, \cdots, a_n)\)</span> and <span class="math notranslate nohighlight">\(\textbf{b} = (b_1, b_2, \cdots, b_n)\)</span> is simply:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f62335dd-7245-49d2-a159-7c98a511da0d">
-<span class="eqno">(16)<a class="headerlink" href="#equation-f62335dd-7245-49d2-a159-7c98a511da0d" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ac8ada31-ff51-4298-8d47-a5d565be5147">
+<span class="eqno">(16)<a class="headerlink" href="#equation-ac8ada31-ff51-4298-8d47-a5d565be5147" title="Permalink to this equation">#</a></span>\[\begin{align}
 \textbf{a}\cdot\textbf{b} &amp;= a_1b_1 + a_2b_2 + \cdots + a_nb_n\\
 &amp;= \sum_{i=1}^na_ib_i
 \end{align}\]</div>
@@ -649,8 +653,8 @@ x(t+1) &amp;= \sum_{i=1}^3 w_iy_i(t)
 <p>Compute the dot product of <span class="math notranslate nohighlight">\(\textbf{a}\)</span> and <span class="math notranslate nohighlight">\(\textbf{b},\)</span> where <span class="math notranslate nohighlight">\(\textbf{a} = \left[\begin{matrix} 3 \\ 5 \\ -2 \\ 0 \end{matrix}\right]\)</span> and <span class="math notranslate nohighlight">\(\textbf{b} = \left[\begin{matrix} 1 \\ 3 \\ 4 \\ -3 \end{matrix}\right]\)</span>.</p>
 <div class="seealso dropdown admonition">
 <p class="admonition-title">Solution</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f68e394f-dfdb-4295-95eb-339fc4f4db66">
-<span class="eqno">(17)<a class="headerlink" href="#equation-f68e394f-dfdb-4295-95eb-339fc4f4db66" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-1bddf393-eb2d-4e00-8f70-93b8a88535ff">
+<span class="eqno">(17)<a class="headerlink" href="#equation-1bddf393-eb2d-4e00-8f70-93b8a88535ff" title="Permalink to this equation">#</a></span>\[\begin{align}
  \left[\begin{matrix} 3 \\ 5 \\ -2 \\ 0 \end{matrix}\right] \cdot \left[\begin{matrix} 1 \\ 3 \\ 4 \\ -3 \end{matrix}\right] &amp;= (3\times 1) + (5 \times 3) + (-2 \times 4) + (0 \times -3)\\
  &amp;= 10
 \end{align}\]</div>
@@ -659,40 +663,40 @@ x(t+1) &amp;= \sum_{i=1}^3 w_iy_i(t)
 <div class="note admonition">
 <p class="admonition-title">Exercise</p>
 <p>Our scalar equation for the activity of the postsynaptic neuron, <span class="math notranslate nohighlight">\(x(t+1),\)</span> is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2add092a-3692-405a-996a-9068a01ff3d2">
-<span class="eqno">(18)<a class="headerlink" href="#equation-2add092a-3692-405a-996a-9068a01ff3d2" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-634365f6-0d0c-41b4-9161-8743ba7d0301">
+<span class="eqno">(18)<a class="headerlink" href="#equation-634365f6-0d0c-41b4-9161-8743ba7d0301" title="Permalink to this equation">#</a></span>\[\begin{align}
 x(t+1) &amp;= w_1y_1(t) + w_2y_2(t) + w_3y_3(t)
 \end{align}\]</div>
 <p>Use the dot product to rewrite this as a vector equation.</p>
 <div class="seealso dropdown admonition">
 <p class="admonition-title">Solution</p>
 <p>Using sigma notation, we can say</p>
-<div class="amsmath math notranslate nohighlight" id="equation-67e06b19-1fa6-42ee-9710-3b15a261709b">
-<span class="eqno">(19)<a class="headerlink" href="#equation-67e06b19-1fa6-42ee-9710-3b15a261709b" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e02f83a3-caba-44e5-bd0f-794ce188fb82">
+<span class="eqno">(19)<a class="headerlink" href="#equation-e02f83a3-caba-44e5-bd0f-794ce188fb82" title="Permalink to this equation">#</a></span>\[\begin{align}
 x(t+1) = \sum_{i=1}^3w_iy_i(t)
 \end{align}\]</div>
 <p>You should recognize this expression as equivalent to a dot product. In particular, if</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0995b2c3-a17f-450d-a36a-2f3985a580a7">
-<span class="eqno">(20)<a class="headerlink" href="#equation-0995b2c3-a17f-450d-a36a-2f3985a580a7" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-0cb9a08e-b8d8-485b-b473-eb7f337b0763">
+<span class="eqno">(20)<a class="headerlink" href="#equation-0cb9a08e-b8d8-485b-b473-eb7f337b0763" title="Permalink to this equation">#</a></span>\[\begin{align}
 \textbf{y}(t) = \left[\begin{matrix}y_1(t) \\ y_2(t) \\ y_3(t) \end{matrix}\right]
 \end{align}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-878f0f45-35b0-4a61-b45f-0b3afa0a1242">
-<span class="eqno">(21)<a class="headerlink" href="#equation-878f0f45-35b0-4a61-b45f-0b3afa0a1242" title="Permalink to this equation">#</a></span>\[\begin{align}\textbf{w} = \left[\begin{matrix}w_1 \\ w_2 \\ w_3 \end{matrix}\right]
+<div class="amsmath math notranslate nohighlight" id="equation-5379b910-d756-4d5e-9cd0-6a33a40fa250">
+<span class="eqno">(21)<a class="headerlink" href="#equation-5379b910-d756-4d5e-9cd0-6a33a40fa250" title="Permalink to this equation">#</a></span>\[\begin{align}\textbf{w} = \left[\begin{matrix}w_1 \\ w_2 \\ w_3 \end{matrix}\right]
 \end{align}\]</div>
 <p>then</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1a130e18-a050-4916-a5e0-e32dd4099b56">
-<span class="eqno">(22)<a class="headerlink" href="#equation-1a130e18-a050-4916-a5e0-e32dd4099b56" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ae806698-4620-4733-a4d3-171088cbe464">
+<span class="eqno">(22)<a class="headerlink" href="#equation-ae806698-4620-4733-a4d3-171088cbe464" title="Permalink to this equation">#</a></span>\[\begin{align}
 x(t+1) &amp;= \textbf{w}\cdot\textbf{y}(t)
 \end{align}\]</div>
 </div>
 </div>
 <p>The dot product can be written in a number of different ways. You should be able to recognize all of them. For two vectors <span class="math notranslate nohighlight">\(\textbf{a} = \left[\begin{matrix}a_1 \\ a_2 \\ a_3 \end{matrix}\right]\)</span> and <span class="math notranslate nohighlight">\(\textbf{b} = \left[\begin{matrix}b_1 \\ b_2 \\ b_3 \end{matrix}\right]\)</span>, all of the following expressions are equivalent:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-62b436d9-3471-41b0-b8c2-8723e529510e">
-<span class="eqno">(23)<a class="headerlink" href="#equation-62b436d9-3471-41b0-b8c2-8723e529510e" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-b33385a0-f77d-4f3f-83e6-d00fa1f88b2c">
+<span class="eqno">(23)<a class="headerlink" href="#equation-b33385a0-f77d-4f3f-83e6-d00fa1f88b2c" title="Permalink to this equation">#</a></span>\[\begin{align}
 \textbf{a} &amp;\cdot \textbf{b} \end{align}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-ec06c1f4-089a-4cc1-b516-bcf981f84094">
-<span class="eqno">(24)<a class="headerlink" href="#equation-ec06c1f4-089a-4cc1-b516-bcf981f84094" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-8e0608d8-ef39-4cc8-a43f-914efebe7abd">
+<span class="eqno">(24)<a class="headerlink" href="#equation-8e0608d8-ef39-4cc8-a43f-914efebe7abd" title="Permalink to this equation">#</a></span>\[\begin{align}
 \left[\begin{matrix}a_1 \\ a_2 \\ a_3 \end{matrix}\right]\cdot\left[\begin{matrix}b_1 \\ b_2 \\ b_3 \end{matrix}\right]
 \end{align}\]</div>
 <div class="math notranslate nohighlight" id="equation-eq3">
@@ -712,15 +716,15 @@ x(t+1) &amp;= \textbf{w}\cdot\textbf{y}(t)
 <p>Write the three scalar equations describing how the activity levels of <span class="math notranslate nohighlight">\(x_1,\)</span> <span class="math notranslate nohighlight">\(x_2,\)</span> and <span class="math notranslate nohighlight">\(x_3\)</span> evolve in time. Then, rewrite each of those scalar equations as a vector equation.</p>
 <div class="seealso dropdown admonition">
 <p class="admonition-title">Solution</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9f37c1f6-7f8c-4905-9380-719ded39554b">
-<span class="eqno">(26)<a class="headerlink" href="#equation-9f37c1f6-7f8c-4905-9380-719ded39554b" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-c33d446c-f68a-44fa-b556-c29dbb5189da">
+<span class="eqno">(26)<a class="headerlink" href="#equation-c33d446c-f68a-44fa-b556-c29dbb5189da" title="Permalink to this equation">#</a></span>\[\begin{align}
 	x_1(t+1) &amp;= x_1(t) + w_{11}y_1(t) + w_{12}y_2(t) + w_{13}y_3(t)\\
 	x_2(t+1) &amp;= x_2(t) + w_{21}y_1(t) + w_{22}y_2(t) + w_{23}y_3(t)\\
 	x_3(t+1) &amp;= x_3(t) + w_{31}y_1(t) + w_{32}y_2(t) + w_{33}y_3(t)
 \end{align}\]</div>
 <p>Taken separately, each <span class="math notranslate nohighlight">\(x_i\)</span> neuron is just a single postsynaptic neuron with three presynaptic inputs, which is exactly the situation we had above. So to turn these into vector equations, we just have to use the dot product:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a777b8e5-defe-4a9f-bc7a-d425fd6bdd5b">
-<span class="eqno">(27)<a class="headerlink" href="#equation-a777b8e5-defe-4a9f-bc7a-d425fd6bdd5b" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-7e4fb753-b245-42b5-9a61-ef29e19059dc">
+<span class="eqno">(27)<a class="headerlink" href="#equation-7e4fb753-b245-42b5-9a61-ef29e19059dc" title="Permalink to this equation">#</a></span>\[\begin{align}
 	x_1(t+1) &amp;= x_1(t) + \left[\begin{matrix}w_{11} \\ w_{12} \\ w_{13} \end{matrix}\right]\cdot\left[\begin{matrix}y_1(t) \\ y_2(t) \\ y_3(t) \end{matrix}\right]\\
 	x_2(t+1) &amp;= x_2(t) + \left[\begin{matrix}w_{21} \\ w_{22} \\ w_{23} \end{matrix}\right]\cdot\left[\begin{matrix}y_1(t) \\ y_2(t) \\ y_3(t) \end{matrix}\right]\\
 	x_3(t+1) &amp;= x_3(t) + \left[\begin{matrix}w_{31} \\ w_{32} \\ w_{33} \end{matrix}\right]\cdot\left[\begin{matrix}y_1(t) \\ y_2(t) \\ y_3(t) \end{matrix}\right]
@@ -728,8 +732,8 @@ x(t+1) &amp;= \textbf{w}\cdot\textbf{y}(t)
 </div>
 </div>
 <p>Using the notation we learned above, where a dot product can be written as a row vector followed by a column vector, the equations describing our network are:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3ef7a1b2-f576-493d-992a-82e7a33e4353">
-<span class="eqno">(28)<a class="headerlink" href="#equation-3ef7a1b2-f576-493d-992a-82e7a33e4353" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-11b86d1e-942b-44f9-9eaf-be6bed6ba4c1">
+<span class="eqno">(28)<a class="headerlink" href="#equation-11b86d1e-942b-44f9-9eaf-be6bed6ba4c1" title="Permalink to this equation">#</a></span>\[\begin{align}
 		x_1(t+1) &amp;= x_1(t) + \left[\begin{matrix} w_{11} &amp; w_{12} &amp; w_{13} \end{matrix}\right]\left[\begin{matrix} y_1(t) \\ y_2(t) \\ y_3(t) \end{matrix} \right]\\
 		x_2(t+1) &amp;= x_2(t) + \left[\begin{matrix} w_{21} &amp; w_{22} &amp; w_{23} \end{matrix}\right]\left[\begin{matrix} y_1(t) \\ y_2(t) \\ y_3(t) \end{matrix} \right]\\
 			x_3(t+1) &amp;= x_3(t) + \left[\begin{matrix} w_{31} &amp; w_{32} &amp; w_{33} \end{matrix}\right]\left[\begin{matrix} y_1(t) \\ y_2(t) \\ y_3(t) \end{matrix} \right]
@@ -744,14 +748,14 @@ x(t+1) &amp;= \textbf{w}\cdot\textbf{y}(t)
 <div class="math notranslate nohighlight" id="equation-eq4">
 <span class="eqno">(29)<a class="headerlink" href="#equation-eq4" title="Link to this equation">#</a></span>\[\begin{split}\left[\begin{matrix} x_1(t+1)\\x_2(t+1)\\x_3(t+1) \end{matrix}\right] &amp;=   \left[\begin{matrix} x_1(t)\\x_2(t)\\x_3(t) \end{matrix}\right] +  \left[\begin{matrix} w_{11} &amp; w_{12} &amp; w_{13} \\ w_{21} &amp; w_{22} &amp; w_{23} \\ w_{31} &amp; w_{32} &amp; w_{33}  \end{matrix}\right]\left[\begin{matrix} y_1(t) \\ y_2(t) \\ y_3(t) \end{matrix} \right]\end{split}\]</div>
 <p>Let’s break down <a class="reference internal" href="#equation-eq4">(29)</a> to figure out how it works. We can expand the last portion, where we multiply our matrix <span class="math notranslate nohighlight">\(\textbf{W}\)</span> by the vector:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f329d094-cb1c-41a4-9259-e18d59c93aa5">
-<span class="eqno">(30)<a class="headerlink" href="#equation-f329d094-cb1c-41a4-9259-e18d59c93aa5" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-004d5962-aab8-41f9-847c-9531b1718d2e">
+<span class="eqno">(30)<a class="headerlink" href="#equation-004d5962-aab8-41f9-847c-9531b1718d2e" title="Permalink to this equation">#</a></span>\[\begin{align}
  \left[\begin{matrix} w_{11} &amp; w_{12} &amp; w_{13} \\ w_{21} &amp; w_{22} &amp; w_{23} \\ w_{31} &amp; w_{32} &amp; w_{33}  \end{matrix}\right]\left[\begin{matrix} y_1(t) \\ y_2(t) \\ y_3(t) \end{matrix} \right] &amp;=  \left[\begin{matrix} w_{11}y_1(t) + w_{12}y_2(t) + w_{13}y_3(t) \\ w_{21}y_1(t) + w_{22}y_2(t) + w_{23}y_3(t) \\ w_{31}y_1(t) + w_{32}y_2(t) + w_{33}y_3(t)  \end{matrix}\right]
 \end{align}\]</div>
 <p>We’ve taken a 3x3 matrix, multiplied it by a 3x1 vector, and obtain another 3x1 vector. And each entry in that 3x1 vector is the <strong>dot product</strong> of one of the rows of <span class="math notranslate nohighlight">\(\textbf{W}\)</span> and <span class="math notranslate nohighlight">\(\textbf{y}(t).\)</span> <strong>Matrix multiplication is just taking lots and lots of dot products.</strong></p>
 <p>We just multiplied a matrix by a vector, but we can also multiply two matrices together. If <span class="math notranslate nohighlight">\(\color{red}{\textbf{a}} \, \color{black}{=} \, \left[\begin{matrix}\color{red}{a_1} \\ \color{red}{a_2} \\ \color{red}{a_3} \end{matrix}\right],\)</span> <span class="math notranslate nohighlight">\(\color{orange}{\textbf{b}} \, \color{black} \, = \left[\begin{matrix}\color{orange}{b_1} \\ \color{orange}{b_2} \\ \color{orange}{b_3} \end{matrix}\right],\)</span> etc:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e69b1801-c55a-4858-be57-da18a0e00bbc">
-<span class="eqno">(31)<a class="headerlink" href="#equation-e69b1801-c55a-4858-be57-da18a0e00bbc" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-eab1cd4b-734a-40f7-aafd-019ef27a3ff0">
+<span class="eqno">(31)<a class="headerlink" href="#equation-eab1cd4b-734a-40f7-aafd-019ef27a3ff0" title="Permalink to this equation">#</a></span>\[\begin{align}
 \left[\begin{matrix} \color{red}{a_1} &amp; \color{red}{a_2} &amp; \color{red}{a_3}\\
 \color{orange}{b_1} &amp; \color{orange}{b_2} &amp; \color{orange}{b_3}\\
 \color{yellow}{c_1} &amp; \color{yellow}{c_2} &amp; \color{yellow}{c_3}
@@ -831,21 +835,21 @@ x(t+1) &amp;= \textbf{w}\cdot\textbf{y}(t)
 </div>
 </div>
 <p>And so now we can understand why</p>
-<div class="amsmath math notranslate nohighlight" id="equation-58cd0e61-7d20-4d79-a06f-ac3aba6a1396">
-<span class="eqno">(32)<a class="headerlink" href="#equation-58cd0e61-7d20-4d79-a06f-ac3aba6a1396" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ab4454c1-4056-45fc-91bb-06528906bd56">
+<span class="eqno">(32)<a class="headerlink" href="#equation-ab4454c1-4056-45fc-91bb-06528906bd56" title="Permalink to this equation">#</a></span>\[\begin{align}
 \left[\begin{matrix} a_1 &amp; a_2 &amp; a_3 \end{matrix}\right] \left[\begin{matrix}b_1\\ b_2\\ b_3\end{matrix}\right]
 \end{align}\]</div>
 <p>is a dot product. It’s matrix multiplication of a matrix with a single row and a matrix with a single column.</p>
 <section id="special-matrices">
 <h3>Special Matrices<a class="headerlink" href="#special-matrices" title="Link to this heading">#</a></h3>
 <p>There are a couple more facts about matrices that we need to cover. First off is one really important matrix, the <em><strong>identity matrix</strong></em>. There are identity matrices of every square dimension (i.e. <span class="math notranslate nohighlight">\(1\times 1\)</span>, <span class="math notranslate nohighlight">\(2\times 2\)</span>, <span class="math notranslate nohighlight">\(3 \times 3\)</span>, etc.), but here’s what the <span class="math notranslate nohighlight">\(3 \times 3\)</span> identity matrix looks like:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-98681de2-469f-4e3b-a251-f26ac13007e7">
-<span class="eqno">(33)<a class="headerlink" href="#equation-98681de2-469f-4e3b-a251-f26ac13007e7" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-c0eed506-ec06-43e7-87e9-357c64c48636">
+<span class="eqno">(33)<a class="headerlink" href="#equation-c0eed506-ec06-43e7-87e9-357c64c48636" title="Permalink to this equation">#</a></span>\[\begin{align}
 	\textbf{I} &amp;=\left[ \begin{matrix}1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{matrix}\right]
 \end{align}\]</div>
 <p>It follows a similar pattern for all dimensions—the diagonal is all 1s, and the other entries are all 0s. But what’s the point of it? Well, let’s try multiplying it by a generic 3-dimensional vector, <span class="math notranslate nohighlight">\(\left[\begin{matrix} a\\ b \\ c \end{matrix} \right]\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-00d90722-4c21-4950-ba46-c3316d8472a2">
-<span class="eqno">(34)<a class="headerlink" href="#equation-00d90722-4c21-4950-ba46-c3316d8472a2" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-da8e7d4e-eade-4090-a64b-6764c1ad478e">
+<span class="eqno">(34)<a class="headerlink" href="#equation-da8e7d4e-eade-4090-a64b-6764c1ad478e" title="Permalink to this equation">#</a></span>\[\begin{align}
 	\textbf{I} \cdot \left[\begin{matrix} a\\ b \\ c \end{matrix} \right] &amp;= \left[ \begin{matrix}1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{matrix}\right] \left[\begin{matrix} a\\ b \\ c \end{matrix} \right]\\
 	&amp;= \left[\begin{matrix} a\\ b \\ c \end{matrix} \right]
 \end{align}\]</div>
@@ -872,8 +876,8 @@ x(t+1) &amp;= \textbf{w}\cdot\textbf{y}(t)
 </div>
 </div>
 <p>Next, let’s discuss the <em><strong>transpose</strong></em>. This is a really easy one, so here’s an example of how it works:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a865ed1c-0005-4bf7-9aec-24e28c93755e">
-<span class="eqno">(35)<a class="headerlink" href="#equation-a865ed1c-0005-4bf7-9aec-24e28c93755e" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-2e561d74-30a8-477c-ba6e-54eadd845bf6">
+<span class="eqno">(35)<a class="headerlink" href="#equation-2e561d74-30a8-477c-ba6e-54eadd845bf6" title="Permalink to this equation">#</a></span>\[\begin{align}
 	\left[\begin{matrix}  1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6 \\ 7 &amp; 8 &amp; 9 \end{matrix} \right]^{\intercal} &amp;= \left[\begin{matrix}  1 &amp; 4 &amp; 7 \\ 2 &amp; 5 &amp; 8 \\ 3 &amp; 6 &amp; 9 \end{matrix} \right]
 \end{align}\]</div>
 <p>The transpose just reflects a matrix over its diagonal.</p>
@@ -947,8 +951,8 @@ x(t+1) &amp;= \textbf{w}\cdot\textbf{y}(t)
 </div>
 <p>Okay, what’s the point of the determinant? There are actually lots of reasons it’s important, but, for the moment, our biggest concern is how it factors into the <strong>matrix inverse</strong>.</p>
 <p>Just like the inverse of a scalar <span class="math notranslate nohighlight">\(a\)</span>, which is equal to <span class="math notranslate nohighlight">\(\frac{1}{a}\)</span>, the inverse of a matrix <span class="math notranslate nohighlight">\(A\)</span>, which we write <span class="math notranslate nohighlight">\(A^{-1}\)</span>, essentially ”cancels” the matrix when you multiply them. In other terms:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0d36246c-0503-4553-9e7b-6459e7f9837a">
-<span class="eqno">(36)<a class="headerlink" href="#equation-0d36246c-0503-4553-9e7b-6459e7f9837a" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-0a5a2e17-3404-4802-861e-9fde521153ef">
+<span class="eqno">(36)<a class="headerlink" href="#equation-0a5a2e17-3404-4802-861e-9fde521153ef" title="Permalink to this equation">#</a></span>\[\begin{align}
 a \times a^{-1} &amp;= a\times\frac{1}{a}\\
 &amp;= 1\\
 AA^{-1} &amp;= I
@@ -959,13 +963,13 @@ AA^{-1} &amp;= I
 <p>The <em><strong>inverse</strong></em> of an <span class="math notranslate nohighlight">\(n\times n\)</span> matrix <span class="math notranslate nohighlight">\(\textbf{A}\)</span>, <span class="math notranslate nohighlight">\(\textbf{A}^{-1},\)</span> is the <span class="math notranslate nohighlight">\(n \times n\)</span> matrix such that <span class="math notranslate nohighlight">\(\textbf{A}\textbf{A}^{-1} = \textbf{A}^{-1}\textbf{A} = \textbf{I}.\)</span></p>
 </div>
 <p>Why care about the matrix inverse? Well, let’s say we have a matrix equation:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-542479a7-c975-4f71-991f-62f7fff12f95">
-<span class="eqno">(37)<a class="headerlink" href="#equation-542479a7-c975-4f71-991f-62f7fff12f95" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-c57061d2-a8a0-4932-a109-7bc225f90f68">
+<span class="eqno">(37)<a class="headerlink" href="#equation-c57061d2-a8a0-4932-a109-7bc225f90f68" title="Permalink to this equation">#</a></span>\[\begin{align}
 \textbf{y} = \textbf{A}\textbf{x}
 \end{align}\]</div>
 <p>We know <span class="math notranslate nohighlight">\(\textbf{A}\)</span> and <span class="math notranslate nohighlight">\(\textbf{y}\)</span>, and we want to solve for <span class="math notranslate nohighlight">\(\textbf{x}.\)</span> If <span class="math notranslate nohighlight">\(\textbf{A}\)</span>, <span class="math notranslate nohighlight">\(\textbf{x}\)</span>, and <span class="math notranslate nohighlight">\(\textbf{y}\)</span> were all scalars, we could just divide both sides by <span class="math notranslate nohighlight">\(\textbf{A}\)</span>. But there’s no such thing as matrix division! Instead, we can multiply both sides by <span class="math notranslate nohighlight">\(\textbf{A}^{-1}\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1084046a-a133-49ee-b5a6-e516fcab111a">
-<span class="eqno">(38)<a class="headerlink" href="#equation-1084046a-a133-49ee-b5a6-e516fcab111a" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-abec6e16-a014-46f8-af09-f6aa4a928516">
+<span class="eqno">(38)<a class="headerlink" href="#equation-abec6e16-a014-46f8-af09-f6aa4a928516" title="Permalink to this equation">#</a></span>\[\begin{align}
 \textbf{A}^{-1}\textbf{y} &amp;= \textbf{A}^{-1} \textbf{A}\textbf{x}\\
 &amp;= \textbf{I}\textbf{x}\\
 &amp;= \textbf{x}\\
@@ -1032,8 +1036,8 @@ AA^{-1} &amp;= I
 <p>Carry out the matrix multiplication to demonstrate that <span class="math notranslate nohighlight">\(\frac{1}{ad - cb}\begin{bmatrix} d &amp; - b \\ -c &amp; a \end{bmatrix}\)</span> really is the matrix inverse of <span class="math notranslate nohighlight">\(\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}\)</span>.</p>
 <div class="seealso dropdown admonition">
 <p class="admonition-title">Solution</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b7764420-5c5b-4dc1-ac5a-00d858f3a34b">
-<span class="eqno">(39)<a class="headerlink" href="#equation-b7764420-5c5b-4dc1-ac5a-00d858f3a34b" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-42cf164c-f56b-44fe-945c-8a1e5044a5ac">
+<span class="eqno">(39)<a class="headerlink" href="#equation-42cf164c-f56b-44fe-945c-8a1e5044a5ac" title="Permalink to this equation">#</a></span>\[\begin{align}
 \frac{1}{ad - cb}\begin{bmatrix} d &amp; - b \\ -c &amp; a \end{bmatrix}\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix} &amp;= \frac{1}{ad - cb} \begin{bmatrix} da - bc &amp; 0 \\ 0 &amp; -cb + ad \end{bmatrix}\\
 &amp;= \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}\\
 &amp;= I
@@ -1045,13 +1049,13 @@ AA^{-1} &amp;= I
 <section id="the-geometric-interpretation">
 <h2>The Geometric Interpretation<a class="headerlink" href="#the-geometric-interpretation" title="Link to this heading">#</a></h2>
 <p>Let’s say we have two neurons, <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(x_2,\)</span> and we’re tracking their activities in a vector</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a6ab13e4-3872-4585-bdc6-a2026b6643cd">
-<span class="eqno">(40)<a class="headerlink" href="#equation-a6ab13e4-3872-4585-bdc6-a2026b6643cd" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e3fed543-2a5c-45b5-ab4f-d9504e41e8de">
+<span class="eqno">(40)<a class="headerlink" href="#equation-e3fed543-2a5c-45b5-ab4f-d9504e41e8de" title="Permalink to this equation">#</a></span>\[\begin{align}
 \textbf{x}(t) &amp;= \left[\begin{matrix} x_1(t) \\ x_2(t) \end{matrix}\right]
 \end{align}\]</div>
 <p>At some time <span class="math notranslate nohighlight">\(t_1\)</span>, we might measure their activites and find</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ac3fb776-8561-4eab-93f4-db19945a2d5f">
-<span class="eqno">(41)<a class="headerlink" href="#equation-ac3fb776-8561-4eab-93f4-db19945a2d5f" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-020ab2f6-edf4-432b-94b3-0709624f1c28">
+<span class="eqno">(41)<a class="headerlink" href="#equation-020ab2f6-edf4-432b-94b3-0709624f1c28" title="Permalink to this equation">#</a></span>\[\begin{align}
 x(t_1) &amp;= \left[\begin{matrix} 1 \\ 2 \end{matrix}\right]
 \end{align}\]</div>
 <p>A reasonable thing to do would be to plot this data point, with the <span class="math notranslate nohighlight">\(x\)</span>-axis representing the <span class="math notranslate nohighlight">\(x_1\)</span> neuron and the <span class="math notranslate nohighlight">\(y\)</span>-axis representing the <span class="math notranslate nohighlight">\(x_2\)</span> neuron.</p>
@@ -1067,8 +1071,8 @@ x(t_1) &amp;= \left[\begin{matrix} 1 \\ 2 \end{matrix}\right]
 <a class="reference internal image-reference" href="_images/geofig2.png"><img alt="_images/geofig2.png" src="_images/geofig2.png" style="height: 400px;" /></a>
 </figure>
 <p>We can easily calcualte that</p>
-<div class="amsmath math notranslate nohighlight" id="equation-76182cde-f612-4db7-828f-14bbd8f2f09d">
-<span class="eqno">(42)<a class="headerlink" href="#equation-76182cde-f612-4db7-828f-14bbd8f2f09d" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-4bb17ca4-b669-46cb-8288-6ecf999f3107">
+<span class="eqno">(42)<a class="headerlink" href="#equation-4bb17ca4-b669-46cb-8288-6ecf999f3107" title="Permalink to this equation">#</a></span>\[\begin{align}
 \left[\begin{matrix} 1 \\ 2 \end{matrix}\right] + \left[\begin{matrix} 4 \\ 1 \end{matrix}\right] = \left[\begin{matrix} 5 \\ 3 \end{matrix}\right]
 \end{align}\]</div>
 <p>Let’s add that sum to our plot.</p>
@@ -1081,13 +1085,13 @@ x(t_1) &amp;= \left[\begin{matrix} 1 \\ 2 \end{matrix}\right]
 </figure>
 <p>The sum, in red, is just the diagonal of a parallelogram with sides defined by our two vectors, in green and blue. In other words, you can take the sum of two vectors, geometrically, by stacking them end-to-end and drawing a line between the start of one vector and the end of the other.</p>
 <p>There’s also a straightforward geometric interpretation of scalar multiplication. We know</p>
-<div class="amsmath math notranslate nohighlight" id="equation-47806179-1af4-46b9-a58a-bb6e4741f432">
-<span class="eqno">(43)<a class="headerlink" href="#equation-47806179-1af4-46b9-a58a-bb6e4741f432" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-cac8edb6-979b-4b71-8672-7b892e4e4304">
+<span class="eqno">(43)<a class="headerlink" href="#equation-cac8edb6-979b-4b71-8672-7b892e4e4304" title="Permalink to this equation">#</a></span>\[\begin{align}
 0.5 \times \left[\begin{matrix} 1 \\ 2 \end{matrix}\right] = \left[\begin{matrix} 0.5 \\ 1\end{matrix}\right]
 \end{align}\]</div>
 <p>and</p>
-<div class="amsmath math notranslate nohighlight" id="equation-405e68fb-7994-4246-ae3c-501bdefb234c">
-<span class="eqno">(44)<a class="headerlink" href="#equation-405e68fb-7994-4246-ae3c-501bdefb234c" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-6a78b546-9c58-4af2-aa47-a074d196e8f7">
+<span class="eqno">(44)<a class="headerlink" href="#equation-6a78b546-9c58-4af2-aa47-a074d196e8f7" title="Permalink to this equation">#</a></span>\[\begin{align}
 2 \times \left[\begin{matrix} 1 \\ 2\end{matrix}\right] = \left[\begin{matrix} 2 \\ 4\end{matrix}\right]
 \end{align}\]</div>
 <p>What does this look like when we plot it? Multiplying our original vector by 0.5 yields:</p>
@@ -1105,8 +1109,8 @@ x(t_1) &amp;= \left[\begin{matrix} 1 \\ 2 \end{matrix}\right]
 <p>A vector’s <em><strong>norm</strong></em> is simply its length.</p>
 </div>
 <p>So the norm of <span class="math notranslate nohighlight">\(\left[\begin{matrix} 1 \\ 2 \end{matrix}\right]\)</span> is just, by the Pythagorean theorem, <span class="math notranslate nohighlight">\(\sqrt{1^2 + 2^2} = \sqrt{5}.\)</span> In general, the norm of a vector <span class="math notranslate nohighlight">\(\textbf{x} = \left[\begin{matrix} x_1 \\ x_2 \\ x_3 \end{matrix}\right]\)</span> is <span class="math notranslate nohighlight">\(\sqrt{x_1^2 + x_2^2 + x_3^2}.\)</span> Or,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-afb91a17-1c19-42fb-8f48-692d777503d6">
-<span class="eqno">(45)<a class="headerlink" href="#equation-afb91a17-1c19-42fb-8f48-692d777503d6" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-6b7ac467-538e-4fc8-a103-c3bb640181f7">
+<span class="eqno">(45)<a class="headerlink" href="#equation-6b7ac467-538e-4fc8-a103-c3bb640181f7" title="Permalink to this equation">#</a></span>\[\begin{align}
 	\lVert x \rVert &amp;= \sqrt{x_1^2 + x_2^2 + x_3^2}
 \end{align}\]</div>
 <p>Finally, there’s also a straightfoward geometric interpretation of the <a class="reference internal" href="#dotproduct"><span class="std std-ref">dot product</span></a>. Let’s return to our two vectors.</p>
@@ -1114,18 +1118,18 @@ x(t_1) &amp;= \left[\begin{matrix} 1 \\ 2 \end{matrix}\right]
 <a class="reference internal image-reference" href="_images/geofig2.png"><img alt="_images/geofig2.png" src="_images/geofig2.png" style="height: 400px;" /></a>
 </figure>
 <p>We know that</p>
-<div class="amsmath math notranslate nohighlight" id="equation-27073dd9-2bf2-4cb1-8e43-8154a43a7d3e">
-<span class="eqno">(46)<a class="headerlink" href="#equation-27073dd9-2bf2-4cb1-8e43-8154a43a7d3e" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-f7249fcd-9252-4bc2-b067-e709f3ace028">
+<span class="eqno">(46)<a class="headerlink" href="#equation-f7249fcd-9252-4bc2-b067-e709f3ace028" title="Permalink to this equation">#</a></span>\[\begin{align}
 \left[\begin{matrix}1 &amp; 2 \end{matrix}\right] \left[\begin{matrix} 4 \\ 1 \end{matrix}\right] &amp;= 6
 \end{align}\]</div>
 <p>But there’s another way to calculate the dot product. If we call our vectors <span class="math notranslate nohighlight">\(\textbf{a}\)</span> and <span class="math notranslate nohighlight">\(\textbf{b}\)</span>, and the angle between them <span class="math notranslate nohighlight">\(\theta\)</span>, it turns out that our dot product is equal to</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d356ef22-96d1-4834-ba79-eb20e3f00c48">
-<span class="eqno">(47)<a class="headerlink" href="#equation-d356ef22-96d1-4834-ba79-eb20e3f00c48" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-05b5c304-b47f-4305-9946-b7b96add944c">
+<span class="eqno">(47)<a class="headerlink" href="#equation-05b5c304-b47f-4305-9946-b7b96add944c" title="Permalink to this equation">#</a></span>\[\begin{align}
 	\lVert \textbf{a} \rVert \lVert \textbf{b} \rVert \cos\theta
 \end{align}\]</div>
 <p>Let’s demonstrate that for our vectors. Using trigonometry, we can find that the angle between our vectors is approximately <span class="math notranslate nohighlight">\(49.4^{\circ}.\)</span> So our dot product is equal to</p>
-<div class="amsmath math notranslate nohighlight" id="equation-087fbc3d-f39e-4025-aa27-73ad389e05bf">
-<span class="eqno">(48)<a class="headerlink" href="#equation-087fbc3d-f39e-4025-aa27-73ad389e05bf" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e892383d-d48e-44b3-8b78-5bf8aaba61dc">
+<span class="eqno">(48)<a class="headerlink" href="#equation-e892383d-d48e-44b3-8b78-5bf8aaba61dc" title="Permalink to this equation">#</a></span>\[\begin{align}
 \lVert \textbf{a} \rVert \lVert \textbf{b} \rVert \cos\theta &amp;= \sqrt{1^2 + 2^2}\times \sqrt{4^2 + 1^2}\times\cos 49.4\\
 &amp;= 6
 \end{align}\]</div>
@@ -1141,13 +1145,13 @@ x(t_1) &amp;= \left[\begin{matrix} 1 \\ 2 \end{matrix}\right]
 <div class="seealso dropdown admonition">
 <p class="admonition-title">Solution</p>
 <p>Based on the geometric definition of the dot product, we can say (calling our vectors <span class="math notranslate nohighlight">\(\textbf{a}\)</span> and <span class="math notranslate nohighlight">\(\textbf{b}\)</span>):</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d0c3be28-3159-48aa-bee8-84a1f535fe23">
-<span class="eqno">(49)<a class="headerlink" href="#equation-d0c3be28-3159-48aa-bee8-84a1f535fe23" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-a53d37d7-75b1-4ac9-aa9a-dee5b1e403b8">
+<span class="eqno">(49)<a class="headerlink" href="#equation-a53d37d7-75b1-4ac9-aa9a-dee5b1e403b8" title="Permalink to this equation">#</a></span>\[\begin{align}
 \lVert \textbf{a} \rVert \lVert \textbf{b} \rVert \cos\theta = 0
 \end{align}\]</div>
 <p>We know that <span class="math notranslate nohighlight">\(\lVert \textbf{a} \rVert\)</span> and <span class="math notranslate nohighlight">\(\lVert \textbf{b} \rVert\)</span> must be nonzero—that’s just the length of the vectors, and we were told our vectors are nonzero. So we must have</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a57a9d69-290b-4cab-a3d1-7b6d210aa28d">
-<span class="eqno">(50)<a class="headerlink" href="#equation-a57a9d69-290b-4cab-a3d1-7b6d210aa28d" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-bd9c274b-026c-4c85-8820-02b596acef1a">
+<span class="eqno">(50)<a class="headerlink" href="#equation-bd9c274b-026c-4c85-8820-02b596acef1a" title="Permalink to this equation">#</a></span>\[\begin{align}
 \cos\theta = 0
 \end{align}\]</div>
 <p>So <span class="math notranslate nohighlight">\(\theta = 90^{\circ}, 270^{\circ}, 450^{\circ},\)</span> etc.—all angles that have the vectors at right angles to each other.</p>
@@ -1193,8 +1197,8 @@ x(t_1) &amp;= \left[\begin{matrix} 1 \\ 2 \end{matrix}\right]
 <a class="reference internal image-reference" href="_images/basisfig1.png"><img alt="_images/basisfig1.png" src="_images/basisfig1.png" style="height: 400px;" /></a>
 </figure>
 <p>Using <span class="math notranslate nohighlight">\(\textbf{e}_1\)</span> and <span class="math notranslate nohighlight">\(\textbf{e}_2,\)</span> we can rewrite <span class="math notranslate nohighlight">\(\textbf{x}\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3c492ceb-af5b-4642-9be9-feffea956cac">
-<span class="eqno">(51)<a class="headerlink" href="#equation-3c492ceb-af5b-4642-9be9-feffea956cac" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-037b37fd-ff8f-4005-98d5-aad090d7f01d">
+<span class="eqno">(51)<a class="headerlink" href="#equation-037b37fd-ff8f-4005-98d5-aad090d7f01d" title="Permalink to this equation">#</a></span>\[\begin{align}
 \textbf{x} &amp;= 1\textbf{e}_1 + 2\textbf{e}_2
 \end{align}\]</div>
 <p>Note that our coefficients are just the first and second entries of <span class="math notranslate nohighlight">\(\textbf{x}\)</span>, respectively. So we just obtain <span class="math notranslate nohighlight">\(\textbf{x}\)</span> by scaling <span class="math notranslate nohighlight">\(\textbf{e}_1\)</span> by 1, scaling <span class="math notranslate nohighlight">\(\textbf{e}_2\)</span> by 2, and adding the result. Let’s visualize that:</p>
@@ -1226,18 +1230,18 @@ x(t_1) &amp;= \left[\begin{matrix} 1 \\ 2 \end{matrix}\right]
 </div>
 <p>The existence of different bases means that there are tons of different ways to write the same vector. The vector <span class="math notranslate nohighlight">\(\left[\begin{matrix} 2 \\ 4 \end{matrix}\right]\)</span> using the basis <span class="math notranslate nohighlight">\((\textbf{e}_1, \textbf{e}_2)\)</span> is equivalent to the vector <span class="math notranslate nohighlight">\(\left[\begin{matrix} 1 \\ 2 \end{matrix}\right]\)</span> using the basis <span class="math notranslate nohighlight">\(\left(\left[\begin{matrix} 2 \\ 0 \end{matrix}\right], \left[\begin{matrix} 0 \\ 2 \end{matrix}\right]\right).\)</span> (If that’s not clear, expand each vector as a linear combination of its respective basis.)</p>
 <p>Let’s visualize this. We know how to write our original vector, <span class="math notranslate nohighlight">\(\left[\begin{matrix} 1 \\ 2 \end{matrix}\right]\)</span>, in terms of the basis <span class="math notranslate nohighlight">\((\textbf{e}_1, \textbf{e}_2)\)</span>:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7a5bd002-b4b9-4386-857b-8fd2438f8524">
-<span class="eqno">(53)<a class="headerlink" href="#equation-7a5bd002-b4b9-4386-857b-8fd2438f8524" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-b4779842-16a1-45d9-837e-880fe8b40335">
+<span class="eqno">(53)<a class="headerlink" href="#equation-b4779842-16a1-45d9-837e-880fe8b40335" title="Permalink to this equation">#</a></span>\[\begin{align}
 \left[\begin{matrix} 1 \\ 2 \end{matrix}\right] &amp;= 1\textbf{e}_1 + 2\textbf{e}_2
 \end{align}\]</div>
 <p>Let’s use another basis: <span class="math notranslate nohighlight">\(\left(\left[\begin{matrix} 1 \\ 1 \end{matrix}\right], \left[\begin{matrix} -1 \\ 0 \end{matrix}\right]\right)\)</span>. We can see:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7be80274-c0af-46b3-a72f-bba5da3cbfa6">
-<span class="eqno">(54)<a class="headerlink" href="#equation-7be80274-c0af-46b3-a72f-bba5da3cbfa6" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-8e7ffb8b-6576-495b-a7f4-8c44c8116c4a">
+<span class="eqno">(54)<a class="headerlink" href="#equation-8e7ffb8b-6576-495b-a7f4-8c44c8116c4a" title="Permalink to this equation">#</a></span>\[\begin{align}
 \left[\begin{matrix} 1 \\ 2 \end{matrix}\right] &amp;= 2\left[\begin{matrix} 1 \\ 1 \end{matrix}\right] + 1\left[\begin{matrix} -1 \\ 0 \end{matrix}\right]
 \end{align}\]</div>
 <p>So in terms of our new basis, our vector is just <span class="math notranslate nohighlight">\(\left[\begin{matrix} 2 \\ 1 \end{matrix}\right].\)</span> We could write something like</p>
-<div class="amsmath math notranslate nohighlight" id="equation-71a41af7-0349-4f46-a9c3-3617e3eb86a1">
-<span class="eqno">(55)<a class="headerlink" href="#equation-71a41af7-0349-4f46-a9c3-3617e3eb86a1" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-3c194479-5981-442d-8cfc-ceb1d8f10961">
+<span class="eqno">(55)<a class="headerlink" href="#equation-3c194479-5981-442d-8cfc-ceb1d8f10961" title="Permalink to this equation">#</a></span>\[\begin{align}
 \left[\begin{matrix} 1 \\ 2 \end{matrix}\right]_{old} &amp;= \left[\begin{matrix} 2 \\ 1 \end{matrix}\right]_{new}
 \end{align}\]</div>
 <p>where the subscripts indicate the basis that we are using.</p>
@@ -1320,14 +1324,14 @@ x(t_1) &amp;= \left[\begin{matrix} 1 \\ 2 \end{matrix}\right]
 </div>
 </div>
 <p>It looks like the two neuros are firing exactly in sync! If we write out or data in the standard basis, it’s going to look something like</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ecaac124-c53f-4fbd-a944-bd12279da910">
-<span class="eqno">(56)<a class="headerlink" href="#equation-ecaac124-c53f-4fbd-a944-bd12279da910" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-b8cc1ee7-8231-4dbf-af7a-a0c9680aa99a">
+<span class="eqno">(56)<a class="headerlink" href="#equation-b8cc1ee7-8231-4dbf-af7a-a0c9680aa99a" title="Permalink to this equation">#</a></span>\[\begin{align}
 \left[\begin{matrix} 1.2 \\ 1.2 \end{matrix}\right],\left[\begin{matrix} 4.3 \\ 4.3 \end{matrix}\right], \left[\begin{matrix} 8.9 \\ 8.9 \end{matrix}\right], \cdots
 \end{align}\]</div>
 <p>It seems kind of silly to keep writing out both of these numbers. In an important sense, our data aren’t really two-dimensional—they are essentially one-dimensional. If we know the activity of one of the two neurons, we already know the activity of the other.</p>
 <p>Is there a way we can encode this insight? Yes! We can switch to a cleverly chosen basis—in this case, <span class="math notranslate nohighlight">\(\left(\left[\begin{matrix} 1 \\ 1 \end{matrix}\right],\left[\begin{matrix} 1 \\ -1 \end{matrix}\right]\right)\)</span>. In this new basis, our data look a lot simpler:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f628155a-519c-479a-85e6-86a4dacdb20d">
-<span class="eqno">(57)<a class="headerlink" href="#equation-f628155a-519c-479a-85e6-86a4dacdb20d" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-b8b6c4ca-3ca1-4351-8c6d-16914e06c075">
+<span class="eqno">(57)<a class="headerlink" href="#equation-b8b6c4ca-3ca1-4351-8c6d-16914e06c075" title="Permalink to this equation">#</a></span>\[\begin{align}
 \left[\begin{matrix} 1.2 \\ 0 \end{matrix}\right],\left[\begin{matrix} 4.3 \\ 0 \end{matrix}\right], \left[\begin{matrix} 8.9 \\ 0 \end{matrix}\right], \cdots
 \end{align}\]</div>
 <p>Now we can essentially ignore the second entry in each vector. By changing our basis, we’ve made a two-dimenional dataset one-dimensional.</p>
