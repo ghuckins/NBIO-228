@@ -1,0 +1,1089 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Probability &#8212; Mathematical Tools for Neuroscience</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Probability';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Convolution" href="Convolution.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/scary_brain.png" class="logo__image only-light" alt="Mathematical Tools for Neuroscience - Home"/>
+    <script>document.write(`<img src="_static/scary_brain.png" class="logo__image only-dark" alt="Mathematical Tools for Neuroscience - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to NBIO 228!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Linear Algebra</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Vectors%20and%20Matrices.html">Vectors and Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Eigenvectors%20and%20Eigenvalues.html">Eigenvectors and Eigenvalues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Principal%20Component%20Analysis.html">Principal Component Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Computational tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Machine%20Learning.html">Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Convolution.html">Convolution</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ghuckins/NBIO-228" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ghuckins/NBIO-228/issues/new?title=Issue%20on%20page%20%2FProbability.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Probability.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Probability</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-probability-theory">Basic Probability Theory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#events-and-sample-spaces">Events and Sample Spaces</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-rules">Probability Rules</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distributions">Probability Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables">Random Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-binomial-distribution">The Binomial Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-value-and-variance">Expected Value and Variance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-poisson-distribution">The Poisson Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-gaussian-distribution">The Gaussian Distribution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-modeling">Probabilistic Modeling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-likelihood-function">The Likelihood Function</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="probability">
+<h1>Probability<a class="headerlink" href="#probability" title="Link to this heading">#</a></h1>
+<p>It’s impossible to do experimental science without understanding probability. No matter what field you are in, probability permeates every aspect of the scientific process. Hypotheses often ask not whether changing a certain condition makes a particular outcome happen, but whether it makes that outcome <em>more or less likely</em>. And when we analyze data, we often ask: What’s the <em>probability</em> that I would have obtained this result, if my hypothesis were not true?</p>
+<p>Part of why we cover probability in this class is because neuroscience is an experimental science. But probability is also fundamental to how we understand the brain. We often talk about neurons like they are deterministic machines — as if a neuron that responds to a particular stimulus will always fire, and fire in exactly the same way, when the animal perceives that stimulus. But biology doesn’t work that way. Biology is random, and finicky — proteins flip-flop from one conformation to another, neurotransmitters drift across synapses, and ions careen about the cell. All of this means that there’s a high degree of randomness in how neurons behave. We use the tools of probability to get a handle on that randomness — to model how neurons work, to understand the role they play in behavior, and to figure out what their activity patterns mean.</p>
+<div class="important admonition">
+<p class="admonition-title">Learning Goals</p>
+<p>By the end of this week, you should be able to:</p>
+<ul class="simple">
+<li><p>Apply the concepts and principles of basic probability theory — like events, sample spaces, independence, mutual exclusivity, and conditional probability — to calculate the probabilities of specified events</p></li>
+<li><p>Use random variables to describe probabilistic events, and calculate the expected value and variance of those variables</p></li>
+<li><p>Choose and deploy common probability distributions — like Bernoulli, Poisson, and Gaussian — to model neuroscientific phenomena</p></li>
+<li><p>Calculate the likelihood function for a given model and use it to fit that model to data</p></li>
+</ul>
+</div>
+<section id="basic-probability-theory">
+<h2>Basic Probability Theory<a class="headerlink" href="#basic-probability-theory" title="Link to this heading">#</a></h2>
+<section id="events-and-sample-spaces">
+<h3>Events and Sample Spaces<a class="headerlink" href="#events-and-sample-spaces" title="Link to this heading">#</a></h3>
+<p>What does it mean to say “There’s a 50% chance of rain tomorrow”? There are actually a few different answers to this question, and next week we will focus on one that you might not have thought of before. But this week, we’ll be taking the conventional approach to this question, which goes something like this: If you take the set of all possible days that we could have tomorrow, you’ll find that half of them are rainy.</p>
+<p>The idea of the “set of all possible days,” or more generally the set of possibilities, is a really important one in probability. Formally speaking, it’s referred to as the <em><strong>sample space</strong></em>. By leveraging the idea of the sample space, we can work to keep our probability calculations concrete and grounded. Probability gets hard when you lose track of all the possible outcomes; if you work hard to keep them in mind, things get easier.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>A <em><strong>sample space</strong></em> is the set of all of the possible outcomes of some random process — like the weather, or a scientific experiment.</p>
+</div>
+<p>One incredibly simple sample space characterizes all of the possible outcomes of rolling a 6-sided die:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/samplespace3.png"><img alt="_images/samplespace3.png" src="_images/samplespace3.png" style="height: 400px;" /></a>
+</figure>
+<p>To make use of a sample space, we need to identify the portion of the sample space that we are interested in. In the weather case, it’s those next-day weather patterns that include rain. We call a portion of the sample space an <em><strong>event</strong></em>. This usage is generally pretty intuitive — speaking of “rain tomorrow” as an event makes sense in conventional English — but it’s good to keep the formal definition in mind as well.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>An <em><strong>event</strong></em> is a subset of a sample space.</p>
+</div>
+<p>Let’s bring things back to neuroscience. You are running an experiment on mice, and part of your goal is to characterize sniffing behavior. The sense of smell is really important to mice: the whole front chunk of the mouse brain is devoted to processing smell information. So understanding this sniffing behavior could help you get a better grasp on how mice interact with and understand their environments.</p>
+<p>To start, you have a super simple question. Each trial of your experiment involves observing a mouse for 5 seconds. Your question is, how likely is the mouse to sniff on any trial?</p>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>What’s the sample space here? What’s the event that we are interested in?</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Our sample space is just the set of all possible behavioral patterns that the mouse could engage in in that 5-second trial. The event is the subset of those behaviors that include sniffing.</p>
+</div>
+</div>
+<p>So let’s build our sample space:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/samplespace1.png"><img alt="_images/samplespace1.png" src="_images/samplespace1.png" style="height: 400px;" /></a>
+</figure>
+<p>To find the probability of the mouse sniffing, all you have to do is count all of the behavioral patterns that include sniffing (shown in red):</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/samplespace2.png"><img alt="_images/samplespace2.png" src="_images/samplespace2.png" style="height: 400px;" /></a>
+</figure>
+<p>There are 50 behaviors total in the sample space, and 30 of them include sniffing, so the probability of the mouse sniffing in the next trial is 0.6.</p>
+<p>I’ve been glossing over a really important detail, however. We defined the sample space as the set of <em><strong>all possible outcomes</strong></em> — how can we possibly enumerate all of the possible behaviors a mouse might engage in in 5 seconds? Strictly speaking, the sample space is infinite. We could never count up all those possibilities.</p>
+<p>There are a couple of approaches to managing this problem. The first is to partition the sample space in a reasonable way: to consider not specific outcomes, but rather well-chosen sets of outcomes, as the elements of the sample space. The second is to approximate the sample space by running your experiment repeatedly and collecting the results — or by looking at the results that the same random process has produced in the past.</p>
+<p><strong>Let’s start with partitioning.</strong> What does this look like in practice? First, there’s one important constraint here — if we want to be able to count up the elements in our event, and then find the probability of the event by dividing that number by the size of our sample space, then all of the elements in the sample space need to be equally likely. (You could also create a sample space with elements that are not all equally likely, but that makes things much more complicated.)</p>
+<p>Here’s an example. Imagine you are going to flip a coin infinitely many times. What are the odds the first flip will come up heads? If you wanted to make a complete sample space here, the number of outcomes would be infinite, because you are going to flip the coin infinitely many times. But there’s clearly a much easier way to do this — we can just partition that infinite sample space into one set that includes all of the outcomes where the first flip comes up heads, and another set where the first flip comes up tails. So our partitioned sample space has 2 elements, and our event contains 1 — the probability of the first flip coming up heads is 0.5.</p>
+<p>In a real-world situation you might have to approximate a bit, but the general idea still holds. Let’s say that you know the mouse can be in one of 5 states on each trial — tired, hungry, friendly, curious, and bored — and that these states are approximately equally likely. You also know that the mouse sniffs when hungry, curious, or friendly, but will not sniff if tired or bored. There could be tons of other behaviors that may or may not happen in these states, but your partitioning allows you to safely ignore them. Here’s what your sample space will look like:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/samplespace4.png"><img alt="_images/samplespace4.png" src="_images/samplespace4.png" style="height: 400px;" /></a>
+</figure>
+<p>The probability of sniffing is then clearly <span class="math notranslate nohighlight">\(\frac{3}{5}\)</span>, or 0.6.</p>
+<p><strong>The second approach is even simpler</strong> — just approximate the sample space using data. For the mouse experiment, we might approximate the sample space by collecting all the trials we have run so far, and then counting up the number of them that included sniffing. For the weather problem, that might look like collecting all the days in our historical weather data that have similar conditions to tomorrow (same time of year, same weather on the previous day, etc.).</p>
+<p>In the real world, this is often how we think about probability. If you want to know the chances that you’ll miss your alarm tomorrow, for example, you’ll probably think about all the days in recent memory when you went to bed at the same time and calculate the fraction of those days where you overslept.</p>
+</section>
+<section id="probability-rules">
+<h3>Probability Rules<a class="headerlink" href="#probability-rules" title="Link to this heading">#</a></h3>
+<p>In principle, you could use events and sample spaces to find any probability you wish, as long as the sample space is finite. But if the sample space is large, that approach gets really difficult. So let’s try to find some shortcuts. In particular, we’re going to find some rules we can use to combine the probability of two events, which we’ll call <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>, to get the probability of some third event.</p>
+<p>We’ll start super concrete. Let’s say we are running an experiment on a mouse. We are recording from a particular brain region, and we are also observing the mouse’s behavior. In particular, we want to see whether neurons firing in that brain region has anything to do with when the mouse sniffs.</p>
+<p>There are two events we care about here: the neurons firing (we’ll call that event <span class="math notranslate nohighlight">\(A\)</span>), and the mouse sniffing (we’ll call that <span class="math notranslate nohighlight">\(B\)</span>). Let’s say we run 100 trials of this experiment, and we record on each trial whether or not the brain region is active, and whether or not the mouse sniffs. There are our results:</p>
+<figure class="align-default" id="venn">
+<a class="reference internal image-reference" href="_images/prob1.png"><img alt="_images/prob1.png" src="_images/prob1.png" style="height: 400px;" /></a>
+</figure>
+<p>Our first question is: Are activity in this brain region and sniff behavior related?</p>
+<p>First, let’s calculate <span class="math notranslate nohighlight">\(p(A)\)</span> (the probability of brain activity) and <span class="math notranslate nohighlight">\(p(B)\)</span> (the probability of sniff behavior) based on our data. That involves counting up the number of trials in which the event happens, and then dividing that number by the total number of trials.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(A) &amp;= \frac{40 + 10}{100}\\
+&amp;= 0.5\\
+p(B) &amp;= \frac{40 + 20}{100}\\
+&amp;= 0.6\end{split}\]</div>
+<p>Let’s also calculate the probability of the <em><strong>complements</strong></em> of these events — that is, the probability that they don’t happen. We express the complement of an event <span class="math notranslate nohighlight">\(K\)</span> as <span class="math notranslate nohighlight">\(p(K')\)</span> or <span class="math notranslate nohighlight">\(p(!K).\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(!A) &amp;= \frac{20 + 30}{100}\\
+&amp;= 0.5\\
+p(!B) &amp;= \frac{10 + 30}{100}\\
+&amp;= 0.4\end{split}\]</div>
+<p>These calculations allow us to observe something really important: <span class="math notranslate nohighlight">\(p(A) + p(!A) = 1,\)</span> and <span class="math notranslate nohighlight">\(p(B) + p(!B) = 1.\)</span> This should make sense: If we take all the elements of our sample space where a particular event happens, and all the elements where it doesn’t happen, that should cover our entire sample space.</p>
+<div class="tip admonition">
+<p class="admonition-title">Probability Rule</p>
+<p>The probability of an event <span class="math notranslate nohighlight">\(K\)</span> and its complement <span class="math notranslate nohighlight">\(!K\)</span> always sum to 1.</p>
+<div class="math notranslate nohighlight">
+\[p(K) + p(!K) = 1\]</div>
+</div>
+<p>Let’s calculate a few more probabilities from this experiment. What’s the probability that both the mouse sniffs and the brain region is active, <span class="math notranslate nohighlight">\(p(A,B)\)</span>? Well, to calculate that, we just divide the number of trials where both events happen by the total number of trials.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(A,B) &amp;= \frac{40}{100}\\
+&amp;= 0.4\end{split}\]</div>
+<p>This quantity is known as the <em><strong>joint probability</strong></em> of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>. Note that it’s less than both <span class="math notranslate nohighlight">\(p(A)\)</span> and <span class="math notranslate nohighlight">\(p(B)\)</span>, which makes sense — for a trial to count as part of the event <span class="math notranslate nohighlight">\(A,B\)</span>, it must also count toward both <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> individually. In our <a class="reference internal" href="#venn"><span class="std std-ref">Venn diagram</span></a>, we are looking at the purple intersection in the middle, which is smaller than each circle.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>The <em><strong>joint probability</strong></em> of two events <span class="math notranslate nohighlight">\(J\)</span> and <span class="math notranslate nohighlight">\(K\)</span>, <span class="math notranslate nohighlight">\(p(J,K)\)</span>, is the probability that they both occur. It must be less than or equal to the probabilities of the individual events, <span class="math notranslate nohighlight">\(p(J)\)</span> and <span class="math notranslate nohighlight">\(p(K)\)</span>.</p>
+</div>
+<p>Next, let’s calculate the probability of <span class="math notranslate nohighlight">\(A\)</span> <em>given that <span class="math notranslate nohighlight">\(B\)</span> happened</em>, which we write as <span class="math notranslate nohighlight">\(P(A|B)\)</span>. That is, we restrict our sample space to only those trials where the mouse did sniff. Then we say, given the mouse sniffed, how likely is it that the neurons also fired? Since we are changing our sample space, the denominator of our calculation is going to change — from the total number of trials, 100, to the total number of trials in which the mouse sniffed, 60.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(A|B) &amp;= \frac{40}{60}\\
+&amp;= 0.667\end{split}\]</div>
+<p>And we can do the same to calculate the probability that the mouse sniffed given that the brain region was active:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(B|A) &amp;= \frac{40}{50}\\
+&amp;= 0.8\end{split}\]</div>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>The <em><strong>conditional probability</strong></em> of an event <span class="math notranslate nohighlight">\(J\)</span>, conditioned on another event <span class="math notranslate nohighlight">\(K\)</span> — or <span class="math notranslate nohighlight">\(p(J|K)\)</span> — is the probability that <span class="math notranslate nohighlight">\(J\)</span> occurred, under the assumption that <span class="math notranslate nohighlight">\(K\)</span> occurred.</p>
+</div>
+<p>So, to review, we have calculated the following probabilities:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(A) &amp;= 0.5\\
+p(B) &amp;= 0.6\\
+p(A,B) &amp;= 0.4\\
+p(A|B) &amp;= 0.667\\
+p(B|A) &amp;= 0.8\end{split}\]</div>
+<p>We can use these probabilities to demonstrate a really important identity. Let’s say we know <span class="math notranslate nohighlight">\(p(B|A)\)</span> and <span class="math notranslate nohighlight">\(p(A)\)</span> — that is, the probability that the brain region was active, and the probability that the mouse sniffed <em>given that the brain region was active</em>. Can we use these quantities to calculate the joint probability <span class="math notranslate nohighlight">\(p(A,B)\)</span> — that is, the probability that both events happened? Yes! We just have to take <span class="math notranslate nohighlight">\(p(B|A)p(A)\)</span>.</p>
+<p>Why does this work? Well, let’s look at how we calculated <span class="math notranslate nohighlight">\(p(B|A)\)</span> and <span class="math notranslate nohighlight">\(p(A)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(B|A) &amp;= \frac{\text{A &amp; B trials}}{\text{A trials}}\\
+\\
+p(A) &amp;= \frac{\text{A trials}}{\text{total trials}}\\ \\
+p(B|A)p(A) &amp;= \frac{\text{A &amp; B trials}}{\text{A trials}}\frac{\text{A trials}}{\text{total trials}}\\ \\
+&amp;= \frac{\text{A &amp; B trials}}{\text{total trials}} \\ \\
+&amp;= p(A,B)\end{split}\]</div>
+<p>Note that this same logic works in the other direction, so we can also say <span class="math notranslate nohighlight">\(p(A,B) = p(A|B)p(B).\)</span></p>
+<p>We can test this using the numbers we calculated above!</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(B|A)p(A) &amp;= 0.8 \cdot 0.5\\
+&amp;= 0.4
+p(A|B)p(B) &amp;= 0.667 \cdot 0.6\\
+&amp;= 0.4\end{split}\]</div>
+<div class="tip admonition">
+<p class="admonition-title">Probability Rule</p>
+<p>The joint probability of two events, <span class="math notranslate nohighlight">\(J\)</span> and <span class="math notranslate nohighlight">\(K\)</span>, is the product of the probability of one of those events and the probability of the second event conditioned on the first event.</p>
+<div class="math notranslate nohighlight">
+\[p(K) + p(!K) = 1\]</div>
+</div>
+<p>We’ve done lots of useful calculations so far, but we haven’t yet answered our original question — is brain activity in this region related to sniffing behavior? In other words, we want to know whether or not brain activity and sniffing are <em><strong>independent</strong></em>. If brain activity and sniffing behavior are <em>not</em> related, then whether one of them happens should not affect the chances of the other one happening.</p>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>If sniffing and brain activity are independent, what should our <a class="reference internal" href="#venn"><span class="std std-ref">Venn diagram</span></a> look like? Assume that the probability of the mouse sniffing is still 0.6, and the probability of brain activity is still 0.5.</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Since the probability of sniffing is 0.6, we expect that the mouse will sniff on 60 trials. On how many of those trials will the neurons also fire? Since we have assumed that sniffing and brain activity are independent, we should expect to see brain activity on half of the sniffing trials — 30 of those trials — because whether or not the mouse sniffed shouldn’t affect the probability of brain activity.</p>
+<p>That leaves 30 sniffing, no activity trials. We also know that there should be 50 brain activity trials total, so we would expect 20 trials with activity but no sniffing. Here’s what the complete Venn diagram would look like:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/prob2.png"><img alt="_images/prob2.png" src="_images/prob2.png" style="height: 400px;" /></a>
+</figure>
+<p>This  isn’t what we observed in our data! So sniffing and brain activity are <strong>not</strong> independent in our experiment — the two events are connected, at least statistically speaking.</p>
+</div>
+</div>
+<p>If brain activity and sniffing are independent, then <span class="math notranslate nohighlight">\(p(A|B) = p(A)\)</span> — whether or not the mouse sniffed has no effect on the probability of brain activity. The opposite is also true: <span class="math notranslate nohighlight">\(p(B|A) = p(B).\)</span> This yields an important identity:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(A,B) &amp;= p(B|A)p(A)\\
+&amp;= p(B)p(A)\end{split}\]</div>
+<p>So if two events are independent, their joint probability is just the product of their probabilities. We can see this using the Venn diagram from the previous exercise:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(A,B) &amp;= \frac{30}{100}\\
+&amp;= 0.3\\
+p(A) &amp;= \frac{50}{100}\\
+&amp;= 0.5\\
+p(B) &amp;= \frac{60}{100}\\
+&amp;= 0.6\\
+p(A)p(B) &amp;= 0.5 \cdot 0.6\\
+&amp;= 0.3\end{split}\]</div>
+<div class="tip admonition">
+<p class="admonition-title">Probability Rule</p>
+<p>If two events <span class="math notranslate nohighlight">\(J\)</span> and <span class="math notranslate nohighlight">\(K\)</span> are independent — that is, the fact that one happened has no effect on the probability of the other — you can calculate their joint probability by multiplying their individual probabilities.</p>
+<div class="math notranslate nohighlight">
+\[p(J,K) = p(J)p(K)\]</div>
+</div>
+<div class="warning admonition">
+<p class="admonition-title">Independence is NOT the same as mutual exclusivity</p>
+<p>A very common mistake is to assume that independence is equivalent to mutual exclusivity, which means that two events never happen at the same time. In fact, the two are very different. For two events <span class="math notranslate nohighlight">\(J\)</span> and <span class="math notranslate nohighlight">\(K\)</span> to be mutually exclusive, we must have <span class="math notranslate nohighlight">\(p(J,K) = 0.\)</span> But looking at the previous probability rule, we can see that this will only happen for independent events <span class="math notranslate nohighlight">\(J\)</span> and <span class="math notranslate nohighlight">\(K\)</span> if the probability of at least one of them is already 0.</p>
+<p>The difference between mutual exclusivity and independence makes sense if we think about our mouse experiment. If the mouse <em>never</em> sniffed when the brain region was active, we would probably assume that the brain region somehow inhibited sniffing behavior! That certainly wouldn’t make those two events independent.</p>
+</div>
+<p>We have one last important probability rule to cover. We know how to find the probability that our events
+<span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> both happen — that’s just <span class="math notranslate nohighlight">\(p(A,B).\)</span> But what about the probability that either event happens — that the mouse sniffs, or the brain region is active, or both? We can really easily calculate this probability, which we write as <span class="math notranslate nohighlight">\(p(A \cup B),\)</span> from our <a class="reference internal" href="#venn"><span class="std std-ref">Venn diagram</span></a>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(A \cup B) &amp;= \frac{10 + 40 + 20}{100}\\
+&amp;= 0.7\end{split}\]</div>
+<p>How do I calculate this probability? Naïvely, we might think that we should just add <span class="math notranslate nohighlight">\(p(A)\)</span> and <span class="math notranslate nohighlight">\(p(B)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(A) + p(B) &amp;= 0.5 + 0.6\\
+&amp;= 1.1\\
+&amp;\neq 0.7\end{split}\]</div>
+<p>Ok, that doesn’t quite work. The issue here is that we have essentially added everything in the red circle, and everything in the blue circle. But both circles contain that purple overlap — which means we have counted the purple overlap, or <span class="math notranslate nohighlight">\(p(A,B),\)</span> twice. So the trick is to add the probabilities of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>, but then to subtract their joint probability:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(A) + p(B) - p(A,B) &amp;= 0.5 + 0.6 - 0.4\\\\
+&amp;= 0.7\end{split}\]</div>
+<div class="tip admonition">
+<p class="admonition-title">Probability Rule</p>
+<p>To add the probabilities of two events, <span class="math notranslate nohighlight">\(J\)</span> and <span class="math notranslate nohighlight">\(K\)</span>, add the probabilities of the events individually and then subtract their joint probability.</p>
+<div class="math notranslate nohighlight">
+\[p(J \cup K) = p(J) + p(K) - p(J,K)\]</div>
+</div>
+</section>
+</section>
+<section id="probability-distributions">
+<h2>Probability Distributions<a class="headerlink" href="#probability-distributions" title="Link to this heading">#</a></h2>
+<section id="random-variables">
+<h3>Random Variables<a class="headerlink" href="#random-variables" title="Link to this heading">#</a></h3>
+<p>We’ve been focusing so far on 100 trials worth of data that we have already collected. But let’s say we keep running our experiment. What can we say about the 101st trial? Well, based on what we’ve already seen, we can estimate:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(A,B) &amp;= 0.4\\
+p(A,!B) &amp;= 0.1\\
+p(!A,B) &amp;= 0.2\\
+p(!A,!B) &amp;= 0.3\end{split}\]</div>
+<p>We can represent these facts graphically:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/plot1.png"><img alt="_images/plot1.png" src="_images/plot1.png" style="height: 400px;" /></a>
+</figure>
+<p>The <span class="math notranslate nohighlight">\(y\)</span>-axis here represents, of course, the probability of the different events. But what’s the <span class="math notranslate nohighlight">\(x\)</span>-axis? Formally speaking, the <span class="math notranslate nohighlight">\(x\)</span>-axis represents the <em><strong>random variable</strong></em> <span class="math notranslate nohighlight">\(X\)</span>, which can take on four different values — <span class="math notranslate nohighlight">\(A,B\)</span>, <span class="math notranslate nohighlight">\(A,!B\)</span>, <span class="math notranslate nohighlight">\(!A,B\)</span>, <span class="math notranslate nohighlight">\(!A,!B\)</span>.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>An <em><strong>random variable</strong></em> is a variable that represents the outcome of a probabilistic process. Random variables are typically written as capital letters.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Technically speaking, random variables should have numerical values. So to make the random variable <span class="math notranslate nohighlight">\(X\)</span> really work, we have to assign some values to our outcomes — like <span class="math notranslate nohighlight">\(A,B = 0,\)</span> <span class="math notranslate nohighlight">\(A,!B = 1\)</span>, <span class="math notranslate nohighlight">\(!A,B = 2,\)</span> <span class="math notranslate nohighlight">\(!A,!B = 3.\)</span> In most cases, assigning values to outcomes isn’t quite so arbitrary. For example, a random variable might count the number of heads in 10 coin tosses.</p>
+</div>
+<p>With the language of random variables, we can rewrite the outcome probabilities for the 101st trial a bit more formally:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(X=A,B) &amp;= 0.4\\
+p(X=A,!B) &amp;= 0.1\\
+p(X=\:!A,B) &amp;= 0.2\\
+p(X=\:!A,!B) &amp;= 0.3\end{split}\]</div>
+<p>In this new formalism, <span class="math notranslate nohighlight">\(p\)</span> isn’t just a cue telling us to take the probability of some event — it’s a function of the random variable <span class="math notranslate nohighlight">\(X.\)</span> In particular, it is the <em><strong>probability distribution</strong></em> of <span class="math notranslate nohighlight">\(X.\)</span></p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>A <em><strong>probability distribution</strong></em> is a function that maps the set of possible values of a random variable to their probabilities.</p>
+</div>
+<p>The function <span class="math notranslate nohighlight">\(p(X)\)</span> may also be referred to as the <em><strong>probability mass function</strong></em>, if <span class="math notranslate nohighlight">\(X\)</span> takes on discrete values.</p>
+<p>Since a random variable must always take on <em>some</em> value, but cannot take on two values at once, a probability distribution must always sum to 1.</p>
+<p>In the rest of this section, we are going to learn about some useful probability distributions, as well as some important features of random variables.</p>
+</section>
+<section id="the-binomial-distribution">
+<h3>The Binomial Distribution<a class="headerlink" href="#the-binomial-distribution" title="Link to this heading">#</a></h3>
+<p>For the rest of this lesson, we are going to forget about behavior and focus on neuron activity. Let’s say that a neuron has a 0.6 probability of spiking. We represent the spiking state as 1, and the rest state as 0, and we use the random variable <span class="math notranslate nohighlight">\(X\)</span> to capture the neuron’s state at a given point in time. So we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(X=0) &amp;= 0.4\\
+p(X=1) &amp;= 0.6\end{split}\]</div>
+<p>We can easily represent this graphically:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/plot2.png"><img alt="_images/plot2.png" src="_images/plot2.png" style="height: 400px;" /></a>
+</figure>
+<p>Our probability distribution <span class="math notranslate nohighlight">\(p(X)\)</span> here is called the Bernoulli distribution.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>The <em><strong>Bernoulli distribution</strong></em> describes the behavior of any random variable <span class="math notranslate nohighlight">\(X\)</span> with only two possible outcomes, 0 and 1. If the probability of one of those outcomes, <span class="math notranslate nohighlight">\(p(X=1),\)</span> is <span class="math notranslate nohighlight">\(p\)</span>, then the Bernoulli distribution has the following probability mass function:</p>
+<div class="math notranslate nohighlight">
+\[p(X=k) = kp + (1-k)(1-p)\]</div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>Demonstrate that the algebraic description of the Bernoulli distribution above gives us the probabilities we expect for the possible values of <span class="math notranslate nohighlight">\(X.\)</span></p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Plugging in the possible values for <span class="math notranslate nohighlight">\(k\)</span> — that is, 0 and 1 — we obtain</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(X=0) &amp;= 0\times p + (1 - 0)\times(1-p)\\
+&amp;= 1 - p\\
+p(X=1) &amp;= 1 \times p + (1-1)\times(1-p)\\
+&amp;= p\end{split}\]</div>
+</div>
+</div>
+<p>On its own, the Bernoulli distribution isn’t terribly interesting. But let’s extend it into something more useful. What happens when we combine two Bernoulli random variables? That is, what if we don’t look at a single neuron, but two similar neurons? If we use the random variable <span class="math notranslate nohighlight">\(Y\)</span> to capture the state of the second neuron, we get the following joint probabilities (assuming the neurons are independent):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(X=0,Y=0) &amp;= 0.16\\
+p(X=1,Y=0) &amp;= 0.24\\
+p(X=0,Y=1) &amp;= 0.24\\
+p(X=1,Y=1) &amp;= 0.36\end{split}\]</div>
+<p>Typically, when we are studying a population of similarly behaving neurons, we don’t care about the identity of each individual neuron. Instead, what we care about is the total number of neurons that are active or inactive. So let’s define a new random variable, <span class="math notranslate nohighlight">\(N,\)</span> that describes the number of neurons firing at a particular time. We have:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(N=0) &amp;= 0.16\\
+p(N=1) &amp;= 0.48\\
+p(N=2) &amp;= 0.36\end{split}\]</div>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/plot3.png"><img alt="_images/plot3.png" src="_images/plot3.png" style="height: 400px;" /></a>
+</figure>
+<p>What if we look at 3 neurons at once? If the activity of the third neuron is represented using the random variable <span class="math notranslate nohighlight">\(Z,\)</span> we have:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(X=0,Y=0,Z=0) &amp;= 0.064\\
+p(X=1,Y=0,Z=0) &amp;= 0.096\\
+p(X=0,Y=1,Z=0) &amp;= 0.096\\
+p(X=0,Y=0,Z=1) &amp;= 0.096\\
+p(X=1,Y=1,Z=0) &amp;= 0.144\\
+p(X=0,Y=1,Z=1) &amp;= 0.144\\
+p(X=1,Y=0,Z=1) &amp;= 0.144\\
+p(X=1,Y=1,Z=1) &amp;= 0.216\\\end{split}\]</div>
+<p>We can again introduce a new random variable <span class="math notranslate nohighlight">\(N\)</span> to capture the number of neurons that fire:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(N=0) &amp;= 0.064\\
+p(N=1) &amp;= 0.288\\
+p(N=2) &amp;= 0.432\\
+p(N=3) &amp;= 0.216\end{split}\]</div>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/plot4.png"><img alt="_images/plot4.png" src="_images/plot4.png" style="height: 400px;" /></a>
+</figure>
+<p>All of these distributions <span class="math notranslate nohighlight">\(p(N)\)</span> are specific examples of what’s called the <em><strong>binomial distribution</strong></em>. The binomial distribution essentially collects a bunch of Bernoulli random variables and tells us the probability that some number of them will be equal to 1. The binomial distribution has two parameters — the probability <span class="math notranslate nohighlight">\(p\)</span> that any one of the Bernoulli random variables will be equal to 1, and <span class="math notranslate nohighlight">\(n,\)</span> the total number of Bernoulli random variables.</p>
+<p>Let’s try to derive a general form for the probability mass function of a binomial distribution with parameters <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(n.\)</span> The question we need to answer is — if we have <span class="math notranslate nohighlight">\(n\)</span> Bernoulli variables with probability <span class="math notranslate nohighlight">\(p,\)</span> what’s the probability that exactly <span class="math notranslate nohighlight">\(k\)</span> of them will be equal to 1?</p>
+<p>It’s easiest if we start by considering a specific sequence of the Bernoulli variables. That is, let’s find the probability that only the first <span class="math notranslate nohighlight">\(k\)</span> variables are all equal to 1. If that’s the case, the remaining <span class="math notranslate nohighlight">\(n - k\)</span> variables will all be 0. Since the variables are independent, we just have to multiply the probabilities of each of the first <span class="math notranslate nohighlight">\(k\)</span> variables being equal to 1 and of each of the last <span class="math notranslate nohighlight">\(n-k\)</span> being equal to 0:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p \cdot p \cdot p \cdots p&amp; \cdot (1-p) \cdot (1-p) \cdots (1-p)\\
+&amp;= p^k(1-p)^{n-k}\end{split}\]</div>
+<p>But that’s not all we need. We don’t actually care about the order of the neurons — all we care about is the total number of active neurons. So we need to count the possible number of ways that <span class="math notranslate nohighlight">\(k\)</span> out of <span class="math notranslate nohighlight">\(n\)</span> neurons could be active. We won’t go into the details of why here, but that quantity, which we write <span class="math notranslate nohighlight">\({n\choose k}\)</span> (”<span class="math notranslate nohighlight">\(n\)</span> choose <span class="math notranslate nohighlight">\(k\)</span>”), is just</p>
+<div class="math notranslate nohighlight">
+\[{n\choose k} = \frac{n!}{(n-k)!k!}\]</div>
+<p>where <span class="math notranslate nohighlight">\(!\)</span> is the factorial, so</p>
+<div class="math notranslate nohighlight">
+\[n! = 1\times 2\times 3 \times \cdots \times n\]</div>
+<p>Combining these ingredients gives us our binomial probability density function.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>The <em><strong>binomial distribution</strong></em> describes the probability that <span class="math notranslate nohighlight">\(n\)</span> independent Bernoulli random variables with probability <span class="math notranslate nohighlight">\(p\)</span> will have <span class="math notranslate nohighlight">\(k\)</span> successes. Its probability density function is:</p>
+<div class="math notranslate nohighlight">
+\[p(X=k) = {n\choose k}p^k(1-p)^{n-k}\]</div>
+</div>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> is a binomially distributed random variable, we can write that using the following shorthand:</p>
+<div class="math notranslate nohighlight">
+\[X \sim B(n,p)\]</div>
+<p>In general, the symbol <span class="math notranslate nohighlight">\(\sim\)</span> can be read “is drawn from”, e.g. “<span class="math notranslate nohighlight">\(X\)</span> is drawn from the binomial distribution with parameters <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(p.\)</span></p>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>You are studying a population of 10 neurons. The neurons are all independent, and they fire with probability 0.75. What is the probability that exactly 6 of the 10 neurons will fire?</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>In probability language, this question just asks us to find <span class="math notranslate nohighlight">\(p(X=6),\)</span> for <span class="math notranslate nohighlight">\(X \sim B(10,0.75).\)</span> Using the binomial probability density function, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(X=6) &amp;= {10\choose 6}0.75^6(1-0.75)^{10-6}\\
+&amp;= \frac{10!}{6!4!}\times 0.75^6\times 0.25^4\\
+&amp;\approx 0.15\end{split}\]</div>
+</div>
+</div>
+</section>
+<section id="expected-value-and-variance">
+<h3>Expected Value and Variance<a class="headerlink" href="#expected-value-and-variance" title="Link to this heading">#</a></h3>
+<p>Here’s a question we might want to ask about a population of neurons — how many neurons do we <em>expect</em> to fire? Knowing the probability of any specific number of neurons firing is useful, but it doesn’t give us a specific prediction about how the population will behave.</p>
+<p>What we are asking here, in probability language, is a question about the <em><strong>expected value</strong></em> of a random variable. We could potentially define this quantity in a variety of ways, but a sensible thing to do is to take a <em>weighted average</em> of the possible values of <span class="math notranslate nohighlight">\(X\)</span>, where we weight each possible value <span class="math notranslate nohighlight">\(X\)</span> by its probability <span class="math notranslate nohighlight">\(k.\)</span></p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>The <em><strong>expected value</strong></em> of a random variable <span class="math notranslate nohighlight">\(X\)</span>, or <span class="math notranslate nohighlight">\(\mathbb{E}(X),\)</span> is defined as the average of all the possible values of <span class="math notranslate nohighlight">\(X,\)</span> weighted by their probabilities. For a discrete random variable <span class="math notranslate nohighlight">\(X,\)</span> we can write</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{E}(X) = \sum_k k \times p(X=k)\]</div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>Calculate the expected value of a a Bernoulli random variable with probability <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Remember, a Bernoulli random variable <span class="math notranslate nohighlight">\(X\)</span> can only take on two possible values. So all we have to do to execute our sum is to calculate <span class="math notranslate nohighlight">\(k \times p(X=k)\)</span> for both possible values of <span class="math notranslate nohighlight">\(k.\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(X = 1) &amp;= p\\
+p(X = 0) &amp;= 1 - p\\
+\mathbb{E}(X) &amp;= \sum_k k \times p(X=k)\\
+&amp;= 1 \times p + 0 \times (1-p)\\
+&amp;= p\end{split}\]</div>
+</div>
+</div>
+<p>So, what’s the answer to our original question — what’s the expected value of a binomial random variable? To calculate this expected value, we need to combine the definition of expected value and the probability density function for the binomial distribution.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbb{E}(X) &amp;= \sum_k k \times p(X=k)\\
+&amp;= \sum_k k{n\choose k} p^k (1-p)^{n-k}\\
+&amp;= \sum_k k \frac{n!}{k!n-k!} p^k (1-p)^{n-k}\\
+&amp;= \sum_k \frac{n!}{k-1!n-k!} p^k (1-p)^{n-k}\end{split}\]</div>
+<p>To do this next step, we make a crucial observation: <span class="math notranslate nohighlight">\(n - k = (n-1) - (k-1)\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\sum_k \frac{n!}{k-1!n-k!} p^k (1-p)^{n-k} &amp;= \sum_k \frac{n!}{k-1!(n-1)-(k-1)!} p^{k} (1-p)^{(n-1)-(k-1)}\\
+&amp;= \sum_k np \frac{n-1!}{k-1!(n-1)-(k-1)!} p^{k-1} (1-p)^{(n-1)-(k-1)}\\
+&amp;= np\sum_k \frac{n-1!}{k-1!(n-1)-(k-1)!} p^{k-1} (1-p)^{(n-1)-(k-1)}\\
+&amp;= np\sum_j \frac{n-1!}{j!(n-1)-j!} p^{j} (1-p)^{(n-1)-j}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(j = k - 1.\)</span> Looking back at the binomial probability density function, we can see that the probability density function for a binomial distribution <span class="math notranslate nohighlight">\(B(n-1,p)\)</span> is just <span class="math notranslate nohighlight">\(\frac{n-1!}{k!(n-1) - k!} p^{k} (1-p)^{(n-1)-k}\)</span>.$ So the sum above is just the sum over a binomial probability density function. And the sum over the entirety of any probability distribution must be 1. So we can say</p>
+<div class="math notranslate nohighlight">
+\[np\sum_j \frac{n-1!}{j!(n-1)-j!} p^{j} (1-p)^{(n-1)-j} = np\]</div>
+<p>Thus, for <span class="math notranslate nohighlight">\(X \sim B(n,p)\)</span>, we have <span class="math notranslate nohighlight">\(\mathbb{E}(X) = np.\)</span> In plain English, that means that, if we have <span class="math notranslate nohighlight">\(n\)</span> neurons that each fire with probability <span class="math notranslate nohighlight">\(p,\)</span> we should expect <span class="math notranslate nohighlight">\(np\)</span> of them to fire at any given time.</p>
+<p>The expected value helps us the center of a probability distribution. But there’s another important feature of any distribution — how wide it is, or its <em>spread.</em> We describe its spread using a property called the <em><strong>variance</strong></em>. To calculate the variance of a distribution, we take a weighted average, just like for the expected value. But instead of taking a weighted average of the possible values of <span class="math notranslate nohighlight">\(X\)</span>, we want a weighted average of <span class="math notranslate nohighlight">\(X\)</span>’s distance from the center of the distribution.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>The <em><strong>variance</strong></em> of a random variable <span class="math notranslate nohighlight">\(X\)</span>, or <span class="math notranslate nohighlight">\(\mathbb{E}(X),\)</span> is the the average of <span class="math notranslate nohighlight">\((X - \mathbb{E}(X))^2\)</span>, weighted by <span class="math notranslate nohighlight">\(p(X).\)</span> In other words, it’s the weighted average of the squared distance from <span class="math notranslate nohighlight">\(X\)</span> to the center of the probability distribution.</p>
+<div class="math notranslate nohighlight">
+\[\text(Var)(X) = \sum_k (k - \mathbb{E}(X))^2 \times p(X=k)\]</div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>Calculate the variance of a a Bernoulli random variable with probability <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>Just like when we calculated the expected value of a Bernoulli random variable <span class="math notranslate nohighlight">\(X\)</span>, we solve this problem by considering the two possible values of <span class="math notranslate nohighlight">\(X\)</span>—0 and 1.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(X = 1) &amp;= p\\
+p(X = 0) &amp;= 1 - p\\
+\mathbb{E}(X) = p\\
+\mathbb{E}(X) &amp;= \sum_k (k - \mathbb{E}(X))^2 \times p(X=k)\\
+&amp;= (1 - p)^2 \times p + (-p)^2 \times (1-p)\\
+&amp;= p(1-p)\left(1 - p + p)\\
+&amp;= p(1-p)\end{split}\]</div>
+</div>
+</div>
+</section>
+<section id="the-poisson-distribution">
+<h3>The Poisson Distribution<a class="headerlink" href="#the-poisson-distribution" title="Link to this heading">#</a></h3>
+<p>Binomial distributions can be helpful for capturing the behavior of population of neurons. But what if we just want to focus on one neuron at a time? Is there a probability distribution that we can use to model how neurons fire?</p>
+<p>In particular, let’s assume we are recording a series of spikes from a neuron. Instead of looking at each individual spike, we want to track the neuron’s firing rate over time. So we count up the number of times it spikes in every 10 millisecond window. Our results might end up looking something like this:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/poisson.png"><img alt="_images/poisson.png" src="_images/poisson.png" style="height: 400px;" /></a>
+</figure>
+<p>There’s obviously some randomness in how many times the neuron fires in each 10 ms window. And there’s a probability distribution that captures that randomness: the <em><strong>Poisson distribution.</strong></em> The Poisson distribution is designed to predict the number of times an event will happen in some time window. If the event’s occurrences are independent — that is, the fact that the event happened once, or twice, or three times has no effect on whether or not it will happen again — the Poisson distribution is the perfect model.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The firing rate plot above is <strong>not</strong> itself a Poisson distribution. The <span class="math notranslate nohighlight">\(x\)</span>-axis of a probability distribution is the random variable, and the <span class="math notranslate nohighlight">\(y\)</span>-axis is its probability. Instead, each bar in that plot represents a single sample from a Poisson distribution. To produce a firing-rate simulation using a Poisson distribution, you have to repeatedly sample from the distribution to get the firing rate in each time window.</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>The <em><strong>Poisson distribution</strong></em> describes the probability that <span class="math notranslate nohighlight">\(k\)</span> independent events will occur within a particular time window. It has one parameter, <span class="math notranslate nohighlight">\(\lambda.\)</span> Its probability mass function is</p>
+<div class="math notranslate nohighlight">
+\[p(X=k) = \frac{\lambda^ke^{-\lambda}}{k!}\]</div>
+</div>
+<p>The below plot shows the Poisson probability mass function for several values of <span class="math notranslate nohighlight">\(\lambda.\)</span></p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/poisson2.png"><img alt="_images/poisson2.png" src="_images/poisson2.png" style="height: 400px;" /></a>
+</figure>
+<p>What’s the expected value of the Poisson distribution? Let’s calculate it. Just like with the binomial expected value, we’ll have to recall that any probability density function must sum to 1.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbb{E}(X) &amp;= \sum_k k \frac{\lambda^ke^{-\lambda}}{k!}\\
+&amp;= \sum_k \frac{\lambda^k e^{-\lambda}}{k-1!}\\
+&amp;= \lambda \sum_{k-1} \frac{\lambda^{k-1} e^{-\lambda}}{k-1!}\\
+&amp;= \lambda\end{split}\]</div>
+<p>We won’t prove it here, but an interesting fact about the Poisson distribution is that its variance is also <span class="math notranslate nohighlight">\(\lambda.\)</span></p>
+</section>
+<section id="the-gaussian-distribution">
+<h3>The Gaussian Distribution<a class="headerlink" href="#the-gaussian-distribution" title="Link to this heading">#</a></h3>
+<p>Thus far, we’ve been strictly dealing with discrete probability distributions — distributions for which <span class="math notranslate nohighlight">\(X\)</span> can only take on a finite number of values. But the probability distribution with which you are probably most familiar, the Gaussian distribution or normal distribution, is continuous. In fact, if <span class="math notranslate nohighlight">\(X\)</span> is normally distributed, it can take on any real value.</p>
+<p>Because continuous random variables can take on an infinite number of values, the probability that <span class="math notranslate nohighlight">\(p(X=k)\)</span> for any specific value is 0 — if it were anything greater than 0, the total probability of <span class="math notranslate nohighlight">\(X\)</span> taking on any value would be infinite. So instead of defining a probability mass function to describe the distribution, we define a <em><strong>probability density function</strong></em>. We can then integrate that probability density function to find the probability that <span class="math notranslate nohighlight">\(X\)</span> will end up falling between any two values.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/gaussianpdf.png"><img alt="_images/gaussianpdf.png" src="_images/gaussianpdf.png" style="height: 200px;" /></a>
+</figure>
+<p>Okay, but why does this particular continuous distribution matter? We won’t get into the statistical details here, but it turns out that if you sample <em>any</em> random variable many times, the average of all of those observations is guaranteed to be a Gaussian random variable, as long as you make enough observations. To make that more concrete, if you observe 100 different neurons many many times, and average all of their firing rates, those average firing rate observations will follow a Gaussian distribution.</p>
+<p>This makes the Gaussian distribution incredibly useful in biology, when we are often looking at the aggregate results of many simultaneous random processes — like the flip-flopping proteins and drifting neurotransmitters I mentioned in the introduction. If you are measuring some continuous variable in a biological experiment, and the value of that variable comes down to the aggregate behavior of many random processes, then it’s a good idea to model that variable using a Gaussian distribution.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>The Gaussian distribution is a continuous probability distribution that describes the distribution of sample means for any random process. Its probability density function, expected value, and variance are:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}P(x_1 \le X \le x_2) &amp;= \int_{x_1}^{x_2}\frac{1}{\sigma\sqrt{2\pi}}e^{-(x-\mu)^2/2\sigma^2} \, dx\\
+\mathbb{E}(X) &amp;= \mu\\
+\text{Var}(X) &amp;= \sigma^2\end{split}\]</div>
+</div>
+</section>
+</section>
+<section id="probabilistic-modeling">
+<h2>Probabilistic Modeling<a class="headerlink" href="#probabilistic-modeling" title="Link to this heading">#</a></h2>
+<p>We’ve spent all this time discussing probability distributions for one main reason: They are useful for modeling various phenomena in neuroscience. For example, we could define a random variable <span class="math notranslate nohighlight">\(X\)</span> to represent the intracellular voltage of a neuron, and we could draw values of <span class="math notranslate nohighlight">\(X\)</span> at any given time from a Gaussian distribution with mean <span class="math notranslate nohighlight">\(\mu\)</span> and standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[X \sim \mathcal{N}(\mu,\sigma)\]</div>
+<p>Let’s say we want to model a specific neuron, from which we have intracellular recordings —that is, we have a bunch of data <span class="math notranslate nohighlight">\(x_1, x_2, \cdots, x_n\)</span> and we want to choose <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> such that those <span class="math notranslate nohighlight">\(x_i\)</span> could have been believably drawn from that Gaussian distribution. How do we intelligently select <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>? That’s the question that likelihood solves for us.</p>
+<section id="the-likelihood-function">
+<h3>The Likelihood Function<a class="headerlink" href="#the-likelihood-function" title="Link to this heading">#</a></h3>
+<p>Our problem is this: We have some data <span class="math notranslate nohighlight">\(\textbf{x}\)</span> and a probabilistic model with a parameter <span class="math notranslate nohighlight">\(\theta.\)</span> We want to choose the parameter <span class="math notranslate nohighlight">\(\theta\)</span> that makes our data as likely as possible. In other words, we want to maximize
+<span class="math notranslate nohighlight">\(p(\textbf{x} | \theta)\)</span>.
+That’s just a conditional probability. Essentially what we are doing is setting <span class="math notranslate nohighlight">\(\theta\)</span> to a bunch of different values, checking what the probability of our data <span class="math notranslate nohighlight">\(\textbf{x}\)</span> would be with all those different values of <span class="math notranslate nohighlight">\(\theta\)</span>, and choosing the <span class="math notranslate nohighlight">\(\theta\)</span> that yields the highest probability.</p>
+<p><span class="math notranslate nohighlight">\(p(\textbf{x}|\theta),\)</span> where we hold <span class="math notranslate nohighlight">\(\textbf{x}\)</span> (the data we observed) fixed and let <span class="math notranslate nohighlight">\(\theta\)</span> vary, is called the <em><strong>likelihood</strong></em> of our data <span class="math notranslate nohighlight">\(\textbf{x}.\)</span> It can be a bit counterintuitive to have a conditional probability where we are conditioning on a parameter of a model. The trick is to think of the likelihood <span class="math notranslate nohighlight">\(L(\theta)\)</span> just like we would think of any other function. <span class="math notranslate nohighlight">\(p(\textbf{x} | \theta)\)</span> is going to have some algebraic form, and that algebraic form defines the likelihood function <span class="math notranslate nohighlight">\(L(\theta).\)</span></p>
+<div class="math notranslate nohighlight">
+\[L(\theta) = p(\textbf{x} | \theta)\]</div>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>The <em><strong>likelihood</strong></em> of a set of data under a particular model is the probability of observing those data, assuming that the model is true. A likelihood function is <strong>always</strong> a function of the model parameters; the data are fixed.</p>
+</div>
+<p>Let’s try an example. We observe <span class="math notranslate nohighlight">\(A\)</span> neurons, and <span class="math notranslate nohighlight">\(a\)</span> of them fire. What’s the likelihood of those data under a binomial distribution with probability parameter <span class="math notranslate nohighlight">\(p\)</span>?</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}L(p) &amp;= p(a,A|p)\\
+&amp;= {A\choose a}p^a(1-p)^{A-a}\end{split}\]</div>
+<p>To find the value of <span class="math notranslate nohighlight">\(p\)</span> for which a binomial distribution would be most likely to produce the data we observed, we would just have to maximize <span class="math notranslate nohighlight">\({A\choose a}p^a(1-p)^{A-a}\)</span> with respect to <span class="math notranslate nohighlight">\(p\)</span>.</p>
+<p>One important note — you may recall that probability density functions for continuous distributions don’t actually give us the probability of a random variable taking any particular value, since all such probabilities are 0. So if we are, say, dealing with a Gaussian, how would we determine the value of <span class="math notranslate nohighlight">\(\mu\)</span> or <span class="math notranslate nohighlight">\(\sigma\)</span> that maximizes the probability of  some observation <span class="math notranslate nohighlight">\(x_i\)</span>?</p>
+<p>Well, the probability of observing our data is always 0, so we can’t maximize that. So let’s be a little looser here. What’s the likelihood of making an observation at most <span class="math notranslate nohighlight">\(\Delta x\)</span> away from <span class="math notranslate nohighlight">\(x\)</span>?</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(x_i - \Delta x \le X \le x_i + \Delta x | \mu, \sigma) = \int_{x_i - \Delta x}^{x_i + \Delta x}\frac{1}{\sigma\sqrt{2\pi}}e^{-(x-\mu)^2/2\sigma^2} \, dx\\\end{split}\]</div>
+<p>If we assume <span class="math notranslate nohighlight">\(\Delta X\)</span> is very small, then the probability density function is constant within the range we are considering, so</p>
+<div class="math notranslate nohighlight">
+\[p(x_i - \Delta x \le X \le x_i + \Delta x | \mu, \sigma) = \frac{\Delta x}{\sigma\sqrt{2\pi}}e^{-(x-\mu)^2/2\sigma^2}\]</div>
+<p><span class="math notranslate nohighlight">\(\Delta x\)</span> is a constant, so it has no effect on the values of <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> that optimize this expression. So we can safely ignore it and just say</p>
+<div class="math notranslate nohighlight">
+\[L(\mu,\sigma) = \frac{1}{\sigma\sqrt{2\pi}}e^{-(x_i-\mu)^2/2\sigma^2}\]</div>
+<p>which has exactly the same form as our probability density function. So for continuous distributions, we can construct likelihoods exactly as we do for discrete distributions — by going directly to the probability density/mass function.</p>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>What is the likelihood of making a single observation <span class="math notranslate nohighlight">\(k\)</span> under a Poisson distribution with parameter <span class="math notranslate nohighlight">\(\lambda\)</span>?</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>This likelihood is going to look exactly like our Poisson probability mass function. But remember, it is fundamentally different — <span class="math notranslate nohighlight">\(k\)</span> here is fixed, whereas <span class="math notranslate nohighlight">\(\lambda\)</span> is not.</p>
+<div class="math notranslate nohighlight">
+\[p(k|\lambda) = \frac{\lambda^k e^{-\lambda}}{k!}\]</div>
+</div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Exercise</p>
+<p>You want to find the likelihood of a large dataset with observations <span class="math notranslate nohighlight">\(x_1, x_2, \cdots, x_n\)</span> under a model that you are investigating. The likelihood of one observation under the model is <span class="math notranslate nohighlight">\(L(x_i).\)</span> What is the likelihood of all the observations? Assume the observations are independent.</p>
+<div class="seealso dropdown admonition">
+<p class="admonition-title">Solution</p>
+<p>The likelihood is just the probability (or probability density) of observing some data given a model. So we combine likelihoods just like we combine probabilities — if they are independent, we multiply them. So:</p>
+<div class="math notranslate nohighlight">
+\[L(x_1, x_2, \cdots, x_n) = L(x_1)\cdot L(x_2) \cdot \cdots \cdot L(x_n)\]</div>
+</div>
+</div>
+<p>To maximize the likelihood, we have to differentiate it with respect to our parameter — <span class="math notranslate nohighlight">\(\lambda\)</span> for a Poisson distribution, <span class="math notranslate nohighlight">\(p\)</span> for a binomial distribution, etc — and set it to 0. That isn’t too hard as long as we have a small amount of data and our likelihood function is simple.</p>
+<p>But what if we have a bunch of observations? The likelihood of each observation might have a fairly simple form — <span class="math notranslate nohighlight">\(L(x_i)\)</span> — but if we are looking at many observations, we have to take the product of the likelihoods of all the observations — <span class="math notranslate nohighlight">\(L(x_1)\cdot L(x_2) \cdot \cdots \cdot L(x_n).\)</span> Differentiating that extended product can get messy, fast. Is there anything we can do?</p>
+<p>There is, as long as we remember our ultimate objective! All that we want to do with the likelihood function is maximize it. Let’s say our maximum occurs at the parameter value <span class="math notranslate nohighlight">\(\theta_0.\)</span> That means we have</p>
+<div class="math notranslate nohighlight">
+\[L(\theta_0) &gt; L(\theta')\]</div>
+<p>for any <span class="math notranslate nohighlight">\(\theta' \neq \theta_0.\)</span> But what if we could find a function <span class="math notranslate nohighlight">\(f(x)\)</span> such that <span class="math notranslate nohighlight">\(x_1 &gt; x_2\)</span> would imply <span class="math notranslate nohighlight">\(f(x_1) &gt; f(x_2)\)</span>? Then we would have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}L(\theta_0) &amp;&gt; L(\theta')\\
+\text{im}&amp;\text{plies}\\
+f(L(\theta_0)) &amp;&gt; f(L(\theta'))\end{split}\]</div>
+<p>In other words, <span class="math notranslate nohighlight">\(f(L(x))\)</span> would be maximized in exactly the same place as <span class="math notranslate nohighlight">\(L(x)\)</span> — at <span class="math notranslate nohighlight">\(\theta_0.\)</span> So maximizing <span class="math notranslate nohighlight">\(f(L(x))\)</span> would do just as good a job at helping us find our optimal parameter.</p>
+<p>It turns out that any <em>strictly increasing function</em> satisfies our requirement for <span class="math notranslate nohighlight">\(f\)</span>. And one strictly increasing function that helps us out here is the <em>natural logarithm</em>, <span class="math notranslate nohighlight">\(\ln(x).\)</span></p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/lnx.png"><img alt="_images/lnx.png" src="_images/lnx.png" style="height: 300px;" /></a>
+</figure>
+<p>Why is <span class="math notranslate nohighlight">\(\ln(x)\)</span> so helpful here? Well, let’s see what happens when we apply it to our likelihood function for multiple observations!</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}L(x_1, x_2, \cdots, x_n) &amp;= L(x_1)\cdot L(x_2) \cdot \cdots \cdot L(x_n)\\
+\ln(L(x_1, x_2, \cdots, x_n)) &amp;= \ln(L(x_1)\cdot L(x_2) \cdot \cdots \cdot L(x_n))\\
+&amp;= \ln(L(x_1)) + \ln(L(x_2)) + \cdots + \ln(L(x_n))\end{split}\]</div>
+<p>I used the fact that <span class="math notranslate nohighlight">\(\ln(a\cdot b) = \ln(a) + \ln(b)\)</span> to turn our ugly product into a very manageable sum. Sums are super easy to differentiate — you just differentiate every element of the sum separately — so this new <em><strong>log likelihood</strong></em> is much easier to maximize than the original likelihood!</p>
+<p>To wrap up, let’s apply all of these ideas! Let’s say you observe a series of discrete events over a period of <span class="math notranslate nohighlight">\(n\)</span> seconds — say, neuron spikes — and you want to model them using a Poisson distribution. You count the number of events that occur over your chosen time windows, and you obtain a series of spike counts <span class="math notranslate nohighlight">\(k_1, k_2, \cdots, k_n.\)</span> What parameter <span class="math notranslate nohighlight">\(\lambda\)</span> should we use to build a Poisson distribution that best models this neuron?</p>
+<p>We start by calculating the likelihood.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}L(k_1, k_2, \cdots, k_n) &amp;= L(k_1)\cdot L(k_2)\cdot \cdots \cdot L(k_n)\\
+&amp;= \frac{\lambda^{k_1}e^{-\lambda}}{k_1!} \cdot \frac{\lambda^{k_2}e^{-\lambda}}{k_2!} \cdot \cdots \cdot \frac{\lambda^{k_n}e^{-\lambda}}{k_n!}\end{split}\]</div>
+<p>Maximizing a product this big is tricky. So let’s try to maximie the log likelihood (which I will denote <span class="math notranslate nohighlight">\(LL(x)\)</span>) instead.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}LL(k_1, k_2, \cdots, k_n) &amp;= \ln\left(\frac{\lambda^{k_1}e^{-\lambda}}{k_1!} \cdot \frac{\lambda^{k_2}e^{-\lambda}}{k_2!} \cdot \cdots \cdot \frac{\lambda^{k_n}e^{-\lambda}}{k_n!}\right)\\
+&amp;= \sum_i \ln\left(\frac{\lambda^{k_i}e^{-\lambda}}{k_i!}\right) \\
+&amp;= \sum_i ln\left(\lambda^{k_i}\right) + ln\left(e^{-\lambda}\right) - \ln\left(k_i!\right)\\
+&amp;= \sum_i k_i \ln(\lambda) - \lambda - \ln\left(k_i!\right)\\
+&amp;= \ln(\lambda)\left(\sum_ik_i \right) - n\lambda - \sum_{i} \ln\left(k_i!\right)\end{split}\]</div>
+<p>Now, let’s maximize the log likelihood by differentiating it with respect to <span class="math notranslate nohighlight">\(\lambda\)</span> and setting that derivative to 0!</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\frac{d\, LL(k_1, k_2, \cdots, k_n)}{d\,\lambda} &amp;= \frac{1}{\lambda}\left(\sum_ik_i \right) - n\\
+0 &amp;= \frac{1}{\lambda}\left(\sum_ik_i \right) - n\\
+\lambda &amp;= \frac{\sum_ik_i}{n}\end{split}\]</div>
+<p>So, <span class="math notranslate nohighlight">\(\lambda\)</span> should just be the average of all the <span class="math notranslate nohighlight">\(k_i\)</span>! That makes a lot of intuitive sense — remember, <span class="math notranslate nohighlight">\(\lambda\)</span> is the expected value of the Poisson distribution.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Convolution.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Convolution</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-probability-theory">Basic Probability Theory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#events-and-sample-spaces">Events and Sample Spaces</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-rules">Probability Rules</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-distributions">Probability Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-variables">Random Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-binomial-distribution">The Binomial Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-value-and-variance">Expected Value and Variance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-poisson-distribution">The Poisson Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-gaussian-distribution">The Gaussian Distribution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-modeling">Probabilistic Modeling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-likelihood-function">The Likelihood Function</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Grace Huckins, Linnie Warton, and Gabriel Mel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

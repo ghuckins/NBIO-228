@@ -10,9 +10,14 @@ parts:
     - file: Eigenvectors and Eigenvalues
     - file: Principal Component Analysis
 
-  - caption: Computational tools
+  - caption: Computational Tools
     chapters:
     - file: Machine Learning
     - file: Convolution
+
+  - caption: Probability and Statistics
+    chapters:
+    - file: Probability
+
 
 
