@@ -13,4 +13,6 @@ parts:
   - caption: Computational tools
     chapters:
     - file: Machine Learning
+    - file: Convolution
+
 
