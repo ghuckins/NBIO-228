@@ -1,0 +1,921 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Convolution &#8212; Mathematical Tools for Neuroscience</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Convolution';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Machine Learning" href="Machine%20Learning.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/scary_brain.png" class="logo__image only-light" alt="Mathematical Tools for Neuroscience - Home"/>
+    <script>document.write(`<img src="_static/scary_brain.png" class="logo__image only-dark" alt="Mathematical Tools for Neuroscience - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to NBIO 228!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Linear Algebra</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Vectors%20and%20Matrices.html">Vectors and Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Eigenvectors%20and%20Eigenvalues.html">Eigenvectors and Eigenvalues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Principal%20Component%20Analysis.html">Principal Component Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Computational tools</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Machine%20Learning.html">Machine Learning</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Convolution</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ghuckins/NBIO-228" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ghuckins/NBIO-228/issues/new?title=Issue%20on%20page%20%2FConvolution.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Convolution.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Convolution</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#image-blurring">Image blurring</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sliding-averages-de-noising">Sliding averages, de-noising</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-spikes">Extracting spikes</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="convolution">
+<h1>Convolution<a class="headerlink" href="#convolution" title="Link to this heading">#</a></h1>
+<div class="admonition-summary admonition" id="sum-conv-interp">
+<p class="admonition-title">Summary</p>
+<p><em>Convolution</em> is a fundamental operation that takes in two functions <span class="math notranslate nohighlight">\(f,g\)</span> and outputs a third one. Because it is so fundamental, it appears in a huge number of mathematical and scientific contexts. It can be understood in two related ways:</p>
+<ul class="simple">
+<li><p><strong>Generalized blurring</strong> At each point in <span class="math notranslate nohighlight">\(f\)</span>, localized information is spread out according to the “blurring template” <span class="math notranslate nohighlight">\(g\)</span>.</p></li>
+<li><p><strong>Sliding dot product</strong> <span class="math notranslate nohighlight">\(g\)</span> is shifted left to right over <span class="math notranslate nohighlight">\(f\)</span>, and the dot product of the two is computed as a function of the shift.</p></li>
+</ul>
+</div>
+<section id="definition">
+<span id="subsec-conv-def"></span><h2>Definition<a class="headerlink" href="#definition" title="Link to this heading">#</a></h2>
+<p>We’ll start by deriving the expression for the convolution of two functions following the two interpretations above.</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-0">
+Generalized blurring</label><div class="sd-tab-content docutils">
+<p>How do we mathematically express the idea of <a class="reference internal" href="#sum-conv-interp"><span class="std std-ref">generalized blurring</span></a>? Play with the value <span class="math notranslate nohighlight">\(t\)</span> and the template (round/sharp) below to build some intuition. It should be clear that blurring the red function <span class="math notranslate nohighlight">\(f(x)\)</span> by the purple template <span class="math notranslate nohighlight">\(g(x)\)</span> should replace the narrow spikes in <span class="math notranslate nohighlight">\(f(x)\)</span> with wide bumps (upper blue trace).</p>
+<center><iframe src=https://www.desmos.com/calculator/ichflnfagz?nokeypad&nobranding&noexpressions&lockViewport&nosettingsMenu width="600" height="350" frameborder=0></iframe></center>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 sd-g-3 sd-g-xs-3 sd-g-sm-3 sd-g-md-3 sd-g-lg-3 docutils">
+<div class="sd-col sd-d-flex-row sd-col-4 sd-col-xs-4 sd-col-sm-4 sd-col-md-4 sd-col-lg-4 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Inputs</div>
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(f(x),g(x)\)</span></p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-8 sd-col-xs-8 sd-col-sm-8 sd-col-md-8 sd-col-lg-8 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<p class="sd-card-text">We define the “base” function to be blurred (red), and the “blurring template”, which describes how points will spread out (purple).</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-4 sd-col-xs-4 sd-col-sm-4 sd-col-md-4 sd-col-lg-4 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Shift template</div>
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(g(x-t)\)</span></p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-8 sd-col-xs-8 sd-col-sm-8 sd-col-md-8 sd-col-lg-8 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<p class="sd-card-text">To compute the effect of the blur at argument <span class="math notranslate nohighlight">\(t\)</span>, we first shift the template to that <span class="math notranslate nohighlight">\(t\)</span> value (green).</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-4 sd-col-xs-4 sd-col-sm-4 sd-col-md-4 sd-col-lg-4 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Weight template</div>
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(f(t)g(x-t)\)</span></p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-8 sd-col-xs-8 sd-col-sm-8 sd-col-md-8 sd-col-lg-8 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<p class="sd-card-text">The template at <span class="math notranslate nohighlight">\(t\)</span> is weighted by the base function (orange).</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-4 sd-col-xs-4 sd-col-sm-4 sd-col-md-4 sd-col-lg-4 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Combine</div>
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(\int f(t)g(x-t) dt\)</span></p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-8 sd-col-xs-8 sd-col-sm-8 sd-col-md-8 sd-col-lg-8 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<p class="sd-card-text">We combine the spread-out information for all points <span class="math notranslate nohighlight">\(t\)</span>, which gives the convolution (blue).</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+</input><label class="sd-tab-label" for="sd-tab-item-1">
+Sliding dot product</label><div class="sd-tab-content docutils">
+<p>How do we mathematically express the idea of a <a class="reference internal" href="#sum-conv-interp"><span class="std std-ref">sliding dot product</span></a>? The operation should take in two functions, <span class="math notranslate nohighlight">\(f(t)\)</span> and <span class="math notranslate nohighlight">\(g(t)\)</span>, and return a new function <span class="math notranslate nohighlight">\(f*g\)</span> that records the dot product of <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> at all possible relative shifts. It’s important to keep in mind that while <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> are functions of a variable <span class="math notranslate nohighlight">\(t\)</span>, the convolution <span class="math notranslate nohighlight">\(f*g\)</span> <em>is effectively a function of a new variable</em>, the shift, which we’ll call <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>Play with the demo below to build intuition. It should be clear that when computing the convolution of <span class="math notranslate nohighlight">\(f\)</span> (red) and <span class="math notranslate nohighlight">\(g\)</span> (purple), the dot product should be high when they overlap, and nearly <span class="math notranslate nohighlight">\(0\)</span> when they don’t (blue).</p>
+<center><iframe src=https://www.desmos.com/calculator/tkmpo7ffa6?nokeypad&nobranding&noexpressions&lockViewport&nosettingsMenu width="600" height="300" frameborder=0></iframe></center>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 sd-g-3 sd-g-xs-3 sd-g-sm-3 sd-g-md-3 sd-g-lg-3 docutils">
+<div class="sd-col sd-d-flex-row sd-col-4 sd-col-xs-4 sd-col-sm-4 sd-col-md-4 sd-col-lg-4 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Inputs</div>
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(f(t), g(t)\)</span></p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-8 sd-col-xs-8 sd-col-sm-8 sd-col-md-8 sd-col-lg-8 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<p class="sd-card-text">We define the two functions to be convolved (red, purple).</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-4 sd-col-xs-4 sd-col-sm-4 sd-col-md-4 sd-col-lg-4 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Flip</div>
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(g(-t)\)</span></p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-8 sd-col-xs-8 sd-col-sm-8 sd-col-md-8 sd-col-lg-8 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<p class="sd-card-text">We flip the second function left-right. (This is a convention that should become clearer below.)</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-4 sd-col-xs-4 sd-col-sm-4 sd-col-md-4 sd-col-lg-4 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Shift</div>
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(g(x-t)\)</span></p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-8 sd-col-xs-8 sd-col-sm-8 sd-col-md-8 sd-col-lg-8 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<p class="sd-card-text">To compute the convolution at <span class="math notranslate nohighlight">\(x\)</span>, we shift the second function by <span class="math notranslate nohighlight">\(x\)</span> (green).</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-4 sd-col-xs-4 sd-col-sm-4 sd-col-md-4 sd-col-lg-4 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-text-center docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Dot product</div>
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(\int f(t)g(x-t)dt\)</span></p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-8 sd-col-xs-8 sd-col-sm-8 sd-col-md-8 sd-col-lg-8 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<p class="sd-card-text">We multiply the functions and integrate (blue region), giving the convolution (plotted for all <span class="math notranslate nohighlight">\(x\)</span> values above in blue).</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Thus we’ve arrived at the following definition for the convolution of two functions. There is also an analogous concept of the discrete convolution of two vectors, which works in more or less the exact same way, and can be understood in terms of the same two interpretations given above.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>The <strong>convolution</strong> of two functions <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span>, written <span class="math notranslate nohighlight">\(f*g\)</span> is a function defined by</p>
+<div class="math notranslate nohighlight">
+\[f*g(x) = \int f(t)g(x-t) dt\]</div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>The <strong>discrete convolution</strong> of two <span class="math notranslate nohighlight">\(n\)</span>-dimensional vectors <span class="math notranslate nohighlight">\(v\)</span> and <span class="math notranslate nohighlight">\(w\)</span> with components <span class="math notranslate nohighlight">\(v_i,w_i\)</span> for <span class="math notranslate nohighlight">\(i=0,1,\ldots,n-1\)</span>, is a new <span class="math notranslate nohighlight">\(n\)</span>-dimensional vector <span class="math notranslate nohighlight">\(p\)</span> with components</p>
+<div class="math notranslate nohighlight">
+\[p_j = \sum_{i=0}^{n-1} v_i w_{j-i}\]</div>
+</div>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
+<p>Convolution is such an important topic because of the wide range of contexts where it is natural and/or useful. In this section we’ll give several exampes, explaining how each can be understood as a convolution according to one of the two <a class="reference internal" href="#sum-conv-interp"><span class="std std-ref">interpretations</span></a> above.</p>
+<section id="image-blurring">
+<span id="ex-image-blurring"></span><h3>Image blurring<a class="headerlink" href="#image-blurring" title="Link to this heading">#</a></h3>
+<p>Given that convolution can be thought of as a form of <a class="reference internal" href="#sum-conv-interp"><span class="std std-ref">generalized blurring</span></a>, it should come as no susprise that it can be used to model… blurring. The section <a class="reference internal" href="#subsec-conv-def"><span class="std std-ref">Definition</span></a> provides a <span class="math notranslate nohighlight">\(1\)</span>-dimensional example, and things work analogously in the context of a 2-dimensional image. To model the process of image blurring, we begin with an uncorrupted image:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %matplotlib inline</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">im</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;./figs/spam.png&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/28d37a66e1aebead1dfeadf0bc922e4aaa12269e99543c0354c4e8f89b2b76ad.png" src="_images/28d37a66e1aebead1dfeadf0bc922e4aaa12269e99543c0354c4e8f89b2b76ad.png" />
+</div>
+</div>
+<p>Next, we specify a blurring function, which describes how localized information in the image will spread out in 2-dimensions. In this case, we’ll choose a <em>gaussian blurring function</em>, which smoothly spreads information out in all directions equally.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+   
+<span class="c1"># Function for creating gaussian filters</span>
+<span class="k">def</span> <span class="nf">make_gaussian_filter</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">σ</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">    creates gaussian kernel with side length `l` and a sigma of `σ`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span> <span class="p">(</span><span class="n">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
+    <span class="n">gauss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">ax</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">σ</span><span class="o">**</span><span class="mi">2</span> <span class="p">)</span>
+    <span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">gauss</span><span class="p">,</span> <span class="n">gauss</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">kernel</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span>
+
+<span class="c1"># Make our particular filter</span>
+<span class="n">filt</span> <span class="o">=</span> <span class="n">make_gaussian_filter</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">filt</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/44bf59740bb64d73805acba374fb4eb4aafe53c7215b703e544526bae7f527f2.png" src="_images/44bf59740bb64d73805acba374fb4eb4aafe53c7215b703e544526bae7f527f2.png" />
+</div>
+</div>
+<p>You can see that information is spread out by roughly <span class="math notranslate nohighlight">\(20\)</span> pixels in each direction.</p>
+<p>Next, we convolve the image and filter - in effect, each pixel in the image is spread out in the pattern above. We can accomplish this using <code class="docutils literal notranslate"><span class="pre">convolve2d</span></code> in the <code class="docutils literal notranslate"><span class="pre">scipy.signal</span></code> module.</p>
+<div class="cell tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">convolve2d</span>
+
+<span class="n">im_blur</span> <span class="o">=</span> <span class="n">convolve2d</span><span class="p">(</span><span class="n">im</span><span class="p">,</span><span class="n">filt</span><span class="p">,</span><span class="n">fillvalue</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Original&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im_blur</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Convolved&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/f6512ecf80546cdc47f8249ffb68b99e177247df6e1e6117b5ba036c1fbe4b61.png" src="_images/f6512ecf80546cdc47f8249ffb68b99e177247df6e1e6117b5ba036c1fbe4b61.png" />
+</div>
+</div>
+<p>Here’s all the code we used to blur</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">convolve2d</span>
+
+<span class="c1"># Function for creating gaussian filters</span>
+<span class="k">def</span> <span class="nf">make_gaussian_filter</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">σ</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;\</span>
+<span class="sd">    creates gaussian kernel with side length `l` and a sigma of `σ`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span> <span class="p">(</span><span class="n">l</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
+    <span class="n">gauss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">ax</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">σ</span><span class="o">**</span><span class="mi">2</span> <span class="p">)</span>
+    <span class="n">kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">gauss</span><span class="p">,</span> <span class="n">gauss</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">kernel</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span>
+
+<span class="c1"># Get image</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;./figs/spam.png&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Make our particular filter</span>
+<span class="n">filt</span> <span class="o">=</span> <span class="n">make_gaussian_filter</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># Convolve</span>
+<span class="n">im_blur</span> <span class="o">=</span> <span class="n">convolve2d</span><span class="p">(</span><span class="n">im</span><span class="p">,</span><span class="n">filt</span><span class="p">,</span><span class="n">fillvalue</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="sliding-averages-de-noising">
+<h3>Sliding averages, de-noising<a class="headerlink" href="#sliding-averages-de-noising" title="Link to this heading">#</a></h3>
+<p>In the previous example of <a class="reference internal" href="#ex-image-blurring"><span class="std std-ref">image blurring</span></a>, we showed how convolution with a blurring filter can be understood of as a form of data <em>noising</em> or <em>corruption</em>. It might be surprising to learn, then, that the reverse process - <em>denoising</em> - can often also be carried out by a convolution.</p>
+<p>Consider what you’d do if you were given the following noisy recording of neural activity during a task</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;./data/noisy_1d_signal_t.npy&#39;</span><span class="p">)</span>
+<span class="n">signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;./data/noisy_1d_signal.npy&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="c1"># plt.figure(figsize=(10,6))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ts</span><span class="p">[::</span><span class="mi">10</span><span class="p">],</span><span class="n">signal</span><span class="p">[::</span><span class="mi">10</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;activity&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e052a78e34b54cb2d707f24a7ba8572084b4dffc6b2a26e62d799c9cef3b5972.png" src="_images/e052a78e34b54cb2d707f24a7ba8572084b4dffc6b2a26e62d799c9cef3b5972.png" />
+</div>
+</div>
+<p>If you were interested in the underlying activity profile, a reasonable thing to do is to try to clamp down on the noise by taking sliding averages of the signal. This is a convolution! To see this, consider what you do when you take the average of of set of values. Let’s suppose these values are stored as the components of a vector <span class="math notranslate nohighlight">\(x_1,x_2,\ldots,x_n\)</span>. The average is then just</p>
+<div class="math notranslate nohighlight">
+\[\text{Average}=\frac{1}{n} \sum_{i=1}^{n} x_i =  \sum_{i=1}^{n} \left(\frac{1}{n}1\right)(x_i) = \left(\frac{1}{n}\vec{1}\right)\cdot \vec{x},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\vec{1}\)</span> is just the vector whose components are all <span class="math notranslate nohighlight">\(1\)</span>. Thus we’ve managed to write the process of taking an average as a dot product. A sliding average is then just a <a class="reference internal" href="#sum-conv-interp"><span class="std std-ref">sliding dot product</span></a> - a convolution!</p>
+<p>Let’s compute a sliding average of <span class="math notranslate nohighlight">\(n=1000\)</span> values by creating a filter with the values <span class="math notranslate nohighlight">\(\frac{1}{1000}\)</span> and convolving with the signal.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># how many points to average</span>
+
+<span class="c1"># Make filter </span>
+<span class="n">average_filter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">n</span> 
+
+<span class="c1"># Compute sliding averages</span>
+<span class="n">signal_av</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span><span class="n">average_filter</span><span class="p">,</span><span class="s1">&#39;same&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ts</span><span class="p">[::</span><span class="mi">10</span><span class="p">],</span><span class="n">signal</span><span class="p">[::</span><span class="mi">10</span><span class="p">],</span><span class="n">c</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.8</span><span class="p">,</span><span class="mf">0.8</span><span class="p">,</span><span class="mf">0.8</span><span class="p">]))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ts</span><span class="p">[::</span><span class="mi">10</span><span class="p">],</span><span class="n">signal_av</span><span class="p">[::</span><span class="mi">10</span><span class="p">],</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Signal&#39;</span><span class="p">,</span><span class="s1">&#39;Sliding average&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9eee35bbe98df2a866309ea6409f97aef1594f2ed53c71a54a2a6f522231aa2c.png" src="_images/9eee35bbe98df2a866309ea6409f97aef1594f2ed53c71a54a2a6f522231aa2c.png" />
+</div>
+</div>
+<p>Voila! We’ve denoised by convolving with an avereging filter.</p>
+</section>
+<section id="extracting-spikes">
+<h3>Extracting spikes<a class="headerlink" href="#extracting-spikes" title="Link to this heading">#</a></h3>
+<p>A common application for denoising or signal processing in neuroscience is to extract neural spikes from a recording. Suppose we’re given the following signal consisting of spikes on top of a slowly-varying background voltage.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;./data/spike_signal_t.npy&#39;</span><span class="p">)</span>
+<span class="n">signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;./data/spike_signal.npy&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span><span class="n">signal</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Voltage&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7c6bf14f5449503324f2bd7c4cace03fcbdf74156ad8f753ccf3b075bc984274.png" src="_images/7c6bf14f5449503324f2bd7c4cace03fcbdf74156ad8f753ccf3b075bc984274.png" />
+</div>
+</div>
+<p>Intuitively, a spike is an event where the voltage at that time is much larger than before or after. For example, the following snippet of <span class="math notranslate nohighlight">\(3\)</span> times could represent a spike:</p>
+<div class="math notranslate nohighlight">
+\[\ldots,0,1.1,0.2,\ldots\]</div>
+<p>It stands to reason that such events should have a large dot product with a vector like <span class="math notranslate nohighlight">\(-1,2,-1\)</span>, which adds the maximum part of the spike and subtracts the low part of the spike on either side. Furthermore, the dot product of this vector with any snippet where the voltage isn’t changing is exactly <span class="math notranslate nohighlight">\(0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left(\begin{array}{c}
+-1\\
+2\\
+-1
+\end{array}\right)\cdot\left(\begin{array}{c}
+\vdots\\
+x\\
+x\\
+x\\
+\vdots
+\end{array}\right)=-x+2x-x=0.\end{split}\]</div>
+<p>So this seems like a good candidate for a spike-detecting filter. Let’s compute the sliding dot-product of our signal with this filter - ie. let’s convolve:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make filter</span>
+<span class="n">filt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Convolve</span>
+<span class="n">signal_filt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span><span class="n">filt</span><span class="p">,</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span><span class="n">signal</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span><span class="n">signal_filt</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Voltage&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Signal&#39;</span><span class="p">,</span><span class="s1">&#39;Convolved&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/fecea63232e5de3fe9047293834dda947c14adf1670d1d285ec1c6f936b2ea58.png" src="_images/fecea63232e5de3fe9047293834dda947c14adf1670d1d285ec1c6f936b2ea58.png" />
+</div>
+</div>
+<p>The convolution has managed to subtract away almost all of the background variation, leaving just the spikes. This example was slightly contrived, as our ability to use the filter <span class="math notranslate nohighlight">\((-1,2,-1)\)</span> depended on the spiking events being just <span class="math notranslate nohighlight">\(1\)</span> timepoint wide. Further on, we will discuss how Fourier analysis gives a systematic approach for designing filters that extract different components of a signal.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Machine%20Learning.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Machine Learning</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definition">Definition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#image-blurring">Image blurring</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sliding-averages-de-noising">Sliding averages, de-noising</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extracting-spikes">Extracting spikes</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Grace Huckins, Linnie Warton, and Gabriel Mel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
