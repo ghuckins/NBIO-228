@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
   
@@ -799,7 +799,7 @@ p(X = 0) &amp;= 1 - p\\
 <p class="admonition-title">Definition</p>
 <p>The <em><strong>variance</strong></em> of a random variable <span class="math notranslate nohighlight">\(X\)</span>, or <span class="math notranslate nohighlight">\(\mathbb{E}(X),\)</span> is the the average of <span class="math notranslate nohighlight">\((X - \mathbb{E}(X))^2\)</span>, weighted by <span class="math notranslate nohighlight">\(p(X).\)</span> In other words, it’s the weighted average of the squared distance from <span class="math notranslate nohighlight">\(X\)</span> to the center of the probability distribution.</p>
 <div class="math notranslate nohighlight">
-\[\text(Var)(X) = \sum_k (k - \mathbb{E}(X))^2 \times p(X=k)\]</div>
+\[\text{Var}(X) = \sum_k (k - \mathbb{E}(X))^2 \times p(X=k)\]</div>
 </div>
 <div class="note admonition">
 <p class="admonition-title">Exercise</p>
@@ -810,10 +810,10 @@ p(X = 0) &amp;= 1 - p\\
 <div class="math notranslate nohighlight">
 \[\begin{split}p(X = 1) &amp;= p\\
 p(X = 0) &amp;= 1 - p\\
-\mathbb{E}(X) = p\\
+\mathbb{E}(X) &amp;= p\\
 \mathbb{E}(X) &amp;= \sum_k (k - \mathbb{E}(X))^2 \times p(X=k)\\
 &amp;= (1 - p)^2 \times p + (-p)^2 \times (1-p)\\
-&amp;= p(1-p)\left(1 - p + p)\\
+&amp;= p(1-p)(1 - p + p)\\
 &amp;= p(1-p)\end{split}\]</div>
 </div>
 </div>
