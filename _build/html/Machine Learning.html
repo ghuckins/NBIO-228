@@ -192,6 +192,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Probability and Statistics</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="Probability.html">Probability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Bayesian%20Probability.html">Bayesian Probability</a></li>
 </ul>
 
     </div>
@@ -745,13 +746,13 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1.78513081 0.65728992]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1.76202973 0.68409163]]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x133efb390&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x10e8bd290&gt;
 </pre></div>
 </div>
-<img alt="_images/03d16b0f9607a1205eb2a232261be6d46e6d0a0fb2ddf7615944adc9c9f36a2e.png" src="_images/03d16b0f9607a1205eb2a232261be6d46e6d0a0fb2ddf7615944adc9c9f36a2e.png" />
+<img alt="_images/8ed3154f89a4693d76fbffede6dece4dd8de5684c109c0d69a0400a029914b53.png" src="_images/8ed3154f89a4693d76fbffede6dece4dd8de5684c109c0d69a0400a029914b53.png" />
 </div>
 </div>
 </section>
@@ -844,10 +845,10 @@ This second fact is enormously useful to us. It tells us that we can solve the n
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1368d3dd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1351d2a50&gt;
 </pre></div>
 </div>
-<img alt="_images/03d16b0f9607a1205eb2a232261be6d46e6d0a0fb2ddf7615944adc9c9f36a2e.png" src="_images/03d16b0f9607a1205eb2a232261be6d46e6d0a0fb2ddf7615944adc9c9f36a2e.png" />
+<img alt="_images/8ed3154f89a4693d76fbffede6dece4dd8de5684c109c0d69a0400a029914b53.png" src="_images/8ed3154f89a4693d76fbffede6dece4dd8de5684c109c0d69a0400a029914b53.png" />
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> also has a class for ridge regression called <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html"><code class="docutils literal notranslate"><span class="pre">sklearn.linear_model.Ridge</span></code></a>. When declaring an instance of this class, you use an additional parameter, <code class="docutils literal notranslate"><span class="pre">alpha</span></code>, which is equivalent to how we used <span class="math notranslate nohighlight">\(\lambda\)</span> above. Here’s what that looks like:</p>
@@ -866,13 +867,13 @@ This second fact is enormously useful to us. It tells us that we can solve the n
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1.57556791 0.75747263]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1.53017229 0.81810343]]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1369c3dd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1352b8a90&gt;
 </pre></div>
 </div>
-<img alt="_images/8340e885349405eeafe4024ae774b1c64f5546f1c4ca03f260313b9152ea5263.png" src="_images/8340e885349405eeafe4024ae774b1c64f5546f1c4ca03f260313b9152ea5263.png" />
+<img alt="_images/c65cc04aee2d79461fbbe1223daf5f4de5aad9eb2356725ac7ea29e31cee7a0e.png" src="_images/c65cc04aee2d79461fbbe1223daf5f4de5aad9eb2356725ac7ea29e31cee7a0e.png" />
 </div>
 </div>
 <p>What happens if we make <code class="docutils literal notranslate"><span class="pre">alpha</span></code> really huge?</p>
@@ -890,13 +891,13 @@ This second fact is enormously useful to us. It tells us that we can solve the n
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.18852668 0.10122048]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.19058848 0.11560784]]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x13686d810&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x135332a50&gt;
 </pre></div>
 </div>
-<img alt="_images/d85e33469e73d81fe14159676161de96fd9aa67e5bdca41a25e96ce08620b52d.png" src="_images/d85e33469e73d81fe14159676161de96fd9aa67e5bdca41a25e96ce08620b52d.png" />
+<img alt="_images/02ea7f351d47c72bc3934a52927c2e00ee378c2f2d0eae7fa6e7d19684ed8765.png" src="_images/02ea7f351d47c72bc3934a52927c2e00ee378c2f2d0eae7fa6e7d19684ed8765.png" />
 </div>
 </div>
 <p>And if we set it to 0?</p>
@@ -914,13 +915,13 @@ This second fact is enormously useful to us. It tells us that we can solve the n
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1.78513081 0.65728992]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[1.76202973 0.68409163]]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1369fea50&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x13538ab90&gt;
 </pre></div>
 </div>
-<img alt="_images/0df6a6799d3c9c59b6ff43ef751ad81470ec0aa6f591813720bc92bf040a77b2.png" src="_images/0df6a6799d3c9c59b6ff43ef751ad81470ec0aa6f591813720bc92bf040a77b2.png" />
+<img alt="_images/5361e2f40d24d644611d97a459eb26b2daf627a0e623cb779704c84163e36b96.png" src="_images/5361e2f40d24d644611d97a459eb26b2daf627a0e623cb779704c84163e36b96.png" />
 </div>
 </div>
 <p>The way that our solution changes with <code class="docutils literal notranslate"><span class="pre">alpha</span></code> (or, equivalently, <span class="math notranslate nohighlight">\(\lambda\)</span>) should be clear from the way we wrote our loss function for ridge regression. If it isn’t, take another look at <a class="reference internal" href="#equation-eq54">(72)</a>.</p>
@@ -954,8 +955,8 @@ This second fact is enormously useful to us. It tells us that we can solve the n
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE ridge = 0.11898487940935429
-MSE linear = 0.09355538727057654
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE ridge = 0.07851106297774496
+MSE linear = 0.05399643073146663
 </pre></div>
 </div>
 </div>
@@ -979,8 +980,8 @@ MSE linear = 0.09355538727057654
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE ridge test = 0.10045417695556084
-MSE linear test = 0.06822184698835426
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE ridge test = 0.08469648729026083
+MSE linear test = 0.09638692063013678
 </pre></div>
 </div>
 </div>
@@ -1025,10 +1026,10 @@ MSE linear test = 0.06822184698835426
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE ridge = 0.13827949383646537
-MSE ridge test = 0.10512298396311023
-MSE linear = 0.09355538727057655
-MSE linear test = 0.06822184698835426
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE ridge = 0.1001572800644496
+MSE ridge test = 0.10060180916862678
+MSE linear = 0.05399643073146663
+MSE linear test = 0.09638692063013667
 </pre></div>
 </div>
 </div>
@@ -1056,10 +1057,10 @@ MSE linear test = 0.06822184698835426
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x136b45810&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x135332b90&gt;
 </pre></div>
 </div>
-<img alt="_images/061415a1fb176e3397bcce442785f129f5c1757025c64afb519cef6ec6ccfc9d.png" src="_images/061415a1fb176e3397bcce442785f129f5c1757025c64afb519cef6ec6ccfc9d.png" />
+<img alt="_images/a4cabae127aae7140a5e48fafd18234da878a433f344061e06ad6d30cf719c0c.png" src="_images/a4cabae127aae7140a5e48fafd18234da878a433f344061e06ad6d30cf719c0c.png" />
 </div>
 </div>
 <p>Well, that certainly doesn’t look right. Let’s see what happens when we plot the test data as well.</p>
@@ -1074,10 +1075,10 @@ MSE linear test = 0.06822184698835426
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x136bc1ad0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1353a2a50&gt;
 </pre></div>
 </div>
-<img alt="_images/fd572a775cfe00ba3bda544a91d5a96b1114393ef1ee016f762a1aa01579d799.png" src="_images/fd572a775cfe00ba3bda544a91d5a96b1114393ef1ee016f762a1aa01579d799.png" />
+<img alt="_images/0a28ec5bf7ef3eefc1af087a3787906d00d21bf452af4e47e38179337e9d6276.png" src="_images/0a28ec5bf7ef3eefc1af087a3787906d00d21bf452af4e47e38179337e9d6276.png" />
 </div>
 </div>
 <p>That looks like a pretty awful fit. One way to fix this issue is to just have tons more data:</p>
@@ -1097,10 +1098,10 @@ MSE linear test = 0.06822184698835426
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x136c71bd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x135570dd0&gt;
 </pre></div>
 </div>
-<img alt="_images/cb0c36cb006eeca752d599f7cc81cf2850ea3e69297a2dc3312a0b57ed47ee21.png" src="_images/cb0c36cb006eeca752d599f7cc81cf2850ea3e69297a2dc3312a0b57ed47ee21.png" />
+<img alt="_images/2a49c22009363fdb2c30a12895badbe8a4cdba5a032bd355fea8ed1d32830504.png" src="_images/2a49c22009363fdb2c30a12895badbe8a4cdba5a032bd355fea8ed1d32830504.png" />
 </div>
 </div>
 <p>As long as you have substantially more data than features, you’re going to be relatively safe from overfitting. But we won’t always have as much data as we would like. So what happens if we follow exactly the same process, with all those extraneous polynomial regressors, but use ridge regression instead?</p>
@@ -1118,10 +1119,10 @@ MSE linear test = 0.06822184698835426
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x136cd9bd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1354d9710&gt;
 </pre></div>
 </div>
-<img alt="_images/85810998e42594898943cc764dcb84ed834819556033f5f9ed0f45988f8f88fa.png" src="_images/85810998e42594898943cc764dcb84ed834819556033f5f9ed0f45988f8f88fa.png" />
+<img alt="_images/6942ff5f7b1255788f3fe2d1d99c1e6219fecf6cd0fac54432bbf1e6bf9df9d7.png" src="_images/6942ff5f7b1255788f3fe2d1d99c1e6219fecf6cd0fac54432bbf1e6bf9df9d7.png" />
 </div>
 </div>
 <p>And just to make sure our eyes aren’t deceiving us, we can calculate the MSE on the test data for both the linear and the ridge fits.</p>
@@ -1141,8 +1142,8 @@ MSE linear test = 0.06822184698835426
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE linear test = 340.15951819217725
-MSE ridge test = 0.10202595990551958
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE linear test = 4.840668510646553
+MSE ridge test = 0.09860672346675484
 </pre></div>
 </div>
 </div>
@@ -1193,7 +1194,7 @@ MSE ridge test = 0.10202595990551958
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.3063105  -0.15565716 -0.04388598 -0.19752426 -0.32435703]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.07192131 -0.16839604 -0.232236   -0.0251319  -0.17000112]
 </pre></div>
 </div>
 </div>
@@ -1219,13 +1220,11 @@ MSE ridge test = 0.10202595990551958
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/gracehuckins/miniconda3/lib/python3.11/site-packages/sklearn/linear_model/_ridge.py:204: LinAlgWarning: Ill-conditioned matrix (rcond=8.91594e-17): result may not be accurate.
+  return linalg.solve(A, Xy, assume_a=&quot;pos&quot;, overwrite_a=True).T
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/gracehuckins/miniconda3/lib/python3.11/site-packages/sklearn/linear_model/_ridge.py:204: LinAlgWarning: Ill-conditioned matrix (rcond=3.01103e-17): result may not be accurate.
-  return linalg.solve(A, Xy, assume_a=&quot;pos&quot;, overwrite_a=True).T
-/Users/gracehuckins/miniconda3/lib/python3.11/site-packages/sklearn/linear_model/_ridge.py:204: LinAlgWarning: Ill-conditioned matrix (rcond=1.43114e-18): result may not be accurate.
-  return linalg.solve(A, Xy, assume_a=&quot;pos&quot;, overwrite_a=True).T
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.2
 </pre></div>
 </div>
 </div>
@@ -1255,11 +1254,11 @@ MSE ridge test = 0.10202595990551958
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE ridge, lambda=0.2 = 0.07168218424093994
-MSE ridge, lambda=1 = 0.10202595990551958
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MSE ridge, lambda=0.2 = 0.10014989322590351
+MSE ridge, lambda=1 = 0.09860672346675484
 </pre></div>
 </div>
-<img alt="_images/a7d46c6604ecdadc1d4df95fdfe95269d4e672ecdfcabdd184f2457fe58111bb.png" src="_images/a7d46c6604ecdadc1d4df95fdfe95269d4e672ecdfcabdd184f2457fe58111bb.png" />
+<img alt="_images/352468a6219dfcc8a1004100ad9cfc525e733da811178023941914d7b48f4eee.png" src="_images/352468a6219dfcc8a1004100ad9cfc525e733da811178023941914d7b48f4eee.png" />
 </div>
 </div>
 <p>Cross-validation is truly and bread-and-butter machine learning technique—if you do more machine learning in the future, or if you use machine learning on your final project, you will use it all the time. Remember, whenever you are applying machine learning to a problem, you should <em>always</em> follow this pipeline to prevent overfitting:</p>
@@ -1296,7 +1295,7 @@ MSE ridge, lambda=1 = 0.10202595990551958
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x136e03a50&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x135702510&gt;]
 </pre></div>
 </div>
 <img alt="_images/db535bf344e5d1182cb796349619001f7f492396909a4edc26ee095f1003aeea.png" src="_images/db535bf344e5d1182cb796349619001f7f492396909a4edc26ee095f1003aeea.png" />

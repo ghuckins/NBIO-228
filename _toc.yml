@@ -18,6 +18,7 @@ parts:
   - caption: Probability and Statistics
     chapters:
     - file: Probability
+    - file: Bayesian Probability
 
 
 
