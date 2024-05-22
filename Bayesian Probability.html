@@ -1,0 +1,804 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Bayesian Probability &#8212; Mathematical Tools for Neuroscience</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Bayesian Probability';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Probability" href="Probability.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/scary_brain.png" class="logo__image only-light" alt="Mathematical Tools for Neuroscience - Home"/>
+    <script>document.write(`<img src="_static/scary_brain.png" class="logo__image only-dark" alt="Mathematical Tools for Neuroscience - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to NBIO 228!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Introduction to Linear Algebra</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Vectors%20and%20Matrices.html">Vectors and Matrices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Eigenvectors%20and%20Eigenvalues.html">Eigenvectors and Eigenvalues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Principal%20Component%20Analysis.html">Principal Component Analysis</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Computational Tools</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Machine%20Learning.html">Machine Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Convolution.html">Convolution</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Probability and Statistics</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Probability.html">Probability</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Bayesian Probability</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/ghuckins/NBIO-228" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/ghuckins/NBIO-228/issues/new?title=Issue%20on%20page%20%2FBayesian Probability.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Bayesian Probability.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Bayesian Probability</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bayesian-approach">The Bayesian Approach</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-bayes-s-rule">Applying Bayes’s Rule</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-updating-and-bayesian-priors">Bayesian Updating and Bayesian Priors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-discrete-to-continuous">From Discrete to Continuous</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-s-rule-for-continuous-distributions">Bayes’s Rule for Continuous Distributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#that-pesky-normalization-constant">That Pesky Normalization Constant</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conjugate-priors">Conjugate Priors</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="bayesian-probability">
+<h1>Bayesian Probability<a class="headerlink" href="#bayesian-probability" title="Link to this heading">#</a></h1>
+<p>When you’ve learned about probability before, it probably looked something like what we covered last week. In that framework, the probability of an event is defined as</p>
+<div class="math notranslate nohighlight">
+\[	\lim_{n\to\infty} \frac{n_S}{n}\]</div>
+<p>where <span class="math notranslate nohighlight">\(n_S\)</span> represents the total number of “successess” (i.e. trials on which the event took place) out of the total <span class="math notranslate nohighlight">\(n\)</span> trials.This is a useful way to definite probability. It fits a lot of our intuitions—a fair coin has a 50% probability of landing heads up because, if we flip the coin many times, we expect it to land heads half the time.  This version of probability is called <em>frequentist</em> probability.</p>
+<p>But that’s not the only way to understand probability. Instead, we could say that the percentage 50% represents something about our <em>beliefs</em> about the coin—namely that, if we flip it, it is equally likely to land heads or tails. This approach is called <em>Bayesian</em> probability. There’s a really important distinction here; whereas frequentist probabilities adhere to the long-run frequency of an event after many, many trials, Bayesian probabilities describe our beliefs about what a single trial will be like.</p>
+<p>This may not seem to be a very big distinction. But as we shall see, thinking of probability as belief has some major mathematical implications. And while Bayesian probability does present some challenges—pinning down beliefs mathematically can be tricky—it can also be a useful framework for analyzing certain problems. And it turns out to be a really successful model for lots of human, and animal, behavior.</p>
+<div class="important admonition">
+<p class="admonition-title">Learning Goals</p>
+<p>By the end of this week, you should be able to:</p>
+<ul class="simple">
+<li><p>Compare and contrast the Bayesian and frequentist approaches to statistics and identify situations in which each approach might be more advantageous</p></li>
+<li><p>Apply Bayes’s rule in order to find the maximum a posteriori estimate of both discrete and continuous variables</p></li>
+<li><p>Describe the mathematical challenges in applying the Bayesian framework to continuous probabilities as well as multiple ways of meeting those challenges</p></li>
+<li><p>Use the technique of conjugate priors to solve for the full posterior distribution of a parameter, given a likelihood distribution</p></li>
+</ul>
+</div>
+<section id="the-bayesian-approach">
+<h2>The Bayesian Approach<a class="headerlink" href="#the-bayesian-approach" title="Link to this heading">#</a></h2>
+<p>Let’s say we are flipping a coin. We might assume, from the get-go, that this coin is fair, i.e., that it has a 50% probability of landing heads. In frequentist language, we can call the assumption that the coin is fair our <em>null hypothesis</em>. But then we flip the coin several times, and it keeps coming up heads. How many times would it need to come up heads in a row to convince us that it isn’t a fair coin?</p>
+<p>In conventional statistics, we always operate with a null hypothesis <span class="math notranslate nohighlight">\(H_0\)</span> (the coin is fair) and an alternative hypothesis <span class="math notranslate nohighlight">\(H_A\)</span> (the coin isn’t fair). To reject the null, we need to show that the probability of data as extreme as or more extreme than our data occuring if the null hypothesis is true (that is, our <span class="math notranslate nohighlight">\(p\)</span>-value) is below some threshold (our chosen significance level).</p>
+<p>Let’s say, then, that we choose a significance level <span class="math notranslate nohighlight">\(\alpha = 0.05.\)</span> How many times will our coin need to show up heads for us to be convinced that it is unfair? We need to figure out the odds of getting a sequence of heads of a given length under our null hypothesis that the coin is fair. This isn’t too tricky:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}	\text{1 head:}&amp; \quad \left(\frac{1}{2}\right)^1 = 0.5\\
+	\text{2 heads:}&amp; \quad \left(\frac{1}{2}\right)^2 = 0.25\\
+	\text{3 heads:}&amp; \quad \left(\frac{1}{2}\right)^3 = 0.125\\
+	\text{4 heads:}&amp; \quad \left(\frac{1}{2}\right)^4 = 0.0625\\
+	\text{5 heads:}&amp; \quad \left(\frac{1}{2}\right)^5 = 0.03125\\
+	\text{6 heads:}&amp; \quad \left(\frac{1}{2}\right)^6 = 0.015625\\\end{split}\]</div>
+<p>So the odds of 5 heads are below 0.05. Is that our answer? Not quite; remember, we have to take into account all possibilities that are as extreme as (or more extreme than) our data. While there’s nothing more extreme than our data under this null distribution (which is a binomial distribution), there is one possibility as extreme—5 tails. So the <span class="math notranslate nohighlight">\(p\)</span>-value for 5 heads under a <span class="math notranslate nohighlight">\(H_0\)</span> of a fair coin and a <span class="math notranslate nohighlight">\(H_A\)</span> of an unfair coin is <span class="math notranslate nohighlight">\(0.03125 + 0.03125 = 0.0625.\)</span> (You can see what that looks like in the diagram below.) That’s a bit above our significance level. So we need to see <strong>6 heads</strong> in a row to reject our null hypothesis and conclude that the coin is unfair.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/binomial.png"><img alt="_images/binomial.png" src="_images/binomial.png" style="height: 400px;" /></a>
+</figure>
+<p>Under certain circumstances, this may make sense. But in the world we live in, we expect that almost all coins are fair. If you flipped a random coin you found in your pocket 6 times and got heads every time, you probably would not conclude that there was something wrong with that coin. A frequentist framework can’t accommodate this intuition. But a Bayesian framework can.</p>
+<section id="applying-bayes-s-rule">
+<h3>Applying Bayes’s Rule<a class="headerlink" href="#applying-bayes-s-rule" title="Link to this heading">#</a></h3>
+<p>The first step in using the Bayesian framework here is making mathematically concrete what we mean by “almost all coins are fair.” Let’s say it’s a fact that only 1 out of every 10000 coins is unfair, and the rest are all fair—and, furthermore, that every unfair coin lands heads 90% of the time and tails 10% of the time. So if someone gives us a random coin, before flipping that coin, we should think the odds of that coin being fair are 99.99%. This is called our <em><strong>prior</strong></em>—it describes our beliefs <em><strong>prior</strong></em> to making any observations. In Bayesian statistics, we always, <em>always</em> have a prior, and we need to be able to state it mathematically.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>In Bayesian statistics, the <em><strong>prior</strong></em> is a probability distribution describing your beliefs about the outcome of a probabilistic process <em>before</em> observing that process.</p>
+</div>
+<p>Before flipping the coin, then, this is our information:</p>
+<div class="math notranslate nohighlight">
+\[	p(\text{fair}) = 0.9999\]</div>
+<p>What happens once we have flipped the coin? We now have a new piece of information. As we did in the frequentist framework, we can calcuate the <strong>conditional probability</strong> that the coin would have landed heads 6 times in a row, given the assumption that it was fair. This probability is about 1.56%. So we have:</p>
+<div class="math notranslate nohighlight">
+\[	p(\text{evidence} | \text{fair}) = 0.015625\]</div>
+<p>We’ve seen this sort of expression before—it’s just the <em><strong>likelihood</strong></em> of our data! Part of the reason we spent so muh time talking about likelihood last week is that you have to understand likelihood to understand the Bayesian framework.</p>
+<p>Previously, we calculated multiple likelihoods for our data and compared them to decide what we thought was going on in our experiment—comparing the likelihoods of different patterns of neural activity in light vs. dark conditions, for example. In this case, that would looke like calculating both <span class="math notranslate nohighlight">\(p(\text{evidence} | \text{fair})\)</span> and <span class="math notranslate nohighlight">\(p(\text{evidence} | \text{unfair})\)</span> and seeing which was higher. And that’s a totally valid approach for solving many problems. But it doesn’t allow us to incorporate our prior belief that the coin is very likely to be fair.</p>
+<p>To do that, we want to calculate <em>not</em> <span class="math notranslate nohighlight">\(p(\text{evidence} | \text{fair})\)</span>, but rather <span class="math notranslate nohighlight">\(p(\text{fair} | \text{evidence}).\)</span> Fortunately, we have a formula that tells us exactly how to find that, given what we know: <strong>Bayes’s rule</strong>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Bayes’s Rule</p>
+<p>If you know <span class="math notranslate nohighlight">\(p(A|B)\)</span>, it’s straightforward to calculate <span class="math notranslate nohighlight">\(p(B|A)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[	p(B|A) = \frac{p(A|B)p(B)}{p(A)}\]</div>
+</div>
+<p>Before we use Bayes’s rule, let’s break it down a little bit. As we’ve mentioned, <span class="math notranslate nohighlight">\(p(B)\)</span> is our <em><strong>prior</strong></em>, and it describes our belief about the probability of <span class="math notranslate nohighlight">\(B\)</span> before taking our newly observed evidence to account. <span class="math notranslate nohighlight">\(p(A|B)\)</span> is the <em><strong>likelihood</strong></em> of our evidence, assuming that the prior is true. And, in analogy to the term “prior,” <span class="math notranslate nohighlight">\(p(B|A)\)</span> is our <em><strong>posterior</strong></em>—our belief about the odds of <span class="math notranslate nohighlight">\(B\)</span> <em>after</em> taking the evidence into account. (We’ll discuss <span class="math notranslate nohighlight">\(p(A)\)</span> in more detail in a bit; it’s called the <em>normalization constant</em>, for reasons that will become clear.)</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>In Bayesian statistics, the <em><strong>posterior</strong></em> is a probability distribution describing your beliefs about the outcome of a probabilistic process <em>after</em> observing that process. It is proportional to the product of the prior and the likelihood.</p>
+</div>
+<p>It’s not too difficult to derive Bayes’s rule from some other facts about probability. Recall that the joint probability of two events, <span class="math notranslate nohighlight">\(p(A,B)\)</span>—say, the chance that it’s a summer day (<span class="math notranslate nohighlight">\(A\)</span>) and the temperature is above 80<span class="math notranslate nohighlight">\(^{\circ}\)</span> (<span class="math notranslate nohighlight">\(B\)</span>)—is just the probability of the first event times the probability of the second event <em>given</em> the first event: <span class="math notranslate nohighlight">\(p(B|A)p(A).\)</span></p>
+<p>So, the chance that it’s a summer day and the temperature is above 80<span class="math notranslate nohighlight">\(^{\circ}\)</span> is just the probability it’s a summer day, <span class="math notranslate nohighlight">\(p(A) = 0.25\)</span>, times the probability that the temperature is above 80<span class="math notranslate nohighlight">\(^{\circ}\)</span> <em>given</em> that it’s a summer day, <span class="math notranslate nohighlight">\(p(B|A) = 0.2,\)</span> or <span class="math notranslate nohighlight">\(p(B|A)p(A) = 0.05.\)</span> We could also find this answer by multiplying the probability the temperature is above 80<span class="math notranslate nohighlight">\(^{\circ}\)</span>, <span class="math notranslate nohighlight">\(p(B) = 0.05,\)</span> times the probability it’s a summer day <em>given</em> that the temperature is above 80<span class="math notranslate nohighlight">\(^{\circ}\)</span>, <span class="math notranslate nohighlight">\(p(A|B) = 1,\)</span> to get the same joint probability, <span class="math notranslate nohighlight">\(p(A|B)p(B) = 0.05.\)</span></p>
+<p>So we have for any two events, <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}	p(B|A)p(A) = p(A,B) = p(A|B)p(B)\\
+	p(B|A)p(A) = p(A|B)p(B)\\
+	p(B|A) = \frac{p(A|B)p(B)}{p(A)}\\\end{split}\]</div>
+<p>or, in plain English, the <em><strong>posterior</strong></em> probability is the <em><strong>prior</strong></em> times the <em><strong>likelihood</strong></em>, divided by the <em><strong>normalization constant</strong></em>.</p>
+<p>To use Bayes’s rule for our fair coin example, we plug in “evidence” for <span class="math notranslate nohighlight">\(A\)</span> and “fair” for <span class="math notranslate nohighlight">\(B,\)</span> and this is what we get:</p>
+<div class="math notranslate nohighlight">
+\[	p(\text{fair}|\text{evidence}) = \frac{p(\text{evidence}|\text{fair})p(\text{fair})}{p(\text{evidence})}\]</div>
+<p>We already have both terms in the numerator, our prior and our likelihood. But what we don’t have is the normalization constant, which is the total probability of our evidence—the odds of getting 6 heads in a row if we don’t know ahead of time whether the coin is fair or unfair.</p>
+<p>Fortunately, for this problem, that probability isn’t too hard to calculate. It’s analogous to the problem of finding the overall odds that the temperature will be above 80<span class="math notranslate nohighlight">\(^{\circ}\)</span> on any random day if we only know the odds it will be above 80<span class="math notranslate nohighlight">\(^{\circ}\)</span> given that it’s a summer day (<span class="math notranslate nohighlight">\(p(\text{hot}|\text{summer}) = 0.2\)</span>) and the odds it will be above 80<span class="math notranslate nohighlight">\(^{\circ}\)</span> given that it’s <em>not</em> a summer day (<span class="math notranslate nohighlight">\(p(\text{hot}|\text{not summer}) = 0\)</span>). All we have to do here is calculate the odds that it’s a hot day and it’s summer, the odds that it’s a hot day and it’s not summer, and add the two together:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}	p(\text{hot}) &amp;= p(\text{hot},\text{summer}) + p(\text{hot},\text{not summer})\\
+	&amp;= p(\text{hot}|\text{summer}) p(\text{summer}) + p(\text{hot}|\text{not summer}) p(\text{not summer})\\
+	&amp;= 0.2\cdot 0.25 + 0 \cdot 0.75\\
+	&amp;= 0.05\end{split}\]</div>
+<p>This is an implementation of the “law of total probability,” which states that, if we have a set of events <span class="math notranslate nohighlight">\(B_1, B_2, B_3, \dots, B_n\)</span> that are all mutually exclusive but also have probabilities that add to 1—that is, one of them must be true—then we can find the probability of any other event <span class="math notranslate nohighlight">\(p(A)\)</span> by adding <span class="math notranslate nohighlight">\(p(A,B_1) + p(A,B_2) + \dots + p(A,B_n).\)</span> It’s worth noting that we can’t in general add the probabilities of two events together to find the probability of either event occurring, as we did here when we found a probably of a hot day by adding the probability of a hot summer day to the probability of a hot non-summer day. But we <em>can</em> do that if the two events are mutually exclusive—if they can never happen at the same time. Since a summer day is definitionally not a non-summer day, we’re safe doing that in this case.</p>
+<p>We can take the same approach when it comes to fair and unfair coins:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}	p(\text{evidence}) &amp;= p(\text{evidence},\text{fair}) + p(\text{evidence},\text{unfair})\\
+	&amp;= p(\text{evidence}|\text{fair}) p(\text{fair}) + p(\text{evidence}|\text{unfair}) p(\text{unfair})\\\end{split}\]</div>
+<p>The first term in the sum is just our numerator—great! But to find the second term we need to calculate two new probabilities, <span class="math notranslate nohighlight">\(p(\text{evidence}|\text{unfair})\)</span> and <span class="math notranslate nohighlight">\(p(\text{unfair})\)</span>. We get <span class="math notranslate nohighlight">\(p(\text{unfair})\)</span> from the facts about the number of fair and unfair coins (one out of every 10000 coins is unfair), and <span class="math notranslate nohighlight">\(p(\text{evidence}|\text{unfair})\)</span> from our facts about how unfair coins work (they come up heads 90% of the time). So we can say:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}	p(\text{unfair}) &amp;= 0.0001\\
+	p(\text{evidence}|\text{unfair}) &amp;= 0.9^6\\
+	&amp;\approx 0.53\end{split}\]</div>
+<p>We finally have all the information we need!</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}	p(\text{fair}|\text{evidence}) &amp;= \frac{p(\text{evidence}|\text{fair})p(\text{fair})}{p(\text{evidence}|\text{fair}) p(\text{fair}) + p(\text{evidence}|\text{unfair}) p(\text{unfair})}\\
+	&amp;= \frac{0.0156\cdot0.9999}{0.0156\cdot 0.9999 + 0.53 \cdot 0.0001}\\
+	&amp;= \frac{0.0156}{0.0156 + 0.00053}\\
+	&amp;= 0.967\end{split}\]</div>
+<p>So even after seeing the coin come up heads 6 times in a row, we should still think it’s about 97% likely that the coin is fair. This is far different from what the frequentist framework suggested, and it should accord a bit more with our intuitions about what the world is like. If you took a random quarter out of your wallet, flipped it 6 times, and got heads every time, you probably wouldn’t conclude that the coin is unfair! That’s because you have a prior belief that a random coin is very, very likely to be fair.</p>
+<p>That’s the power of the Bayesian framework—unlike the frequentist framework, it can accommodate our baseline, or prior, beliefs about the world.</p>
+</section>
+</section>
+<section id="bayesian-updating-and-bayesian-priors">
+<h2>Bayesian Updating and Bayesian Priors<a class="headerlink" href="#bayesian-updating-and-bayesian-priors" title="Link to this heading">#</a></h2>
+<p>The Bayesian framework has another secret power. Let’s say we flip the coin three more times and it comes up heads again every time. We want to <strong>update</strong> our belief that the coin is fair, based on this new evidence. What does that look like? Let’s put Bayes’s rule to work:</p>
+<div class="math notranslate nohighlight">
+\[	p(\text{fair}|\text{3 more heads}) = \frac{p(\text{3 more heads}|\text{fair})p(\text{fair}) }{p(\text{3 more heads})}\]</div>
+<p>But where do we include the 6 heads that we have already observed into this equation? The trick is to encode it in our prior probability, <span class="math notranslate nohighlight">\(p(\text{fair}).\)</span> In fact, all we have to do is take our previous posterior probability, the probability that our coin is fair given our observation of 6 heads, and plug it in here as our prior.</p>
+<p>This should make some logical sense. After observing the 6 heads, we updated our belief that the coin is fair. So that new belief becomes our prior belief before making any additional observations. The posterior we obtain after observing some past evidence becomes our prior for observing any future evidence.</p>
+<p>So let’s plug in our numbers and see how the math works out. Remember, our prior <span class="math notranslate nohighlight">\(p(\text{fair})\)</span> (as well as <span class="math notranslate nohighlight">\(p(\text{unfair})\)</span>) will come from the calculation we did above, where we found a posterior probability of 0.967 that the coin was fair. The odds of 3 heads if the coin is fair are just <span class="math notranslate nohighlight">\(0.5^3 = 0.125\)</span>; the odds if the coin is unfair are <span class="math notranslate nohighlight">\(0.9^3 = 0.729.\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}	p(\text{fair}|\text{3 more heads}) &amp;= \frac{p(\text{3 more heads}|\text{fair})p(\text{fair}) }{p(\text{3 more heads})}\\
+	&amp;= \frac{p(\text{3 more heads}|\text{fair})p(\text{fair}) }{p(\text{3 more heads}|\text{fair}) p(\text{fair}) + p(\text{3 more heads}|\text{unfair}) p(\text{unfair})}\\
+	&amp;= \frac{0.125 \cdot 0.967}{0.125 \cdot 0.967 + 0.729 \cdot 0.033}\\
+	&amp;= \frac{0.121}{0.121 + 0.0241}\\
+	&amp;= 0.834\end{split}\]</div>
+<p>With three additional observations, we now have a posterior belief of 83.4% that the coin is fair. If we continue to observe heads (and make this posterior into a new prior in order to update our belief), the odds of the coin being fair will continue to fall. Eventually, if we observe enough heads, the extremely low likelihood of observing that evidence under the assumption that the coin is fair will overwhelm our prior, which was biased strongly toward the coin being fair.</p>
+<p>But what happens when we don’t have much evidence—when we’ve only made something like 6 observations? In such cases, the prior remains extremely powerful. With a prior of 99.99% odds that the coin was fair, our posterior belief in the coin being fair was still high after 6 observations—96.7%. But what if we start with a different prior? What if we have a roommate who is a magician and uses trick coins, so we think the odds of our coin being fair are only, say, 80%? Let’s apply Bayes’s rule to our original scenario of observing 6 heads with this new prior:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} 	p(\text{fair}|\text{6 heads}) &amp;= \frac{p(\text{6 heads}|\text{fair})p(\text{fair}) }{p(\text{6 heads})}\\
+ 	&amp;= \frac{p(\text{6 heads}|\text{fair})p(\text{fair}) }{p(\text{6 heads}|\text{fair}) p(\text{fair}) + p(\text{6 heads}|\text{unfair}) p(\text{unfair})}\\
+ 	&amp;= \frac{0.0156 \cdot 0.8}{0.0156 \cdot 0.8 + 0.531 \cdot 0.2}\\
+ 	&amp;= \frac{0.0124}{0.0124 + 0.106}\\
+ 	&amp;= 0.105\end{split}\]</div>
+<p>With this new prior, after observing the 6 heads, we will think there’s only about a 10% chance that the coin is fair. This makes sense—if it’s more likely the coin is unfair in the first place, then the observation of 6 heads will seem much more convincing! But it also highlights how essential an accurate prior is to the successful application of the Bayesian framework.</p>
+<p>When we are undertaking a Bayesian update, as we did above after the observation of 3 new head flips, the question of the prior is trivial—it’s just our previous posterior. But to get started we needed to stipulate our prior, that only 1 of every 10,000 coins is unfair. If we were incorrect in that assumption—if in fact 2 of every 10 coins were unfair—then we would have been very, very wrong to conclude that the coin was likely fair. Inaccurate priors lead to inaccurate conclusions.</p>
+<p>In the real world, defining a prior is often more an art than a science. There are a number of strategies out there for defining priors and ensuring that priors are reasonable, though they are outside of the scope of this course. But it is essential to remember just how important priors are to our final result.</p>
+<p>One coda, however—let’s check what happens when we have lots and lots of evidence. Let’s say we see 30 heads in a row. What will our posterior belief be, with a prior belief of 99.99% that the coin was fair?</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}	p(\text{fair}|\text{30 heads}) &amp;= \frac{p(\text{30 heads}|\text{fair})p(\text{fair}) }{p(\text{30 heads})}\\
+	&amp;= \frac{p(\text{30 heads}|\text{fair})p(\text{fair}) }{p(\text{30 heads}|\text{fair}) p(\text{fair}) + p(\text{30 heads}|\text{unfair}) p(\text{unfair})}\\
+	&amp;= \frac{0.5^{30} \cdot 0.9999}{0.5^{30} \cdot 0.9999 + 0.9^{30} \cdot 0.0001}\\
+	&amp;= 0.00022\end{split}\]</div>
+<p>So at this point we’ll believe it’s nearly impossible that the coin is fair. What if we had a different prior–say, a 50/50 chance of being fair or unfair?</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}	p(\text{fair}|\text{30 heads}) &amp;= \frac{p(\text{30 heads}|\text{fair})p(\text{fair}) }{p(\text{30 heads})}\\
+	&amp;= \frac{p(\text{30 heads}|\text{fair})p(\text{fair}) }{p(\text{30 heads}|\text{fair}) p(\text{fair}) + p(\text{30 heads}|\text{unfair}) p(\text{unfair})}\\
+	&amp;= \frac{0.5^30 \cdot 0.5}{0.5^30 \cdot 0.5 + 0.9^30 \cdot 0.5}\\
+	&amp;= 0.000000022\end{split}\]</div>
+<p>Yes, this probability is smaller; but both numbers are so small that the difference is pretty much negligible. What this exercise demonstrates is that, as we observe more and more data, our prior starts to matter less and less. Eventually, with really extensive evidence, our prior won’t matter at all. But in many situations in science, and many situations in day-to-day reasoning, we don’t have such an overwhelming amount of evidence. In general, priors matter a lot, and the apparent subjectivity of priors is one reason the Bayesian approach receives criticism from people in the frequentist camp.</p>
+</section>
+<section id="from-discrete-to-continuous">
+<h2>From Discrete to Continuous<a class="headerlink" href="#from-discrete-to-continuous" title="Link to this heading">#</a></h2>
+<p>Now that we know our way around priors, posteriors, and likelihoods, we can start  dealing with problems that are a bit more complex. So far, we have focused on a problem that involved just two probabilities—the odds that the coin was fair, and the odds that it was unfair. Often, however, we care about the probabilities of an infinite number of possibilities—every possible height that a person might have, for example—and we capture those probabilities in a probability distribution, like the normal  distribution.</p>
+<p>Now, as you might expect, using distributions instead of discrete probabilities makes some things a bit more complicated. But Bayes’s rule still applies; we just have to write it a bit differently.</p>
+<p>Let’s say that we are interested in figuring out someone’s height. If we know ahead of time that this person is an American cis woman, we might have a prior over the potential values of her height that looks like this:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/prior.png"><img alt="_images/prior.png" src="_images/prior.png" style="height: 400px;" /></a>
+</figure>
+<p>This is just a normal probability density function with a mean of 64.5 and a standard deviation of 2.5. It’s a reasonable prior because it accurately describes what we would observe if we measured the heights of a large number of American cis women—and we don’t know anything else about this woman yet.</p>
+<p>But now let’s say we find out that this woman wears size 9 shoes. This is a new piece of evidence, and to incorporate this evidence we need to formulate a likelihood function—a function that describes the chances of an American cis woman of a given height wearing a size 9 shoe. Let’s say that function looks like this:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/likelihood.png"><img alt="_images/likelihood.png" src="_images/likelihood.png" style="height: 400px;" /></a>
+</figure>
+<p>I want to point out something really important here. While our prior is a probability distribution, as it must be—it makes no sense for our beliefs about someone’s height, integrated over all their possible heights, <em>not</em> to equal 1—the likelihood function is <em>not</em> a probability distribution. If, for example, we were to plot the likelihood that Earth’s atmosphere is mostly nitrogen conditioned on the height of this woman, that distribution would integrate to infinity—because that probability is always 1. That’s why our likelihood function here looks quite a bit shorter than our prior; it doesn’t integrate 1. We can see this in our above coin example as well—the likelihood of 6 heads for a fair coin is 0.0156, and for an unfair coin is 0.531, and these do not sum to 1. As we shall soon see, the overall height of our likelihood function doesn’t actually matter; we can multiply it by any constant and still get the same result.</p>
+<p>Okay, so what do we do with these two distributions to find our posterior? Let’s look at the prior and likelihood on the same set of axes and try to logically infer what the posterior should look like:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/priorlikelihood.png"><img alt="_images/priorlikelihood.png" src="_images/priorlikelihood.png" style="height: 400px;" /></a>
+</figure>
+<p>One thing we can probably infer is what the mean of our new distribution should be. If our prior mean is 64.5, and our likelihood mean is 67, then the mean of our posterior should probably be between those two values; our likelihood should drag the prior mean up a bit. Let’s check if our guess is correct:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/posterior.png"><img alt="_images/posterior.png" src="_images/posterior.png" style="height: 400px;" /></a>
+</figure>
+<p>The posterior is shown in yellow. Our guess about the mean looks right! Also notice that the posterior has less variance than either the prior or the likelihood. This should make sense—the more information we get about our parameter of interest (height), the less variance our beliefs about it should have.</p>
+<p>So, what is this woman’s height? We don’t have a concrete answer here; just a distribution. But there are ways to get a specific guess for a parameter from a posterior distribution. The most common of these approaches is called <em><strong>maximum a posteriori</strong></em>, or MAP. All MAP involves is taking the value of our parameter associated with the highest probability—the peak of our posterior distribution. In this case, our MAP guess would be about 65.5 inches.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>The <em><strong>maximum a posteriori estimate (MAP)</strong></em> of a random variable is simply the mode of its <strong>posterior</strong> distribution, or the value of that random variable at which the posterior reaches its peak value.</p>
+</div>
+<p>That’s not the only way that we could have estimated the woman’s height, however. Last week, when we tried to estimate stimulus values based off of neural activity, we looked for the stimulus value that maximized the likelihood of our data. We could in principle do the same thing here—ignore the prior and maximize our likelihood.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>The <em><strong>maximum likelihood estimate (MLE)</strong></em> of a random varialbe is the mode of its <strong>likelihood</strong> distribution, or the value of that random variable at which the likelihood reaches its peak value.</p>
+</div>
+<p>In general, it’s important to have the right intuitions about how posteriors should look given a particular prior and likelihood. Broadly speaking, the important intuitions are:</p>
+<ul class="simple">
+<li><p>The mean of the posterior should be between the mean of the prior and the mean of the likelihood</p></li>
+<li><p>The mean should end up nearer to the mean of the distribution with the lower variance (because that distribution is more informative)</p></li>
+<li><p>The variance of the posterior should be less than the variances of the prior and the likelihood
+These intuitions are rules of thumb—they do not always work, though they do work for normal distributions. But in general, they should guide you toward valid Bayesian conclusions and help you check your work. You should be able to guess the right column of the below diagram from the left column. (This diagram is also a great representation of the extent to which proper prior choice matters.)</p></li>
+</ul>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/posts.png"><img alt="_images/posts.png" src="_images/posts.png" style="height: 700px;" /></a>
+</figure>
+<p>But intuition isn’t going to get us all of the way there. What we need to know is how to solve for the posterior mathematically.</p>
+<section id="bayes-s-rule-for-continuous-distributions">
+<h3>Bayes’s Rule for Continuous Distributions<a class="headerlink" href="#bayes-s-rule-for-continuous-distributions" title="Link to this heading">#</a></h3>
+<p>Last week, we discussed how to calculate a likelihood <span class="math notranslate nohighlight">\(p(y | \theta)\)</span>—by calculating the probability density function’s values at each of our observations as a function of <span class="math notranslate nohighlight">\(\theta\)</span>, and then multiplying all those functions. And for now, we will assume our prior has been given to us. But how to we combine those pieces of information to get our posterior?</p>
+<p>Fortunately, we can do for distributions what we did for discrete probabilities. If <span class="math notranslate nohighlight">\(p(\theta)\)</span> describes our prior probability density function over our parameter of interest, <span class="math notranslate nohighlight">\(\theta\)</span>, (height in the above example), and <span class="math notranslate nohighlight">\(y\)</span> is our evidence, we can say</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}	p(\theta | y) = \frac{p(y|\theta)p(\theta)}{p(y)}\\\end{split}\]</div>
+<p>Let’s walk through this step-by-step. This is really just our old friend Bayes’s rule. For distributions, what this means is that the posterior distribution over <span class="math notranslate nohighlight">\(\theta\)</span> given some evidence is the same as the product between the prior distribution of <span class="math notranslate nohighlight">\(\theta\)</span> and the likelihood function of the evidence <span class="math notranslate nohighlight">\(y\)</span>, divided by some number. (Yes, <span class="math notranslate nohighlight">\(p(y)\)</span> is a number, not a distribution—it just describes the probability of having received the specific evidence that we did in fact receive.)</p>
+<p>So to find our posterior, we literally just multiply our prior distribution and our likelihood function. This might sound pretty simple, and it often is. For example, let’s say <span class="math notranslate nohighlight">\(p(\theta)\)</span> and <span class="math notranslate nohighlight">\(p(y|\theta)\)</span> are both normally distributed, as in the height example above:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(\theta) &amp;= \frac{1}{\sqrt{2\pi}\sigma_1}e^{-(\theta-\mu_1)^2/2\sigma_1^2}\\
+p(y | \theta) &amp;= \frac{1}{\sqrt{2\pi}\sigma_2}e^{-(\theta-\mu_1)^2/2\sigma_1^2}\\
+p(\theta | y) &amp;\propto \frac{1}{2\pi\sigma_1\sigma_2}e^{-(\theta-\mu_1)^2/2\sigma_1^2 -(\theta-\mu_2)^2/2\sigma_2^2}\\
+&amp;\propto \frac{1}{2\pi\sigma_1\sigma_2}e^{-(\theta - \mu_3)^2/2\sigma_3^2}\\
+\mu_3 &amp;= \frac{\sigma_1^2\mu_2 + \sigma_2^2\mu_1}{\sigma_1^2 + \sigma_2^2}\\
+\sigma_3 &amp;= \frac{\sigma_1^2\sigma_2^2}{\sigma_1^2 + \sigma_2^2}\end{split}\]</div>
+<p>We still have to normalize this expression, but that’s easy, since we know how to normalize a normal distribution—we know what the coefficient in front of any normal is <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{2\pi}\sigma}\)</span>. So we don’t even have to worry about <span class="math notranslate nohighlight">\(p(y)\)</span> at all.</p>
+<p>Often, though, we do have to worry about <span class="math notranslate nohighlight">\(p(y),\)</span> and that poses problems. To find the total probability of the evidence in the coin example from way at the beginning, we had to add the joint probability of the evidence with each possible condition (the coin is fair, or the coin is unfair). That was fine when we only had two possibilities to worry about. But now, when we aren’t worried about whether a coin is fair or unfair but about what its bias is over a continuous range of values, we have an infinite number of possible conditions. That means we can’t add. We have to integrate.</p>
+</section>
+<section id="that-pesky-normalization-constant">
+<h3>That Pesky Normalization Constant<a class="headerlink" href="#that-pesky-normalization-constant" title="Link to this heading">#</a></h3>
+<p>So what is this normalization constant that we are trying to deal with? Remember, if we have just two possible conditions, <span class="math notranslate nohighlight">\(c_1\)</span> and <span class="math notranslate nohighlight">\(c_2,\)</span> finding <span class="math notranslate nohighlight">\(p(y)\)</span> is easy:</p>
+<div class="math notranslate nohighlight">
+\[	p(y) = p(y|c_1)p(c_1) + p(y|c_2)p(c_2)\]</div>
+<p>This is doable for any finite number of conditions. But it isn’t if we have an infinite number of possible values for <span class="math notranslate nohighlight">\(\theta\)</span>, our parameter of interest. In such a situation, we have to integrate:</p>
+<div class="math notranslate nohighlight">
+\[	p(y) = \int_{\theta} p(y|\theta')p(\theta')\, d\theta'\]</div>
+<p>As we’ve mentioned before, this value, <span class="math notranslate nohighlight">\(p(y),\)</span> is called the normalization constant. We can now see why. The reason we can’t just say that our posterior is equal to <span class="math notranslate nohighlight">\(p(y|\theta)p(\theta),\)</span> or our likelihood times our prior, is that our posterior distribution must be a valid probability density function, and all probability density functions must integrate to 1. But we have no guarantee that this product <span class="math notranslate nohighlight">\(p(y|\theta)p(\theta)\)</span> integrates to 1. So we have to integrate over the entire product <span class="math notranslate nohighlight">\(p(y|\theta)p(\theta)\)</span> to get the current area under our curve and then divide by the result, to confirm that the area under our posterior distribution will in fact be 1. That’s why <span class="math notranslate nohighlight">\(p(y)\)</span> is called our normalization constant—it makes sure that our posterior is normalized.</p>
+<p>Often, we simply cannot calculate this integral, which means that there is no analytic way to solve for our posterior. But <span class="math notranslate nohighlight">\(p(y)\)</span> is a constant, so we can at least say</p>
+<div class="math notranslate nohighlight">
+\[		p(\theta | y) \propto p(y|\theta)p(\theta)\]</div>
+<p>So we can figure out the shape of <span class="math notranslate nohighlight">\(p(\theta | y),\)</span> which lets us know which <span class="math notranslate nohighlight">\(\theta\)</span> are more or less likely. We can even find the MAP estimate of <span class="math notranslate nohighlight">\(\theta,\)</span> because that’s just the value of <span class="math notranslate nohighlight">\(\theta\)</span> where our posterior distribution reaches its peak. But without that normalization constant, we can’t fully solve for our posterior distribution. And that can be a major limitation. In fact, the difficulty of calculating these integrals is part of the reason that the Bayesian framework remained unpopular for so long.</p>
+<p>Fortunately, there are a number of techniques we can use to overcome this hurdle. Some of these techniques require computer simulation and numerical analysis. But occassionally we can find a closed-form solution for our posterior distribution, using the method of conjugate priors.</p>
+</section>
+<section id="conjugate-priors">
+<h3>Conjugate Priors<a class="headerlink" href="#conjugate-priors" title="Link to this heading">#</a></h3>
+<p>In some cases, we can solve for <span class="math notranslate nohighlight">\(p(\theta | y)\)</span> analytically. These are cases where we know how to normalize the functional form of  <span class="math notranslate nohighlight">\(p(\theta | y)\)</span>. In the case of height above, where I assumed that our prior and our likelihood were both known normal distributions, we were able to solve for our posterior because the product of two normal distributions is also a normal distribution, and it’s easy to normalize a normal distribution—just include that <span class="math notranslate nohighlight">\(\frac{1}{\sqrt{2\pi}\sigma}\)</span> in front. In general, if multiplying our prior and our likelihood gives us a known distribution (like a normal distribution), we are safe; we can normalize those distributions easily.</p>
+<p>This means that there are pairs of priors and likelihoods that will give us easily manageable posteriors. We don’t get to choose our likelihood, but we <em>do</em> get to choose our prior. And as it turns out, for certain likelihoods, there exist families of priors called <em><strong>conjugate priors</strong></em> that make our lives really, really easy. As we saw above, the conjugate prior of a normal is a normal.</p>
+<div class="note admonition">
+<p class="admonition-title">Definition</p>
+<p>A <em><strong>conjugate prior</strong></em> for a given likelihood distribution is a prior that, when multiplied by the likelihood, yields a posterior that is from the same family of distributions as the prior.</p>
+</div>
+<p>Let’s run through a full Bayesian inference problem using conjugate priors. We’ll use the same coin example from the beginning, but we’ll make it a bit more realistic—by allowing the coin’s bias, <span class="math notranslate nohighlight">\(\theta\)</span>, to range continuously from 0 to 1. Let’s say we flip the coin <span class="math notranslate nohighlight">\(n\)</span> times and get <span class="math notranslate nohighlight">\(y\)</span> heads. What’s the likelihood? Well, this is just a classic binomial distribution problem:</p>
+<div class="math notranslate nohighlight">
+\[	p(y|\theta) = {n \choose y}\theta^y(1-\theta)^{n - y}\]</div>
+<p>In theory, our prior over the coin’s bias could be anything. But if we want our Bayesian inferece to work out nicely, we have to pick a specific sort of distribution to represent our prior—in this case, the <em><strong>beta distribution</strong></em>. The probability density function for the beta distribution is:</p>
+<div class="math notranslate nohighlight">
+\[	p(\theta) = \frac{(\alpha + \beta - 1)!}{(\alpha - 1)!(\beta - 1)!}\theta^{\alpha - 1}(1-\theta)^{\beta - 1}\]</div>
+<p>As you can see, the beta distribution is very closely related to the binomial distribution. And we can choose whatever <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> we want for the beta distribution, which comes in super handy; it allows us to give our prior a ton of different shapes, while still keeping it beta. (As a note—<span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> don’t actually have to be integers, but the coefficient is easier to write if they are.)</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/beta.png"><img alt="_images/beta.png" src="_images/beta.png" style="height: 400px;" /></a>
+</figure>
+<p>So, let’s do some inference. Let’s say we think our coin is fair to start off, and we’re pretty confident in that assumption. So we want a distribution with a quite strong peak at 0.5. We can achieve this by setting <span class="math notranslate nohighlight">\(\alpha = \beta\)</span> and having them both take fairly high values. Let’s see what our prior looks like of both are 20:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/betaprior.png"><img alt="_images/betaprior.png" src="_images/betaprior.png" style="height: 400px;" /></a>
+</figure>
+<p>So the functional form of our prior is</p>
+<div class="math notranslate nohighlight">
+\[	p(\theta) = \frac{39!}{19!19!}\theta^{19}(1-\theta)^{19}\]</div>
+<p>Now let’s say we end up flipping our coin and getting 6 heads. So <span class="math notranslate nohighlight">\(n\)</span> is 6 and <span class="math notranslate nohighlight">\(y\)</span> is 6, which means our likelihood is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}	p(y|\theta) &amp;= {6 \choose 6} \theta^{6}(1-\theta)^{0}\\
+	&amp;=  \theta^{6}\end{split}\]</div>
+<p>because there is only one way to choose 6 items from a set of 6! This is what our prior and likelihood look like on the same axes:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/betapl.png"><img alt="_images/betapl.png" src="_images/betapl.png" style="height: 400px;" /></a>
+</figure>
+<p>Now we can find our posterior. We write:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}	p(\theta | y) &amp;\propto p(y|\theta)p(\theta)\\
+	&amp;= \theta^6\frac{39!}{19!19!}\theta^{19}(1-\theta)^{19}\\
+	&amp;= \frac{39!}{19!19!}\theta^{25}(1-\theta)^{19}\end{split}\]</div>
+<p>This is not normalized. But it <em>is</em> proportional to a beta distribution with <span class="math notranslate nohighlight">\(\alpha = 26\)</span> and <span class="math notranslate nohighlight">\(\beta = 20\)</span>—and we know how to normalize that! So we have</p>
+<div class="math notranslate nohighlight">
+\[	p(\theta|y) = \frac{45!}{25!19!}\theta^{25}(1-\theta)^{19}\]</div>
+<p>We didn’t even have to deal with <span class="math notranslate nohighlight">\(p(y)\)</span> because we already knew what we needed to do to normalize our posterior. Plotting the prior, likelihood, and posterior on the same axes, we get the following:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/betaplp.png"><img alt="_images/betaplp.png" src="_images/betaplp.png" style="height: 400px;" /></a>
+</figure>
+<p>So our beliefs about the coin have shifted a bit to the right! After all those tails, our MAP is that the coin has about a 55% chance of landing heads. But there’s still plenty of probability mass at <span class="math notranslate nohighlight">\(\theta = 0.5\)</span>—it’s definitely still very possible that the coin is fair. If we had started with a much stronger prior—say, <span class="math notranslate nohighlight">\(\alpha = \beta = 100\)</span>—we would have seen something different:</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/otherbeta.png"><img alt="_images/otherbeta.png" src="_images/otherbeta.png" style="height: 400px;" /></a>
+</figure>
+<p>We would have remained quite confident that the coin was fair, or very close to it.</p>
+<p>This is the power of conjugate priors—they make Bayesian inference easy. We can’t choose what our likelihood looks like, but we <em>can</em> choose our prior; and even when we restrict ourselves to a conjugate family, there are still tons of possibilities for what a prior might look like.</p>
+<p>Of course, depending on what the likelihood is like, conjugate priors are not always an option. That’s when we have to use numerical methods—basically, brute-forcing the problem with a computer—to solve for the posterior.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Probability.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Probability</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bayesian-approach">The Bayesian Approach</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-bayes-s-rule">Applying Bayes’s Rule</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-updating-and-bayesian-priors">Bayesian Updating and Bayesian Priors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#from-discrete-to-continuous">From Discrete to Continuous</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayes-s-rule-for-continuous-distributions">Bayes’s Rule for Continuous Distributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#that-pesky-normalization-constant">That Pesky Normalization Constant</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conjugate-priors">Conjugate Priors</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Grace Huckins, Linnie Warton, and Gabriel Mel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
